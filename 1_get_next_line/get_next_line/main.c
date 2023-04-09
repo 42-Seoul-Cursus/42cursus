@@ -27,18 +27,19 @@ int	main(void)
 	int test, no_nl;
 	atexit(leak);
 	no_nl = open("./no_nl.txt", 0);
-	/* buff = get_next_line(no_nl);
+	buff = get_next_line(no_nl);
 	printf("%s\n", buff);
-	free(buff); */
+	free(buff);
 
 	test = open("./test.txt", 0);
-	for (int i = 0; i < 9; i++)
+	/* for (int i = 0; i < 9; i++)
 	{
 		buff = get_next_line(test);
 		printf("%d : %s\n", i + 1, buff);
 		free(buff);
-	}
+	} */
 	close(test);
+	close(no_nl);
 	return (0);
 }
 

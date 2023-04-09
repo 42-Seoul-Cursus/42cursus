@@ -115,9 +115,9 @@ char	*make_line(char *buf)
 	char	*line;
 	size_t	i;
 
-	line = ft_calloc(find_idx(buf, '\n') + 1);
+	line = ft_calloc(find_idx(buf, '\n') + 2);
 	i = 0;
-	while (i < find_idx(buf, '\n'))
+	while (i <= find_idx(buf, '\n'))
 	{
 		line[i] = buf[i];
 		++i;

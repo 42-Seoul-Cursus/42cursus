@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			size;
 
-	if (backup == 0)
+	if (backup == 0 || *backup == '\0')
 		backup = ft_calloc(1);
 	while (1)
 	{
