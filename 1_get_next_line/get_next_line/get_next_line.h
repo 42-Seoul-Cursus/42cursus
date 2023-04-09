@@ -3,28 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seunan    <seunan@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 17:26:15 by seunan            #+#    #+#             */
-/*   Updated: 2023/03/23 15:08:23 by seunan           ###   ########seoul.kr  */
+/*   Created: 2023/04/09 20:31:33 by seunan            #+#    #+#             */
+/*   Updated: 2023/04/09 22:57:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
+
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100
+#  define BUFFER_SIZE 1
 # endif
 
-char	*get_next_line(int fd);
-char	*make_backup(char *buf);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(char *s);
-char	*make_line(char *buf, char c);
-char	*ft_calloc(size_t count, size_t size);
-int		inc_newline(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
+typedef struct s_list
+{
+	char			*content;
+	size_t			size;
+	int				fd;
+	struct s_list	*next;
+}					t_list;
+
+char				*get_next_line(int fd);
+t_list				*set_backup(t_list **head, int fd);
+size_t				check_nl(char *buf, size_t size);
+char				*make_line(char *buf, size_t size);
+void				make_backup(t_list *backup, size_t size, char *buf);
+char				*make_buf(t_list *backup, char *buf, long long *size);
 
 #endif

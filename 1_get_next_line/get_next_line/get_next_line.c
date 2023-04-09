@@ -3,72 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: seunan    <seunan@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 17:26:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/03/23 17:12:49 by seunan           ###   ########seoul.kr  */
+/*   Created: 2023/04/09 20:31:33 by seunan            #+#    #+#             */
+/*   Updated: 2023/04/09 23:05:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(char *s)
-{
-	char	*answer;
-	int		i;
-
-	answer = ft_calloc(sizeof(char), ft_strlen(s) + 1);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		answer[i] = s[i];
-		++i;
-	}
-	return (answer);
-}
-
-char	*make_backup(char *buf)
-{
-	char	*backup;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (buf[i++] != '\n')
-		;
-	backup = ft_calloc(sizeof(char), ft_strlen(buf) - i + 1);
-	j = 0;
-	while (buf[i] != '\0')
-		backup[j++] = buf[i++];
-	free(buf);
-	return (backup);
-}
-
 char	*get_next_line(int fd)
 {
-	static char	*backup;
-	char		*buffer;
-	char		*line;
+	static t_list	**head;
+	t_list			*backup;
+	char			*buf;
+	char			*line;
+	long long		size;
 
+	if (head == 0)
+		head = malloc(sizeof(t_list **) * 1);
+	backup = set_backup(head, fd);
 	while (1)
 	{
-		buffer = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-		if (!buffer)
-			return (0);
-		if (read(fd, buffer, BUFFER_SIZE) <= 0 && (backup != 0 && *backup == '\0'))
+		if (backup->content != 0)
 		{
-			free(buffer);
-			return (0);
-		}
-		buffer = ft_strjoin(backup, buffer);
-		if (inc_newline(buffer, '\n') || )
-		{
-			line = make_line(buffer, '\n');
-			backup = make_backup(buffer);
-			break;
+			size = check_nl(backup->content, backup->size);
+			if (size > 0)
+			{
+				line = make_line(backup->content, size);
+				make_backup(backup, backup->size - size, backup->content);
+				break ;
+			}
 		}
 		else
-			backup = buffer;
+		{
+			buf = malloc(sizeof(char) * BUFFER_SIZE);
+			size = read(fd, buf, BUFFER_SIZE);
+			buf = make_buf(backup, buf, &size);
+			if (check_nl(buf, size) > 0)
+			{
+				line = make_line(buf, check_nl(buf, size));
+				make_backup(backup, size, buf);
+				break ;
+			}
+		}
 	}
 	return (line);
+}
+
+t_list	*set_backup(t_list **head, int fd)
+{
+	t_list	*tmp;
+
+	if (fd < 0)
+		return (0);
+	if (*head == (void *)0)
+	{
+		*head = malloc(sizeof(t_list) * 1);
+		tmp = *head;
+		tmp->fd = fd;
+		tmp->content = (void *)0;
+		tmp->size = 0;
+	}
+	tmp = *head;
+	while (tmp->fd != fd && tmp->next != 0)
+		tmp = tmp->next;
+	if (tmp->fd != fd && tmp->next == 0)
+	{
+		tmp->next = malloc(sizeof(t_list) * 1);
+		tmp = tmp->next;
+		tmp->fd = fd;
+		tmp->content = (void *)0;
+		tmp->size = 0;
+	}
+	return (tmp);
 }

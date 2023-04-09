@@ -12,82 +12,85 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+char	*make_buf(t_list *backup, char *buf, long long *size)
 {
-	size_t	len;
+	char	*new_buf;
+	size_t	i;
+	size_t	j;
 
-	len = 0;
-	while (s[len] != '\0')
-		++len;
-	return (len);
+	new_buf = malloc(sizeof(char) * (backup->size + *size));
+	i = 0;
+	while (i < backup->size)
+	{
+		new_buf[i] = backup->content[i];
+		++i;
+	}
+	j = 0;
+	while (j < (size_t) *size)
+	{
+		new_buf[i] = buf[j];
+		++j;
+		++i;
+	}
+	free(buf);
+	free(backup->content);
+	*size += backup->size;
+	return (new_buf);
 }
 
-char	*make_line(char *buf, char c)
+void	make_backup(t_list *backup, size_t size, char *buf)
+{
+	size_t	i;
+	size_t	start;
+
+	if (backup->content != 0)
+		free(backup->content);
+	start = check_nl(buf, size) + 1;
+	backup->content = malloc(sizeof(char) * (size - start));
+	if (!(backup->content))
+		return ;
+	i = 0;
+	if (size > start)
+	{
+		backup->size = size - start;
+		size -= start;
+	}
+	while (i < size)
+	{
+		backup->content[i] = buf[start];
+		++i;
+		++start;
+	}
+}
+
+char	*make_line(char *buf, size_t size)
 {
 	char	*line;
-	int		i;
+	size_t	i;
 
+	line = malloc(sizeof(char) * size + 2);
+	if (!line)
+		return (0);
 	i = 0;
-	while (buf[i] != c)
-		++i;
-	line = ft_calloc(sizeof(char), i + 1);
-	i = 0;
-	while (buf[i] != c)
+	while (i <= size)
 	{
 		line[i] = buf[i];
 		++i;
 	}
-	line[i] = c;
+	line[i] = '\0';
 	return (line);
 }
 
-char	*ft_calloc(size_t count, size_t size)
+size_t	check_nl(char *buf, size_t size)
 {
-	char	*mem;
 	size_t	i;
 
-	mem = malloc(size * count);
-	if (!mem)
-		return (0);
 	i = 0;
-	while (i < size * count)
+	while (i <= size)
 	{
-		mem[i] = 0;
+		if (buf[i] == '\n')
+			return (i);
 		++i;
 	}
-	return ((char *) mem);
-}
-
-int	inc_newline(const char *s, int c)
-{
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return (1);
-		++s;
-	}
 	return (0);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*answer;
-	size_t	i;
-	size_t	j;
-
-	if (s1 == 0)
-		return (ft_strdup(s2));
-	answer = ft_calloc(sizeof(char), ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!answer)
-		return (0);
-	i = 0;
-	j = 0;
-	while (s1[j] != '\0')
-		answer[i++] = s1[j++];
-	j = 0;
-	while (s2[j] != '\0')
-		answer[i++] = s2[j++];
-	free(s1);
-	free(s2);
-	return (answer);
 }
