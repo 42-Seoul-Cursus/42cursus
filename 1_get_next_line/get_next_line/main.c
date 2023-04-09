@@ -13,7 +13,6 @@
 #include "get_next_line.h"
 #include <fcntl.h> // O_WRONLY
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 void	leak(void)
@@ -24,30 +23,22 @@ void	leak(void)
 int	main(void)
 {
 	char	*buff;
-	int		fd, fd1;
 
+	int test, no_nl;
 	atexit(leak);
-	fd = open("./test.txt", 0);
-	fd1 = open("./test", 0);
-	buff = get_next_line(fd);
+	no_nl = open("./no_nl.txt", 0);
+	/* buff = get_next_line(no_nl);
 	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(fd1);
-	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(fd);
-	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(fd);
-	printf("%s\n", buff);
-	free(buff);
-	/* for (int i = 0; i < 9; i++)
+	free(buff); */
+
+	test = open("./test.txt", 0);
+	for (int i = 0; i < 9; i++)
 	{
-		buff = get_next_line(fd);
+		buff = get_next_line(test);
 		printf("%d : %s\n", i + 1, buff);
 		free(buff);
-	} */
-	close(fd);
+	}
+	close(test);
 	return (0);
 }
 

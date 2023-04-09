@@ -14,67 +14,44 @@
 
 char	*get_next_line(int fd)
 {
-	static t_list	**head;
-	t_list			*backup;
-	char			*buf;
-	char			*line;
-	long long		size;
+	static char	*backup;
+	char		*buf;
+	char		*line;
+	int			size;
 
-	if (head == 0)
-		head = malloc(sizeof(t_list **) * 1);
-	backup = set_backup(head, fd);
+	if (backup == 0)
+		backup = ft_calloc(1);
 	while (1)
 	{
-		if (backup->content != 0)
+		if (*backup != '\0')
 		{
-			size = check_nl(backup->content, backup->size);
-			if (size > 0)
+			if (find_idx(backup, '\n') > 0)
 			{
-				line = make_line(backup->content, size);
-				make_backup(backup, backup->size - size, backup->content);
-				break ;
+				line = make_line(backup);
+				backup = make_backup(backup, 1000); // size 써야댐
+				return (line);
 			}
 		}
-		else
+		while (1)
 		{
-			buf = malloc(sizeof(char) * BUFFER_SIZE);
+			buf = ft_calloc((BUFFER_SIZE + 1));
 			size = read(fd, buf, BUFFER_SIZE);
-			buf = make_buf(backup, buf, &size);
-			if (check_nl(buf, size) > 0)
+			if (size == 0 && *buf == '\0')
 			{
-				line = make_line(buf, check_nl(buf, size));
-				make_backup(backup, size, buf);
-				break ;
+				free(buf);
+				return (backup);
 			}
+			buf = ft_strjoin(backup, buf);
+			if (find_idx(buf, '\n') > 0)
+			{
+				line = make_line(buf);
+				backup = make_backup(buf, 1000);
+				return (line);
+			}
+			backup = make_backup(buf, 1000);
+			if (size == 0 && *backup == '\0')
+				return (0);
 		}
 	}
 	return (line);
-}
-
-t_list	*set_backup(t_list **head, int fd)
-{
-	t_list	*tmp;
-
-	if (fd < 0)
-		return (0);
-	if (*head == (void *)0)
-	{
-		*head = malloc(sizeof(t_list) * 1);
-		tmp = *head;
-		tmp->fd = fd;
-		tmp->content = (void *)0;
-		tmp->size = 0;
-	}
-	tmp = *head;
-	while (tmp->fd != fd && tmp->next != 0)
-		tmp = tmp->next;
-	if (tmp->fd != fd && tmp->next == 0)
-	{
-		tmp->next = malloc(sizeof(t_list) * 1);
-		tmp = tmp->next;
-		tmp->fd = fd;
-		tmp->content = (void *)0;
-		tmp->size = 0;
-	}
-	return (tmp);
 }

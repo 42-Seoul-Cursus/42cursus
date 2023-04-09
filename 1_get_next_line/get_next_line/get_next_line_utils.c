@@ -12,85 +12,115 @@
 
 #include "get_next_line.h"
 
-char	*make_buf(t_list *backup, char *buf, long long *size)
+char	*ft_calloc(size_t size)
 {
-	char	*new_buf;
+	char	*answer;
+	size_t	i;
+
+	answer = malloc(sizeof(char) * size);
+	i = 0;
+	while (i < size)
+	{
+		answer[i] = '\0';
+		++i;
+	}
+	return (answer);
+}
+
+size_t	find_idx(char *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	if (c == '\0')
+		while (s[i] != '\0')
+			++i;
+	else if (c == '\n')
+	{
+		while (s[i] != '\0')
+		{
+			if (s[i] == '\n')
+				return (i);
+			++i;
+		}
+		return (0);
+	}
+	return (i);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*s;
 	size_t	i;
 	size_t	j;
 
-	new_buf = malloc(sizeof(char) * (backup->size + *size));
+	s = ft_calloc((find_idx(s1, '\0') + find_idx(s2, '\0') + 1));
 	i = 0;
-	while (i < backup->size)
-	{
-		new_buf[i] = backup->content[i];
-		++i;
-	}
 	j = 0;
-	while (j < (size_t) *size)
+	while (s1[i] != '\0')
 	{
-		new_buf[i] = buf[j];
-		++j;
+		s[i] = s1[i];
 		++i;
 	}
-	free(buf);
-	free(backup->content);
-	*size += backup->size;
-	return (new_buf);
+	while (s2[j] != '\0')
+	{
+		s[i] = s2[j];
+		++i;
+		++j;
+	}
+	free(s1);
+	free(s2);
+	return (s);
 }
 
-void	make_backup(t_list *backup, size_t size, char *buf)
+char	*ft_strdup(char *s)
 {
 	size_t	i;
-	size_t	start;
+	char	*answer;
 
-	if (backup->content != 0)
-		free(backup->content);
-	start = check_nl(buf, size) + 1;
-	backup->content = malloc(sizeof(char) * (size - start));
-	if (!(backup->content))
-		return ;
+	answer = ft_calloc((find_idx(s, '\0') + 1));
 	i = 0;
-	if (size > start)
+	while (s[i] != '\0')
 	{
-		backup->size = size - start;
-		size -= start;
-	}
-	while (i < size)
-	{
-		backup->content[i] = buf[start];
+		answer[i] = s[i];
 		++i;
-		++start;
 	}
+	return (answer);
 }
 
-char	*make_line(char *buf, size_t size)
+char	*make_backup(char *buf, size_t size)
+{
+	char	*backup;
+	size_t	i;
+	size_t	j;
+	size_t	flag;
+
+	flag = (find_idx(buf, '\n') > 0);
+	(void)size;
+	backup = ft_calloc(find_idx(buf, '\0') - find_idx(buf, '\n') + flag);
+	i = 0;
+	j = find_idx(buf, '\n') + flag;
+	while (buf[j] != '\0')
+	{
+		backup[i] = buf[j];
+		++i;
+		++j;
+	}
+	free(buf);
+	return (backup);
+}
+
+char	*make_line(char *buf)
 {
 	char	*line;
 	size_t	i;
 
-	line = malloc(sizeof(char) * size + 2);
-	if (!line)
-		return (0);
+	line = ft_calloc(find_idx(buf, '\n') + 1);
 	i = 0;
-	while (i <= size)
+	while (i < find_idx(buf, '\n'))
 	{
 		line[i] = buf[i];
 		++i;
 	}
-	line[i] = '\0';
 	return (line);
-}
-
-size_t	check_nl(char *buf, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i <= size)
-	{
-		if (buf[i] == '\n')
-			return (i);
-		++i;
-	}
-	return (0);
 }

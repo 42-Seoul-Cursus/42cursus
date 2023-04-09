@@ -19,19 +19,12 @@
 #  define BUFFER_SIZE 1
 # endif
 
-typedef struct s_list
-{
-	char			*content;
-	size_t			size;
-	int				fd;
-	struct s_list	*next;
-}					t_list;
-
-char				*get_next_line(int fd);
-t_list				*set_backup(t_list **head, int fd);
-size_t				check_nl(char *buf, size_t size);
-char				*make_line(char *buf, size_t size);
-void				make_backup(t_list *backup, size_t size, char *buf);
-char				*make_buf(t_list *backup, char *buf, long long *size);
+char	*get_next_line(int fd);
+size_t	find_idx(char *s, char c);
+char	*ft_calloc(size_t size);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *s);
+char	*make_backup(char *buf, size_t size);
+char	*make_line(char *buf);
 
 #endif
