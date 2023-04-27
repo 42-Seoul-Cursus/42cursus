@@ -5,53 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan    <seunan@student.42seoul.kr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 20:31:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/04/09 23:05:58 by seunan           ###   ########.fr       */
+/*   Created: 2023/04/26 15:51:08 by seunan            #+#    #+#             */
+/*   Updated: 2023/04/26 17:53:17 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char	*update_line(char **backup, char *line, char *cut)
 {
-	static char	*backup;
-	char		*buf;
-	char		*line;
-	int			size;
+	char	*tmp;
 
-	if (backup == 0 || *backup == '\0')
-		backup = ft_calloc(1);
-	while (1)
+	tmp = ft_strdup(cut + 1);
+	*(cut + 1) = '\0';
+	line = ft_strdup(*backup);
+	free(*backup);
+	*backup = tmp;
+	return (line);
+}
+
+char	*ret_line(char **backup, int size)
+{
+	char	*line;
+	char	*cut;
+
+	line = NULL;
+	if (size < 0)
+		return (NULL);
+	if (*backup)
 	{
-		if (*backup != '\0')
-		{
-			if (find_idx(backup, '\n') > 0)
-			{
-				line = make_line(backup);
-				backup = make_backup(backup, 1000); // size 써야댐
-				return (line);
-			}
-		}
-		while (1)
-		{
-			buf = ft_calloc((BUFFER_SIZE + 1));
-			size = read(fd, buf, BUFFER_SIZE);
-			if (size == 0 && *buf == '\0')
-			{
-				free(buf);
-				return (backup);
-			}
-			buf = ft_strjoin(backup, buf);
-			if (find_idx(buf, '\n') > 0)
-			{
-				line = make_line(buf);
-				backup = make_backup(buf, 1000);
-				return (line);
-			}
-			backup = make_backup(buf, 1000);
-			if (size == 0 && *backup == '\0')
-				return (0);
-		}
+		cut = ft_strchr(*backup, '\n');
+		if (cut != NULL)
+			return (update_line(backup, line, cut));
+		line = *backup;
+		*backup = NULL;
 	}
 	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*backup[OPEN_MAX];
+	char		*buf;
+	int			size;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	size = read(fd, buf, BUFFER_SIZE);
+	while (size > 0)
+	{
+		buf[size] = '\0';
+		if (backup[fd] == NULL)
+			backup[fd] = ft_strdup("\0");
+		backup[fd] = ft_strjoin(backup[fd], buf);
+		if (ft_strchr(backup[fd], '\n') != NULL)
+			break ;
+		size = read(fd, buf, BUFFER_SIZE);
+	}
+	free(buf);
+	return (ret_line(&backup[fd], size));
 }
