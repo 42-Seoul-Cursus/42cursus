@@ -30,7 +30,7 @@ char	*ft_strdup(const char *s)
 	return (answer);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*s;
 	size_t	i;
@@ -53,7 +53,6 @@ char	*ft_strjoin(char *s1, const char *s2)
 		++j;
 	}
 	s[i] = '\0';
-	free(s1);
 	return (s);
 }
 

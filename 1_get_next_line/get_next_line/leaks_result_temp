@@ -1,14 +1,14 @@
-Process:         a.out [74393]
+Process:         a.out [85794]
 Path:            /Users/USER/*/a.out
-Load Address:    0x102840000
+Load Address:    0x104d58000
 Identifier:      a.out
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  zsh [69261]
+Parent Process:  zsh [74533]
 
-Date/Time:       2023-04-27 19:08:45.154 +0900
-Launch Time:     2023-04-27 19:08:44.489 +0900
+Date/Time:       2023-04-28 13:41:32.239 +0900
+Launch Time:     2023-04-28 13:41:31.867 +0900
 OS Version:      macOS 13.3.1 (22E261)
 Report Version:  7
 Analysis Tool:   /usr/bin/leaks
@@ -19,6 +19,6 @@ Idle exit:                  untracked
 ----
 
 leaks Report Version: 4.0
-Process 74393: 219 nodes malloced for 28 KB
-Process 74393: 0 leaks for 0 total leaked bytes.
+Process 85794: 219 nodes malloced for 16 KB
+Process 85794: 0 leaks for 0 total leaked bytes.
 

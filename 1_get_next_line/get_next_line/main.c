@@ -22,50 +22,18 @@ void	leak(void)
 
 int	main(void)
 {
-	char	*buff;
-
 	atexit(leak);
-	int	test = open("./test.txt", 0);
-	buff = get_next_line(test);
-	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(test);
-	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(test);
-	printf("%s\n", buff);
-	free(buff);
-	buff = get_next_line(test);
-	printf("%s\n", buff);
-	free(buff);
-	// int	only = open("./only_nl.txt", 0);
+	// int	test = open("./test.txt", 0);
+	int	only = open("./only_nl.txt", 0);
 	// int	no_nl = open("./no_nl.txt", 0);
-	// int	test1 = open("./test.txt", 0);
+	// int	test1 = open("./test1.txt", 0);
 
-	// for (int i = 0; i < 10; i++)
-	// {
-	// 	buff = get_next_line(only);
-	// 	printf("%d : %s\n",i + 1, buff);
-	// 	free(buff);
-	// }
-	// for (int i = 0; i < 10; i++)
-	// {
-	// 	buff = get_next_line(test);
-	// 	printf("%d : %s\n", i + 1, buff);
-	// 	free(buff);
-	// }
-	// for (int i = 0; i < 10; i++)
-	// {
-	// 	buff = get_next_line(test1);
-	// 	printf("%d : %s\n", i + 1, buff);
-	// 	free(buff);
-	// }
-	// for (int i = 0; i < 10; i++)
-	// {
-	// 	buff = get_next_line(no_nl);
-	// 	printf("%d : %s",i + 1, buff);
-	// 	free(buff);
-	// }
+	for (int i = 0; i < 10; i++)
+	{
+		char	*buff = get_next_line(only);
+		printf("%d : %s\n",i + 1, buff);
+		free(buff);
+	}
 	return (0);
 }
 
