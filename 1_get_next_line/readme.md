@@ -50,3 +50,15 @@ read의 반환값이 음수라면 실패, BUFFER_SIZE보다 작은 음이 아닌
 
 ### 참고자료
 * [gnl 준비: 기본 개념](https://velog.io/@pig005/gnl-%EC%A4%80%EB%B9%84-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90)
+
+```zsh
+ulimit -a
+```
+
+```c
+#include <limits.h>
+
+OPEN_MAX -> 	10240
+FD_SETSIEZE -> 1024
+
+```
