@@ -4,6 +4,7 @@
 	"lldb.consoleMode": "commands",
 	"lldb.showDisassembly": "auto",
 	"files.associations": {
+		"*.ejs": "html",
 		"unistd.h": "c",
 		"algorithm": "c",
 		"ratio": "c",
@@ -17,6 +18,7 @@
 		"cstring": "cpp",
 		"iostream": "cpp",
 		"string.h": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"get_next_line_bonus.h": "c"
 	}
 }

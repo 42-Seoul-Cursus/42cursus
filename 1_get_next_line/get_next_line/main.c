@@ -23,11 +23,15 @@ void	leak(void)
 int	main(void)
 {
 	atexit(leak);
-	int	only = open("./abort.txt", 0);
+	int	char1 = open("./1char.txt", 0);
+	int	nonl = open("./one_line_no_nl.txt", 0);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		char	*buff = get_next_line(only);
+		char	*buff = get_next_line(char1);
+		printf("%d : %s\n",i + 1, buff);
+		free(buff);
+		buff = get_next_line(nonl);
 		printf("%d : %s\n",i + 1, buff);
 		free(buff);
 	}

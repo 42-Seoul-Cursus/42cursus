@@ -12,42 +12,22 @@
 
 #include "get_next_line_bonus.h"
 
-char	*update_line(char **backup, char *line, char *cut)
+char	*get_next_line(int fd)
 {
-	char	*tmp;
+	static char	*backup[OPEN_MAX];
+	char		*buf;
+	int			size;
 
-	tmp = ft_strdup(cut + 1);
-	*(cut + 1) = '\0';
-	line = ft_strdup(*backup);
-	free(*backup);
-	*backup = tmp;
-	return (line);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	size = read(fd, buf, BUFFER_SIZE);
+	return (repeat_read(backup, fd, buf, size));
 }
 
-char	*ret_line(char **backup)
-{
-	char	*line;
-	char	*cut;
-
-	line = NULL;
-	if (*backup)
-	{
-		cut = ft_strchr(*backup, '\n');
-		if (cut != NULL)
-			return (update_line(backup, line, cut));
-		if (**backup == '\0')
-		{
-			free(*backup);
-			*backup = NULL;
-			return (NULL);
-		}
-		line = *backup;
-		*backup = NULL;
-	}
-	return (line);
-}
-
-char	*make_backup(char **backup, int fd, char *buf, int size)
+char	*repeat_read(char **backup, int fd, char *buf, int size)
 {
 	char	*tmp;
 
@@ -59,7 +39,7 @@ char	*make_backup(char **backup, int fd, char *buf, int size)
 		tmp = ft_strjoin(backup[fd], buf);
 		free(backup[fd]);
 		backup[fd] = tmp;
-		if (ft_strchr(backup[fd], '\n') != NULL)
+		if (ft_strchr(backup[fd], '\n'))
 			break ;
 		size = read(fd, buf, BUFFER_SIZE);
 	}
@@ -73,17 +53,36 @@ char	*make_backup(char **backup, int fd, char *buf, int size)
 	return (ret_line(&backup[fd]));
 }
 
-char	*get_next_line(int fd)
+char	*ret_line(char **backup)
 {
-	static char	*backup[OPEN_MAX];
-	char		*buf;
-	int			size;
+	char	*line;
+	char	*cut;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (NULL);
-	size = read(fd, buf, BUFFER_SIZE);
-	return (make_backup(backup, fd, buf, size));
+	line = NULL;
+	if (*backup)
+	{
+		cut = ft_strchr(*backup, '\n');
+		if (cut)
+			return (update_line(backup, line, cut));
+		if (**backup == '\0')
+		{
+			free(*backup);
+			*backup = NULL;
+		}
+		line = *backup;
+		*backup = NULL;
+	}
+	return (line);
+}
+
+char	*update_line(char **backup, char *line, char *cut)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(cut + 1);
+	*(cut + 1) = '\0';
+	line = ft_strdup(*backup);
+	free(*backup);
+	*backup = tmp;
+	return (line);
 }

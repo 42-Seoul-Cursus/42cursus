@@ -22,12 +22,12 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
+char	*repeat_read(char **backup, int fd, char *buf, int size);
 char	*ret_line(char **backup);
 char	*update_line(char **backup, char *line, char *cut);
-char	*make_backup(char **backup, int fd, char *buf, int size);
 size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *src);
-char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif
