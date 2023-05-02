@@ -24,14 +24,12 @@ char	*update_line(char **backup, char *line, char *cut)
 	return (line);
 }
 
-char	*ret_line(char **backup, int size)
+char	*ret_line(char **backup)
 {
 	char	*line;
 	char	*cut;
 
 	line = NULL;
-	if (size < 0)
-		return (NULL);
 	if (*backup)
 	{
 		cut = ft_strchr(*backup, '\n');
@@ -40,6 +38,7 @@ char	*ret_line(char **backup, int size)
 		if (**backup == '\0')
 		{
 			free(*backup);
+			*backup = NULL;
 			return (NULL);
 		}
 		line = *backup;
@@ -65,13 +64,13 @@ char	*make_backup(char **backup, int fd, char *buf, int size)
 		size = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);
-	if (size == -1)
+	if (size < 0)
 	{
 		free(backup[fd]);
 		backup[fd] = NULL;
 		return (NULL);
 	}
-	return (ret_line(&backup[fd], size));
+	return (ret_line(&backup[fd]));
 }
 
 char	*get_next_line(int fd)

@@ -23,10 +23,7 @@ void	leak(void)
 int	main(void)
 {
 	atexit(leak);
-	// int	test = open("./test.txt", 0);
-	int	only = open("./only_nl.txt", 0);
-	// int	no_nl = open("./no_nl.txt", 0);
-	// int	test1 = open("./test1.txt", 0);
+	int	only = open("./abort.txt", 0);
 
 	for (int i = 0; i < 10; i++)
 	{

@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*ret_line(char **backup, int size);
+char	*ret_line(char **backup);
 char	*update_line(char **backup, char *line, char *cut);
 char	*make_backup(char **backup, int fd, char *buf, int size);
 size_t	ft_strlen(const char *s);
