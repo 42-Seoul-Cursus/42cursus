@@ -1,4 +1,6 @@
-# int	ft_printf(const char *format, ...);
+# ft_printf
+
+## int	ft_printf(const char *format, ...);
 
 >'...'은 '가변 인자' 혹은 '가변 파라미터'라고 불린다.
 가변 인자를 나타내는 '...'은 파라미터 순서 상 가장 뒤에 있어야 한다.

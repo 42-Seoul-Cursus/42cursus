@@ -1,4 +1,6 @@
-# char *get_next_line(int fd);
+# get_next_line
+
+## char *get_next_line(int fd);
 
 ```c
 	char	*get_next_line(int fd)

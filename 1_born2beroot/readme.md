@@ -1,2 +1,4 @@
-- [설치 및 세팅](https://techdebt.tistory.com/18)
-- [ubuntu 설치](https://velog.io/@suzu11/Mac-M1-%EC%97%90%EC%84%9C-%EC%9A%B0%EB%B6%84%ED%88%AC-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-UTM#ubuntu-gui-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)
+# Born2BeRoot
+
+- [LVM이란](https://mamu2830.blogspot.com/2019/12/lvmpv-vg-lv-pe-lvm.html)
+- [](https://80000coding.oopy.io/a9c39e11-07ce-45d2-ade4-77cf6814a466)
