@@ -54,14 +54,54 @@
 - [2](https://phoenixnap.com/kb/apparmor-vs-selinux)
 
 ## SSH
+```bash
+apt-get install openssh-server
+vim /etc/ssh/sshd_config
+	#Port 22 -> Port 4242
+	#PermitRootLogin no
+systemctl restart ssh
+systemctl status ssh
+hostnamectl
+hostname -I
+vim /etc/hostname
+ssh seunan@<MAC_IP> -p <HOST_PORT>
+cat /etc/ssh/sshd_config | grep "PermitRootLogin"
+```
 - [1](https://www.freecodecamp.org/news/ssh-meaning-in-linux/#:~:text=Secure%20Shell%20(SSH)%20is%20a,remote%20administration%20and%20file%20transfer.)
 - [2](https://baked-corn.tistory.com/52)
 - [3](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221334854192)
 ## UFW
+```bash
+apt-get install ufw
+ufw status verbose
+ufw enable
+ufw default deny
+ufw allow 4242
+cat /etc/ufw/user.rules
+ufw status numbered
+ufw delete <rule number>
+```
 - [1](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221409997866)
 - [2](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
 
 ## PASSWORD POLICY
+```bash
+chage -l
+chage -M
+chage -m 2 -M 30 -W 7
+passwd -e user
+
+vi /etc/login.defs
+PASS_MAX_DAYS 30
+PASS_MIN_DATS 2
+PASS_WARN_AGE 7
+
+apt-get install libpam-pwquality
+vi /etc/pam.d/common-password
+retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7
+
+passwd -e <사용자명>
+```
 - [1](https://techpicnic.tistory.com/506)
 - [2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
 - [3](https://manpages.debian.org/stretch/libpam-pwquality/pam_pwquality.8.en.html)
@@ -69,9 +109,31 @@
 - [5](https://serverfault.com/questions/1016570/how-to-enable-enforce-for-root-under-pam-pwquality-so-in-rhel8-centos-8)
 
 ## GROUP
+```bash
+id user
+groupadd aaa
+groupadd -g 1010 aaa
+usermod -G user hunpark
+usermod -g user hunpark
+groupdel user
+```
 - [1](https://www.manualfactory.net/13414)
 - [2](https://goni9071.tistory.com/68)
 ## SUDO
+```bash
+apt-get install sudo
+visudo sudoers
+	Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+	Defaults	passwd_tries=3
+	Defaults	badpass_message=""
+	Defaults	authfail_message=""
+	Defaults	log_input
+	Defaults	log_output
+	Defaults	iolog_dir="/var/log/sudo/"
+	Defaults	requiretty
+cd /var/log/sudo
+usermod -aG sudo seunan
+```
 - [1](https://darrengwon.tistory.com/844)
 - [2](https://wiki.debian.org/sudo/)
 - [3](https://ostechnix.com/how-to-change-default-sudo-log-file-in-linux/)
