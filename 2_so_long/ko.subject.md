@@ -307,7 +307,7 @@ _버전 2.3_
 
 쉘 대신, 화면상에 현재까지 움직인 횟수를 출력할 수도 있습니다.
 
-![안녕히!](solong.png)
+![안녕히!](img/solong.png)
 
 > ℹ️ <br>
 >
@@ -333,7 +333,7 @@ _버전 2.3_
 
 <br>
 
-![예시](examples.png)
+![예시](img/examples.png)
 
 ##### _`so_long` examples showing terrible taste in graphic design<br>(almost worth some bonus points)!_
 
@@ -346,7 +346,7 @@ _버전 2.3_
 ## Submission and peer correction
 
 ##### _Turn in your assignment in your `Git` repository as usual. Only the work inside your repository will be evaluated during the defense. Don't hesitate to double check the names of your files to ensure they are correct._
- 
+
  항상 그래왔듯, 여러분의 결과물을 `Git` 레포지토리에 제출하세요. 레포지토리에 있는 과제물만이 평가될 것입니다. 파일 이름이 올바른지 확인하려면 꼭 한번 더 확인하세요.
 
 
