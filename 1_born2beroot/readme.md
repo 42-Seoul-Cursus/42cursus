@@ -68,10 +68,10 @@
 ![](img/47.png)
 ![](img/48.png)
 ```bash
-apt-get install ufw
+apt-get install ufw # ufw 설치
 ufw enable # ufw 활성화
 ufw default deny incoming # 들어오는 접속을 거부하는 기본값 설정
-ufw default allow outgoing # 나가는 것을 허용 기본값 설정
+ufw default allow outgoing # 나가는 것을 허용하는 기본값 설정
 ufw allow 4242 # 4242 포트 열기
 ufw status verbose # 방화벽이 활성화되어 있는지 확인
 cat /etc/ufw/user.rules # ufw default rules 조회
@@ -96,14 +96,14 @@ ufw delete <rule number> # 번호를 사용하여 특정 규칙을 삭제
 ```bash
 apt-get install openssh-server
 vim /etc/ssh/sshd_config # ssh 데몬의 작업을 수정하는 옵션을 설정할 수 있는 OpenSSH용 시스템 전체 구성 파일
-	#Port 4242 -> ssh 데몬이 들어오는 연결을 수신 대기하는 포트 번호를 지정
-	#PermitRootLogin no -> root가 ssh를 사용하여 로그인할 수 있는지 여부를 지정
+	Port 4242 # ssh 데몬이 들어오는 연결을 수신 대기하는 포트 번호를 지정
+	PermitRootLogin no # root가 ssh를 사용하여 로그인할 수 있는지 여부를 지정
 vim /etc/hostname # = hostname
 hostname -I # VM에서 할당받은 IP를 확인
 hostnamectl # hostname 변경
 systemctl restart ssh # SSH 데몬 재시작
 systemctl status ssh # SSH 데몬 상태 확인
-ssh seunan@<MAC_IP> -p <HOST_PORT> # HOST_PORT에 연결
+ssh seunan@<macIP> -p <host port> # host port에 연결
 ```
 - [What is SSH](https://www.freecodecamp.org/news/ssh-meaning-in-linux/#:~:text=Secure%20Shell%20(SSH)%20is%20a,remote%20administration%20and%20file%20transfer.)
 - [Enable the SSH server](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221334854192)
@@ -138,11 +138,11 @@ PASS_MAX_DAYS 30
 PASS_MIN_DATS 2
 PASS_WARN_AGE 7
 
-apt-get install libpam-pwquality
+apt-get install libpam-pwquality # pwquality 라이브러리 설치
 vi /etc/pam.d/common-password
-retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7 # root는 password에 대한 캐시를 저장하지 않기 때문에 difok 설정이 안됨
+retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7 # root는 password에 대한 캐시를 저장하지 않기 때문에 difok 설정이 안먹음
 
-passwd -e <username>
+passwd -e <username> # password 변경
 ```
 - [Password policy1](https://techpicnic.tistory.com/506)
 - [Password policy2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
@@ -167,7 +167,7 @@ visudo /etc/sudoers
 	Defaults	log_input, log_output # sudo는 터미널에서 명령을 실행하고 모든 사용자 입력과 화면으로 전송되는 모든 출력을 로그로 기록
 	Defaults	iolog_dir="/var/log/sudo/" # log_input 또는 log_output 옵션이 활성화 되어있을 경우 입출력 로그 디렉터리의 경로 이름
 	Defaults	requiretty # tty를 할당 받지 않은 shell에서는 sudo 를 사용하지 못하게 하는 옵션
-cd /var/log/sudo
+mkdir /var/log/sudo
 usermod -aG sudo <username> # user에게 sudo 그룹 권한
 ```
 - [debian wiki](https://wiki.debian.org/sudo/)
