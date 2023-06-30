@@ -1,4 +1,14 @@
 # Born2BeRoot
+- [Install Guide](#install-guide)
+- [LVM](#what-is-lvm)
+- [apt vs aptitude](#apt-vs-aptitude)
+- [SElinux vs AppArmor](#selinux-vs-apparmor)
+- [SSH](#ssh)
+- [UFW](#ufw)
+- [PASSWORD POLICY](#password-policy)
+- [GROUP](#group)
+- [SUDO](#sudo)
+- [monitoring.sh](#monitoringsh)
 
 ## Install Guide
 ![](img/1.png)
@@ -42,16 +52,16 @@
 ![](img/39.png)
 ![](img/40.png)
 
-## LVM이란
-- [1](https://mamu2830.blogspot.com/2019/12/lvmpv-vg-lv-pe-lvm.html)
-- [2](https://wiseworld.tistory.com/32)
+## What is LVM
+- [What is LVM](https://mamu2830.blogspot.com/2019/12/lvmpv-vg-lv-pe-lvm.html)
+- [LVM Concepts](https://wiseworld.tistory.com/32)
 
-## apt와 aptitude
-- [1](https://www.tecmint.com/difference-between-apt-and-aptitude/)
+## apt vs aptitude
+- [What is APT and Aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
 
-## SElinux 와 AppArmor
-- [1](https://www.techtarget.com/searchdatacenter/tip/Compare-two-Linux-security-modules-SELinux-vs-AppArmor)
-- [2](https://phoenixnap.com/kb/apparmor-vs-selinux)
+## SElinux vs AppArmor
+- [Compare two Linux security modules: SELinux vs AppArmor](https://www.techtarget.com/searchdatacenter/tip/Compare-two-Linux-security-modules-SELinux-vs-AppArmor)
+- [AppArmor vs. SELinux](https://phoenixnap.com/kb/apparmor-vs-selinux)
 
 ## SSH
 ```bash
@@ -67,9 +77,16 @@ vim /etc/hostname
 ssh seunan@<MAC_IP> -p <HOST_PORT>
 cat /etc/ssh/sshd_config | grep "PermitRootLogin"
 ```
-- [1](https://www.freecodecamp.org/news/ssh-meaning-in-linux/#:~:text=Secure%20Shell%20(SSH)%20is%20a,remote%20administration%20and%20file%20transfer.)
-- [2](https://baked-corn.tistory.com/52)
-- [3](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221334854192)
+- [What is SSH](https://www.freecodecamp.org/news/ssh-meaning-in-linux/#:~:text=Secure%20Shell%20(SSH)%20is%20a,remote%20administration%20and%20file%20transfer.)
+- [Enable the SSH server](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221334854192)
+- [Configure the /etc/ssh/sshd_config file](https://www.linuxtopia.org/online_books/linux_system_administration/securing_and_optimizing_linux/chap15sec122.html)
+- [SSH wiki](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_sshd_%EC%9E%AC%EC%8B%9C%EC%9E%91)
+- [Change the Default SSH port](https://www.ionos.com/help/server-cloud-infrastructure/getting-started/important-security-information-for-your-server/changing-the-default-ssh-port/)
+- [hostnamectl](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%ED%98%B8%EC%8A%A4%ED%8A%B8%EB%AA%85_%EB%B3%80%EA%B2%BD_hostnamectl_set-hostname)
+- [Port Forwarding1](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm)
+- [Port Forwarding2](https://www.activecountermeasures.com/port-forwarding-with-virtualbox/)
+- [Port Forwarding3](https://www.nemonein.xyz/2020/01/3048/)
+- [Port Forwarding4](https://m.blog.naver.com/yexx/221996230014)
 ## UFW
 ```bash
 apt-get install ufw
@@ -81,8 +98,9 @@ cat /etc/ufw/user.rules
 ufw status numbered
 ufw delete <rule number>
 ```
-- [1](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221409997866)
-- [2](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
+- [UFW setting](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221409997866)
+- [UFW status](https://linuxhint.com/ufw_status/)
+- [Debian wiki](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
 
 ## PASSWORD POLICY
 ```bash
@@ -100,25 +118,15 @@ apt-get install libpam-pwquality
 vi /etc/pam.d/common-password
 retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7
 
-passwd -e <사용자명>
+passwd -e <username>
 ```
-- [1](https://techpicnic.tistory.com/506)
-- [2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
-- [3](https://manpages.debian.org/stretch/libpam-pwquality/pam_pwquality.8.en.html)
-- [4](https://www.baeldung.com/linux/password-complexity)
-- [5](https://serverfault.com/questions/1016570/how-to-enable-enforce-for-root-under-pam-pwquality-so-in-rhel8-centos-8)
-
+- [Password policy1](https://techpicnic.tistory.com/506)
+- [Password policy2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
+- [man PAM_PWQUALITY](https://manpages.debian.org/stretch/libpam-pwquality/pam_pwquality.8.en.html)
+- [Managing Password Complexity in Linux](https://www.baeldung.com/linux/password-complexity)
 ## GROUP
-```bash
-id user
-groupadd aaa
-groupadd -g 1010 aaa
-usermod -G user hunpark
-usermod -g user hunpark
-groupdel user
-```
-- [1](https://www.manualfactory.net/13414)
-- [2](https://goni9071.tistory.com/68)
+- [group](https://www.manualfactory.net/13414)
+- [Verify user groups](https://goni9071.tistory.com/68)
 ## SUDO
 ```bash
 apt-get install sudo
@@ -127,16 +135,27 @@ visudo sudoers
 	Defaults	passwd_tries=3
 	Defaults	badpass_message=""
 	Defaults	authfail_message=""
-	Defaults	log_input
-	Defaults	log_output
+	Defaults	log_input, log_output
 	Defaults	iolog_dir="/var/log/sudo/"
 	Defaults	requiretty
 cd /var/log/sudo
 usermod -aG sudo seunan
 ```
-- [1](https://darrengwon.tistory.com/844)
-- [2](https://wiki.debian.org/sudo/)
-- [3](https://ostechnix.com/how-to-change-default-sudo-log-file-in-linux/)
-- [4](https://bloodguy.tistory.com/entry/Linux-ssh%EB%82%98-%EB%8B%A4%EB%A5%B8-%EB%8D%B0%EB%AA%AC%EC%97%90%EC%84%9C-sudo-u-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EB%8B%A4%EB%A5%B8-%EC%9C%A0%EC%A0%80%EA%B6%8C%ED%95%9C%EC%9C%BC%EB%A1%9C-%EC%8B%A4%ED%96%89%EC%8B%9C-sudo-sorry-you-must-have-a-tty-to-run-sudo-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0)
-- [5](https://www.cloudpanel.io/tutorial/how-to-add-user-to-sudoers-in-debian/)
-- [6](https://ko.linux-console.net/?p=1985#gsc.tab=0)
+- [debian wiki](https://wiki.debian.org/sudo/)
+- [Add User to Sudoers](https://www.cloudpanel.io/tutorial/how-to-add-user-to-sudoers-in-debian/)
+- [Configure Sudoers](https://ko.linux-console.net/?p=1985#gsc.tab=0)
+- [man sudoers](https://man.freebsd.org/cgi/man.cgi?query=sudoers&apropos=0&sektion=0&manpath=FreeBSD+13.0-RELEASE+and+Ports&arch=default&format=html)
+
+## monitoring.sh
+- [The architecture of your operating system and its kernel version](https://www.cyberciti.biz/faq/find-print-linux-unix-kernel-version/)
+- [The number of physical processors](https://www.cyberciti.biz/faq/check-how-many-cpus-are-there-in-linux-system/)
+- [The number of virtual processors](https://webhostinggeeks.com/howto/how-to-display-the-number-of-processors-vcpu-on-linux-vps/)
+- [The current available RAM on your server and its utilization rate as a percentage](https://www.2daygeek.com/linux-check-cpu-memory-swap-utilization-percentage/)
+- [The current available memory on your server and its utilization rate as a percentage](https://www.2daygeek.com/linux-check-cpu-memory-swap-utilization-percentage/)
+- [The current utilization rate of your processors as a percentage](https://www.baeldung.com/linux/get-cpu-usage)
+- [The date and time of the last reboot](https://www.cyberciti.biz/tips/linux-last-reboot-time-and-date-find-out.html)
+- [Whether LVM is active or not](https://askubuntu.com/questions/202613/how-do-i-check-whether-i-am-using-lvm)
+- [The number of active connections](https://serverfault.com/questions/421310/check-the-number-of-active-connections-on-port-80)
+- [The number of users using the server](https://www.computerhope.com/issues/ch001649.htm)
+- [The IPv4 address of your server and its MAC (Media Access Control) address](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
+- [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
