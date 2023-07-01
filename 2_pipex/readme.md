@@ -25,3 +25,5 @@
 https://www.youtube.com/results?search_query=execve
 https://www.it-note.kr/157
 https://nomad-programmer.tistory.com/110
+
+echo $PATH
