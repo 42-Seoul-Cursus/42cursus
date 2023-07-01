@@ -7,8 +7,14 @@
 |01|[ft_printf](https://github.com/42seoul-translation/subject_ko/blob/master/ft_printf/ft_printf.ko.md)|[![seunan's 42 ft_printf Score](https://badge42.vercel.app/api/v2/clffdagdh001109kzdz8dck42/project/3033532)](https://github.com/JaeSeoKim/badge42)|2023.03.22|
 |01|[get_next_line](https://github.com/42seoul-translation/subject_ko/blob/master/get_next_line/get_next_line.ko.md)|[![seunan's 42 Libft Score](https://badge42.vercel.app/api/v2/clffdagdh001109kzdz8dck42/project/3024509)](https://github.com/JaeSeoKim/badge42)|2023.05.04|
 |01|[born2beroot](https://github.com/42seoul-translation/subject_ko/blob/master/born2beroot/born2beroot.md)|-|-|
+|02|[pipex](https://github.com/seungwonme/42cursus/tree/main/2_pipex)|-|-|
+|02|[so_long](https://github.com/seungwonme/42cursus/tree/main/2_so_long)|-|-|
+|02|[push_swap](https://github.com/seungwonme/42cursus/tree/main/2_push_swap)|-|-|
+|03|[Philosophers]()|-|-|
+|03|[minishell]()|-|-|
+
 
 ## Exam
 |Circle|Exam|Score|Date|
 |----|----|:----:|:----:|
-|-|Exam Rank 0-|-|-|
+|1|Exam Rank 01|-|-|
