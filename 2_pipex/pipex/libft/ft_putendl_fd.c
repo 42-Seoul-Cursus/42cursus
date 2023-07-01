@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 07:50:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/01 10:50:14 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:21:59 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/15 23:33:14 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
-# include <sys/fcntl.h>
-# include <sys/errno.h>
-# include <unistd.h>
+#include "libft.h"
 
-#endif
+void	ft_putendl_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
+}

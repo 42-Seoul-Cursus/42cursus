@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/01 07:50:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/01 10:50:14 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:21:19 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/15 23:33:25 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
-# include <sys/fcntl.h>
-# include <sys/errno.h>
-# include <unistd.h>
+#include "libft.h"
 
-#endif
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
