@@ -53,6 +53,10 @@
 ![](img/40.png)
 
 ## What is LVM
+
+- [Hard disk structure](https://mamu2830.blogspot.com/2019/10/blog-post_14.html)
+- [What is file system](https://mamu2830.blogspot.com/2019/10/chs-lba.html)
+- [What is mount](https://mamu2830.blogspot.com/2019/11/fdisk-df-etcfstab-blkid.html)
 - [What is LVM](https://mamu2830.blogspot.com/2019/12/lvmpv-vg-lv-pe-lvm.html)
 - [LVM Concepts](https://wiseworld.tistory.com/32)
 
@@ -60,6 +64,8 @@
 - [What is APT and Aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
 
 ## SElinux vs AppArmor
+
+- [What is AppArmor](https://ko.wikipedia.org/wiki/AppArmor)
 - [Compare two Linux security modules: SELinux vs AppArmor](https://www.techtarget.com/searchdatacenter/tip/Compare-two-Linux-security-modules-SELinux-vs-AppArmor)
 - [AppArmor vs. SELinux](https://phoenixnap.com/kb/apparmor-vs-selinux)
 
@@ -151,6 +157,8 @@ passwd -e <username> # password 변경
 ## GROUP
 - [group](https://www.manualfactory.net/13414)
 - [Verify user groups](https://goni9071.tistory.com/68)
+- [user](https://withcoding.com/101)
+
 ## SUDO
 ![](img/41.png)
 ![](img/42.png)
@@ -179,7 +187,8 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 
 ## monitoring.sh
 - [The architecture of your operating system and its kernel version](https://www.cyberciti.biz/faq/find-print-linux-unix-kernel-version/)
-- [The number of physical processors](https://www.cyberciti.biz/faq/check-how-many-cpus-are-there-in-linux-system/)
+- [The number of physical processors1](https://www.cyberciti.biz/faq/check-how-many-cpus-are-there-in-linux-system/)
+- [The number of physical processors2](https://www.baeldung.com/linux/get-number-of-processors)
 - [The number of virtual processors](https://webhostinggeeks.com/howto/how-to-display-the-number-of-processors-vcpu-on-linux-vps/)
 - [The current available RAM on your server and its utilization rate as a percentage](https://www.2daygeek.com/linux-check-cpu-memory-swap-utilization-percentage/)
 - [The current available memory on your server and its utilization rate as a percentage](https://stackoverflow.com/questions/10585978/how-to-get-the-percentage-of-memory-free-with-a-linux-command)
@@ -189,5 +198,14 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 - [Whether LVM is active or not](https://askubuntu.com/questions/202613/how-do-i-check-whether-i-am-using-lvm)
 - [The number of active connections](https://serverfault.com/questions/421310/check-the-number-of-active-connections-on-port-80)
 - [The number of users using the server](https://www.computerhope.com/issues/ch001649.htm)
-- [The IPv4 address of your server and its MAC (Media Access Control) address](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
+- [The IPv4 address of your server and its MAC (Media Access Control) address1](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
+- [The IPv4 address of your server and its MAC (Media Access Control) address2](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
+
+## crontab
+- [1](https://jdm.kr/blog/2)
+
+
+https://serverfault.com/questions/50585/whats-the-best-way-to-check-if-a-volume-is-mounted-in-a-bash-script
+https://phoenixnap.com/kb/bash-printf
+https://recipes4dev.tistory.com/171#recentEntries
