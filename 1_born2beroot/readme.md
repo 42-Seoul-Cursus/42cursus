@@ -6,9 +6,10 @@
 - [SSH](#ssh)
 - [UFW](#ufw)
 - [PASSWORD POLICY](#password-policy)
-- [GROUP](#group)
+- [GROUP, USER](#group-user)
 - [SUDO](#sudo)
 - [monitoring.sh](#monitoringsh)
+- [SHELL](#shell)
 
 ## Install Guide
 ![](img/1.png)
@@ -39,6 +40,7 @@
 ![](img/26.png)
 ![](img/27.png)
 ![](img/28.png)
+/boot(sda1) 파티션을 500mib로 만드는 법은 아직도 모르겠다.
 ![](img/29.png)
 ![](img/30.png)
 ![](img/31.png)
@@ -79,6 +81,7 @@ ufw enable # ufw 활성화
 ufw default deny incoming # 들어오는 접속을 거부하는 기본값 설정
 ufw default allow outgoing # 나가는 것을 허용하는 기본값 설정
 ufw allow 4242 # 4242 포트 열기
+# ----------참고--------------
 ufw status verbose # 방화벽이 활성화되어 있는지 확인
 cat /etc/ufw/user.rules # ufw default rules 조회
 ufw status numbered # 규칙의 번호가 매겨진 목록을 표시
@@ -92,12 +95,24 @@ ufw delete <rule number> # 번호를 사용하여 특정 규칙을 삭제
 ## SSH
 ![](img/49.png)
 ![](img/50.png)
+port와 PermitRootLogin만 수정
 ![](img/51.png)
 ![](img/52.png)
 ![](img/53.png)
 ![](img/54.png)
+en0의 ip를 적어주면 된다. [(en0과 en1의 차이)](https://stackoverflow.com/questions/29958143/what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig)
 ![](img/55.png)
+[127.0.0.1](https://en.wikipedia.org/wiki/Localhost) 자신의 IP주소인 루프백 주소로 써도 된다.
+![](img/65.png)
+User log는 접속해있는 유저의 수를 말한다. (1)
 ![](img/56.png)
+![](img/63.png)
+```bash
+ssh seunan@127.0.0.1 -p 4242
+를 통해 4242 포트로 연결
+```
+![](img/64.png)
+User log가 2로 증가한 것을 볼 수 있다.
 ![](img/57.png)
 ```bash
 apt-get install openssh-server
@@ -144,20 +159,36 @@ PASS_MAX_DAYS 30
 PASS_MIN_DATS 2
 PASS_WARN_AGE 7
 
-apt-get install libpam-pwquality # pwquality 라이브러리 설치
+apt-get install libpam-pwquality # pwquality 라이브러리 설치했지만 pam_cracklib.so 설치 추천 !
 vi /etc/pam.d/common-password
 retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7 # root는 password에 대한 캐시를 저장하지 않기 때문에 difok 설정이 안먹음
 
-passwd -e <username> # password 변경
+passwd # password 변경
 ```
 - [Password policy1](https://techpicnic.tistory.com/506)
 - [Password policy2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
 - [man PAM_PWQUALITY](https://manpages.debian.org/stretch/libpam-pwquality/pam_pwquality.8.en.html)
 - [Managing Password Complexity in Linux](https://www.baeldung.com/linux/password-complexity)
-## GROUP
-- [group](https://www.manualfactory.net/13414)
-- [Verify user groups](https://goni9071.tistory.com/68)
-- [user](https://withcoding.com/101)
+## GROUP, USER
+```bash
+id <username> # == groups, user의 groups 확인
+cat /etc/group # 그룹 목록
+groupadd <groupname> # 그룹 생성
+groupdel <groupname> # 그룹 삭제
+gpasswd -a <username> <groupname> # user를 group에 추가
+gpasswd -d <username> <groupname> # user를 group에서 삭제
+groupmod -n group2 group1 # group1을 group2로 변경
+
+su <username> # 사용자 변경
+useradd # 유저 생성(수동)
+	-m # 사용자 홈 디렉토리도 함께 생성
+	-g # 그룹 지정
+	-d # 디렉토리 지정
+	-s # 쉘 지정
+	-p # 패스워드 지정
+adduser # 유저 생성(비밀번호, 홈 디렉토리 등 자동 설정)
+userdel # 유저 삭제
+```
 
 ## SUDO
 ![](img/41.png)
@@ -186,6 +217,16 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 - [what is tty](https://jake-seo-dev.tistory.com/115)
 
 ## monitoring.sh
+![](img/66.png)
+![](img/67.png)
+![](img/64.png)
+![](img/65.png)
+```bash
+crontab -e
+```
+![](img/68.png)
+권한을 안주면 실행이 안된다.
+![](img/69.png)
 - [The architecture of your operating system and its kernel version](https://www.cyberciti.biz/faq/find-print-linux-unix-kernel-version/)
 - [The number of physical processors1](https://www.cyberciti.biz/faq/check-how-many-cpus-are-there-in-linux-system/)
 - [The number of physical processors2](https://www.baeldung.com/linux/get-number-of-processors)
@@ -201,11 +242,11 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 - [The IPv4 address of your server and its MAC (Media Access Control) address1](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
 - [The IPv4 address of your server and its MAC (Media Access Control) address2](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
+- [crontab](https://jdm.kr/blog/2)
+- [wall](https://linuxize.com/post/wall-command-in-linux/)
 
-## crontab
-- [1](https://jdm.kr/blog/2)
 
-
-https://serverfault.com/questions/50585/whats-the-best-way-to-check-if-a-volume-is-mounted-in-a-bash-script
-https://phoenixnap.com/kb/bash-printf
-https://recipes4dev.tistory.com/171#recentEntries
+## SHELL
+- [shell if](https://serverfault.com/questions/50585/whats-the-best-way-to-check-if-a-volume-is-mounted-in-a-bash-script)
+- [shell printf](https://phoenixnap.com/kb/bash-printf)
+- [shell awk](https://recipes4dev.tistory.com/171#recentEntries)
