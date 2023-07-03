@@ -244,6 +244,7 @@ crontab -e
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
 - [crontab](https://jdm.kr/blog/2)
 - [wall](https://linuxize.com/post/wall-command-in-linux/)
+- [shasum](https://linuxhint.com/shasum-linux/)
 
 
 ## SHELL
