@@ -9,8 +9,8 @@
 - [GROUP, USER](#group-user)
 - [SUDO](#sudo)
 - [monitoring.sh](#monitoringsh)
-- [SHELL](#shell)
-
+	- [SHELL](#shell)
+	- [crontab](#crontab)
 ## Install Guide
 ![](img/1.png)
 ![](img/2.png)
@@ -72,9 +72,6 @@
 - [AppArmor vs. SELinux](https://phoenixnap.com/kb/apparmor-vs-selinux)
 
 ## UFW
-![](img/46.png)
-![](img/47.png)
-![](img/48.png)
 ```bash
 apt-get install ufw # ufw 설치
 ufw enable # ufw 활성화
@@ -86,13 +83,29 @@ ufw status verbose # 방화벽이 활성화되어 있는지 확인
 cat /etc/ufw/user.rules # ufw default rules 조회
 ufw status numbered # 규칙의 번호가 매겨진 목록을 표시
 ufw delete <rule number> # 번호를 사용하여 특정 규칙을 삭제
+ufw delete allow 4242 # 이 규칙 삭제
 ```
+![](img/46.png)
+![](img/47.png)
+![](img/48.png)
 - [UFW setting1](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221409997866)
 - [UFW setting2](https://lindarex.github.io/ubuntu/ubuntu-ufw-setting/)
 - [UFW status](https://linuxhint.com/ufw_status/)
 - [Debian wiki](https://wiki.debian.org/Uncomplicated%20Firewall%20%28ufw%29)
 
 ## SSH
+```bash
+apt-get install openssh-server
+vim /etc/ssh/sshd_config # ssh 데몬의 작업을 수정하는 옵션을 설정할 수 있는 OpenSSH용 시스템 전체 구성 파일
+	Port 4242 # ssh 데몬이 들어오는 연결을 수신 대기하는 포트 번호를 지정
+	PermitRootLogin no # root가 ssh를 사용하여 로그인할 수 있는지 여부를 지정
+vim /etc/hostname # = hostname
+hostname -I # VM에서 할당받은 IP를 확인
+ hostnamectl set-hostname <hostname> # hostname 변경
+systemctl restart ssh # SSH 데몬 재시작
+systemctl status ssh # SSH 데몬 상태 확인
+ssh seunan@<macIP> -p <host port> # host port에 연결
+```
 ![](img/49.png)
 ![](img/50.png)
 port와 PermitRootLogin만 수정
@@ -114,18 +127,6 @@ ssh seunan@127.0.0.1 -p 4242
 ![](img/64.png)
 User log가 2로 증가한 것을 볼 수 있다.
 ![](img/57.png)
-```bash
-apt-get install openssh-server
-vim /etc/ssh/sshd_config # ssh 데몬의 작업을 수정하는 옵션을 설정할 수 있는 OpenSSH용 시스템 전체 구성 파일
-	Port 4242 # ssh 데몬이 들어오는 연결을 수신 대기하는 포트 번호를 지정
-	PermitRootLogin no # root가 ssh를 사용하여 로그인할 수 있는지 여부를 지정
-vim /etc/hostname # = hostname
-hostname -I # VM에서 할당받은 IP를 확인
-hostnamectl # hostname 변경
-systemctl restart ssh # SSH 데몬 재시작
-systemctl status ssh # SSH 데몬 상태 확인
-ssh seunan@<macIP> -p <host port> # host port에 연결
-```
 - [What is SSH](https://www.freecodecamp.org/news/ssh-meaning-in-linux/#:~:text=Secure%20Shell%20(SSH)%20is%20a,remote%20administration%20and%20file%20transfer.)
 - [Enable the SSH server](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jodi999&logNo=221334854192)
 - [Configure the /etc/ssh/sshd_config file](https://www.linuxtopia.org/online_books/linux_system_administration/securing_and_optimizing_linux/chap15sec122.html)
@@ -135,6 +136,7 @@ ssh seunan@<macIP> -p <host port> # host port에 연결
 - [hostnamectl](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%ED%98%B8%EC%8A%A4%ED%8A%B8%EB%AA%85_%EB%B3%80%EA%B2%BD_hostnamectl_set-hostname)
 - [virtualbox network setting](https://www.nakivo.com/blog/virtualbox-network-setting-guide/)
 - [Find Local IP Address](https://www.avg.com/en/signal/find-ip-address)
+- [what is port](https://study-recording.tistory.com/13)
 - [Port Forwarding1](https://nsrc.org/workshops/2014/sanog23-virtualization/raw-attachment/wiki/Agenda/ex-virtualbox-portforward-ssh.htm)
 - [Port Forwarding2](https://www.activecountermeasures.com/port-forwarding-with-virtualbox/)
 - [Port Forwarding3](https://www.nemonein.xyz/2020/01/3048/)
@@ -142,11 +144,6 @@ ssh seunan@<macIP> -p <host port> # host port에 연결
 
 
 ## PASSWORD POLICY
-![](img/58.png)
-![](img/59.png)
-![](img/60.png)
-![](img/61.png)
-![](img/62.png)
 ```bash
 chage -l <username> # user 암호 정책 확인
 chage -M 30 # : 최대 사용가능일
@@ -165,10 +162,16 @@ retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username e
 
 passwd # password 변경
 ```
+![](img/58.png)
+![](img/59.png)
+![](img/60.png)
+![](img/61.png)
+![](img/62.png)
 - [Password policy1](https://techpicnic.tistory.com/506)
 - [Password policy2](https://www.haedongg.net/2020/08/28/linux-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C-%EA%B4%80%EB%A0%A8-%EC%A0%95%EC%B1%85-%EC%84%A4%EC%A0%95/)
 - [man PAM_PWQUALITY](https://manpages.debian.org/stretch/libpam-pwquality/pam_pwquality.8.en.html)
 - [Managing Password Complexity in Linux](https://www.baeldung.com/linux/password-complexity)
+
 ## GROUP, USER
 ```bash
 id <username> # == groups, user의 groups 확인
@@ -191,11 +194,6 @@ userdel # 유저 삭제
 ```
 
 ## SUDO
-![](img/41.png)
-![](img/42.png)
-![](img/43.png)
-![](img/44.png)
-![](img/45.png)
 ```bash
 apt-get install sudo
 visudo /etc/sudoers
@@ -209,21 +207,24 @@ visudo /etc/sudoers
 mkdir /var/log/sudo
 usermod -aG sudo <username> # user에게 sudo 그룹 권한
 ```
+![](img/41.png)
+![](img/42.png)
+![](img/43.png)
+![](img/44.png)
+![](img/45.png)
 - [debian wiki](https://wiki.debian.org/sudo/)
 - [Add User to Sudoers](https://www.cloudpanel.io/tutorial/how-to-add-user-to-sudoers-in-debian/)
 - [Configure Sudoers](https://ko.linux-console.net/?p=1985#gsc.tab=0)
 - [man sudoers](https://man.freebsd.org/cgi/man.cgi?query=sudoers&apropos=0&sektion=0&manpath=FreeBSD+13.0-RELEASE+and+Ports&arch=default&format=html)
-- [requiretty](https://kldp.org/node/155210)
-- [what is tty](https://jake-seo-dev.tistory.com/115)
+- [requiretty1](https://kldp.org/node/155210)
+- [requiretty2](https://stackoverflow.com/questions/67985925/why-would-i-want-to-require-a-tty-for-sudo-whats-the-security-benefit-of-requi)
+- [what is tty](https://itsfoss.com/what-is-tty-in-linux/)
 
 ## monitoring.sh
 ![](img/66.png)
 ![](img/67.png)
 ![](img/64.png)
 ![](img/65.png)
-```bash
-crontab -e
-```
 ![](img/68.png)
 권한을 안주면 실행이 안된다.
 ![](img/69.png)
@@ -242,8 +243,66 @@ crontab -e
 - [The IPv4 address of your server and its MAC (Media Access Control) address1](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
 - [The IPv4 address of your server and its MAC (Media Access Control) address2](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
-- [crontab](https://jdm.kr/blog/2)
+
+### crontab
+![](img/70.png)
+```bash
+crontab -e
+
+* * * * * {실행 명령} vi /etc/crontab에 적혀있다.
+
+분 : 0-59
+시 : 0-23
+일 : 0-31
+월 : 0-12
+요일 : 0-6 (일-토 : 0과 7은 일요일이며 1부터 월요일)
+
+// 매 분마다 실행
+* * * * * {실행 명령} or /1 * * * * {실행 명령}
+
+// 매일 오후 13시 정각에 실행
+0 13 * * * {실행 명령}
+
+// 매주 월요일 자정에 실행
+0 0 * * 1 {실행 명령}
+
+// 매달 5일 자정에 실행
+0 0 5 * * {실행 명령}
+
+// 매시 25분, 55분에 실행
+25,55 * * * * {실행 명령}
+
+// 15분마다 실행
+*/15 * * * * {실행 명령}
+
+// 매일 3시에 실행
+0 3 * * * {실행 명령}
+
+// 매 6시간마다(00:30, 06:30, 12:30, 18:30) 실행
+30 */6 * * * {실행 명령}
+
+// 평일(월요일~토요일) 06:00에 실행
+0 6 * * 1-6 {실행 명령}
+
+// 토요일 07:00에 실행
+0 7 * * 6 {실행 명령}
+
+// 크론탭 시작
+systemctl cron start
+
+// 크론탭 중지
+systemctl cron stop
+
+// 작동확인
+systemctl cron status
+```
+
+- [crontab2](https://linuxize.com/post/wall-command-in-linux/)
+- [crontab1]()
 - [wall](https://linuxize.com/post/wall-command-in-linux/)
+
+### SHA
+- [what is sha?](https://ko.wikipedia.org/wiki/SHA)
 - [shasum](https://linuxhint.com/shasum-linux/)
 
 
@@ -251,3 +310,17 @@ crontab -e
 - [shell if](https://serverfault.com/questions/50585/whats-the-best-way-to-check-if-a-volume-is-mounted-in-a-bash-script)
 - [shell printf](https://phoenixnap.com/kb/bash-printf)
 - [shell awk](https://recipes4dev.tistory.com/171#recentEntries)
+
+
+https://xyunsikx.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-cpu-%EC%A0%95%EB%B3%B4-%EC%A0%95%ED%99%95%ED%95%98%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EC%9E%90
+env
+path  https://seulcode.tistory.com/546
+secure path https://www.tuwlab.com/ece/24044
+sudo ps, ps
+tty, pts https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jangpro1003&logNo=90098910350
+telnet ssh 차이 https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=ahnsh09&logNo=40171391492
+
+
+env path secure sudo ps, ps tty, pts telnet  ssh 차이
+https://www.pentasecurity.co.kr/column/%EB%AD%90-%EB%94%94%ED%94%BC-%ED%97%AC%EB%A8%BC-%EC%84%B1%EC%9D%B4-%EB%AC%B4%EB%84%88%EC%A7%84%EB%8B%A4%EA%B3%A0-2/
+https://www.accuwebhosting.com/blog/what-is-virtual-processor-or-vcpu/
