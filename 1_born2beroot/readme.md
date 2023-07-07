@@ -90,6 +90,7 @@ LVM은 파티션의 상위호환이라고 생각하면 쉽다.
 LVM을 활용하면 1번 항목의 이점으로 인해 확장이 쉬워진다.
 
 - [lvm 이란 매우 쉽게!](https://mamu2830.blogspot.com/2019/12/lvmpv-vg-lv-pe-lvm.html)
+- [LVM (Logical Volume Manager) 관리](https://access.redhat.com/documentation/ko-kr/red_hat_enterprise_linux/6/html-single/logical_volume_manager_administration/index#LVM_components)
 
 ## Package Manager
 
@@ -118,7 +119,7 @@ LVM을 활용하면 1번 항목의 이점으로 인해 확장이 쉬워진다.
 
 |DISTRIBUTION|LOW-LEVEL TOOL|HIGH-LEVEL TOOL|
 |---|---|---|
-|Debian and derivatives|dpkg|apt-get / ptitude|
+|Debian and derivatives|dpkg|apt-get / aptitude|
 |CentOS|rpm|yum|
 |openSUSE|rmp|zypper|
 
@@ -148,7 +149,12 @@ LVM을 활용하면 1번 항목의 이점으로 인해 확장이 쉬워진다.
 	- Ubuntu 기반의 리눅스의 또 다른 high-level package manager
 	- apt-get 보다 좀 더 개선된 기능을 제공
 
-apt-get / apt-cache의 경우 패키지 repository는 /etc/apt/sources.list 에 명시되어 있다.
+```bash
+/etc/apt/sources.list # apt-get / apt-cache의 경우 패키지 repository 경로
+apt list --installaed # apt로 설치한 package list
+```
+
+
 
 - [What is APT and Aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
 - [aptitude vs apt-get vs apt](https://thecustomizewindows.com/2020/01/aptitude-vs-apt-get-vs-apt/)
@@ -315,9 +321,12 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 ![](img/45.png)
 - [sudo](https://wiki.debian.org/sudo/)
 - [sudoers](https://manpages.debian.org/bookworm/sudo-ldap/sudoers.5.en.html)
+- [How does sudo really work?](https://unix.stackexchange.com/questions/126914/how-does-sudo-really-work)
 - [Linux에서 sudo를 설정하기 위한 10가지 유용한 Sudoers 구성](https://ko.linux-console.net/?p=1985#gsc.tab=0)
+- [TTY와 PTS의 차이](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jangpro1003&logNo=90098910350)
 - [Why would I want to require a tty for sudo? What's the security benefit of requiring it?](https://stackoverflow.com/questions/67985925/why-would-i-want-to-require-a-tty-for-sudo-whats-the-security-benefit-of-requi)
-- [what is tty](https://itsfoss.com/what-is-tty-in-linux/)
+- [Linux environment: 환경변수](https://seulcode.tistory.com/546)
+- [Sudo 명령의 Secure Path](https://www.tuwlab.com/ece/24044)
 
 ## monitoring.sh
 ![](img/66.png)
@@ -328,26 +337,27 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 권한을 안주면 실행이 안된다.
 ![](img/69.png)
 - [The architecture of your operating system and its kernel version](https://www.cyberciti.biz/faq/find-print-linux-unix-kernel-version/)
-- [The number of physical processors1](https://www.cyberciti.biz/faq/check-how-many-cpus-are-there-in-linux-system/)
-- [The number of physical processors2](https://www.baeldung.com/linux/get-number-of-processors)
+- [The number of physical processors](https://xyunsikx.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-cpu-%EC%A0%95%EB%B3%B4-%EC%A0%95%ED%99%95%ED%95%98%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EC%9E%90)
 - [The number of virtual processors](https://webhostinggeeks.com/howto/how-to-display-the-number-of-processors-vcpu-on-linux-vps/)
 - [The current available RAM on your server and its utilization rate as a percentage](https://www.2daygeek.com/linux-check-cpu-memory-swap-utilization-percentage/)
-- [The current available memory on your server and its utilization rate as a percentage](https://stackoverflow.com/questions/10585978/how-to-get-the-percentage-of-memory-free-with-a-linux-command)
-- [The current utilization rate of your processors as a percentage1](https://www.baeldung.com/linux/get-cpu-usage)
-- [The current utilization rate of your processors as a percentage2](https://stackoverflow.com/questions/9229333/how-to-get-overall-cpu-usage-e-g-57-on-linux)
+- [The current available memory on your server and its utilization rate as a percentage](https://www.cyberciti.biz/faq/linux-check-disk-space-command/)
+- [The current utilization rate of your processors as a percentage](https://stackoverflow.com/questions/9229333/how-to-get-overall-cpu-usage-e-g-57-on-linux)
 - [The date and time of the last reboot](https://www.cyberciti.biz/tips/linux-last-reboot-time-and-date-find-out.html)
 - [Whether LVM is active or not](https://askubuntu.com/questions/202613/how-do-i-check-whether-i-am-using-lvm)
 - [The number of active connections](https://serverfault.com/questions/421310/check-the-number-of-active-connections-on-port-80)
 - [The number of users using the server](https://www.computerhope.com/issues/ch001649.htm)
-- [The IPv4 address of your server and its MAC (Media Access Control) address1](https://www.howtouselinux.com/post/linux-command-get-mac-address-in-linux)
-- [The IPv4 address of your server and its MAC (Media Access Control) address2](https://www.baeldung.com/linux/get-mac-address)
+- [The IPv4 address of your server and its MAC (Media Access Control) address](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
+- [What is Virtual Processor or vCPU?](https://www.accuwebhosting.com/blog/what-is-virtual-processor-or-vcpu/)
 
 ### crontab
 ![](img/70.png)
 ```bash
 crontab -e
-vi /etc/crontab
+vi /etc/crontab # crontab 사용법
+systemctl cron start
+systemctl cron stop
+systemctl cron status
 
 * * * * * {실행 명령} or /1 * * * * {실행 명령} # 매 분마다 실행
 
@@ -355,14 +365,11 @@ vi /etc/crontab
 0 0 * * 1 {실행 명령} # 매주 월요일 자정에 실행
 0 0 5 * * {실행 명령} # 매달 5일 자정에 실행
 25,55 * * * * {실행 명령} # 매시 25분, 55분에 실행
-*/15 * * * * {실행 명령} # 15분마다 실행\
+*/15 * * * * {실행 명령} # 15분마다 실행
 0 3 * * * {실행 명령} # 매일 3시에 실행
 30 */6 * * * {실행 명령} # 매 6시간마다(00:30, 06:30, 12:30, 18:30) 실행
 0 6 * * 1-6 {실행 명령} # 평일(월요일~토요일) 06:00에 실행
 0 7 * * 6 {실행 명령} # 토요일 07:00에 실행
-systemctl cron start
-systemctl cron stop
-systemctl cron status
 ```
 
 - [크론 (Cron) 크론탭(Crontab) 사용법](https://asufi.tistory.com/entry/Linux-%ED%81%AC%EB%A1%A0-Cron-%ED%81%AC%EB%A1%A0%ED%83%ADCrontab-%EC%82%AC%EC%9A%A9%EB%B2%95)
@@ -376,12 +383,3 @@ systemctl cron status
 - [shell if](https://serverfault.com/questions/50585/whats-the-best-way-to-check-if-a-volume-is-mounted-in-a-bash-script)
 - [shell printf](https://phoenixnap.com/kb/bash-printf)
 - [shell awk](https://recipes4dev.tistory.com/171#recentEntries)
----
-## 추가로 공부해야하는 부분
-- [버츄얼cpu와 피지컬cpu의 구분](https://www.accuwebhosting.com/blog/what-is-virtual-processor-or-vcpu/)
-- [피지컬 cpu 틀림](https://xyunsikx.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-cpu-%EC%A0%95%EB%B3%B4-%EC%A0%95%ED%99%95%ED%95%98%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EC%9E%90)
-- [env명령어와 PATH](https://seulcode.tistory.com/546)
-- [sudo의 secure path](https://www.tuwlab.com/ece/24044)
-- [How does sudo really work?](https://unix.stackexchange.com/questions/126914/how-does-sudo-really-work)
-- [TTY 와 PTS 의 차이](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=jangpro1003&logNo=90098910350)
-- sudo ps와 ps 명령어 결과가 다르다.
