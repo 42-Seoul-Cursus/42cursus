@@ -108,7 +108,7 @@ LVM을 활용하면 1번 항목의 이점으로 인해 확장이 쉬워진다.
 ![](img/71.png)
 *Debian에서는 /var/cache/apt/archives 디렉터리에 다양한 .deb 파일들이 보관되어 있다.*
 ![](img/72.png)
-*apt edit-sources (== /etc/apt/sources.list)*
+*apt 저장소(repository)*
 
 이러한 패키지를 관리하기 위해선 패키지 관리 도구를 사용하는데, 일반적으로 다음 두 유형의 패키지 관리 도구가 사용된다.
 
@@ -147,17 +147,14 @@ LVM을 활용하면 1번 항목의 이점으로 인해 확장이 쉬워진다.
 	- 최근의 Debian 기반의 리눅스 배포판에는 apt-get과 apt-cache 의 기능을 통합한 apt 명령이 설치되어 있다
 - aptitude
 	- Ubuntu 기반의 리눅스의 또 다른 high-level package manager
-	- apt-get 보다 좀 더 개선된 기능을 제공
+	- apt-get 보다 좀 더 개선된 기능을 제공 (기본 텍스트 전용 대화형 인터페이스, why 명령 제공, 사용하지 않는 패키지 자동 제거 등)
 
 ```bash
-/etc/apt/sources.list # apt-get / apt-cache의 경우 패키지 repository 경로
+/etc/apt/sources.list # == apt edit-sources, apt-get / apt-cache의 경우 패키지 repository 경로
 apt list --installaed # apt로 설치한 package list
 ```
 
-
-
 - [What is APT and Aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
-- [aptitude vs apt-get vs apt](https://thecustomizewindows.com/2020/01/aptitude-vs-apt-get-vs-apt/)
 
 ## port
 - [What is a port?](https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/)
@@ -165,8 +162,9 @@ apt list --installaed # apt로 설치한 package list
 - [Port란 무엇인가](https://study-recording.tistory.com/13)
 
 ## AppArmor
-- ![](img/73.png)
-*aa-status (==apparmor_status)*
+![](img/73.png)
+*aa-status (==apparmor_status)*<br>
+
 Application Armor, 애플리케이션을 보호하는 리눅스 커널 보안 모듈<br>
 시스템 관리자가 프로그램 프로필 별로 프로그램의 역량을 제한할 수 있게 해주는 리눅스 커널 보안 모듈이다.<br>
 프로필들은 네트워크 액세스, raw 소켓 액세스 그리고 파일의 읽기, 쓰기, 실행 같은 능력을 허용할 수 있으며 /etc/apparmor.d에서 확인할 수 있다.<br>
@@ -184,7 +182,7 @@ ufw default deny incoming # 들어오는 접속을 거부하는 기본값 설정
 ufw default allow outgoing # 나가는 것을 허용하는 기본값 설정
 ufw allow 4242 # 4242 포트 열기
 # ----------참고--------------
-ufw status verbose # 방화벽이 활성화되어 있는지 확인
+ufw status verbose # 방화벽이 활성화 여부, 열린 포트 확인
 ufw status numbered # 규칙의 목록과 인덱스를 함께 표시
 ufw delete <rule number> # 번호를 사용하여 특정 규칙을 삭제
 ufw delete allow 4242 # 4242 포트 여는 규칙 삭제
@@ -206,10 +204,10 @@ iptables 명령어로 커널상에서의 netfilter 패킷필터링 기능을 사
 ## SSH
 ```bash
 apt-get install openssh-server
-vim /etc/ssh/sshd_config # ssh 데몬의 작업을 수정하는 옵션을 설정할 수 있는 OpenSSH용 시스템 전체 구성 파일
+vi /etc/ssh/sshd_config # ssh 데몬의 작업을 수정하는 옵션을 설정할 수 있는 OpenSSH용 시스템 전체 구성 파일
 	Port 4242 # ssh 데몬이 들어오는 연결을 수신 대기하는 포트 번호를 지정
 	PermitRootLogin no # root가 ssh를 사용하여 로그인할 수 있는지 여부를 지정
-vim /etc/hostname # = hostname
+cat /etc/hostname # = hostname
 hostname -I # VM에서 할당받은 IP를 확인
  hostnamectl set-hostname <hostname> # hostname 변경
 systemctl restart ssh # SSH 데몬 재시작
@@ -259,7 +257,7 @@ chage -m 2 # : 최소 의무사용일
 chage -W 7 # : 만료 전 경고일
 passwd -e <username> # user 비밀번호 변경
 
-apt-get install libpam-pwquality # pwquality 라이브러리 설치했지만 reject_username 옵션이 pam_cracklib.so구현되어 있으므로 이걸 설치 추천 !
+apt-get install libpam-pwquality # pwquality 라이브러리 설치
 vi /etc/pam.d/common-password
 retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username enforce_for_root difok=7 # root는 password에 대한 캐시를 저장하지 않기 때문에 difok 설정이 안먹음
 
