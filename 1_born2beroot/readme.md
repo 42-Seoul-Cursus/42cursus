@@ -321,6 +321,8 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 ![](img/43.png)
 ![](img/44.png)
 ![](img/45.png)
+![](img/74.png)
+*원격으로 sudo 명령어가 실행되지 않는 것을 확인할 수 있다.*
 - [sudo](https://wiki.debian.org/sudo/)
 - [sudoers](https://manpages.debian.org/bookworm/sudo-ldap/sudoers.5.en.html)
 - [How does sudo really work?](https://unix.stackexchange.com/questions/126914/how-does-sudo-really-work)
@@ -360,7 +362,8 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 crontab -e
 vi /etc/crontab # crontab 사용법
 systemctl cron start
-systemctl cron stop
+systemctl cron stop # crontab 중지
+systemctl cron disable # crontab 정지
 systemctl cron status
 
 * * * * * {실행 명령} or /1 * * * * {실행 명령} # 매 분마다 실행
