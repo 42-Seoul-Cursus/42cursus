@@ -165,6 +165,8 @@ apt list --installaed # apt로 설치한 package list
 - [Port란 무엇인가](https://study-recording.tistory.com/13)
 
 ## AppArmor
+- ![](img/73.png)
+*aa-status (==apparmor_status)*
 Application Armor, 애플리케이션을 보호하는 리눅스 커널 보안 모듈<br>
 시스템 관리자가 프로그램 프로필 별로 프로그램의 역량을 제한할 수 있게 해주는 리눅스 커널 보안 모듈이다.<br>
 프로필들은 네트워크 액세스, raw 소켓 액세스 그리고 파일의 읽기, 쓰기, 실행 같은 능력을 허용할 수 있으며 /etc/apparmor.d에서 확인할 수 있다.<br>
@@ -277,6 +279,7 @@ passwd # password 변경
 ```bash
 id <username> # == groups, user의 groups 확인
 cat /etc/group # 그룹 목록
+cat /etc/passwd # 사용자 목록
 groupadd <groupname> # 그룹 생성
 groupdel <groupname> # 그룹 삭제
 gpasswd -a <username> <groupname> # user를 group에 추가
@@ -296,6 +299,7 @@ useradd # 유저 생성(수동)
 ```
 - [useradd, usermod, /etc/passwd , /etc/shadow 자세히!](https://mamu2830.blogspot.com/2019/08/etcpasswd-etcshadow.html)
 - [groupadd , gpasswd , id , groupmod 매우 자세히 설명!](https://mamu2830.blogspot.com/2019/08/linux-group-groupadd-gpasswd-id-groupmod.html)
+- [리눅스 사용자 목록 확인](https://overcode.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%AA%A9%EB%A1%9D-%ED%99%95%EC%9D%B8-Linux-User-List)
 - [chown, chgrp 매우 자세히!](https://mamu2830.blogspot.com/2019/08/chown-chgrp.html)
 - [리눅스 rwx, chmod, 8진수 매우 자세히!](https://mamu2830.blogspot.com/2019/09/rwx.html)
 - [setuid setgid 매우 자세하게!](https://mamu2830.blogspot.com/2019/10/setuid-setgid-sticky-bit.html)
@@ -338,7 +342,9 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 ![](img/69.png)
 - [The architecture of your operating system and its kernel version](https://www.cyberciti.biz/faq/find-print-linux-unix-kernel-version/)
 - [The number of physical processors](https://xyunsikx.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-cpu-%EC%A0%95%EB%B3%B4-%EC%A0%95%ED%99%95%ED%95%98%EA%B2%8C-%ED%99%95%EC%9D%B8%ED%95%98%EC%9E%90)
+	- [중복된 내용을 제거하는 linux uniq 명령어 사용법](https://www.lesstif.com/lpt/linux-uniq-95879394.html)
 - [The number of virtual processors](https://webhostinggeeks.com/howto/how-to-display-the-number-of-processors-vcpu-on-linux-vps/)
+	- [What is Virtual Processor or vCPU?](https://www.accuwebhosting.com/blog/what-is-virtual-processor-or-vcpu/)
 - [The current available RAM on your server and its utilization rate as a percentage](https://www.2daygeek.com/linux-check-cpu-memory-swap-utilization-percentage/)
 - [The current available memory on your server and its utilization rate as a percentage](https://www.cyberciti.biz/faq/linux-check-disk-space-command/)
 - [The current utilization rate of your processors as a percentage](https://stackoverflow.com/questions/9229333/how-to-get-overall-cpu-usage-e-g-57-on-linux)
@@ -348,7 +354,7 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 - [The number of users using the server](https://www.computerhope.com/issues/ch001649.htm)
 - [The IPv4 address of your server and its MAC (Media Access Control) address](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
-- [What is Virtual Processor or vCPU?](https://www.accuwebhosting.com/blog/what-is-virtual-processor-or-vcpu/)
+	- [journalctl 사용법](https://sysops.tistory.com/115)
 
 ### crontab
 ![](img/70.png)
