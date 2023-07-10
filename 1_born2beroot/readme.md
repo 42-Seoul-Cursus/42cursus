@@ -351,6 +351,7 @@ usermod -aG sudo <username> # user에게 sudo 그룹 권한
 - [The date and time of the last reboot](https://www.cyberciti.biz/tips/linux-last-reboot-time-and-date-find-out.html)
 - [Whether LVM is active or not](https://askubuntu.com/questions/202613/how-do-i-check-whether-i-am-using-lvm)
 - [The number of active connections](https://serverfault.com/questions/421310/check-the-number-of-active-connections-on-port-80)
+	- ss -at | grep ESTAB 이래요
 - [The number of users using the server](https://www.computerhope.com/issues/ch001649.htm)
 - [The IPv4 address of your server and its MAC (Media Access Control) address](https://www.baeldung.com/linux/get-mac-address)
 - [The number of commands executed with the sudo program](https://unix.stackexchange.com/questions/167935/details-about-sudo-commands-executed-by-all-user)
