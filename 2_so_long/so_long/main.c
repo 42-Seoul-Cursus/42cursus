@@ -1,24 +1,22 @@
 #include "so_long.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int	deal_key(void)
-{
-	ft_putchar('X');
-	return (0);
-}
-
 int	main(void)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "Hello world!");
-	mlx_pixel_put(mlx_ptr, win_ptr, 250, 250, 0xFFFFFF);
-	mlx_key_hook(win_ptr, deal_key, (void *) 0);
-	mlx_loop(mlx_ptr);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	img.img = mlx_new_image(mlx, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+			&img.endian);
+
+	draw_square(img);
+	draw_circle(img);
+	draw_hexagon(img);
+
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx);
+	return (0);
 }

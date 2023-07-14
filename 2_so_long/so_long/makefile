@@ -1,14 +1,16 @@
+.SUFFIXES : .c .o
+
 NAME=so_long
 CC=gcc
 INCLUDE=-I./Libft -I./MiniLibX
 CFLAGS=-Wall -Werror -Wextra
 LIBS=-L./Libft -lft -L./MiniLibX
-FRAMEWORKS=-Lmlx -lmlx -framework OpenGL -framework AppKit
+FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 
 LIBFT=./Libft/libft.a
 LIBMLX=./MiniLibX/libmlx.a
-SRCS=main.c
-OBJS=main.o
+SRCS=main.c src.c color.c
+OBJS=main.o src.o color.o
 
 all: $(NAME)
 
@@ -19,7 +21,7 @@ $(LIBMLX):
 	$(MAKE) -C ./MiniLibX
 
 $(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME) $(LIBS) $(FRAMEWORKS)
+	$(CC) $(CFLAGS) $(FRAMEWORKS) $(OBJS) -o $(NAME) $(INCLUDE) $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
