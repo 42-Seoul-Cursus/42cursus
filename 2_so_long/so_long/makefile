@@ -4,6 +4,7 @@ NAME=so_long
 CC=gcc
 INCLUDE=-I./Libft -I./MiniLibX
 CFLAGS=-Wall -Werror -Wextra
+DEBUG=-g3 -fsanitize=memory
 LIBS=-L./Libft -lft -L./MiniLibX
 FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 
@@ -40,4 +41,8 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: all clean fclean re
+debug:
+	$(MAKE) fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+
+.PHONY: all clean fclean re debug
