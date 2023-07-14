@@ -1,32 +1,41 @@
-NAME=pipex
+NAME=so_long
 CC=gcc
-INCLUDE=-I./Libft
+INCLUDE=-I./Libft -I./MiniLibX
 CFLAGS=-Wall -Werror -Wextra
-LIBS= -L./Libft -lft
+LIBS=-L./Libft -lft -L./MiniLibX
+FRAMEWORKS=-Lmlx -lmlx -framework OpenGL -framework AppKit
 
 LIBFT=./Libft/libft.a
+LIBMLX=./MiniLibX/libmlx.a
 SRCS=main.c
 OBJS=main.o
 
 all: $(NAME)
 
-$(LIBFT): ./Libft/*.c
+$(LIBFT):
 	$(MAKE) bonus -C ./Libft
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
+$(LIBMLX):
+	$(MAKE) -C ./MiniLibX
+
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME) $(LIBS) $(FRAMEWORKS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
+	$(MAKE) clean -C ./MiniLibX
 	$(MAKE) clean -C ./Libft
 	rm -f $(OBJS)
 
 fclean: clean
+	$(MAKE) fclean -C ./MiniLibX
 	$(MAKE) fclean -C ./Libft
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re

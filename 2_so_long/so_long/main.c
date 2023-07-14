@@ -1,5 +1,3 @@
-#include <mlx.h>
-#include <unistd.h>
 #include "so_long.h"
 
 void	ft_putchar(char c)
