@@ -22,6 +22,7 @@
 		"get_next_line_bonus.h": "c",
 		"fcntl.h": "c",
 		"*.a": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"push_swap.h": "c"
 	}
 }

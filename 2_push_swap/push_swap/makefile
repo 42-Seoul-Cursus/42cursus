@@ -1,17 +1,19 @@
-NAME=pipex
+.SUFFIXES : .c .o
+
+NAME=push_swap
 CC=gcc
 INCLUDE=-I./Libft
 CFLAGS=-Wall -Werror -Wextra
+DEBUG=-g3 -fsanitize=memory
 LIBS= -L./Libft -lft
 
 LIBFT=./Libft/libft.a
 SRCS=main.c
 OBJS=main.o
 
-
 all: $(NAME)
 
-$(LIBFT): ./Libft/*.c
+$(LIBFT):
 	$(MAKE) bonus -C ./Libft
 
 $(NAME): $(LIBFT) $(OBJS)
@@ -28,6 +30,12 @@ fclean: clean
 	$(MAKE) fclean -C ./Libft
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
-.PHONY: all clean fclean re
+debug:
+	$(MAKE) fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+
+.PHONY: all clean fclean re debug
