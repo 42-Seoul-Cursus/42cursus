@@ -3,28 +3,30 @@
 #include "so_long.h"
 #include <stdio.h>
 
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-}			t_vars;
-
 int	key_hook(int keycode, t_vars *vars)
 {
 	printf("Hello from key_hook!\n");
 	printf("keycode: %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
+	(void) vars;
 	return (0);
 }
 
-int	main(void)
+int	mouse_click_hook(int keycode, int x, int y, t_vars *vars)
 {
-	t_vars	vars;
+	printf("Hello from mouse_click_hook!\n");
+	printf("button: %d\n", keycode);
+	printf("x: %d\n", x);
+	printf("y: %d\n", y);
+	(void) vars;
+	return (0);
+}
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_loop(vars.mlx);
+int	key_press(int keycode, t_vars *vars)
+{
+	printf("Hello from key_press!\n");
+	printf("keycode: %d\n", keycode);
+	(void) vars;
 	return (0);
 }

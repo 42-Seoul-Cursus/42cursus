@@ -10,8 +10,8 @@ FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 
 LIBFT=./Libft/libft.a
 LIBMLX=./MiniLibX/libmlx.a
-SRCS=main.c src.c color.c
-OBJS=main.o src.o color.o
+SRCS=main.c src.c color.c hook.c
+OBJS=main.o src.o color.o hook.o
 
 all: $(NAME)
 
