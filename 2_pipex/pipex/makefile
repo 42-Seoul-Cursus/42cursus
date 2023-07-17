@@ -4,7 +4,7 @@ NAME=pipex
 CC=gcc
 INCLUDE=-I./Libft
 CFLAGS=-Wall -Werror -Wextra
-DEBUG=-g3 -fsanitize=memory
+DEBUG=-g3 -fsanitize=address
 LIBS= -L./Libft -lft
 
 LIBFT=./Libft/libft.a

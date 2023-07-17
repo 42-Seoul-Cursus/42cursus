@@ -22,6 +22,7 @@ int	main(void)
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 
+	mlx_xpm_file_to_image()
 	mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 	mlx_mouse_hook(vars.win, mouse_click_hook, &vars);

@@ -4,7 +4,7 @@ NAME=so_long
 CC=gcc
 INCLUDE=-I./Libft -I./MiniLibX
 CFLAGS=-Wall -Werror -Wextra
-DEBUG=-g3 -fsanitize=memory
+DEBUG=-g3 -fsanitize=address
 LIBS=-L./Libft -lft -L./MiniLibX
 FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 
