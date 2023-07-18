@@ -35,8 +35,7 @@ void				parse_map(t_list **map, t_vars *vars);
 
 // hook.c
 int					key_hook(int keycode, t_vars *vars);
-int					mouse_click_hook(int keycode, int x, int y, t_vars *vars);
-int					key_press(int keycode, t_vars *vars);
+int					exit_window(t_vars *vars);
 
 // gnl
 char				*get_next_line(int fd);

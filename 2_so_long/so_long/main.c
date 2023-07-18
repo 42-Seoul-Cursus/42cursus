@@ -22,7 +22,6 @@ int	main(int ac, char *av[])
 
 	char	*buf;
 	int		i;
-	(void) vars;
 
 	while (*map != NULL)
 	{
@@ -48,8 +47,9 @@ int	main(int ac, char *av[])
 		*map = (*map)->next;
 	}
 
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_mouse_hook(vars.win, mouse_click_hook, &vars);
+	mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars);
+	mlx_hook(vars.win, 17, 0, exit_window, &vars);
+	// mlx_key_hook(vars.win, key_hook, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
