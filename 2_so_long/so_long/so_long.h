@@ -1,21 +1,13 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 42
 # endif
 # include "minilibx/mlx.h"
+# include "libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_list
-{
-	char			*content;
-	int				index;
-	struct s_list	*next;
-}					t_list;
 
 typedef struct s_data
 {
@@ -30,18 +22,15 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
+	int				x;
+	int				y;
 	int				width;
 	int				height;
 	t_data			img;
 	int				fd;
 }					t_vars;
 
-// src.c
-void				*ft_calloc(size_t count, size_t size);
-
 // parse.c
-void				ft_lstadd_back(t_list **lst, t_list *new);
-t_list				*ft_lstnew_idx(void *content, int idx);
 void				parse_map(t_list **map, t_vars *vars);
 
 // hook.c

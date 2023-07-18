@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 12:13:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/18 14:50:53 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/18 16:35:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (NULL);
 	size = read(fd, buf, BUFFER_SIZE);
@@ -80,7 +80,7 @@ char	*update_line(char **backup, char *line, char *cut)
 	char	*tmp;
 
 	tmp = ft_strdup(cut + 1);
-	*(cut + 1) = '\0';
+	*cut = '\0';
 	line = ft_strdup(*backup);
 	free(*backup);
 	*backup = tmp;
