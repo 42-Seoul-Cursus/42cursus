@@ -23,6 +23,10 @@
 		"fcntl.h": "c",
 		"*.a": "c",
 		"stdlib.h": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"cstdlib": "c",
+		"locale": "c",
+		"so_long.h": "c",
+		"so_long": "c"
 	}
 }

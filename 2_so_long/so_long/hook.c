@@ -1,7 +1,6 @@
 // gcc hook.c -L./MiniLibX -lmlx -framework OpenGL -framework AppKit
 
 #include "so_long.h"
-#include <stdio.h>
 
 int	key_hook(int keycode, t_vars *vars)
 {

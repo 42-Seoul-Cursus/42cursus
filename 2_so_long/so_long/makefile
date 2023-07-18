@@ -2,39 +2,33 @@
 
 NAME=so_long
 CC=gcc
-INCLUDE=-I./Libft -I./MiniLibX
+INCLUDE=-I./minilibx
 CFLAGS=-Wall -Werror -Wextra
 DEBUG=-g3 -fsanitize=address
-LIBS=-L./Libft -lft -L./MiniLibX
+LIBS=-L./minilibx
 FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 
-LIBFT=./Libft/libft.a
-LIBMLX=./MiniLibX/libmlx.a
-SRCS=main.c src.c color.c hook.c
-OBJS=main.o src.o color.o hook.o
+LIBMLX=./minilibx/libmlx.a
+SRCS=main.c hook.c get_next_line.c get_next_line_utils.c src.c parse_map.c
+OBJS=main.o hook.o get_next_line.o get_next_line_utils.o src.o parse_map.o
 
 all: $(NAME)
 
-$(LIBFT):
-	$(MAKE) bonus -C ./Libft
-
 $(LIBMLX):
-	$(MAKE) -C ./MiniLibX
+	$(MAKE) -C ./minilibx
 
-$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
+$(NAME): $(LIBMLX) $(OBJS)
 	$(CC) $(CFLAGS) $(FRAMEWORKS) $(OBJS) -o $(NAME) $(INCLUDE) $(LIBS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./MiniLibX
-	$(MAKE) clean -C ./Libft
+	$(MAKE) clean -C ./minilibx
 	rm -f $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C ./MiniLibX
-	$(MAKE) fclean -C ./Libft
+	$(MAKE) fclean -C ./minilibx
 	rm -f $(NAME)
 
 re:
