@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
+/*   Updated: 2023/07/19 17:24:26 by seunan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # ifndef BUFFER_SIZE
@@ -27,11 +39,18 @@ typedef struct s_vars
 	int					exit;
 }						t_vars;
 
+void					leak(void);
+
 // parse.c
 void					parse_map(t_vars *vars);
 void					print_map(t_vars *vars, int width, int height);
-void					print_map_first(t_vars *vars, int width, int height);
 void					set_vars(t_vars *vars);
+
+void					is_valid_map(t_vars *vars);
+void					is_rectangular(t_vars *vars);
+void					is_valid_char(t_vars *vars);
+void					is_map_around_one(t_vars *vars);
+void					is_dup_char(t_vars *vars);
 
 // protect.c
 int						protected_open(char *path);
@@ -42,6 +61,8 @@ char					**protected_realloc(char **ptr, size_t size,
 // hook.c
 int						key_hook(int keycode, t_vars *vars);
 int						exit_window(t_vars *vars);
+void					write_num(unsigned long long num, int size);
+void					print_num(unsigned long long num);
 
 // get_next_line.c
 char					*get_next_line(int fd);
