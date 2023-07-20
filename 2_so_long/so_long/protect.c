@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 16:30:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 17:03:28 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	protected_open(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("open\n");
+		perror("Error\nFailed to open");
 		exit(1);
 	}
 	return (fd);
@@ -33,7 +33,7 @@ void	*protected_calloc(size_t size)
 	ptr = malloc(size);
 	if (ptr == NULL)
 	{
-		perror("malloc\n");
+		perror("Error\nFailed to malloc");
 		exit(1);
 	}
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 15:20:19 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/20 17:09:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,24 @@ typedef struct s_vars
 	int					fd;
 	unsigned long long	cnt;
 	int					ball;
-	int					exit;
+	int					is_exit;
 }						t_vars;
-
-void					leak(void);
 
 // parse.c
 void					parse_map(t_vars *vars);
 void					print_map(t_vars *vars, int width, int height);
 void					set_vars(t_vars *vars);
 
+// valid.c
 void					is_valid_map(t_vars *vars);
 void					is_rectangular(t_vars *vars);
 void					is_valid_char(t_vars *vars);
 void					is_map_around_one(t_vars *vars);
 void					is_dup_char(t_vars *vars);
-void					is_valid_arg(char *av);
+void					is_valid_arg(int ac, char *av);
+char					**dup_map(t_vars *vars);
+void					is_escape(t_vars *vars);
+void					dfs(t_vars *vars, int x, int y, char **visited);
 
 // protect.c
 int						protected_open(char *path);

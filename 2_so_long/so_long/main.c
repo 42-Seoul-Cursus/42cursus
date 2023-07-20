@@ -3,30 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 15:21:29 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/20 17:09:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	leak(void)
-{
-	system("leaks so_long > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
-}
+// void	leak(void)
+// {
+// 	system("leaks so_long > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
+// }
 
 int	main(int ac, char *av[])
 {
-	atexit(leak);
+	// atexit(leak);
 	t_vars	vars;
 
-	if (ac != 2)
-		return (1);
-
-	is_valid_arg(av[1]);
-
+	is_valid_arg(ac, av[1]);
 	vars.fd = protected_open(av[1]);
 	parse_map(&vars);
 	set_vars(&vars);
