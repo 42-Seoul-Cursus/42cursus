@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 18:13:14 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:31:12 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	up(t_vars *vars)
 	else if (vars->map[vars->p[1] - 1][vars->p[0]] == 'E')
 	{
 		if (vars->ball == 0)
-			exit(0);
+			exit_window(vars);
 		return ;
 	}
 	vars->map[vars->p[1]][vars->p[0]] = '0';
@@ -62,7 +62,7 @@ void	down(t_vars *vars)
 	else if (vars->map[vars->p[1] + 1][vars->p[0]] == 'E')
 	{
 		if (vars->ball == 0)
-			exit(0);
+			exit_window(vars);
 		return ;
 	}
 	vars->map[vars->p[1]][vars->p[0]] = '0';
@@ -78,7 +78,7 @@ void	left(t_vars *vars)
 	else if (vars->map[vars->p[1]][vars->p[0] - 1] == 'E')
 	{
 		if (vars->ball == 0)
-			exit(0);
+			exit_window(vars);
 		return ;
 	}
 	vars->map[vars->p[1]][vars->p[0]] = '0';
@@ -94,7 +94,7 @@ void	right(t_vars *vars)
 	else if (vars->map[vars->p[1]][vars->p[0] + 1] == 'E')
 	{
 		if (vars->ball == 0)
-			exit(0);
+			exit_window(vars);
 		return ;
 	}
 	vars->map[vars->p[1]][vars->p[0]] = '0';
@@ -106,7 +106,7 @@ void	right(t_vars *vars)
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 53)
-		exit(0);
+		exit_window(vars);
 	if (keycode == 13)
 		if (vars->map[vars->p[1] - 1][vars->p[0]] != '1')
 			up(vars);

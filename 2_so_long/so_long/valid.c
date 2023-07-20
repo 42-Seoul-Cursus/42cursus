@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                       ::     :::::::   */
+/*   valid.c                                           +:     +:   +:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:16:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 18:27:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:33:18 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_map(t_vars *vars)
+void	free_map(char **visited)
 {
 	int i;
 
 	i = 0;
-	while (i < vars->y)
+	while (visited[i] != NULL)
 	{
-		free(vars->map[i]);
+		free(visited[i]);
 		++i;
 	}
-	free(vars->map);
+	free(visited);
 }
 
 char **dup_map(t_vars *vars)
@@ -53,17 +53,17 @@ void is_escape(t_vars *vars)
 	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)
 	{
-		perror("Error\nUnable to escape :");
+		perror("Error\nUnable to escape");
 		exit(1);
 	}
 	vars->is_escape = 0;
 	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)
 	{
-		perror("Error\nUnable to escape :");
+		perror("Error\nUnable to escape");
 		exit(1);
 	}
-	free_map(vars);
+	free_map(visited);
 	vars->p[0] = backup[0];
 	vars->p[1] = backup[1];
 	vars->ball = backup[2];

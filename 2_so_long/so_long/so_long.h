@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 18:18:32 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:32:37 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char					**dup_map(t_vars *vars);
 void					is_escape(t_vars *vars);
 void					dfs_find_c(t_vars *vars, int x, int y, char **visited);
 void					dfs_find_e(t_vars *vars, int x, int y, char **visited);
+void					free_map(char **visited);
 
 // protect.c
 int						protected_open(char *path);
