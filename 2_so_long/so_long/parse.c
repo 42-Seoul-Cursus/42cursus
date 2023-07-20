@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 19:08:46 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/21 01:06:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,6 @@ void	parse_map(t_vars *vars)
 	is_valid_map(vars);
 }
 
-void	is_rectangular(t_vars *vars)
-{
-	int	i;
-
-	i = 1;
-	while (vars->map[i] != NULL)
-	{
-		if (vars->x != (int)ft_strlen(vars->map[i]))
-		{
-			perror("Error\nis not rectangular :");
-			exit(1);
-		}
-		++i;
-	}
-}
-
 void	set_vars(t_vars *vars)
 {
 	vars->mlx = mlx_init();
@@ -98,4 +82,5 @@ void	set_vars(t_vars *vars)
 			"so_long");
 	vars->img = mlx_new_image(vars->mlx, vars->x * 64, vars->y * 64);
 	vars->cnt = 0;
+	print_map(vars, 64, 64);
 }

@@ -6,11 +6,17 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 17:03:28 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/21 00:54:29 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	exit_with_msg(char *msg)
+{
+	perror(msg);
+	exit(EXIT_FAILURE);
+}
 
 int	protected_open(char *path)
 {
@@ -18,10 +24,7 @@ int	protected_open(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	{
-		perror("Error\nFailed to open");
-		exit(1);
-	}
+		exit_with_msg("Error\nFailed to open");
 	return (fd);
 }
 
@@ -32,10 +35,7 @@ void	*protected_calloc(size_t size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
-	{
-		perror("Error\nFailed to malloc");
-		exit(1);
-	}
+		exit_with_msg("Error\nFailed to malloc");
 	i = 0;
 	while (i < size)
 		ptr[i++] = 0;

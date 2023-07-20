@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:04:56 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/20 19:05:50 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/21 01:00:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	is_valid_map(t_vars *vars)
 {
+	vars->cnt = 0;
+	vars->ball = 0;
 	is_rectangular(vars);
 	is_valid_char(vars);
 	is_map_around_one(vars);
@@ -82,7 +84,7 @@ char	**dup_map(t_vars *vars)
 	int		i;
 
 	i = 0;
-	tmp = malloc(sizeof(char *) * (vars->y + 1));
+	tmp = protected_calloc(sizeof(char *) * (vars->y + 1));
 	while (i < vars->y)
 	{
 		tmp[i] = ft_strdup(vars->map[i]);
