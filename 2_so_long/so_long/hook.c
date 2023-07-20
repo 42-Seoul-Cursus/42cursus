@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 17:21:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:13:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,65 +41,65 @@ void	print_num(unsigned long long num)
 
 void	up(t_vars *vars)
 {
-	if (vars->map[vars->player[1] - 1][vars->player[0]] == 'C')
+	if (vars->map[vars->p[1] - 1][vars->p[0]] == 'C')
 		--(vars->ball);
-	else if (vars->map[vars->player[1] - 1][vars->player[0]] == 'E')
+	else if (vars->map[vars->p[1] - 1][vars->p[0]] == 'E')
 	{
 		if (vars->ball == 0)
 			exit(0);
 		return ;
 	}
-	vars->map[vars->player[1]][vars->player[0]] = '0';
-	vars->map[vars->player[1] - 1][vars->player[0]] = 'P';
-	vars->player[1] -= 1;
+	vars->map[vars->p[1]][vars->p[0]] = '0';
+	vars->map[vars->p[1] - 1][vars->p[0]] = 'P';
+	vars->p[1] -= 1;
 	print_num(++vars->cnt);
 }
 
 void	down(t_vars *vars)
 {
-	if (vars->map[vars->player[1] + 1][vars->player[0]] == 'C')
+	if (vars->map[vars->p[1] + 1][vars->p[0]] == 'C')
 		--(vars->ball);
-	else if (vars->map[vars->player[1] + 1][vars->player[0]] == 'E')
+	else if (vars->map[vars->p[1] + 1][vars->p[0]] == 'E')
 	{
 		if (vars->ball == 0)
 			exit(0);
 		return ;
 	}
-	vars->map[vars->player[1]][vars->player[0]] = '0';
-	vars->map[vars->player[1] + 1][vars->player[0]] = 'P';
-	vars->player[1] += 1;
+	vars->map[vars->p[1]][vars->p[0]] = '0';
+	vars->map[vars->p[1] + 1][vars->p[0]] = 'P';
+	vars->p[1] += 1;
 	print_num(++vars->cnt);
 }
 
 void	left(t_vars *vars)
 {
-	if (vars->map[vars->player[1]][vars->player[0] - 1] == 'C')
+	if (vars->map[vars->p[1]][vars->p[0] - 1] == 'C')
 		--(vars->ball);
-	else if (vars->map[vars->player[1]][vars->player[0] - 1] == 'E')
+	else if (vars->map[vars->p[1]][vars->p[0] - 1] == 'E')
 	{
 		if (vars->ball == 0)
 			exit(0);
 		return ;
 	}
-	vars->map[vars->player[1]][vars->player[0]] = '0';
-	vars->map[vars->player[1]][vars->player[0] - 1] = 'P';
-	vars->player[0] -= 1;
+	vars->map[vars->p[1]][vars->p[0]] = '0';
+	vars->map[vars->p[1]][vars->p[0] - 1] = 'P';
+	vars->p[0] -= 1;
 	print_num(++vars->cnt);
 }
 
 void	right(t_vars *vars)
 {
-	if (vars->map[vars->player[1]][vars->player[0] + 1] == 'C')
+	if (vars->map[vars->p[1]][vars->p[0] + 1] == 'C')
 		--(vars->ball);
-	else if (vars->map[vars->player[1]][vars->player[0] + 1] == 'E')
+	else if (vars->map[vars->p[1]][vars->p[0] + 1] == 'E')
 	{
 		if (vars->ball == 0)
 			exit(0);
 		return ;
 	}
-	vars->map[vars->player[1]][vars->player[0]] = '0';
-	vars->map[vars->player[1]][vars->player[0] + 1] = 'P';
-	vars->player[0] += 1;
+	vars->map[vars->p[1]][vars->p[0]] = '0';
+	vars->map[vars->p[1]][vars->p[0] + 1] = 'P';
+	vars->p[0] += 1;
 	print_num(++vars->cnt);
 }
 
@@ -108,16 +108,16 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 13)
-		if (vars->map[vars->player[1] - 1][vars->player[0]] != '1')
+		if (vars->map[vars->p[1] - 1][vars->p[0]] != '1')
 			up(vars);
 	if (keycode == 1)
-		if (vars->map[vars->player[1] + 1][vars->player[0]] != '1')
+		if (vars->map[vars->p[1] + 1][vars->p[0]] != '1')
 			down(vars);
 	if (keycode == 0)
-		if (vars->map[vars->player[1]][vars->player[0] - 1] != '1')
+		if (vars->map[vars->p[1]][vars->p[0] - 1] != '1')
 			left(vars);
 	if (keycode == 2)
-		if (vars->map[vars->player[1]][vars->player[0] + 1] != '1')
+		if (vars->map[vars->p[1]][vars->p[0] + 1] != '1')
 			right(vars);
 	print_map(vars, 64, 64);
 	return (0);

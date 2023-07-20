@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 17:09:33 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:18:32 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef struct s_vars
 
 	int					x;
 	int					y;
-	int					player[2];
+	int					p[2];
 	int					fd;
 	unsigned long long	cnt;
 	int					ball;
-	int					is_exit;
+	int					is_escape;
 }						t_vars;
 
 // parse.c
@@ -53,7 +53,8 @@ void					is_dup_char(t_vars *vars);
 void					is_valid_arg(int ac, char *av);
 char					**dup_map(t_vars *vars);
 void					is_escape(t_vars *vars);
-void					dfs(t_vars *vars, int x, int y, char **visited);
+void					dfs_find_c(t_vars *vars, int x, int y, char **visited);
+void					dfs_find_e(t_vars *vars, int x, int y, char **visited);
 
 // protect.c
 int						protected_open(char *path);

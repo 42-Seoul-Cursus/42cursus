@@ -6,16 +6,29 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:16:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 17:09:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:27:35 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**dup_map(t_vars *vars)
+void	free_map(t_vars *vars)
 {
-	char	**tmp;
-	int		i;
+	int i;
+
+	i = 0;
+	while (i < vars->y)
+	{
+		free(vars->map[i]);
+		++i;
+	}
+	free(vars->map);
+}
+
+char **dup_map(t_vars *vars)
+{
+	char **tmp;
+	int i;
 
 	i = 0;
 	tmp = malloc(sizeof(char *) * (vars->y + 1));
@@ -27,51 +40,82 @@ char	**dup_map(t_vars *vars)
 	return (tmp);
 }
 
-void	is_escape(t_vars *vars)
+void is_escape(t_vars *vars)
 {
-	char	**visited;
+	char **visited;
+	int backup[3];
 
+	backup[0] = vars->p[0];
+	backup[1] = vars->p[1];
+	backup[2] = vars->ball;
 	visited = dup_map(vars);
-	vars->is_exit = 0;
-	dfs(vars, vars->player[0], vars->player[1], visited);
-	if (vars->is_exit == 0)
+	vars->is_escape = 0;
+	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
+	if (vars->is_escape == 0)
 	{
 		perror("Error\nUnable to escape :");
 		exit(1);
 	}
+	vars->is_escape = 0;
+	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
+	if (vars->is_escape == 0)
+	{
+		perror("Error\nUnable to escape :");
+		exit(1);
+	}
+	free_map(vars);
+	vars->p[0] = backup[0];
+	vars->p[1] = backup[1];
+	vars->ball = backup[2];
 }
 
-void	dfs(t_vars *vars, int x, int y, char **visited)
+void dfs_find_c(t_vars *vars, int x, int y, char **visited)
 {
 	if (x < 0 || y < 0 || x >= vars->x || y >= vars->y)
-		return ;
+		return;
+	if (visited[y][x] == '1' || visited[y][x] == '2' | visited[y][x] == 'E')
+		return;
 	if (visited[y][x] == 'C')
 	{
-		visited[y][x] = '0';
-		--vars->cnt;
-		return ;
+		--vars->ball;
+		vars->p[0] = x;
+		vars->p[1] = y;
 	}
-	if (visited[y][x] == '1')
-		return ;
-	if (vars->map[y][x] == 'E')
+	visited[y][x] = '2';
+	if (vars->ball == 0)
 	{
-		if (vars->ball == 0)
-			vars->is_exit = 1;
-		else
-			return ;
+		vars->is_escape = 1;
+		return;
 	}
-	visited[y][x] = '1';
-	dfs(vars, x + 1, y, visited);
-	dfs(vars, x - 1, y, visited);
-	dfs(vars, x, y + 1, visited);
-	dfs(vars, x, y - 1, visited);
+	dfs_find_c(vars, x + 1, y, visited);
+	dfs_find_c(vars, x - 1, y, visited);
+	dfs_find_c(vars, x, y + 1, visited);
+	dfs_find_c(vars, x, y - 1, visited);
 }
 
-void	is_valid_arg(int ac, char *av)
+void dfs_find_e(t_vars *vars, int x, int y, char **visited)
 {
-	int		i;
-	int		slash;
-	char	*tmp;
+	if (x < 0 || y < 0 || x >= vars->x || y >= vars->y)
+		return;
+	if (visited[y][x] == '1' || visited[y][x] == '3')
+		return;
+	if (visited[y][x] == 'E')
+	{
+		vars->is_escape = 1;
+		return;
+	}
+	visited[y][x] = '3';
+	dfs_find_e(vars, x + 1, y, visited);
+	dfs_find_e(vars, x - 1, y, visited);
+	dfs_find_e(vars, x, y + 1, visited);
+	dfs_find_e(vars, x, y - 1, visited);
+}
+
+void is_valid_arg(int ac, char *av)
+{
+	int i;
+	int slash;
+	char *tmp;
 
 	if (ac != 2)
 	{
@@ -87,15 +131,14 @@ void	is_valid_arg(int ac, char *av)
 			slash = i + 1;
 		++i;
 	}
-	if (tmp[i - 1] != 'r' || tmp[i - 2] != 'e' || tmp[i - 3] != 'b' || tmp[i - 4]
-			!= '.' || i - slash < 5)
+	if (tmp[i - 1] != 'r' || tmp[i - 2] != 'e' || tmp[i - 3] != 'b' || tmp[i - 4] != '.' || i - slash < 5)
 	{
 		perror("Error\nInvalid argument");
 		exit(1);
 	}
 }
 
-void	is_valid_map(t_vars *vars)
+void is_valid_map(t_vars *vars)
 {
 	is_rectangular(vars);
 	is_valid_char(vars);
@@ -104,10 +147,10 @@ void	is_valid_map(t_vars *vars)
 	is_escape(vars);
 }
 
-void	is_dup_char(t_vars *vars)
+void is_dup_char(t_vars *vars)
 {
-	int	y;
-	int	x;
+	int y;
+	int x;
 
 	y = 0;
 	vars->cnt = 0;
@@ -119,8 +162,8 @@ void	is_dup_char(t_vars *vars)
 		{
 			if (vars->map[y][x] == 'P')
 			{
-				vars->player[0] = x;
-				vars->player[1] = y;
+				vars->p[0] = x;
+				vars->p[1] = y;
 				++(vars->cnt);
 			}
 			else if (vars->map[y][x] == 'E')
@@ -138,10 +181,10 @@ void	is_dup_char(t_vars *vars)
 	}
 }
 
-void	is_valid_char(t_vars *vars)
+void is_valid_char(t_vars *vars)
 {
-	int	y;
-	int	x;
+	int y;
+	int x;
 
 	y = 0;
 	while (vars->map[y] != NULL)
@@ -149,9 +192,7 @@ void	is_valid_char(t_vars *vars)
 		x = 0;
 		while (vars->map[y][x] != '\0')
 		{
-			if (vars->map[y][x] != '0' && vars->map[y][x] != '1'
-				&& vars->map[y][x] != 'C' && vars->map[y][x] != 'E'
-				&& vars->map[y][x] != 'P')
+			if (vars->map[y][x] != '0' && vars->map[y][x] != '1' && vars->map[y][x] != 'C' && vars->map[y][x] != 'E' && vars->map[y][x] != 'P')
 			{
 				perror("Error\nContains unrecognized characters");
 				exit(1);
@@ -162,11 +203,11 @@ void	is_valid_char(t_vars *vars)
 	}
 }
 
-void	is_map_around_one(t_vars *vars)
+void is_map_around_one(t_vars *vars)
 {
-	int		x;
-	int		y;
-	char	**tmp;
+	int x;
+	int y;
+	char **tmp;
 
 	y = 0;
 	tmp = vars->map;
