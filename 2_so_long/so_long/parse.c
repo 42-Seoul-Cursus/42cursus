@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 17:22:47 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:20:34 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ void	print_map(t_vars *vars, int width, int height)
 			++x;
 		}
 		++y;
+	}
+}
+
+void	is_valid_arg(char *av)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	tmp = av;
+	while (tmp[i] != '\0')
+		++i;
+	if (tmp[i - 1] != 'r' || tmp[i - 2] != 'e' || tmp[i - 3] != 'b' || tmp[i - 4]
+			!= '.' || i < 5)
+	{
+		perror("Error\nInvalid argument");
+		exit(1);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 17:24:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:20:19 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void					is_rectangular(t_vars *vars);
 void					is_valid_char(t_vars *vars);
 void					is_map_around_one(t_vars *vars);
 void					is_dup_char(t_vars *vars);
+void					is_valid_arg(char *av);
 
 // protect.c
 int						protected_open(char *path);

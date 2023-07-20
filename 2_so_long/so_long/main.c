@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 17:25:13 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 15:21:29 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	leak(void)
 {
@@ -25,7 +24,10 @@ int	main(int ac, char *av[])
 
 	if (ac != 2)
 		return (1);
-	vars.fd = open(av[1], O_RDONLY);
+
+	is_valid_arg(av[1]);
+
+	vars.fd = protected_open(av[1]);
 	parse_map(&vars);
 	set_vars(&vars);
 	print_map(&vars, 64, 64);
