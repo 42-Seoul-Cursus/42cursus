@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 16:45:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/20 19:08:46 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	xpm_file_to_img(t_vars *vars, int width, int height, char tmp)
+{
+	if (tmp == '1')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/wall.xpm", &width,
+				&height);
+	else if (tmp == '0')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/tile.xpm", &width,
+				&height);
+	else if (tmp == 'P')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/char.xpm", &width,
+				&height);
+	else if (tmp == 'E')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/center.xpm", &width,
+				&height);
+	else if (tmp == 'C')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/ball.xpm", &width,
+				&height);
+}
 
 void	print_map(t_vars *vars, int width, int height)
 {
@@ -25,23 +44,9 @@ void	print_map(t_vars *vars, int width, int height)
 		x = 0;
 		while (tmp[y][x] != '\0')
 		{
-			if (tmp[y][x] == '1')
-				vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/wall.xpm",
-						&width, &height);
-			else if (tmp[y][x] == '0')
-				vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/tile.xpm",
-						&width, &height);
-			else if (tmp[y][x] == 'P')
-				vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/char.xpm",
-						&width, &height);
-			else if (tmp[y][x] == 'E')
-				vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/center.xpm",
-						&width, &height);
-			else if (tmp[y][x] == 'C')
-				vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/ball.xpm",
-						&width, &height);
+			xpm_file_to_img(vars, width, height, tmp[y][x]);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y
-					* 64);
+				* 64);
 			++x;
 		}
 		++y;

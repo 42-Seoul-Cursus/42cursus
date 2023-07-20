@@ -6,38 +6,11 @@
 /*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:16 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/20 18:31:12 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/20 18:59:28 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	write_num(unsigned long long num, int size)
-{
-	char	c;
-
-	if (num == 0)
-		return ;
-	write_num(num / 10, size - 1);
-	c = num % 10 + '0';
-	write(1, &c, 1);
-}
-
-void	print_num(unsigned long long num)
-{
-	int size;
-	unsigned long long	tmp;
-	tmp = num;
-
-	size = 0;
-	while (tmp)
-	{
-		tmp /= 10;
-		++size;
-	}
-	write_num(num, size);
-	write(1, "\n", 1);
-}
 
 void	up(t_vars *vars)
 {
@@ -121,10 +94,4 @@ int	key_hook(int keycode, t_vars *vars)
 			right(vars);
 	print_map(vars, 64, 64);
 	return (0);
-}
-
-int	exit_window(t_vars *vars)
-{
-	mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
 }
