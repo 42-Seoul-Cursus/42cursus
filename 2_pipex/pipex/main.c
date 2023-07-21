@@ -1,9 +1,55 @@
 #include "pipex.h"
 
-int	main(int ac, char *av[])
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	char	*path[6] = {"/bin/", "/sbin/", "/usr/bin/", "/usr/sbin/", "/usr/local/bin/", NULL};
+	size_t	i;
+	size_t	j;
+	size_t	tmp;
 
+	i = 0;
+	while (haystack[i] != '\0')
+	{
+		if (haystack[i] == needle[0])
+		{
+			tmp = i;
+			j = 0;
+			while (haystack[tmp] != '\0' && haystack[tmp] == needle[j])
+			{
+				++tmp;
+				++j;
+			}
+			if (needle[j] == '\0')
+				return ((char *)(haystack + i));
+		}
+		++i;
+	}
+	return (NULL);
+}
+
+char	*parse_path(char *envp[])
+{
+	char	*path;
+	int		i;
+
+	path = ft_strstr(envp[0], "PATH=");
+	i = 0;
+	// while (path[i] != '\n')
+	// {
+	// 	printf("%c", path[i]);
+	// 	++i;
+	// }
+	// path[i] = '\0';
+	return (path);
+}
+
+int	main(int ac, char *av[], char *envp[])
+{
+	char	*path = parse_path(envp);
+	printf("%s\n", path);
+	return (0);
+}
+
+/*
 	char	**cmd1 = ft_split(av[2], ' ');
 	// char	**cmd2 = ft_split(av[3], ' ');
 
@@ -49,5 +95,4 @@ int	main(int ac, char *av[])
 	{
 
 	}
-	return (0);
-}
+*/

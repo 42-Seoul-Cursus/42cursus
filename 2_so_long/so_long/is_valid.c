@@ -12,6 +12,17 @@
 
 #include "so_long.h"
 
+void	is_valid_map(t_vars *vars)
+{
+	vars->cnt = 0;
+	vars->ball = 0;
+	is_rectangular(vars);
+	is_valid_char(vars);
+	is_map_around_one(vars);
+	is_dup_char(vars);
+	is_escape(vars);
+}
+
 void	is_rectangular(t_vars *vars)
 {
 	int	i;
@@ -23,29 +34,6 @@ void	is_rectangular(t_vars *vars)
 			exit_with_msg("Error\nis not rectangular");
 		++i;
 	}
-}
-
-void	is_escape(t_vars *vars)
-{
-	char	**visited;
-	int		backup[3];
-
-	backup[0] = vars->p[0];
-	backup[1] = vars->p[1];
-	backup[2] = vars->ball;
-	visited = dup_map(vars);
-	vars->is_escape = 0;
-	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
-	if (vars->is_escape == 0)
-		exit_with_msg("Error\nUnable to escape");
-	vars->is_escape = 0;
-	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
-	if (vars->is_escape == 0)
-		exit_with_msg("Error\nUnable to escape");
-	free_map(visited);
-	vars->p[0] = backup[0];
-	vars->p[1] = backup[1];
-	vars->ball = backup[2];
 }
 
 void	is_dup_char(t_vars *vars)

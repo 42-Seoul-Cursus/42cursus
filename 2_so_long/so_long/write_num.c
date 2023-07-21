@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_utils.c                                       :+:      :+:    :+:   */
+/*   write_num.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 18:58:00 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/20 19:13:34 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/07/21 18:20:36 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	print_num(unsigned long long num)
 int	exit_window(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }

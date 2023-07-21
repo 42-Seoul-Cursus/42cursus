@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/21 00:54:29 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:24:52 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_with_msg(char *msg)
 {
-	perror(msg);
+	write(1, msg, ft_strlen(msg));
 	exit(EXIT_FAILURE);
 }
 

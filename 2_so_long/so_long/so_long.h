@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/21 01:02:21 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:25:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-# include "minilibx/mlx.h"
+# include "MiniLibX/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>

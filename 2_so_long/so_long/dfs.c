@@ -6,21 +6,33 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:04:56 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/21 01:00:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:23:42 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	is_valid_map(t_vars *vars)
+void	is_escape(t_vars *vars)
 {
-	vars->cnt = 0;
-	vars->ball = 0;
-	is_rectangular(vars);
-	is_valid_char(vars);
-	is_map_around_one(vars);
-	is_dup_char(vars);
-	is_escape(vars);
+	char	**visited;
+	int		backup[3];
+
+	backup[0] = vars->p[0];
+	backup[1] = vars->p[1];
+	backup[2] = vars->ball;
+	visited = dup_map(vars);
+	vars->is_escape = 0;
+	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
+	if (vars->is_escape == 0)
+		exit_with_msg("Error\nUnable to escape");
+	vars->is_escape = 0;
+	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
+	if (vars->is_escape == 0)
+		exit_with_msg("Error\nUnable to escape");
+	free_map(visited);
+	vars->p[0] = backup[0];
+	vars->p[1] = backup[1];
+	vars->ball = backup[2];
 }
 
 void	dfs_find_c(t_vars *vars, int x, int y, char **visited)
@@ -65,19 +77,6 @@ void	dfs_find_e(t_vars *vars, int x, int y, char **visited)
 	dfs_find_e(vars, x, y - 1, visited);
 }
 
-void	free_map(char **visited)
-{
-	int	i;
-
-	i = 0;
-	while (visited[i] != NULL)
-	{
-		free(visited[i]);
-		++i;
-	}
-	free(visited);
-}
-
 char	**dup_map(t_vars *vars)
 {
 	char	**tmp;
@@ -91,4 +90,17 @@ char	**dup_map(t_vars *vars)
 		++i;
 	}
 	return (tmp);
+}
+
+void	free_map(char **visited)
+{
+	int	i;
+
+	i = 0;
+	while (visited[i] != NULL)
+	{
+		free(visited[i]);
+		++i;
+	}
+	free(visited);
 }
