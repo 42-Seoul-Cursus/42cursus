@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/14 20:09:39 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/14 20:09:40 by anseungwon       ###   ########.fr       */
+/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
+/*   Updated: 2023/07/23 23:16:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 int	main(int ac, char *av[])
 {
-
+	t_stack a;
+	a.next = NULL;
+	a.prev = NULL;
 	return (0);
 }
 
