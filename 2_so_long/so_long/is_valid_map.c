@@ -68,7 +68,7 @@ void	is_dup_char(t_vars *vars)
 		++y;
 	}
 	if (vars->cnt != 1 || vars->is_escape != 1)
-		exit_with_msg("Error\nMore than 1 character on the ma\n");
+		exit_with_msg("Error\nMore than 1 character on the map\n");
 }
 
 void	is_map_surrounded_one(t_vars *vars)
@@ -86,7 +86,7 @@ void	is_map_surrounded_one(t_vars *vars)
 		{
 			if (x == 0 || y == 0 || x == vars->x - 1 || y == vars->y - 1)
 				if (tmp[y][x] != '1')
-					exit_with_msg("Error\nMap is not surrounded by \'1\\n");
+					exit_with_msg("Error\nMap is not surrounded by \'1\'\n");
 			++x;
 		}
 		++y;
@@ -101,7 +101,7 @@ void	is_rectangular(t_vars *vars)
 	while (vars->map[i] != NULL)
 	{
 		if (vars->x != (int)ft_strlen(vars->map[i]))
-			exit_with_msg("Error\nMap is not rectangula\n");
+			exit_with_msg("Error\nMap is not rectangular\n");
 		++i;
 	}
 }
