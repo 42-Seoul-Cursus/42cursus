@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/23 22:35:51 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:49:41 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	is_valid_arg(int ac, char *av)
 			slash = i + 1;
 		++i;
 	}
-	if (i - slash < 5 || av[i - 1] != 'r' || av[i - 2] != 'e' || av[i
-		- 3] != 'b' || av[i - 4] != '.')
+	if (i - slash < 5 || av[i - 1] != 'r' || av[i - 2] != 'e'
+		|| av[i - 3] != 'b' || av[i - 4] != '.')
 		exit_with_msg("Error\nThe file must end with a \'.ber\'\n");
 }
 

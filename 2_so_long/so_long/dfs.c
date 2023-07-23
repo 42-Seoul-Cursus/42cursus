@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:04:56 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/23 22:41:03 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:51:25 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	is_escape(t_vars *vars)
 	vars->is_escape = 0;
 	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)
-		exit_with_msg("Error\nUnable to collect all items\n");
+		exit_with_msg("Error\nUnable to escape\n");
 	vars->is_escape = 0;
 	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)

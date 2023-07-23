@@ -68,7 +68,7 @@ void	is_dup_char(t_vars *vars)
 		++y;
 	}
 	if (vars->cnt != 1 || vars->is_escape != 1)
-		exit_with_msg("Error\nMore than 1 character on the map\n");
+		exit_with_msg("Error\nMaps should only have 1 escape and 1 character\n");
 }
 
 void	is_map_surrounded_one(t_vars *vars)

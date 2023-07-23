@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/23 22:23:18 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:50:30 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	print_map(t_vars *vars)
 		while (tmp[y][x] != '\0')
 		{
 			xpm_file_to_img(vars, 64, 64, tmp[y][x]);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y
-				* 64);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img,
+				x * 64, y * 64);
 			++x;
 		}
 		++y;
@@ -57,20 +57,20 @@ void	print_map(t_vars *vars)
 void	xpm_file_to_img(t_vars *vars, int width, int height, char tmp)
 {
 	if (tmp == '1')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/wall.xpm", &width,
-				&height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/wall.xpm",
+				&width, &height);
 	else if (tmp == '0')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/floor.xpm", &width,
-				&height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/floor.xpm",
+				&width, &height);
 	else if (tmp == 'P')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/player.xpm", &width,
-				&height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/player.xpm",
+				&width, &height);
 	else if (tmp == 'E')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/escape.xpm", &width,
-				&height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/escape.xpm",
+				&width, &height);
 	else if (tmp == 'C')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/item.xpm", &width,
-				&height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/item.xpm",
+				&width, &height);
 }
 
 void	open_window(t_vars *vars)
