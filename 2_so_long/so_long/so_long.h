@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:29:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/23 22:58:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 23:01:24 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # endif
 # include "MiniLibX/mlx.h"
 # include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
