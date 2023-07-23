@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 12:13:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/19 16:30:21 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:33:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buf)
-		return (NULL);
+	buf = (char *)protected_calloc((BUFFER_SIZE + 1) * sizeof(char));
 	size = read(fd, buf, BUFFER_SIZE);
 	return (repeat_read(&backup, fd, buf, size));
 }

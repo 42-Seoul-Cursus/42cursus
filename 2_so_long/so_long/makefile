@@ -8,8 +8,8 @@ DEBUG=-g3 -fsanitize=address
 LIBS=-L./MiniLibX
 FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 LIBMLX=./MiniLibX/libmlx.a
-SRCS=main.c parse.c hook.c valid.c dfs.c hook_utils.c protect.c get_next_line.c get_next_line_utils.c
-OBJS=main.o parse.o hook.o valid.o dfs.o hook_utils.o protect.o get_next_line.o get_next_line_utils.o
+SRCS=main.c parse.c hook.c is_valid_map.c dfs.c protect.c get_next_line.c get_next_line_utils.c
+OBJS=main.o parse.o hook.o is_valid_map.o dfs.o protect.o get_next_line.o get_next_line_utils.o
 
 all: $(NAME)
 

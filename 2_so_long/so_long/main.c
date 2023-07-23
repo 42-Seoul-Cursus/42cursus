@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:14 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/21 01:06:03 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:35:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int	main(int ac, char *av[])
 	t_vars	vars;
 
 	is_valid_arg(ac, av[1]);
-	vars.fd = protected_open(av[1]);
+	init_vars(&vars, av[1]);
 	parse_map(&vars);
-	set_vars(&vars);
+	is_valid_map(&vars);
+	open_window(&vars);
 	mlx_hook(vars.win, 3, 1L << 1, key_hook, &vars);
 	mlx_hook(vars.win, 17, 0, exit_window, &vars);
 	mlx_loop(vars.mlx);
@@ -28,22 +29,39 @@ int	main(int ac, char *av[])
 
 void	is_valid_arg(int ac, char *av)
 {
-	int		i;
-	int		slash;
-	char	*tmp;
+	int	i;
+	int	slash;
 
 	if (ac != 2)
-		exit_with_msg("Error\nEnter 2 arguments");
+		exit_with_msg("Error\nEnter 2 arguments\n");
 	i = 0;
 	slash = 0;
-	tmp = av;
-	while (tmp[i] != '\0')
+	while (av[i] != '\0')
 	{
-		if (tmp[i] == '/')
+		if (av[i] == '/')
 			slash = i + 1;
 		++i;
 	}
-	if (tmp[i - 1] != 'r' || tmp[i - 2] != 'e' || tmp[i - 3] != 'b'
-		|| tmp[i - 4] != '.' || i - slash < 5)
-		exit_with_msg("Error\nInvalid argument");
+	if (i - slash < 5 || av[i - 1] != 'r' || av[i - 2] != 'e' || av[i
+		- 3] != 'b' || av[i - 4] != '.')
+		exit_with_msg("Error\nThe file must end with a \'.ber\'\n");
+}
+
+void	init_vars(t_vars *vars, char *file)
+{
+	vars->fd = protected_open(file);
+	vars->map = NULL;
+	vars->x = 0;
+	vars->y = 0;
+	vars->p[0] = 0;
+	vars->p[1] = 0;
+	vars->item = 0;
+	vars->is_escape = 0;
+	vars->cnt = 0;
+}
+
+int	exit_window(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 19:04:56 by anseungwon        #+#    #+#             */
-/*   Updated: 2023/07/21 18:23:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:32:21 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ void	is_escape(t_vars *vars)
 
 	backup[0] = vars->p[0];
 	backup[1] = vars->p[1];
-	backup[2] = vars->ball;
+	backup[2] = vars->item;
 	visited = dup_map(vars);
 	vars->is_escape = 0;
 	dfs_find_c(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)
-		exit_with_msg("Error\nUnable to escape");
+		exit_with_msg("Error\nUnable to escape\n");
 	vars->is_escape = 0;
 	dfs_find_e(vars, vars->p[0], vars->p[1], visited);
 	if (vars->is_escape == 0)
-		exit_with_msg("Error\nUnable to escape");
+		exit_with_msg("Error\nUnable to escape\n");
 	free_map(visited);
 	vars->p[0] = backup[0];
 	vars->p[1] = backup[1];
-	vars->ball = backup[2];
+	vars->item = backup[2];
 }
 
 void	dfs_find_c(t_vars *vars, int x, int y, char **visited)
@@ -43,12 +43,12 @@ void	dfs_find_c(t_vars *vars, int x, int y, char **visited)
 		return ;
 	if (visited[y][x] == 'C')
 	{
-		--vars->ball;
+		--vars->item;
 		vars->p[0] = x;
 		vars->p[1] = y;
 	}
 	visited[y][x] = '2';
-	if (vars->ball == 0)
+	if (vars->item == 0)
 	{
 		vars->is_escape = 1;
 		return ;
@@ -89,18 +89,19 @@ char	**dup_map(t_vars *vars)
 		tmp[i] = ft_strdup(vars->map[i]);
 		++i;
 	}
+	tmp[i] = NULL;
 	return (tmp);
 }
 
-void	free_map(char **visited)
+void	free_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (visited[i] != NULL)
+	while (map[i] != NULL)
 	{
-		free(visited[i]);
+		free(map[i]);
 		++i;
 	}
-	free(visited);
+	free(map);
 }

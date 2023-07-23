@@ -6,32 +6,33 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/21 01:06:16 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:23:18 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	xpm_file_to_img(t_vars *vars, int width, int height, char tmp)
+void	parse_map(t_vars *vars)
 {
-	if (tmp == '1')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/wall.xpm", &width,
-				&height);
-	else if (tmp == '0')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/tile.xpm", &width,
-				&height);
-	else if (tmp == 'P')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/char.xpm", &width,
-				&height);
-	else if (tmp == 'E')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/center.xpm", &width,
-				&height);
-	else if (tmp == 'C')
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "./xpm/ball.xpm", &width,
-				&height);
+	int		i;
+	char	*buf;
+
+	i = 0;
+	while (1)
+	{
+		buf = get_next_line(vars->fd);
+		if (buf == NULL)
+			break ;
+		++i;
+		vars->map = protected_realloc(vars->map, sizeof(char *) * (i + 1), i);
+		vars->map[i - 1] = buf;
+		vars->map[i] = NULL;
+	}
+	vars->x = ft_strlen(vars->map[0]);
+	vars->y = i;
 }
 
-void	print_map(t_vars *vars, int width, int height)
+void	print_map(t_vars *vars)
 {
 	char	**tmp;
 	int		x;
@@ -44,7 +45,7 @@ void	print_map(t_vars *vars, int width, int height)
 		x = 0;
 		while (tmp[y][x] != '\0')
 		{
-			xpm_file_to_img(vars, width, height, tmp[y][x]);
+			xpm_file_to_img(vars, 64, 64, tmp[y][x]);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, x * 64, y
 				* 64);
 			++x;
@@ -53,34 +54,37 @@ void	print_map(t_vars *vars, int width, int height)
 	}
 }
 
-void	parse_map(t_vars *vars)
+void	xpm_file_to_img(t_vars *vars, int width, int height, char tmp)
 {
-	int		i;
-	char	*buf;
-
-	i = 0;
-	vars->map = NULL;
-	while (1)
-	{
-		buf = get_next_line(vars->fd);
-		if (buf == NULL)
-			break ;
-		vars->map = protected_realloc(vars->map, sizeof(char *) * (i + 2), i
-				+ 1);
-		vars->map[i++] = buf;
-		vars->map[i] = NULL;
-	}
-	vars->x = ft_strlen(vars->map[0]);
-	vars->y = i;
-	is_valid_map(vars);
+	if (tmp == '1')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/wall.xpm", &width,
+				&height);
+	else if (tmp == '0')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/floor.xpm", &width,
+				&height);
+	else if (tmp == 'P')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/player.xpm", &width,
+				&height);
+	else if (tmp == 'E')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/escape.xpm", &width,
+				&height);
+	else if (tmp == 'C')
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "./textures/item.xpm", &width,
+				&height);
 }
 
-void	set_vars(t_vars *vars)
+void	open_window(t_vars *vars)
 {
 	vars->mlx = mlx_init();
 	vars->win = mlx_new_window(vars->mlx, vars->x * 64, vars->y * 64,
 			"so_long");
 	vars->img = mlx_new_image(vars->mlx, vars->x * 64, vars->y * 64);
 	vars->cnt = 0;
-	print_map(vars, 64, 64);
+	print_map(vars);
+}
+
+void	exit_with_msg(char *msg)
+{
+	write(1, msg, ft_strlen(msg));
+	exit(EXIT_FAILURE);
 }

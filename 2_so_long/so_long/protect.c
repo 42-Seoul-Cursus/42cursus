@@ -6,17 +6,11 @@
 /*   By: seunan <seunan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/21 18:24:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/23 22:34:27 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	exit_with_msg(char *msg)
-{
-	write(1, msg, ft_strlen(msg));
-	exit(EXIT_FAILURE);
-}
 
 int	protected_open(char *path)
 {
@@ -24,7 +18,7 @@ int	protected_open(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit_with_msg("Error\nFailed to open");
+		exit_with_msg("Error\nFailed to open\n");
 	return (fd);
 }
 
@@ -35,7 +29,7 @@ void	*protected_calloc(size_t size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
-		exit_with_msg("Error\nFailed to malloc");
+		exit_with_msg("Error\nFailed to malloc\n");
 	i = 0;
 	while (i < size)
 		ptr[i++] = 0;
@@ -47,10 +41,10 @@ char	**protected_realloc(char **ptr, size_t size, size_t len)
 	char	**new_ptr;
 	size_t	i;
 
-	if (!ptr)
+	if (ptr == NULL)
 		return (protected_calloc(size));
-	i = 0;
 	new_ptr = protected_calloc(size);
+	i = 0;
 	while (i < len)
 	{
 		new_ptr[i] = ptr[i];
@@ -58,4 +52,31 @@ char	**protected_realloc(char **ptr, size_t size, size_t len)
 	}
 	free(ptr);
 	return (new_ptr);
+}
+
+void	write_num(unsigned long long num, int size)
+{
+	char	c;
+
+	if (num == 0)
+		return ;
+	write_num(num / 10, size - 1);
+	c = num % 10 + '0';
+	write(1, &c, 1);
+}
+
+void	print_num(unsigned long long num)
+{
+	int					size;
+	unsigned long long	tmp;
+
+	tmp = num;
+	size = 0;
+	while (tmp)
+	{
+		tmp /= 10;
+		++size;
+	}
+	write_num(num, size);
+	write(1, "\n", 1);
 }
