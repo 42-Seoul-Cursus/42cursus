@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:20:20 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 20:26:51 by anseungwon       ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+void	ft_putchar_fd(char c, int fd)
 {
-	t_stack a;
-
-
-	return (0);
+	write(fd, &c, 1);
 }
-

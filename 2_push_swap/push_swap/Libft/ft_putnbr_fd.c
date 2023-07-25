@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:21:05 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/20 17:43:29 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+static void	write_num(int n, int fd)
 {
-	t_stack a;
+	char	num;
 
-
-	return (0);
+	if (n == 0)
+		return ;
+	num = n % 10 + '0';
+	write_num(n / 10, fd);
+	write(fd, &num, 1);
 }
 
+void	ft_putnbr_fd(int n, int fd)
+{
+	char	tmp;
+
+	if (n > 0)
+		write_num(n, fd);
+	else if (n == 0)
+		write(fd, "0", 1);
+	else
+	{
+		tmp = -1 * (n % 10) + '0';
+		n /= 10;
+		write(fd, "-", 1);
+		write_num(n * -1, fd);
+		write(fd, &tmp, 1);
+	}
+}

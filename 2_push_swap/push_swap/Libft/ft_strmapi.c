@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:18:14 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 19:37:49 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_stack a;
+	char			*answer;
+	unsigned int	i;
 
-
-	return (0);
+	answer = ft_calloc(sizeof(char), ft_strlen(s) + 1);
+	if (!answer)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		answer[i] = f(i, s[i]);
+		++i;
+	}
+	return (answer);
 }
-

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/17 14:45:37 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/19 19:30:56 by anseungwon       ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_stack a;
-
-
-	return (0);
+	if (lst == 0)
+		return ;
+	del(lst->content);
+	free(lst);
 }
-

@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:42:09 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/16 10:07:52 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	t_stack a;
+	unsigned int	i;
 
-
-	return (0);
+	i = 0;
+	while (*s != '\0')
+		f(i++, s++);
 }
-

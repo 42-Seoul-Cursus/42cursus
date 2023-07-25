@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:17 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/20 17:38:54 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-#include <stdio.h>
-
-int	main(int ac, char *av[])
+int	ft_atoi(const char *str)
 {
-	t_stack a;
+	long long	num;
+	int			min;
+	int			i;
 
-
-	return (0);
+	num = 0;
+	min = 1;
+	i = 0;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
+		++i;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			min *= -1;
+		++i;
+	}
+	while (('0' <= str[i] && str[i] <= '9'))
+	{
+		num = num * 10 + str[i] - '0';
+		++i;
+	}
+	return (min * num);
 }
-
