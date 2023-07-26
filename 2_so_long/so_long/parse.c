@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 16:30:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/23 23:11:33 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:17:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	parse_map(t_vars *vars)
 		buf = get_next_line(vars->fd);
 		if (buf == NULL)
 			break ;
+		vars->map = protected_realloc(vars->map, sizeof(char *) * (i + 2), i);
+		vars->map[i] = buf;
+		vars->map[i + 1] = NULL;
 		++i;
-		vars->map = protected_realloc(vars->map, sizeof(char *) * (i + 1), i);
-		vars->map[i - 1] = buf;
-		vars->map[i] = NULL;
 	}
 	vars->x = ft_strlen(vars->map[0]);
 	vars->y = i;
