@@ -6,60 +6,53 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/26 15:59:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/27 17:28:30 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-struct s_stack *deque(struct s_stack *st, enum e_rear rear)
+void	print_stack(t_stack *st)
 {
-	struct s_stack_node	*tmp;
+	t_stack_node	*tmp;
+	unsigned int	i;
 
-	if (st->size == 0)
-		return (NULL);
-	tmp = st->node[rear];
-	if (st->size == 1)
+	i = 0;
+	tmp = st->node[FRONT];
+	while (i < st->size)
 	{
-		st->node[rear] = NULL;
-		st->node[rear]->next = NULL;
-		st->node[rear]->prev = NULL;
+		ft_printf("%d ", tmp->value);
+		tmp = tmp->next;
+		++i;
 	}
-	else
-	{
-		st->node[rear] = st->node[rear]->next;
-		st->node[rear]->prev = NULL;
-		tmp->next = NULL;
-	}
-	st->size--;
-	return (tmp);
+	ft_printf("\n");
 }
 
-void	enque(struct s_stack *st, enum e_rear rear)
+void	parse_arg(t_push_swap *ps, int ac, char *av[])
 {
-	struct s_stack_node	*tmp;
+	int		i;
+	int		j;
+	char	**tmp;
 
-	tmp = st->node[rear];
-	if (st->size == 0)
+	i = 0;
+	while (++i < ac)
 	{
-		st->node[rear] = tmp;
-		st->node[rear]->next = NULL;
-		st->node[rear]->prev = NULL;
+		tmp = ft_split(av[i], ' ');
+		j = 0;
+		while (tmp[j])
+		{
+			push(&ps->a, ft_atoi(tmp[j]));
+			++j;
+			++ps->cnt;
+		}
 	}
-	else
-	{
-		st->node[rear] = tmp;
-		st->node[rear]->next = tmp;
-		st->node[rear]->prev = NULL;
-	}
-	st->size++;
 }
 
 int	main(int ac, char *av[])
 {
-	(void) ac;
-	(void) av;
-	ft_printf("Hello, world!\n");
+	t_push_swap	ps;
+
+	parse_arg(&ps, ac, av);
+	print_stack(&ps.a);
 	return (0);
 }
-

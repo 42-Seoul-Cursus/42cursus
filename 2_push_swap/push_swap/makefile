@@ -2,20 +2,20 @@
 
 NAME=push_swap
 CC=gcc
-INCLUDE=-I./Libft
+INCLUDE=-I./libft
 CFLAGS=-Wall -Werror -Wextra
 DEBUG=-g3 -fsanitize=memory
-LIBS= -L./Libft -lft -L./ft_printf -lftprintf
+LIBS= -L./libft -lft -L./ft_printf -lftprintf
 
 FT_FRINTF=./ft_printf/libftprintf.a
-LIBFT=./Libft/libft.a
-SRCS=main.c
-OBJS=main.o
+LIBFT=./libft/libft.a
+SRCS=main.c utils.c
+OBJS=main.o utils.o
 
 all: $(NAME)
 
 $(LIBFT):
-	$(MAKE) bonus -C ./Libft
+	$(MAKE) bonus -C ./libft
 
 $(FT_FRINTF):
 	$(MAKE) -C ./ft_printf
@@ -27,12 +27,12 @@ $(NAME): $(LIBFT) $(FT_FRINTF) $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./Libft
+	$(MAKE) clean -C ./libft
 	$(MAKE) clean -C ./ft_printf
 	rm -f $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C ./Libft
+	$(MAKE) fclean -C ./libft
 	$(MAKE) fclean -C ./ft_printf
 	rm -f $(NAME)
 
