@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/27 17:28:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/28 19:24:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ void	print_stack(t_stack *st)
 	ft_printf("\n");
 }
 
+t_stack_node	*new_node(int value)
+{
+	t_stack_node	*node;
+
+	node = (t_stack_node *)malloc(sizeof(t_stack_node));
+	node->value = value;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
+
 void	parse_arg(t_push_swap *ps, int ac, char *av[])
 {
 	int		i;
@@ -41,7 +52,7 @@ void	parse_arg(t_push_swap *ps, int ac, char *av[])
 		j = 0;
 		while (tmp[j])
 		{
-			push(&ps->a, ft_atoi(tmp[j]));
+			enque(&ps->a, REAR, new_node(ft_atoi(tmp[j])));
 			++j;
 			++ps->cnt;
 		}

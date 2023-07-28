@@ -6,50 +6,65 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:10:49 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/27 17:28:27 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/28 19:25:36 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// rear  : 가장 위
+// front : 가장 밑
 void	enque(struct s_stack *st, enum e_rear rear, struct s_stack_node *node)
 {
 	if (st->size == 0)
 	{
-		st->node[rear] = node;
-		st->node[rear]->next = NULL;
-		st->node[rear]->prev = NULL;
+		st->node[0] = node;
+		st->node[0]->next = NULL;
+		st->node[0]->prev = NULL;
+		st->node[1] = node;
+		st->node[1]->next = NULL;
+		st->node[1]->prev = NULL;
 	}
-	else
+	else if (rear == FRONT)
 	{
 		st->node[rear]->prev = node;
 		node->next = st->node[rear];
-		st->node[rear] = node;
+		node->prev = NULL;
 	}
-	st->size++;
+	else if (rear == REAR)
+	{
+		st->node[rear]->next = node;
+		node->prev = st->node[rear];
+		node->next = NULL;
+	}
+	st->node[rear] = node;
+	++st->size;
 }
 
-struct s_stack	*deque(struct s_stack *st, enum e_rear rear)
+t_stack	*deque(struct s_stack *st, enum e_rear rear)
 {
-	struct s_stack_node	*tmp;
+	struct s_stack_node	*node;
 
 	if (st->size == 0)
 		return (NULL);
-	tmp = st->node[rear];
+	node = st->node[rear];
 	if (st->size == 1)
 	{
-		st->node[rear] = NULL;
-		st->node[rear]->next = NULL;
-		st->node[rear]->prev = NULL;
+		st->node[0] = NULL;
+		st->node[1] = NULL;
 	}
-	else
+	else if (rear == FRONT)
 	{
-		st->node[rear] = st->node[rear]->next;
+		st->node[rear] = node->next;
 		st->node[rear]->prev = NULL;
-		tmp->next = NULL;
 	}
-	st->size--;
-	return (tmp);
+	else if (rear == REAR)
+	{
+		st->node[rear] = node->prev;
+		st->node[rear]->next = NULL;
+	}
+	--st->size;
+	return (node);
 }
 
 int	push(struct s_stack *from, struct s_stack *to)
