@@ -6,11 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/28 19:24:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/29 15:01:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	print_stack(t_stack *st)
 {
@@ -62,8 +63,20 @@ void	parse_arg(t_push_swap *ps, int ac, char *av[])
 int	main(int ac, char *av[])
 {
 	t_push_swap	ps;
+	int			flag;
+	char		*line = (char *)calloc(sizeof(char), 4);
 
 	parse_arg(&ps, ac, av);
-	print_stack(&ps.a);
+	while (1)
+	{
+		scanf("%s", line);
+		line[2] = '\n';
+		flag = command(&ps, line);
+		print_stack(&ps.a);
+		print_stack(&ps.b);
+		if (flag == 0)
+			break ;
+	}
+
 	return (0);
 }
