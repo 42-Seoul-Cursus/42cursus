@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/28 19:25:44 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/29 02:59:24 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ enum					e_rear
 int						push(struct s_stack *from, struct s_stack *to);
 int						swap(t_stack *st);
 int						rotate(t_stack *st, enum e_rear rear);
-t_stack					*deque(struct s_stack *st, enum e_rear rear);
+t_stack_node			*deque(struct s_stack *st, enum e_rear rear);
 void					enque(struct s_stack *st, enum e_rear rear,
 							struct s_stack_node *node);
 void					print_stack(t_stack *st);

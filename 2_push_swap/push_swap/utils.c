@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:10:49 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/28 19:25:36 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/29 02:59:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	enque(struct s_stack *st, enum e_rear rear, struct s_stack_node *node)
 	++st->size;
 }
 
-t_stack	*deque(struct s_stack *st, enum e_rear rear)
+t_stack_node	*deque(struct s_stack *st, enum e_rear rear)
 {
 	struct s_stack_node	*node;
 
