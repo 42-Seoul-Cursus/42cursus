@@ -6,14 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 17:10:49 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/29 15:00:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/29 16:26:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// rear  : 가장 위
-// front : 가장 밑
 void	enque(struct s_stack *st, enum e_rear rear, struct s_stack_node *node)
 {
 	if (st->size == 0)
@@ -67,6 +65,7 @@ t_stack_node	*deque(struct s_stack *st, enum e_rear rear)
 	return (node);
 }
 
+// from에서 빼서 to로 넣는다.
 int	push(struct s_stack *from, struct s_stack *to)
 {
 	struct s_stack_node	*node;
@@ -78,6 +77,7 @@ int	push(struct s_stack *from, struct s_stack *to)
 	return (1);
 }
 
+// 한 스택 내 두 node의 value를 바꾼다.
 int	swap(t_stack *st)
 {
 	struct s_stack_node	*node[2];
@@ -91,6 +91,7 @@ int	swap(t_stack *st)
 	return (1);
 }
 
+// 스택을 회전시킨다.
 int	rotate(t_stack *st, enum e_rear rear)
 {
 	struct s_stack_node	*node;

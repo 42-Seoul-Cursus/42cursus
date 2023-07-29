@@ -6,24 +6,54 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/29 15:01:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/07/29 16:06:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	print_stack(t_stack *st)
+void	init_ps(t_push_swap *ps)
 {
-	t_stack_node	*tmp;
+	ps->a.size = 0;
+	ps->a.node[FRONT] = NULL;
+	ps->a.node[REAR] = NULL;
+	ps->b.size = 0;
+	ps->b.node[FRONT] = NULL;
+	ps->b.node[REAR] = NULL;
+	ps->cnt = 0;
+}
+
+void	print_stack(t_push_swap *ps)
+
+{
+	t_stack *a = &(ps->a);
+	t_stack *b = &(ps->b);
+	t_stack_node	*a_tmp;
+	t_stack_node	*b_tmp;
 	unsigned int	i;
 
 	i = 0;
-	tmp = st->node[FRONT];
-	while (i < st->size)
+	a_tmp = a->node[FRONT];
+	b_tmp = b->node[FRONT];
+	while (i < a->size || i < b->size)
 	{
-		ft_printf("%d ", tmp->value);
-		tmp = tmp->next;
+		if (i < a->size && a_tmp != NULL)
+			ft_printf("%d\t", a_tmp->value);
+		else
+			ft_printf("\t");
+		if (i < b->size && b_tmp != NULL)
+			ft_printf("%d\n", b_tmp->value);
+		else
+			ft_printf("\n");
+		if (a_tmp == NULL || a_tmp->next == NULL)
+			;
+		else
+			a_tmp = a_tmp->next;
+		if (b_tmp == NULL || b_tmp->next == NULL)
+			;
+		else
+			b_tmp = b_tmp->next;
 		++i;
 	}
 	ft_printf("\n");
@@ -66,14 +96,14 @@ int	main(int ac, char *av[])
 	int			flag;
 	char		*line = (char *)calloc(sizeof(char), 4);
 
+	init_ps(&ps);
 	parse_arg(&ps, ac, av);
 	while (1)
 	{
 		scanf("%s", line);
 		line[2] = '\n';
 		flag = command(&ps, line);
-		print_stack(&ps.a);
-		print_stack(&ps.b);
+		print_stack(&ps);
 		if (flag == 0)
 			break ;
 	}

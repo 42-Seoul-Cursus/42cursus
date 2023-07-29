@@ -4,7 +4,7 @@ NAME=push_swap
 CC=gcc
 INCLUDE=-I./libft
 CFLAGS=-Wall -Werror -Wextra
-DEBUG=-g3 -fsanitize=memory
+DEBUG=-g3 -fsanitize=address
 LIBS= -L./libft -lft -L./ft_printf -lftprintf
 
 FT_FRINTF=./ft_printf/libftprintf.a
