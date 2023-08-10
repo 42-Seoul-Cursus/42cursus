@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/10 23:45:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 02:17:49 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ enum					e_rear
 
 int						command(t_push_swap *ps, char *cmd);
 
-// utils.c
-
-t_deque_node			*new_node(int value);
-void					parse_arg(t_push_swap *ps, int ac, char *av[]);
-
 // deque.c
 
 void					enque(t_deque *st, enum e_rear rear,
@@ -62,14 +57,27 @@ int						push(t_deque *from, t_deque *to);
 int						swap(t_deque *st);
 int						rotate(t_deque *st, enum e_rear rear);
 
-// test.c
+// parse.c
+
+void					parse_arg(t_push_swap *ps, int ac, char *av[]);
+t_deque_node			*new_node(int value);
+void					set_idx(t_push_swap *ps);
+void					set_idx_in_deque(int *arr, t_push_swap *ps);
+void					sort_arr(int *arr, t_push_swap *ps);
+
+// utils.c
 
 void					init_ps(t_push_swap *ps);
+
+// checker.c
+
+int						command(t_push_swap *ps, char *cmd);
+int						is_sorted(t_push_swap *ps);
+void					checker(t_push_swap *ps);
+
+// test.c
+
 void					print_deque(t_push_swap *ps);
 void					test(t_push_swap *ps);
-
-void					sort_arr(int *arr, t_push_swap *ps);
-void					set_idx(t_push_swap *ps);
-void					arr_to_deque(int *arr, t_push_swap *ps);
 
 #endif

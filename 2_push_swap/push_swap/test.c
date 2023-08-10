@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/10 22:18:43 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 02:19:48 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	print_deque(t_push_swap *ps)
 
 {
-	t_deque			*a = &(ps->a);
-	t_deque			*b = &(ps->b);
-	t_deque_node	*a_tmp = a->node[REAR];
-	t_deque_node	*b_tmp = b->node[REAR];
+	t_deque			*a;
+	t_deque			*b;
+	t_deque_node	*a_tmp;
+	t_deque_node	*b_tmp;
 	unsigned int	i;
 
+	a = &(ps->a);
+	b = &(ps->b);
+	a_tmp = a->node[FRONT];
+	b_tmp = b->node[REAR];
 	i = 0;
 	while (i < a->size || i < b->size)
 	{
@@ -42,8 +46,7 @@ void	print_deque(t_push_swap *ps)
 			b_tmp = b_tmp->prev;
 		++i;
 	}
-	printf("\x1b[37ma\tb");
-	printf("\x1b[0m\n");
+	printf("\x1b[37ma\tb\x1b[0m\n");
 }
 
 void	test(t_push_swap *ps)

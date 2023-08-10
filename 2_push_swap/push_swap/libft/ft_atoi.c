@@ -6,16 +6,16 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/10 23:06:18 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 02:16:53 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static long long make_num(const char *str, int min)
+static long long	make_num(const char *str, int min)
 {
-	long long num;
-	int i;
+	long long	num;
+	int			i;
 
 	num = 0;
 	i = 0;

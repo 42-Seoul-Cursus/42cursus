@@ -6,34 +6,69 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:40:04 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/29 16:10:43 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 02:13:55 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "get_next_line/get_next_line.h"
 #include "push_swap.h"
 
-int	main(int ac, char *av[])
+int	command(t_push_swap *ps, char *cmd)
 {
-	t_push_swap	ps;
-	int			flag;
-	char		*line[5];
+	if (ft_strncmp(cmd, "sa\n", 4) == 0)
+		return (swap(&(ps->a)));
+	else if (ft_strncmp(cmd, "sb\n", 4) == 0)
+		return (swap(&(ps->b)));
+	else if (ft_strncmp(cmd, "ss\n", 4) == 0)
+		return (swap(&(ps->a)) && swap(&(ps->b)));
+	else if (ft_strncmp(cmd, "pa\n", 4) == 0)
+		return (push(&(ps->b), &(ps->a)));
+	else if (ft_strncmp(cmd, "pb\n", 4) == 0)
+		return (push(&(ps->a), &(ps->b)));
+	else if (ft_strncmp(cmd, "ra\n", 4) == 0)
+		return (rotate(&(ps->a), REAR));
+	else if (ft_strncmp(cmd, "rb\n", 4) == 0)
+		return (rotate(&(ps->b), REAR));
+	else if (ft_strncmp(cmd, "rr\n", 4) == 0)
+		return (rotate(&(ps->a), REAR) && rotate(&(ps->b), REAR));
+	else if (ft_strncmp(cmd, "rra\n", 5) == 0)
+		return (rotate(&(ps->a), FRONT));
+	else if (ft_strncmp(cmd, "rrb\n", 5) == 0)
+		return (rotate(&(ps->b), FRONT));
+	else if (ft_strncmp(cmd, "rrr\n", 5) == 0)
+		return (rotate(&(ps->a), FRONT) && rotate(&(ps->b), FRONT));
+	else
+		ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
 
-	init_ps(&ps);
-	parse_arg(&ps, ac, av);
-	while (1)
+int	is_sorted(t_push_swap *ps)
+{
+	t_deque_node	*cur;
+	t_deque_node	*tmp;
+
+	cur = ps->a.node[FRONT];
+	while (cur->next != NULL)
 	{
-		scanf("%s", line);
-		if (ft_strlen(line) == 3)
-			line[2] = '\n';
-		else if (ft_strlen(line) == 4)
-			line[3] = '\n';
-		flag = command(&ps, line);
-		print_stack(&ps.a);
-		print_stack(&ps.b);
-		if (flag == 0)
-			break ;
+		tmp = cur->next;
+		if (cur->value > tmp->value)
+			return (0);
+		cur = tmp;
 	}
-	return (0);
+	return (1);
+}
+
+void	checker(t_push_swap *ps)
+{
+	char	*cmd;
+
+	cmd = get_next_line(0);
+	while (cmd)
+	{
+		command(ps, cmd);
+		cmd = get_next_line(0);
+	}
+	if (is_sorted(ps) && ps->b.size == 0)
+		ft_putstr_fd(1, "OK\n");
+	else
+		ft_putstr_fd(1, "KO\n");
 }
