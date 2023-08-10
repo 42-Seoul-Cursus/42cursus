@@ -9,8 +9,8 @@ LIBS= -L./libft -lft -L./ft_printf -lftprintf
 
 FT_FRINTF=./ft_printf/libftprintf.a
 LIBFT=./libft/libft.a
-SRCS=main.c utils.c
-OBJS=main.o utils.o
+SRCS=main.c deque.c utils.c test.c
+OBJS=main.o deque.o utils.o test.o
 
 all: $(NAME)
 

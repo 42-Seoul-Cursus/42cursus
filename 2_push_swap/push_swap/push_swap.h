@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/29 15:52:48 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/10 19:39:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,28 @@
 # define PUSH_SWAP_H
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
+# include <stdio.h>
 # include <stdlib.h>
 
-typedef struct s_stack_node
+typedef struct s_deque_node
 {
 	int					value;
 	int					idx;
-	struct s_stack_node	*next;
-	struct s_stack_node	*prev;
-}						t_stack_node;
+	struct s_deque_node	*next;
+	struct s_deque_node	*prev;
+}						t_deque_node;
 
-typedef struct s_stack
+typedef struct s_deque
 {
 	unsigned int		size;
-	struct s_stack_node	*node[2];
-}						t_stack;
+	struct s_deque_node	*node[2];
+}						t_deque;
 
 typedef struct s_push_swap
 {
-	unsigned int		cnt;
-	struct s_stack		a;
-	struct s_stack		b;
+	unsigned int		sum;
+	struct s_deque		a;
+	struct s_deque		b;
 }						t_push_swap;
 
 enum					e_rear
@@ -43,16 +44,27 @@ enum					e_rear
 	REAR = 1
 };
 
-int						push(struct s_stack *from, struct s_stack *to);
-int						swap(t_stack *st);
-int						rotate(t_stack *st, enum e_rear rear);
-t_stack_node			*deque(struct s_stack *st, enum e_rear rear);
-void					enque(struct s_stack *st, enum e_rear rear,
-							struct s_stack_node *node);
-void					print_stack(t_push_swap *ps);
-void					parse_arg(t_push_swap *ps, int ac, char *av[]);
-t_stack_node			*new_node(int value);
-int						command(t_push_swap *ps, char *cmd);
+// main.c
+
 void					init_ps(t_push_swap *ps);
+int						command(t_push_swap *ps, char *cmd);
+
+// utils.c
+
+t_deque_node			*new_node(int value);
+void					parse_arg(t_push_swap *ps, int ac, char *av[]);
+
+// deque.c
+
+void					enque(t_deque *st, enum e_rear rear,
+							t_deque_node *node);
+t_deque_node			*deque(t_deque *st, enum e_rear rear);
+int						push(t_deque *from, t_deque *to);
+int						swap(t_deque *st);
+int						rotate(t_deque *st, enum e_rear rear);
+
+// test.c
+
+void					print_deque(t_push_swap *ps);
 
 #endif

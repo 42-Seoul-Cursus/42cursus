@@ -6,12 +6,32 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/29 16:06:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/10 19:17:55 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
+int	main(int ac, char *av[])
+{
+	t_push_swap	ps;
+	int			flag;
+	char		line[5] = { 0 };
+
+	init_ps(&ps);
+	parse_arg(&ps, ac, av);
+	while (1)
+	{
+		print_deque(&ps);
+		scanf("%s", line);
+		line[ft_strlen(line)] = '\n';
+		flag = command(&ps, line);
+		if (flag == 0)
+			break ;
+		ft_bzero(line, 4);
+	}
+	return (0);
+}
 
 void	init_ps(t_push_swap *ps)
 {
@@ -21,92 +41,34 @@ void	init_ps(t_push_swap *ps)
 	ps->b.size = 0;
 	ps->b.node[FRONT] = NULL;
 	ps->b.node[REAR] = NULL;
-	ps->cnt = 0;
+	ps->sum = 0;
 }
 
-void	print_stack(t_push_swap *ps)
-
+int command(t_push_swap *ps, char *cmd)
 {
-	t_stack *a = &(ps->a);
-	t_stack *b = &(ps->b);
-	t_stack_node	*a_tmp;
-	t_stack_node	*b_tmp;
-	unsigned int	i;
-
-	i = 0;
-	a_tmp = a->node[FRONT];
-	b_tmp = b->node[FRONT];
-	while (i < a->size || i < b->size)
-	{
-		if (i < a->size && a_tmp != NULL)
-			ft_printf("%d\t", a_tmp->value);
-		else
-			ft_printf("\t");
-		if (i < b->size && b_tmp != NULL)
-			ft_printf("%d\n", b_tmp->value);
-		else
-			ft_printf("\n");
-		if (a_tmp == NULL || a_tmp->next == NULL)
-			;
-		else
-			a_tmp = a_tmp->next;
-		if (b_tmp == NULL || b_tmp->next == NULL)
-			;
-		else
-			b_tmp = b_tmp->next;
-		++i;
-	}
-	ft_printf("\n");
-}
-
-t_stack_node	*new_node(int value)
-{
-	t_stack_node	*node;
-
-	node = (t_stack_node *)malloc(sizeof(t_stack_node));
-	node->value = value;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-void	parse_arg(t_push_swap *ps, int ac, char *av[])
-{
-	int		i;
-	int		j;
-	char	**tmp;
-
-	i = 0;
-	while (++i < ac)
-	{
-		tmp = ft_split(av[i], ' ');
-		j = 0;
-		while (tmp[j])
-		{
-			enque(&ps->a, REAR, new_node(ft_atoi(tmp[j])));
-			++j;
-			++ps->cnt;
-		}
-	}
-}
-
-int	main(int ac, char *av[])
-{
-	t_push_swap	ps;
-	int			flag;
-	char		*line = (char *)calloc(sizeof(char), 4);
-
-	init_ps(&ps);
-	parse_arg(&ps, ac, av);
-	while (1)
-	{
-		scanf("%s", line);
-		line[2] = '\n';
-		flag = command(&ps, line);
-		print_stack(&ps);
-		if (flag == 0)
-			break ;
-	}
-
-	return (0);
+	if (ft_strncmp(cmd, "sa\n", 4) == 0)
+		return swap(&(ps->a));
+	else if (ft_strncmp(cmd, "sb\n", 4) == 0)
+		return swap(&(ps->b));
+	else if (ft_strncmp(cmd, "ss\n", 4) == 0)
+		return swap(&(ps->a)) && swap(&(ps->b));
+	else if (ft_strncmp(cmd, "pa\n", 4) == 0)
+		return push(&(ps->b), &(ps->a));
+	else if (ft_strncmp(cmd, "pb\n", 4) == 0)
+		return push(&(ps->a), &(ps->b));
+	else if (ft_strncmp(cmd, "ra\n", 4) == 0)
+		return rotate(&(ps->a), REAR);
+	else if (ft_strncmp(cmd, "rb\n", 4) == 0)
+		return rotate(&(ps->b), REAR);
+	else if (ft_strncmp(cmd, "rr\n", 4) == 0)
+		return rotate(&(ps->a), REAR) && rotate(&(ps->b), REAR);
+	else if (ft_strncmp(cmd, "rra\n", 5) == 0)
+		return rotate(&(ps->a), FRONT);
+	else if (ft_strncmp(cmd, "rrb\n", 5) == 0)
+		return rotate(&(ps->b), FRONT);
+	else if (ft_strncmp(cmd, "rrr\n", 5) == 0)
+		return rotate(&(ps->a), FRONT) && rotate(&(ps->b), FRONT);
+	else
+		ft_putstr_fd("Error\n", 2); // 명령어를 찾을 수 없는 경우
+	exit(EXIT_FAILURE);
 }
