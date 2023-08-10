@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/03/20 17:36:41 by seunan           ###   ########seoul.kr  */
+/*   Updated: 2023/08/10 23:12:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	*ft_calloc(size_t count, size_t size)
 
 	mem = malloc(size * count);
 	if (!mem)
-		return (0);
+	{
+		ft_putstr_fd("Error : malloc\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	ft_bzero(mem, size * count);
 	return ((void *) mem);
 }

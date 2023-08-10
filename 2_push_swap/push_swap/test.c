@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/10 19:36:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/10 22:18:43 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_deque(t_push_swap *ps)
 		else
 			printf("\t");
 		if (i < b->size && b_tmp != NULL)
-			printf("\x1b[32m%d\n", b_tmp->value);
+			printf("\x1b[36m%d\n", b_tmp->value);
 		else
 			printf("\n");
 		if (a_tmp == NULL || a_tmp->prev == NULL)
@@ -42,5 +42,23 @@ void	print_deque(t_push_swap *ps)
 			b_tmp = b_tmp->prev;
 		++i;
 	}
-	printf("\x1b[30ma\tb\n");
+	printf("\x1b[37ma\tb");
+	printf("\x1b[0m\n");
+}
+
+void	test(t_push_swap *ps)
+{
+	int		flag;
+	char	line[5];
+
+	while (1)
+	{
+		ft_bzero(line, 4);
+		print_deque(ps);
+		scanf("%s", line);
+		line[ft_strlen(line)] = '\n';
+		flag = command(ps, line);
+		if (flag == 0)
+			break ;
+	}
 }

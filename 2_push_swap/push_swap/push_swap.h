@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/10 19:39:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/10 23:45:53 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ enum					e_rear
 
 // main.c
 
-void					init_ps(t_push_swap *ps);
 int						command(t_push_swap *ps, char *cmd);
 
 // utils.c
@@ -65,6 +64,12 @@ int						rotate(t_deque *st, enum e_rear rear);
 
 // test.c
 
+void					init_ps(t_push_swap *ps);
 void					print_deque(t_push_swap *ps);
+void					test(t_push_swap *ps);
+
+void					sort_arr(int *arr, t_push_swap *ps);
+void					set_idx(t_push_swap *ps);
+void					arr_to_deque(int *arr, t_push_swap *ps);
 
 #endif
