@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 03:03:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 16:51:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ enum					e_rear
 // main.c
 
 void					quick_sort(t_push_swap *ps);
+void					quick_sort_l(t_push_swap *ps);
 
 // deque.c
 

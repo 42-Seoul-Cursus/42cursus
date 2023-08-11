@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 03:09:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 16:19:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parse_arg(t_push_swap *ps, int ac, char *av[])
 	i = 1;
 	while (i < ac)
 	{
-		enque(&ps->a, REAR, new_node(ft_atoi(av[i])));
+		enque(&ps->a, FRONT, new_node(ft_atoi(av[i])));
 		++i;
 		++ps->sum;
 	}
