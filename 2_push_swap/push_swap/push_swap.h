@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 21:02:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 22:35:25 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct s_deque
 typedef struct s_push_swap
 {
 	int					sum;
-	int					pivot_s;
-	int					pivot_m;
 	struct s_deque		a;
 	struct s_deque		b;
 }						t_push_swap;
@@ -48,7 +46,7 @@ enum					e_rear
 
 // main.c
 
-void					quick_div_l(t_push_swap *ps, int base);
+void					partitioning(t_push_swap *ps);
 
 // deque.c
 
@@ -70,6 +68,7 @@ void					sort_arr(int *arr, t_push_swap *ps);
 // utils.c
 
 void					init_ps(t_push_swap *ps);
+void					sort_3(t_push_swap *ps);
 
 // checker.c
 

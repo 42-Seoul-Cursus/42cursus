@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 21:19:43 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 22:51:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,38 @@ int	main(int ac, char *av[])
 	init_ps(&ps);
 	parse_arg(&ps, ac, av);
 	// test(&ps);
-	quick_div_l(&ps, 0);
+	partitioning(&ps);
 	return (0);
 }
 
-void	sort_3(t_push_swap *ps)
+void	partitioning(t_push_swap *ps)
 {
-	if (ps->a.node[REAR]->idx > ps->a.node[REAR]->prev->idx)
-		sa(ps);
-	if (ps->a.node[REAR]->prev->idx > ps->a.node[REAR]->prev->prev->idx)
-	{
-		rra(ps);
-		if (ps->a.node[REAR]->idx > ps->a.node[REAR]->prev->idx)
-			sa(ps);
-	}
-	if (ps->a.node[REAR]->idx > ps->a.node[REAR]->prev->idx)
-		sa(ps);
-}
+	int	pivot[2];
 
-void	quick_div_l(t_push_swap *ps, int base)
-{
-	ps->pivot_s = ps->a.size / 3;           // 166
-	ps->pivot_m = ps->a.size - ps->pivot_s; // 334
-	if (ps->a.size == 3)
+	if (ps->a.size <= 3)
 	{
-		sort_3(ps);
-	}
-	else if (ps->a.size == 2)
-	{
-		if (ps->a.node[REAR]->idx > ps->a.node[REAR]->prev->idx)
+		if (ps->a.size == 3)
+			sort_3(ps);
+		else if (ps->a.size == 2 && ps->a.node[FRONT]->idx < ps->a.node[REAR]->idx)
 			sa(ps);
+		exit(EXIT_SUCCESS);
 	}
-	while (ps->a.size > ps->pivot_s + (ps->a.size % 3 == 2))
+	pivot[0] = ps->a.size / 3;  // 3
+	pivot[1] = ps->a.size - pivot[0]; // 6
+	while (ps->a.size > pivot[0])
 	{
-		if (ps->a.node[REAR]->idx - base >= ps->pivot_m && ps->pivot_m != ps->sum)     // L 334 ~ 500 (167개)
+		if (ps->a.node[REAR]->idx > pivot[1])       // L 7 ~ 9
 			ra(ps);
-		else if (ps->a.node[REAR]->idx - base < ps->pivot_m) // M 167 ~ 333 (167개)
+		else if (ps->a.node[REAR]->idx <= pivot[1]) // M 4 ~ 6
 		{
 			pb(ps);
-			if (ps->b.node[REAR]->idx - base <= ps->pivot_s) // S 1 ~ 166 (166개)
+			if (ps->b.node[REAR]->idx <= pivot[0])  // S 1 ~ 3
 				rb(ps);
 		}
 	}
-	if (ps->a.size > 3)
-		quick_div_l(ps, ps->pivot_m + base);
+	while (ps->a.size)
+		pb(ps);
 }
 
-// void	quick_join_l(t_push_swap *ps)
-// {
-// 	return ;
-// }
+// https://80000coding.oopy.io/71fa0b62-6461-463d-b1e1-5eaa2b3a3ca9
+// 그리디 알고리즘으로 풀기
