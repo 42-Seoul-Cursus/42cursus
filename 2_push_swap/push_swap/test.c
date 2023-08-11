@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 03:12:11 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 18:12:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_deque(t_push_swap *ps)
 	t_deque			*b;
 	t_deque_node	*a_tmp;
 	t_deque_node	*b_tmp;
-	unsigned int	i;
+	int				i;
 
 	a = &(ps->a);
 	b = &(ps->b);

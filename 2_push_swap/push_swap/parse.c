@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 16:19:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 18:28:57 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	set_idx(t_push_swap *ps)
 {
 	int				*arr;
 	t_deque_node	*tmp;
-	unsigned int	i;
+	int				i;
 
 	arr = ft_calloc(ps->sum, sizeof(int));
 	tmp = ps->a.node[FRONT];
@@ -59,7 +59,7 @@ void	set_idx(t_push_swap *ps)
 
 void	set_idx_in_deque(int *arr, t_push_swap *ps)
 {
-	unsigned int	i;
+	int				i;
 	t_deque_node	*tmp;
 
 	tmp = ps->a.node[FRONT];
@@ -68,7 +68,7 @@ void	set_idx_in_deque(int *arr, t_push_swap *ps)
 	{
 		if (tmp->value == arr[i])
 		{
-			tmp->idx = i;
+			tmp->idx = i + 1;
 			i = 0;
 			tmp = tmp->next;
 		}
@@ -79,9 +79,9 @@ void	set_idx_in_deque(int *arr, t_push_swap *ps)
 
 void	sort_arr(int *arr, t_push_swap *ps)
 {
-	unsigned int	i;
-	unsigned int	j;
-	int				tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
 	while (i < ps->sum)
