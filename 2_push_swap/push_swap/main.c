@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 14:29:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 15:24:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int ac, char *av[])
 
 	init_ps(&ps);
 	parse_arg(&ps, ac, av);
-	test(&ps);
-	// quick_sort(&ps);
+	// test(&ps);
+	quick_sort(&ps);
 
 	return (0);
 }
@@ -29,24 +29,20 @@ void	quick_sort(t_push_swap *ps)
 	unsigned int pivot_s;
 	unsigned int pivot_m;
 
-	pivot_m = ps->a.size / 3;
-	pivot_s = ps->a.size / 3 * 2;
-	while (ps->a.size > pivot_m)
-	{
-		if (ps->a.node[FRONT]->idx < pivot_s)
-			pb(ps);
-		else
-			ra(ps);
-	}
+	pivot_s = ps->a.size / 3;
+	pivot_m = ps->a.size / 3 * 2;
 	while (ps->a.size > pivot_s)
 	{
-		if (ps->a.node[FRONT]->idx < pivot_s)
+		if (ps->a.node[REAR]->idx >= pivot_m) // L
+		{
+			ra(ps);
+		}
+		else // M or S
 		{
 			pb(ps);
-			rb(ps);
+			if (ps->b.node[REAR]->idx < pivot_s)
+				rb(ps);
 		}
-		else
-			ra(ps);
 	}
 }
 
