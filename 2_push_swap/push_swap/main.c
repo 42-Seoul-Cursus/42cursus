@@ -6,11 +6,18 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 22:51:08 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 23:21:28 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+// void	leak(void)
+// {
+// 	system("leaks push_swap > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
+// 	atexit(leak);
+// }
 
 int	main(int ac, char *av[])
 {
@@ -20,36 +27,106 @@ int	main(int ac, char *av[])
 	parse_arg(&ps, ac, av);
 	// test(&ps);
 	partitioning(&ps);
+	greedy_l(&ps);
+	greedy_m(&ps);
+	greedy_s(&ps);
 	return (0);
 }
 
-void	partitioning(t_push_swap *ps)
+void	greedy_l(t_push_swap *ps)
 {
-	int	pivot[2];
+	int	bottom;
+	int	cnt;
 
-	if (ps->a.size <= 3)
+	bottom = ps->sum;
+	cnt = 0;
+	while (ps->b.size > ps->pivot[1])
 	{
-		if (ps->a.size == 3)
-			sort_3(ps);
-		else if (ps->a.size == 2 && ps->a.node[FRONT]->idx < ps->a.node[REAR]->idx)
-			sa(ps);
-		exit(EXIT_SUCCESS);
-	}
-	pivot[0] = ps->a.size / 3;  // 3
-	pivot[1] = ps->a.size - pivot[0]; // 6
-	while (ps->a.size > pivot[0])
-	{
-		if (ps->a.node[REAR]->idx > pivot[1])       // L 7 ~ 9
-			ra(ps);
-		else if (ps->a.node[REAR]->idx <= pivot[1]) // M 4 ~ 6
+		if (ps->b.node[REAR]->idx == bottom)
 		{
-			pb(ps);
-			if (ps->b.node[REAR]->idx <= pivot[0])  // S 1 ~ 3
-				rb(ps);
+			--bottom;
+			pa(ps);
+			while (cnt > 0)
+			{
+				--cnt;
+				rrb(ps);
+				if (ps->b.node[REAR]->idx == bottom)
+				{
+					--bottom;
+					pa(ps);
+				}
+			}
+		}
+		else
+		{
+			rb(ps);
+			++cnt;
 		}
 	}
-	while (ps->a.size)
-		pb(ps);
+}
+
+void	greedy_m(t_push_swap *ps)
+{
+	int	bottom;
+	int	cnt;
+
+	bottom = ps->pivot[1];
+	cnt = 0;
+	while (ps->b.size > ps->pivot[0])
+	{
+		if (ps->b.node[REAR]->idx == bottom)
+		{
+			--bottom;
+			pa(ps);
+			while (cnt > 0)
+			{
+				--cnt;
+				rrb(ps);
+				if (ps->b.node[REAR]->idx == bottom)
+				{
+					--bottom;
+					pa(ps);
+				}
+			}
+		}
+		else
+		{
+			rb(ps);
+			++cnt;
+		}
+	}
+}
+
+void	greedy_s(t_push_swap *ps)
+{
+	int	bottom;
+	int	cnt;
+
+	bottom = ps->pivot[0];
+	cnt = 0;
+	while (ps->b.size > 0)
+	{
+		if (ps->b.node[REAR]->idx == bottom)
+		{
+			--bottom;
+			pa(ps);
+			while (cnt > 0)
+			{
+				--cnt;
+				rrb(ps);
+				if (ps->b.node[REAR]->idx == bottom)
+				{
+					--bottom;
+					pa(ps);
+				}
+			}
+		}
+		else
+		{
+			rb(ps);
+			++cnt;
+		}
+	}
 }
 
 // https://80000coding.oopy.io/71fa0b62-6461-463d-b1e1-5eaa2b3a3ca9
