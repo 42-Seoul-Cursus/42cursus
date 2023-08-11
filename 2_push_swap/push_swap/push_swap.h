@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 02:17:49 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 03:03:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct s_deque_node
 {
 	int					value;
-	int					idx;
+	unsigned int		idx;
 	struct s_deque_node	*next;
 	struct s_deque_node	*prev;
 }						t_deque_node;
@@ -46,7 +46,7 @@ enum					e_rear
 
 // main.c
 
-int						command(t_push_swap *ps, char *cmd);
+void					quick_sort(t_push_swap *ps);
 
 // deque.c
 
@@ -79,5 +79,19 @@ void					checker(t_push_swap *ps);
 
 void					print_deque(t_push_swap *ps);
 void					test(t_push_swap *ps);
+
+// command.c
+
+void					sa(t_push_swap *ps);
+void					sb(t_push_swap *ps);
+void					ss(t_push_swap *ps);
+void					pa(t_push_swap *ps);
+void					pb(t_push_swap *ps);
+void					ra(t_push_swap *ps);
+void					rb(t_push_swap *ps);
+void					rr(t_push_swap *ps);
+void					rra(t_push_swap *ps);
+void					rrb(t_push_swap *ps);
+void					rrr(t_push_swap *ps);
 
 #endif

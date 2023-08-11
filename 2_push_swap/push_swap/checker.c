@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:40:04 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 02:13:55 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 03:04:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ int	is_sorted(t_push_swap *ps)
 	return (1);
 }
 
-void	checker(t_push_swap *ps)
-{
-	char	*cmd;
+// void	checker(t_push_swap *ps)
+// {
+// 	char	*cmd;
 
-	cmd = get_next_line(0);
-	while (cmd)
-	{
-		command(ps, cmd);
-		cmd = get_next_line(0);
-	}
-	if (is_sorted(ps) && ps->b.size == 0)
-		ft_putstr_fd(1, "OK\n");
-	else
-		ft_putstr_fd(1, "KO\n");
-}
+// 	cmd = get_next_line(0);
+// 	while (cmd)
+// 	{
+// 		command(ps, cmd);
+// 		cmd = get_next_line(0);
+// 	}
+// 	if (is_sorted(ps) && ps->b.size == 0)
+// 		ft_putstr_fd("OK\n", 1);
+// 	else
+// 		ft_putstr_fd("KO\n", 1);
+// }

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 02:10:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 03:09:40 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_deque_node	*new_node(int value)
 {
 	t_deque_node	*node;
 
-	node = (t_deque_node *)malloc(sizeof(t_deque_node));
+	node = (t_deque_node *)calloc(1, sizeof(t_deque_node));
 	node->value = value;
 	node->next = NULL;
 	node->prev = NULL;

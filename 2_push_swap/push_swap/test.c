@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 02:19:48 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/11 03:12:11 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_deque(t_push_swap *ps)
 
 	a = &(ps->a);
 	b = &(ps->b);
-	a_tmp = a->node[FRONT];
+	a_tmp = a->node[REAR];
 	b_tmp = b->node[REAR];
 	i = 0;
 	while (i < a->size || i < b->size)
