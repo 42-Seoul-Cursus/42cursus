@@ -9,8 +9,8 @@ LIBS= -L./libft -lft -L./ft_printf -lftprintf
 
 FT_FRINTF=./ft_printf/libftprintf.a
 LIBFT=./libft/libft.a
-SRCS=main.c deque.c parse.c utils.c cmd.c test.c checker.c
-OBJS=main.o deque.o parse.o utils.o cmd.o test.o checker.o
+SRCS=${wildcard *.c}
+OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
 

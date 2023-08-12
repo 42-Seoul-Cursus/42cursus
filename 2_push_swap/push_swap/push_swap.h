@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/12 17:39:42 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/12 20:23:32 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ enum					e_rear
 
 void					partitioning(t_push_swap *ps, int base);
 void					greedy(t_push_swap *ps);
-void					rotate_until(t_push_swap *ps, t_deque *q,
-							enum e_rear rear, int idx);
 
 // deque.c
 
