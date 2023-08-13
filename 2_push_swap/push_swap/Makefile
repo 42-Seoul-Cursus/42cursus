@@ -5,20 +5,19 @@ CC=gcc
 INCLUDE=-I./libft
 CFLAGS=-Wall -Werror -Wextra
 DEBUG=-g3 -fsanitize=address
-LIBS= -L./libft -lft -L./ft_printf -lftprintf
+LIBS= -L./libft -lft
 
-FT_FRINTF=./ft_printf/libftprintf.a
 LIBFT=./libft/libft.a
 SRCS=${wildcard *.c}
 OBJS=$(SRCS:.c=.o)
+
+CHECKER=checker
+CHECKER_SRCS=${wildcard checker/*.c} cmd.c deque.c
 
 all: $(NAME)
 
 $(LIBFT):
 	$(MAKE) bonus -C ./libft
-
-$(FT_FRINTF):
-	$(MAKE) -C ./ft_printf
 
 $(NAME): $(LIBFT) $(FT_FRINTF) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
@@ -28,12 +27,10 @@ $(NAME): $(LIBFT) $(FT_FRINTF) $(OBJS)
 
 clean:
 	$(MAKE) clean -C ./libft
-	$(MAKE) clean -C ./ft_printf
 	rm -f $(OBJS)
 
 fclean: clean
 	$(MAKE) fclean -C ./libft
-	$(MAKE) fclean -C ./ft_printf
 	rm -f $(NAME)
 
 re:
@@ -44,4 +41,7 @@ debug:
 	$(MAKE) fclean
 	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 
-.PHONY: all clean fclean re debug
+checker:
+	$(CC) $(CFLAGS) $(CHECKER_SRCS) -o $(CHECKER) $(LIBS)
+
+.PHONY: all clean fclean re debug checker
