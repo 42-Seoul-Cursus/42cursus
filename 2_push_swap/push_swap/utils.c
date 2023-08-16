@@ -6,11 +6,39 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 02:09:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 18:33:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 05:08:30 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	partitioning(t_push_swap *ps)
+{
+	int	pivot[2];
+
+	pivot[0] = ps->a.size / 3;
+	pivot[1] = ps->a.size - pivot[0];
+	while (ps->a.size > pivot[0] + 1)
+	{
+		if (ps->a.node[REAR]->idx >= pivot[1])
+			ra(ps);
+		else if (ps->a.node[REAR]->idx < pivot[1])
+		{
+			pb(ps);
+			if (ps->b.node[REAR]->idx <= pivot[0] && ps->b.size > 1)
+				rb(ps);
+		}
+	}
+	while (ps->a.size > 2)
+	{
+		if (ps->a.node[REAR]->idx == ps->sum)
+			ra(ps);
+		else
+			pb(ps);
+	}
+	if (ps->a.node[REAR]->idx > ps->a.node[REAR]->prev->idx)
+		sa(ps);
+}
 
 int	is_sorted(t_push_swap *ps)
 {
@@ -48,18 +76,18 @@ void	sort_3(t_push_swap *ps)
 	top = ps->a.node[REAR]->idx;
 	mid = ps->a.node[REAR]->prev->idx;
 	bot = ps->a.node[REAR]->prev->prev->idx;
-	if (top > mid && mid > bot) // 3 2 1 top -> bot
+	if (top > mid && mid > bot)
 	{
 		sa(ps);
 		rra(ps);
 	}
-	else if (top > mid && mid < bot && top > bot) // 3 1 2
+	else if (top > mid && mid < bot && top > bot)
 		ra(ps);
-	else if (top > mid && mid < bot && top < bot) // 2 1 3
+	else if (top > mid && mid < bot && top < bot)
 		sa(ps);
-	else if (top < mid && mid > bot && top > bot) // 2 3 1
+	else if (top < mid && mid > bot && top > bot)
 		rra(ps);
-	else if (top < mid && mid > bot && top < bot) // 1 3 2
+	else if (top < mid && mid > bot && top < bot)
 	{
 		sa(ps);
 		ra(ps);

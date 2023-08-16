@@ -8,7 +8,7 @@ DEBUG=-g3 -fsanitize=address
 LIBS= -L./libft -lft
 
 LIBFT=./libft/libft.a
-SRCS=${wildcard *.c}
+SRCS=main.c deque.c cmd_push.c cmd_swap.c cmd_rotate.c parse.c utils.c find_min_rot.c find_min_rot_utils.c
 OBJS=$(SRCS:.c=.o)
 
 CHECKER=checker

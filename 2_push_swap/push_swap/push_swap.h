@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 23:47:44 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 05:13:31 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ typedef struct s_cnt
 
 // main.c
 
-void					partitioning(t_push_swap *ps, int base);
+void					partitioning(t_push_swap *ps);
+void					sort_5(t_push_swap *ps);
 void					sort(t_push_swap *ps);
+void					greedy(t_push_swap *ps);
 
 // deque.c
 
@@ -89,6 +91,8 @@ void					checker(t_push_swap *ps);
 
 // test.c
 
+void					debug(char *a, t_cnt *cnt);
+
 void					print_deque(t_push_swap *ps);
 void					test(t_push_swap *ps);
 
@@ -106,10 +110,10 @@ void					rra(t_push_swap *ps);
 void					rrb(t_push_swap *ps);
 void					rrr(t_push_swap *ps);
 
-void					ra_rb(t_push_swap *ps, t_cnt *cnt);
-void					ra_rrb(t_push_swap *ps, t_cnt *cnt);
-void					rra_rb(t_push_swap *ps, t_cnt *cnt);
-void					rra_rrb(t_push_swap *ps, t_cnt *cnt);
+void					ra_rb(t_push_swap *dup, t_cnt *cnt);
+void					ra_rrb(t_push_swap *dup, t_cnt *cnt);
+void					rra_rb(t_push_swap *dup, t_cnt *cnt);
+void					rra_rrb(t_push_swap *dup, t_cnt *cnt);
 
 t_push_swap				dup_ps(t_push_swap *ps);
 void					ra_x(t_push_swap *ps, t_cnt *cnt);
