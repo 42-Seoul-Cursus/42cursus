@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 19:36:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 23:47:44 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ typedef struct s_cnt
 	int					rra;
 	int					rrb;
 	int					sum;
+	int					min[2];
+	int					i;
+	int					j;
 }						t_cnt;
 
 // main.c
@@ -103,16 +106,17 @@ void					rra(t_push_swap *ps);
 void					rrb(t_push_swap *ps);
 void					rrr(t_push_swap *ps);
 
-t_cnt					ra_rb(t_push_swap *ps);
-t_cnt					ra_rrb(t_push_swap *ps);
-t_cnt					rra_rb(t_push_swap *ps);
-t_cnt					rra_rrb(t_push_swap *ps);
+void					ra_rb(t_push_swap *ps, t_cnt *cnt);
+void					ra_rrb(t_push_swap *ps, t_cnt *cnt);
+void					rra_rb(t_push_swap *ps, t_cnt *cnt);
+void					rra_rrb(t_push_swap *ps, t_cnt *cnt);
 
 t_push_swap				dup_ps(t_push_swap *ps);
 void					ra_x(t_push_swap *ps, t_cnt *cnt);
 void					rb_x(t_push_swap *ps, t_cnt *cnt);
 void					rra_x(t_push_swap *ps, t_cnt *cnt);
 void					rrb_x(t_push_swap *ps, t_cnt *cnt);
+void					pull_node(t_push_swap *ps);
 
 // min.c
 

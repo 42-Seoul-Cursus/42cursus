@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 20:36:04 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 23:46:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,40 @@ void	print_deque(t_push_swap *ps)
 void	ra_x(t_push_swap *ps, t_cnt *cnt)
 {
 	if (cnt != NULL)
+	{
 		cnt->ra++;
+		cnt->sum++;
+	}
 	rotate(&(ps->a), REAR);
 }
 
 void	rb_x(t_push_swap *ps, t_cnt *cnt)
 {
 	if (cnt != NULL)
+	{
 		cnt->rb++;
+		cnt->sum++;
+	}
 	rotate(&(ps->b), REAR);
 }
 
 void	rra_x(t_push_swap *ps, t_cnt *cnt)
 {
 	if (cnt != NULL)
+	{
 		cnt->rra++;
+		cnt->sum++;
+	}
 	rotate(&(ps->a), FRONT);
 }
 
 void	rrb_x(t_push_swap *ps, t_cnt *cnt)
 {
 	if (cnt != NULL)
+	{
 		cnt->rrb++;
+		cnt->sum++;
+	}
 	rotate(&(ps->b), FRONT);
 }
 

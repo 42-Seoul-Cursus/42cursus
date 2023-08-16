@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 22:40:23 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 23:41:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,47 @@ int	main(int ac, char *av[])
 	return (0);
 }
 
+void	pull_node(t_push_swap *ps)
+{
+	t_deque_node	*tmp;
+	t_cnt			cnt;
+
+	init_cnt(&cnt);
+	tmp = ps->a.node[FRONT];
+	cnt.rra = 1;
+	while (tmp->idx != 0)
+	{
+		++cnt.rra;
+		tmp = tmp->next;
+	}
+	tmp = ps->a.node[REAR];
+	while (tmp->idx != 0)
+	{
+		++cnt.ra;
+		tmp = tmp->prev;
+	}
+	if (cnt.ra > cnt.rra)
+		while (ps->a.node[FRONT]->idx != 0)
+			ra(ps);
+	else
+		while (ps->a.node[FRONT]->idx != 0)
+			rra(ps);
+}
+
 void	deque_rot(t_push_swap *ps, t_cnt cnt)
 {
+	while (cnt.ra > 0 && cnt.rb > 0)
+	{
+		rr(ps);
+		--cnt.ra;
+		--cnt.rb;
+	}
+	while (cnt.rra > 0 && cnt.rrb > 0)
+	{
+		rrr(ps);
+		--cnt.rra;
+		--cnt.rrb;
+	}
 	while (cnt.ra-- > 0)
 		ra(ps);
 	while (cnt.rra-- > 0)
@@ -38,29 +77,29 @@ void	deque_rot(t_push_swap *ps, t_cnt cnt)
 
 void	greedy(t_push_swap *ps)
 {
-	t_cnt	cnt;
+	t_push_swap	dup;
+	t_cnt		cnt;
+	t_cnt		tmp;
 
 	while (ps->b.size > 0)
 	{
-		init_cnt(&cnt);
-		if (cnt.sum > ra_rb(ps).sum)
-		{
-			cnt = ra_rb(ps);
-		}
-		if (cnt.sum > ra_rrb(ps).sum)
-		{
-			cnt = ra_rrb(ps);
-		}
-		if (cnt.sum > rra_rb(ps).sum)
-		{
-			cnt = rra_rb(ps);
-		}
-		if (cnt.sum > rra_rrb(ps).sum)
-		{
-			cnt = rra_rrb(ps);
-		}
+		dup = dup_ps(&ps);
+		ra_rb(&dup, &cnt);
+		dup = dup_ps(&ps);
+		ra_rrb(&dup, &tmp);
+		if (cnt.sum > tmp.sum)
+			cnt = tmp;
+		dup = dup_ps(&ps);
+		rra_rb(&dup, &tmp);
+		if (cnt.sum > tmp.sum)
+			cnt = tmp;
+		dup = dup_ps(&ps);
+		rra_rrb(&dup, &tmp);
+		if (cnt.sum > tmp.sum)
+			cnt = tmp;
 		deque_rot(ps, cnt);
 	}
+	pull_node(ps);
 }
 
 void	sort(t_push_swap *ps)
