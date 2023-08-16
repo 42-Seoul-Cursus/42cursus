@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 02:09:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/13 21:09:33 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:33:19 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_sorted(t_push_swap *ps)
 	while (cur->next != NULL)
 	{
 		tmp = cur->next;
-		if (cur->value > tmp->value)
+		if (cur->value < tmp->value)
 			return (0);
 		cur = tmp;
 	}

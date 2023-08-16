@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/13 21:25:34 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:38:14 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	parse_arg(t_push_swap *ps, int ac, char *av[])
 		++i;
 		++ps->sum;
 	}
-	// if (is_sorted(ps))
-	// 	exit(EXIT_SUCCESS);
+	if (is_sorted(ps))
+		exit(EXIT_SUCCESS);
 	set_idx(ps);
 }
 

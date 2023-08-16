@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:41:36 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/11 18:12:37 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 20:36:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,31 @@ void	print_deque(t_push_swap *ps)
 	printf("\x1b[37ma\tb\x1b[0m\n");
 }
 
-void	test(t_push_swap *ps)
+void	ra_x(t_push_swap *ps, t_cnt *cnt)
 {
-	int		flag;
-	char	line[5];
-
-	while (1)
-	{
-		ft_bzero(line, 4);
-		print_deque(ps);
-		scanf("%s", line);
-		line[ft_strlen(line)] = '\n';
-		flag = command(ps, line);
-		if (flag == 0)
-			break ;
-	}
+	if (cnt != NULL)
+		cnt->ra++;
+	rotate(&(ps->a), REAR);
 }
+
+void	rb_x(t_push_swap *ps, t_cnt *cnt)
+{
+	if (cnt != NULL)
+		cnt->rb++;
+	rotate(&(ps->b), REAR);
+}
+
+void	rra_x(t_push_swap *ps, t_cnt *cnt)
+{
+	if (cnt != NULL)
+		cnt->rra++;
+	rotate(&(ps->a), FRONT);
+}
+
+void	rrb_x(t_push_swap *ps, t_cnt *cnt)
+{
+	if (cnt != NULL)
+		cnt->rrb++;
+	rotate(&(ps->b), FRONT);
+}
+
