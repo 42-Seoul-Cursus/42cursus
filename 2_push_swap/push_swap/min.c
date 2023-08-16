@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:52:24 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 21:25:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 22:39:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_push_swap	dup_ps(t_push_swap *ps)
 		enque(&(dup.a), REAR, cur);
 		cur = tmp;
 	}
-	tmp = ps->b.node[FRONT];
+	cur = ps->b.node[FRONT];
 	while (cur != NULL)
 	{
 		tmp = cur->next;

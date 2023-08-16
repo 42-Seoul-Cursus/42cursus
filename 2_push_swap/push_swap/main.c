@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/16 21:28:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/16 22:40:23 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	main(int ac, char *av[])
 	init_ps(&ps);
 	parse_arg(&ps, ac, av);
 	sort(&ps);
-	t_push_swap dup = dup_ps(&ps);
-	print_deque(&ps);
-	print_deque(&dup);
 	return (0);
 }
 
@@ -49,26 +46,18 @@ void	greedy(t_push_swap *ps)
 		if (cnt.sum > ra_rb(ps).sum)
 		{
 			cnt = ra_rb(ps);
-		printf("cnt.ra : %d\ncnt.rra : %d\ncnt.rb : %d\ncnt.rrb : %d\ncnt.sum : %d\n", cnt.ra, cnt.rra, cnt.rb, cnt.rrb, cnt.sum);
-
 		}
 		if (cnt.sum > ra_rrb(ps).sum)
 		{
 			cnt = ra_rrb(ps);
-		printf("cnt.ra : %d\ncnt.rra : %d\ncnt.rb : %d\ncnt.rrb : %d\ncnt.sum : %d\n", cnt.ra, cnt.rra, cnt.rb, cnt.rrb, cnt.sum);
-
 		}
 		if (cnt.sum > rra_rb(ps).sum)
 		{
 			cnt = rra_rb(ps);
-		printf("cnt.ra : %d\ncnt.rra : %d\ncnt.rb : %d\ncnt.rrb : %d\ncnt.sum : %d\n", cnt.ra, cnt.rra, cnt.rb, cnt.rrb, cnt.sum);
-
 		}
 		if (cnt.sum > rra_rrb(ps).sum)
 		{
 			cnt = rra_rrb(ps);
-		printf("cnt.ra : %d\ncnt.rra : %d\ncnt.rb : %d\ncnt.rrb : %d\ncnt.sum : %d\n", cnt.ra, cnt.rra, cnt.rb, cnt.rrb, cnt.sum);
-
 		}
 		deque_rot(ps, cnt);
 	}
@@ -84,7 +73,7 @@ void	sort(t_push_swap *ps)
 	{
 		partitioning(ps, 0);
 		ps->a.node[FRONT]->idx = 0;
-		// greedy(ps);
+		greedy(ps);
 	}
 }
 
