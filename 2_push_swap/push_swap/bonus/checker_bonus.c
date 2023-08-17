@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:40:04 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 18:16:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 18:54:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	checker(t_push_swap *ps)
 		cmd = get_next_line(0);
 	}
 	if (is_sorted(ps) && ps->b.size == 0)
-			ft_putstr_fd("OK\n", 1);
+		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
 }

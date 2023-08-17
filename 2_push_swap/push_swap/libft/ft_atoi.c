@@ -6,11 +6,18 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/12 01:04:41 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 19:00:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+
+static void	exit_with_msg(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
 
 static long long	make_num(const char *str, int min)
 {
@@ -19,22 +26,18 @@ static long long	make_num(const char *str, int min)
 
 	num = 0;
 	i = 0;
+	if (str[i] == 0)
+		exit_with_msg();
 	while (str[i])
 	{
 		if (str[i] < '0' || '9' < str[i])
-		{
-			ft_putstr_fd("Error\n", 2);
-			exit(EXIT_FAILURE);
-		}
+			exit_with_msg();
 		num = num * 10 + (str[i] - '0');
 		++i;
 	}
 	num *= min;
 	if (num > 2147483647 || num < -2147483648)
-	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
-	}
+		exit_with_msg();
 	return (num);
 }
 

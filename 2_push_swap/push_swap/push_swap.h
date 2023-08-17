@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 15:07:38 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 18:52:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int						rotate(t_deque *st, enum e_rear rear);
 
 // parse.c
 
+void					split_enque(t_push_swap *ps, int ac, char *av[]);
 void					parse_arg(t_push_swap *ps, int ac, char *av[]);
 t_deque_node			*new_node(int value);
 
