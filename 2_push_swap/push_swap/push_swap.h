@@ -6,14 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 13:51:16 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 14:39:34 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
-# include <stdio.h>
 
 typedef struct s_deque_node
 {
@@ -56,10 +55,10 @@ typedef struct s_cnt
 
 // main.c
 
-void					push_b(t_push_swap *ps);
 void					sort(t_push_swap *ps);
 void					greedy(t_push_swap *ps);
-void					partitioning(t_push_swap *ps, int base);
+void					deque_rot(t_push_swap *ps, t_cnt cnt);
+void					pull_node(t_push_swap *ps);
 
 // deque.c
 
@@ -74,56 +73,56 @@ int						rotate(t_deque *st, enum e_rear rear);
 
 void					parse_arg(t_push_swap *ps, int ac, char *av[]);
 t_deque_node			*new_node(int value);
+
+// set_idx.c
+
 void					set_idx(t_push_swap *ps);
 void					set_idx_in_deque(int *arr, t_push_swap *ps);
 void					sort_arr(int *arr, t_push_swap *ps);
 
-// utils.c
+// cmd_push.c
 
-void					init_ps(t_push_swap *ps);
-void					sort_3(t_push_swap *ps);
+void					pa(t_push_swap *ps);
+void					pb(t_push_swap *ps);
+void					rrr(t_push_swap *ps);
 
-// checker.c
-
-int						command(t_push_swap *ps, char *cmd);
-int						is_sorted(t_push_swap *ps);
-void					checker(t_push_swap *ps);
-
-// test.c
-
-void					debug(char *a, t_cnt *cnt);
-
-void					print_deque(t_push_swap *ps);
-void					test(t_push_swap *ps);
-
-// command.c
+// cmd_swap.c
 
 void					sa(t_push_swap *ps);
 void					sb(t_push_swap *ps);
 void					ss(t_push_swap *ps);
-void					pa(t_push_swap *ps);
-void					pb(t_push_swap *ps);
+
+// cmd_rotate.c
+
 void					ra(t_push_swap *ps);
 void					rb(t_push_swap *ps);
 void					rr(t_push_swap *ps);
 void					rra(t_push_swap *ps);
 void					rrb(t_push_swap *ps);
-void					rrr(t_push_swap *ps);
 
+// utils.c
+
+void					partitioning(t_push_swap *ps, int base);
+void					push_b(t_push_swap *ps);
+int						is_sorted(t_push_swap *ps);
+void					init_ps(t_push_swap *ps);
+void					sort_3(t_push_swap *ps);
+
+// find_min_rot.c
+
+void					assign_min(t_cnt *cnt, int a, int b);
+void					init_cnt(t_cnt *cnt);
 void					ra_rb(t_push_swap *dup, t_cnt *cnt);
 void					ra_rrb(t_push_swap *dup, t_cnt *cnt);
 void					rra_rb(t_push_swap *dup, t_cnt *cnt);
 void					rra_rrb(t_push_swap *dup, t_cnt *cnt);
+
+// find_min_rot_utils.c
 
 t_push_swap				dup_ps(t_push_swap *ps);
 void					ra_x(t_push_swap *ps, t_cnt *cnt);
 void					rb_x(t_push_swap *ps, t_cnt *cnt);
 void					rra_x(t_push_swap *ps, t_cnt *cnt);
 void					rrb_x(t_push_swap *ps, t_cnt *cnt);
-void					pull_node(t_push_swap *ps);
-
-// min.c
-
-void					init_cnt(t_cnt *cnt);
 
 #endif

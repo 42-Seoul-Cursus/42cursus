@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:52:24 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 05:05:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 14:41:56 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ void	init_cnt(t_cnt *cnt)
 	cnt->sum = INT32_MAX;
 }
 
-void	debug(char *a, t_cnt *cnt)
-{
-	printf("%s\nra : %d\nrb : %d\nrra : %d\nrrb : %d\nsum : %d\n",
-	a, cnt->ra, cnt->rb, cnt->rra, cnt->rrb, cnt->sum);
-}
-
 void	ra_rb(t_push_swap *dup, t_cnt *cnt)
 {
 	init_cnt(cnt);
@@ -42,13 +36,9 @@ void	ra_rb(t_push_swap *dup, t_cnt *cnt)
 		{
 			if (dup->b.node[REAR]->idx < dup->a.node[REAR]->idx
 				&& (dup->a.node[FRONT]->idx < dup->b.node[REAR]->idx
-				|| dup->a.node[FRONT]->idx == dup->sum)
+					|| dup->a.node[FRONT]->idx == dup->sum)
 				&& cnt->rb + cnt->ra < cnt->sum)
-			{
-				cnt->min[0] = cnt->ra;
-				cnt->min[1] = cnt->rb;
-				cnt->sum = cnt->ra + cnt->rb;
-			}
+				assign_min(cnt, cnt->ra, cnt->rb);
 			rb_x(dup, cnt);
 			++cnt->j;
 		}
@@ -72,13 +62,9 @@ void	ra_rrb(t_push_swap *dup, t_cnt *cnt)
 		{
 			if (dup->b.node[REAR]->idx < dup->a.node[REAR]->idx
 				&& (dup->a.node[FRONT]->idx < dup->b.node[REAR]->idx
-				|| dup->a.node[FRONT]->idx == dup->sum)
+					|| dup->a.node[FRONT]->idx == dup->sum)
 				&& cnt->rrb + cnt->ra < cnt->sum)
-			{
-				cnt->min[0] = cnt->ra;
-				cnt->min[1] = cnt->rrb;
-				cnt->sum = cnt->ra + cnt->rrb;
-			}
+				assign_min(cnt, cnt->ra, cnt->rrb);
 			rrb_x(dup, cnt);
 			++cnt->j;
 		}
@@ -102,13 +88,9 @@ void	rra_rb(t_push_swap *dup, t_cnt *cnt)
 		{
 			if (dup->b.node[REAR]->idx < dup->a.node[REAR]->idx
 				&& (dup->a.node[FRONT]->idx < dup->b.node[REAR]->idx
-				|| dup->a.node[FRONT]->idx == dup->sum)
+					|| dup->a.node[FRONT]->idx == dup->sum)
 				&& cnt->rb + cnt->rra < cnt->sum)
-			{
-				cnt->min[0] = cnt->rra;
-				cnt->min[1] = cnt->rb;
-				cnt->sum = cnt->rra + cnt->rb;
-			}
+				assign_min(cnt, cnt->rra, cnt->rb);
 			rb_x(dup, cnt);
 			++cnt->j;
 		}
@@ -132,13 +114,9 @@ void	rra_rrb(t_push_swap *dup, t_cnt *cnt)
 		{
 			if (dup->b.node[REAR]->idx < dup->a.node[REAR]->idx
 				&& (dup->a.node[FRONT]->idx < dup->b.node[REAR]->idx
-				|| dup->a.node[FRONT]->idx == dup->sum)
+					|| dup->a.node[FRONT]->idx == dup->sum)
 				&& cnt->rrb + cnt->rra < cnt->sum)
-			{
-				cnt->min[0] = cnt->rra;
-				cnt->min[1] = cnt->rrb;
-				cnt->sum = cnt->rra + cnt->rrb;
-			}
+				assign_min(cnt, cnt->rra, cnt->rrb);
 			rrb_x(dup, cnt);
 			++cnt->j;
 		}
