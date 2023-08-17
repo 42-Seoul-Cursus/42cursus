@@ -6,14 +6,20 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:40:04 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 23:41:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/18 00:32:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
+void	leak(void)
+{
+	system("leaks checker > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");
+}
+
 int	main(int ac, char *av[])
 {
+	atexit(leak);
 	t_push_swap	ps;
 
 	if (ac < 2)

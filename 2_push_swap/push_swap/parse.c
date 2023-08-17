@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 23:40:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/18 01:31:18 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void	split_enque(t_push_swap *ps, int ac, char *av[])
 		ft_putstr_fd("Error\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	ac = 0;
+	while (av[ac] != NULL)
+	{
+		free(av[ac]);
+		++ac;
+	}
+	free(av);
 }
 
 void	parse_arg(t_push_swap *ps, int ac, char *av[])
