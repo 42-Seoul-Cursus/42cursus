@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 14:39:34 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 15:07:38 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,10 @@ void					ra_x(t_push_swap *ps, t_cnt *cnt);
 void					rb_x(t_push_swap *ps, t_cnt *cnt);
 void					rra_x(t_push_swap *ps, t_cnt *cnt);
 void					rrb_x(t_push_swap *ps, t_cnt *cnt);
+
+// checker.c
+
+void					checker(t_push_swap *ps);
+int						command(t_push_swap *ps, char *cmd);
 
 #endif
