@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 19:45:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 21:53:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_deque_node			*new_node(int value);
 void					set_idx(t_push_swap *ps);
 void					set_idx_in_deque(int *arr, t_push_swap *ps);
 void					sort_arr(int *arr, t_push_swap *ps);
+void					free_q(t_push_swap *ps);
 void					pa(t_push_swap *ps);
 void					pb(t_push_swap *ps);
 void					rrr(t_push_swap *ps);

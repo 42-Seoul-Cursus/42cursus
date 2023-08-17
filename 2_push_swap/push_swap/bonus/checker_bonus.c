@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:40:04 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 18:54:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 21:59:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char *av[])
 	init_ps(&ps);
 	parse_arg(&ps, ac, av);
 	checker(&ps);
+	free_q(&ps);
 	return (0);
 }
 
@@ -32,6 +33,7 @@ void	checker(t_push_swap *ps)
 	while (cmd)
 	{
 		command(ps, cmd);
+		free(cmd);
 		cmd = get_next_line(0);
 	}
 	if (is_sorted(ps) && ps->b.size == 0)

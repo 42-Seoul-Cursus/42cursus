@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 19:08:31 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 21:52:21 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,24 @@ t_deque_node	*new_node(int value)
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
+}
+
+void	free_q(t_push_swap *ps)
+{
+	t_deque_node	*temp;
+
+	temp = ps->a.node[FRONT];
+	while (temp)
+	{
+		ps->a.node[FRONT] = ps->a.node[FRONT]->next;
+		free(temp);
+		temp = ps->a.node[FRONT];
+	}
+	temp = ps->b.node[FRONT];
+	while (temp)
+	{
+		ps->b.node[FRONT] = ps->b.node[FRONT]->next;
+		free(temp);
+		temp = ps->b.node[FRONT];
+	}
 }
