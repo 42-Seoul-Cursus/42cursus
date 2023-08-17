@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:44:28 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 05:13:31 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 13:51:16 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef struct s_cnt
 
 // main.c
 
-void					partitioning(t_push_swap *ps);
-void					sort_5(t_push_swap *ps);
+void					push_b(t_push_swap *ps);
 void					sort(t_push_swap *ps);
 void					greedy(t_push_swap *ps);
+void					partitioning(t_push_swap *ps, int base);
 
 // deque.c
 

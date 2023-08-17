@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 23:09:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 05:14:01 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 13:51:46 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,10 @@ void	sort(t_push_swap *ps)
 		sa(ps);
 	else if (ps->a.size == 3)
 		sort_3(ps);
-	else if (ps->a.size <= 5)
-		sort_5(ps);
+	else if (ps->a.size <= 50)
+		push_b(ps);
 	else
-	{
-		partitioning(ps);
-		greedy(ps);
-	}
-}
-
-void	sort_5(t_push_swap *ps)
-{
-	while (ps->a.size > 3)
-	{
-		if (ps->a.node[REAR]->idx == ps->sum)
-			ra(ps);
-		else
-			pb(ps);
-	}
-	sort_3(ps);
-	greedy(ps);
+		partitioning(ps, 0);
 }
 
 void	pull_node(t_push_swap *ps)
