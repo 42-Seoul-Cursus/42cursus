@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 02:09:06 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 15:15:14 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 18:15:48 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	push_b(t_push_swap *ps)
 
 int	is_sorted(t_push_swap *ps)
 {
+	if (ps->a.size == 0)
+		return (0);
 	t_deque_node	*cur;
 	t_deque_node	*tmp;
 

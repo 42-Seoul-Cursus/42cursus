@@ -10,7 +10,7 @@ SRCS=main.c deque.c cmd_push.c cmd_swap.c cmd_rotate.c parse.c set_idx.c sort.c 
 OBJS=$(SRCS:.c=.o)
 
 BONUS=checker
-BONUS_SRCS=bonus/get_next_line/get_next_line.c bonus/get_next_line/get_next_line_utils.c bonus/checker_bonus.c deque.c cmd_push.c cmd_swap.c cmd_rotate.c parse.c set_idx.c sort.c utils.c find_min_rot.c find_min_rot_utils.c
+BONUS_SRCS=bonus/get_next_line/get_next_line_bonus.c bonus/get_next_line/get_next_line_utils_bonus.c bonus/checker_bonus.c deque.c cmd_push.c cmd_swap.c cmd_rotate.c parse.c set_idx.c sort.c utils.c find_min_rot.c find_min_rot_utils.c
 BONUS_OBJS=$(BONUS_SRCS:.c=.o)
 
 all: $(NAME)
@@ -21,14 +21,16 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	$(MAKE) bonus -C ./libft
 
-bonus: $(LIBFT) $(BONUS_OBJS)
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT) -o $(BONUS)
+bonus: $(BONUS)
+
+$(BONUS): $(LIBFT) $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBFT) -o $(BONUS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./libft
+	$(MAKE) fclean -C ./libft
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
@@ -42,5 +44,6 @@ re:
 debug:
 	$(MAKE) fclean
 	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+	$(MAKE) bonus CFLAGS="$(CFLAGS) $(DEBUG)"
 
 .PHONY: all clean fclean re debug bonus
