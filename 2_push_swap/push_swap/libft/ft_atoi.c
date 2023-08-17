@@ -6,12 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 19:00:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 19:42:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static void	exit_with_msg(void)
 {

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:37:15 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 14:38:34 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 19:25:05 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	pull_node(t_push_swap *ps)
 		++cnt.ra;
 		tmp = tmp->prev;
 	}
-	if (cnt.ra > cnt.rra)
+	if (cnt.ra < cnt.rra)
 		while (ps->a.node[FRONT]->idx != ps->sum)
 			ra(ps);
 	else
