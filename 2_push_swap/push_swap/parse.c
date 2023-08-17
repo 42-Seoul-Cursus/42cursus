@@ -6,11 +6,12 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:40:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 21:52:21 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/17 23:40:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	split_enque(t_push_swap *ps, int ac, char *av[])
 {
@@ -44,8 +45,6 @@ void	parse_arg(t_push_swap *ps, int ac, char *av[])
 		++i;
 		++ps->sum;
 	}
-	if (is_sorted(ps))
-		exit(EXIT_SUCCESS);
 }
 
 t_deque_node	*new_node(int value)
