@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:35:56 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/17 23:36:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/20 20:59:44 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,6 @@ void	set_idx(t_push_swap *ps)
 	sort_arr(arr, ps);
 	set_idx_in_deque(arr, ps);
 	free(arr);
-}
-
-void	set_idx_in_deque(int *arr, t_push_swap *ps)
-{
-	int				i;
-	t_deque_node	*tmp;
-
-	tmp = ps->a.node[FRONT];
-	i = 0;
-	while (tmp != NULL)
-	{
-		if (tmp->value == arr[i])
-		{
-			tmp->idx = i + 1;
-			i = 0;
-			tmp = tmp->next;
-		}
-		else
-			++i;
-	}
 }
 
 void	sort_arr(int *arr, t_push_swap *ps)
@@ -78,5 +58,25 @@ void	sort_arr(int *arr, t_push_swap *ps)
 			++j;
 		}
 		++i;
+	}
+}
+
+void	set_idx_in_deque(int *arr, t_push_swap *ps)
+{
+	int				i;
+	t_deque_node	*tmp;
+
+	tmp = ps->a.node[FRONT];
+	i = 0;
+	while (tmp != NULL)
+	{
+		if (tmp->value == arr[i])
+		{
+			tmp->idx = i + 1;
+			i = 0;
+			tmp = tmp->next;
+		}
+		else
+			++i;
 	}
 }
