@@ -6,16 +6,13 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 07:50:57 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/22 00:18:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/22 00:53:32 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <sys/fcntl.h>
 # define READ_END 0
 # define WRITE_END 1

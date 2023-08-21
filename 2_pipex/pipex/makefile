@@ -11,7 +11,6 @@ OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
 
-
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
 
