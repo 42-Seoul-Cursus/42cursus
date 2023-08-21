@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:36:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/22 00:23:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/22 00:44:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	valid_path(char *path[], char *cmd)
 			return (i);
 		++i;
 	}
-	exit_with_msg("Error: command not found");
+	exit_with_msg("Error: command not found\n");
 	return (-1);
 }
 
