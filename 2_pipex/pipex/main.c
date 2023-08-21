@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/21 20:39:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/21 20:43:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char *av[], char *envp[])
 		exit_with_msg("Error: pipe");
 
 	pid = fork();
-	if (pid == 0) // infile -> cmd1 -> cmd2
+	if (pid == 0) // infile -> cmd1 -> fd[1]
 	{
 		infile = open(av[1], O_RDONLY); // 입력 파일을 읽기 전용으로 열기
 		if (infile == -1)
@@ -43,7 +43,7 @@ int	main(int ac, char *av[], char *envp[])
 	else // parent process
 	{
 		pid = fork();
-		if (pid == 0) // cmd1 -> cmd2 -> outfile
+		if (pid == 0) // fd[0] -> cmd2 -> outfile
 		{
 			outfile = open(av[4], O_WRONLY | O_CREAT, 0666); // 출력 파일을 쓰기, 없으면 생성 후 열기
 			if (outfile == -1)
