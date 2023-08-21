@@ -1,38 +1,32 @@
-  #include <sys/types.h>
-  #include <unistd.h>
-  #include <stdlib.h>
-  #include <stdio.h>
-  #include <string.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+extern char	**environ;
+
+int	main(int argc, char *argv[])
 {
-	char	*answer;
-	size_t	i;
-	size_t	j;
+	char	**new_argv;
+	char	command[] = "ls";
 
-	answer = calloc(sizeof(char), (strlen(s1) + strlen(s2) + 1));
-	if (!answer)
-		return (0);
-	i = 0;
-	j = 0;
-	while (s1[j] != '\0')
-		answer[i++] = s1[j++];
-	j = 0;
-	while (s2[j] != '\0')
-		answer[i++] = s2[j++];
-	return (answer);
-}
-
-  int main(int ac, char *av[])
-  {
-	(void) ac;
-	char	*cmd = ft_strjoin("/bin/", av[2]);
-	char	*argVec[] = {av[2], av[3], NULL};
-	//  char	*envVec[] = {NULL};
-
-	 printf("----------------------------------\n");
-	 if (execve(cmd, argVec, NULL) == -1)
-	 	perror("Could not execute execve\n");
-	printf("Oops, something went wrong!\n");
+	new_argv = (char **)malloc(sizeof(char *) * (argc + 1));
+	/* 명령어를 ls로 변경 */
+	new_argv[0] = command;
+	/* command line으로 넘어온 parameter를 그대로 사용 */
+	for (int i = 1; i < argc; i++)
+	{
+		new_argv[i] = argv[i];
+	}
+	/* argc를 execve 파라미터에 전달할 수 없기 때문에 NULL이 파라미터의 끝을 의미함 */
+	new_argv[argc] = NULL;
+	if (execve("/bin/ls", new_argv, environ) == -1)
+	{
+		fprintf(stderr, "프로그램 실행 error: %s\n", strerror(errno));
+		return (1);
+	}
+	/* ls 명령어 binary로 실행로직이 교체되었으므로 이후의 로직은 절대 실행되지 않습니다. */
+	printf("이곳이 이제 ls 명령어라 이 라인은 출력이 되지 않습니다.\n");
 	return (0);
-  }
+}

@@ -1,52 +1,93 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
+/*   Updated: 2023/08/21 19:50:13 by seunan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-char	*ft_strstr(const char *haystack, const char *needle)
-{
-	size_t	i;
-	size_t	j;
-	size_t	tmp;
+#define READ_END 0
+#define WRITE_END 1
 
-	i = 0;
-	while (haystack[i] != '\0')
-	{
-		if (haystack[i] == needle[0])
-		{
-			tmp = i;
-			j = 0;
-			while (haystack[tmp] != '\0' && haystack[tmp] == needle[j])
-			{
-				++tmp;
-				++j;
-			}
-			if (needle[j] == '\0')
-				return ((char *)(haystack + i));
-		}
-		++i;
-	}
-	return (NULL);
-}
-
-char	*parse_path(char *envp[])
-{
-	char	*path;
-	int		i;
-
-	path = ft_strstr(envp[0], "PATH=");
-	i = 0;
-	// while (path[i] != '\n')
-	// {
-	// 	printf("%c", path[i]);
-	// 	++i;
-	// }
-	// path[i] = '\0';
-	return (path);
-}
+char	**parse_path(char *envp[]);
+int		valid_path(char *path[], char *cmd);
 
 int	main(int ac, char *av[], char *envp[])
 {
-	char	*path = parse_path(envp);
-	printf("%s\n", path);
+	char	**path;
+	pid_t	pid;
+	int		fd[2];
+	int		infile, outfile;
+	char	*execve_path;
+	char	**execve_argv;
+
+	if (ac != 4)
+		exit_with_msg("Error: arguments");
+	path = parse_path(envp);
+	infile = open(av[1], O_RDONLY);
+	if (infile == -1)
+		exit_with_msg("Error: input file");
+	outfile = open(av[3], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (outfile == -1)
+		exit_with_msg("Error: output file");
+	if (pipe(fd) == -1)
+		exit_with_msg("Error: pipe");
+
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(infile, STDIN_FILENO);
+		dup2(outfile, STDOUT_FILENO);
+		execve_path = ft_strjoin(path[valid_path(path, av[2])], av[2]);
+		execve_argv = ft_split(av[2], ' ', '\0');
+		execve(execve_path, execve_argv, NULL);
+	}
+	close(fd[WRITE_END]);
+	// dup2(fd[READ_END], STDIN_FILENO);
+	wait(NULL);
 	return (0);
+}
+
+int		valid_path(char *path[], char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (path[i] != NULL)
+	{
+		if (access(ft_strjoin(path[i], cmd), F_OK) == 0)
+			return (i);
+		++i;
+	}
+	exit_with_msg("Error: command not found");
+	return (-1);
+}
+
+char	**parse_path(char *envp[])
+{
+	char	**path = NULL;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			tmp = ft_substr(envp[i], 5, ft_strlen(envp[i]));
+			path = ft_split(tmp, ':', '/');
+			free(tmp);
+			break ;
+		}
+		++i;
+	}
+	return (path);
 }
 
 /*
@@ -95,4 +136,4 @@ int	main(int ac, char *av[], char *envp[])
 	{
 
 	}
-*/
+ */

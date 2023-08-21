@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 22:19:23 by seunan            #+#    #+#             */
-/*   Updated: 2023/07/01 16:00:10 by anseungwon       ###   ########.fr       */
+/*   Updated: 2023/08/21 19:32:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	cnt_strnum(char const *s, char c)
 	return (strnum);
 }
 
-static char	*str_maker(const char *s, int *sidx, char c)
+static char	*str_maker(const char *s, int *sidx, char c, char suffix)
 {
 	char	*str;
 	int		strlen;
@@ -55,7 +55,7 @@ static char	*str_maker(const char *s, int *sidx, char c)
 		++strlen;
 		++*sidx;
 	}
-	str = (char *) ft_calloc(sizeof(char), (strlen + 1));
+	str = (char *) ft_calloc(sizeof(char), (strlen + 1 + (suffix != '\0')));
 	if (!str)
 		return (0);
 	*sidx -= strlen;
@@ -66,10 +66,11 @@ static char	*str_maker(const char *s, int *sidx, char c)
 		++*sidx;
 		++strlen;
 	}
+	str[strlen] = suffix;
 	return (str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char charset, char suffix)
 {
 	char	**answer;
 	char	*str;
@@ -77,15 +78,15 @@ char	**ft_split(char const *s, char c)
 	int		strnum;
 	int		sidx;
 
-	strnum = cnt_strnum(s, c);
+	strnum = cnt_strnum(s, charset);
 	answer = (char **)ft_calloc(sizeof(char *), (strnum + 1));
 	if (!answer)
-		return (0);
+		return (NULL);
 	i = 0;
 	sidx = 0;
 	while (i < strnum)
 	{
-		str = str_maker(s, &sidx, c);
+		str = str_maker(s, &sidx, charset, suffix);
 		if (!str)
 			return (str_free(answer, i));
 		answer[i] = str;

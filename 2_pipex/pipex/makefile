@@ -2,22 +2,21 @@
 
 NAME=pipex
 CC=gcc
-INCLUDE=-I./Libft
 CFLAGS=-Wall -Werror -Wextra
 DEBUG=-g3 -fsanitize=address
-LIBS= -L./Libft -lft
 
 LIBFT=./Libft/libft.a
-SRCS=main.c
-OBJS=main.o
+SRCS=main.c utils.c
+OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(LIBFT):
-	$(MAKE) bonus -C ./Libft
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
+
+$(LIBFT):
+	$(MAKE) bonus -C ./Libft
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
