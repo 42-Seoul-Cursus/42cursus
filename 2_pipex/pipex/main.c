@@ -6,17 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/21 19:50:13 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/21 20:39:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-#define READ_END 0
-#define WRITE_END 1
-
-char	**parse_path(char *envp[]);
-int		valid_path(char *path[], char *cmd);
 
 int	main(int ac, char *av[], char *envp[])
 {
@@ -27,30 +21,42 @@ int	main(int ac, char *av[], char *envp[])
 	char	*execve_path;
 	char	**execve_argv;
 
-	if (ac != 4)
+	if (ac != 5)
 		exit_with_msg("Error: arguments");
-	path = parse_path(envp);
-	infile = open(av[1], O_RDONLY);
-	if (infile == -1)
-		exit_with_msg("Error: input file");
-	outfile = open(av[3], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (outfile == -1)
-		exit_with_msg("Error: output file");
-	if (pipe(fd) == -1)
+	path = parse_path(envp); // PATH 환경변수를 파싱하여 저장
+	if (pipe(fd) == -1) // 파이프 생성
 		exit_with_msg("Error: pipe");
 
 	pid = fork();
-	if (pid == 0)
+	if (pid == 0) // infile -> cmd1 -> cmd2
 	{
-		dup2(infile, STDIN_FILENO);
-		dup2(outfile, STDOUT_FILENO);
+		infile = open(av[1], O_RDONLY); // 입력 파일을 읽기 전용으로 열기
+		if (infile == -1)
+			exit_with_msg("Error: input file");
+		close(fd[READ_END]); // 자식 프로세스는 파이프에서 읽지 않으므로 읽는 쪽을 닫는다.
+		dup2(infile, STDIN_FILENO); // infile을 표준 입력으로 복제
+		dup2(fd[WRITE_END], STDOUT_FILENO); // 파이프의 쓰기 쪽을 표준 출력으로 복제
 		execve_path = ft_strjoin(path[valid_path(path, av[2])], av[2]);
 		execve_argv = ft_split(av[2], ' ', '\0');
 		execve(execve_path, execve_argv, NULL);
 	}
-	close(fd[WRITE_END]);
-	// dup2(fd[READ_END], STDIN_FILENO);
-	wait(NULL);
+	else // parent process
+	{
+		pid = fork();
+		if (pid == 0) // cmd1 -> cmd2 -> outfile
+		{
+			outfile = open(av[4], O_WRONLY | O_CREAT, 0666); // 출력 파일을 쓰기, 없으면 생성 후 열기
+			if (outfile == -1)
+				exit_with_msg("Error: output file");
+			close(fd[WRITE_END]);
+			dup2(fd[READ_END], STDIN_FILENO); // 파이프의 읽기 쪽을 표준 입력으로 복제
+			dup2(outfile, STDOUT_FILENO); // 출력 파일을 표준 출력으로 복제
+			execve_path = ft_strjoin(path[valid_path(path, av[3])], av[3]);
+			execve_argv = ft_split(av[3], ' ', '\0');
+			execve(execve_path, execve_argv, NULL);
+		}
+		wait(NULL);
+	}
 	return (0);
 }
 
@@ -89,51 +95,3 @@ char	**parse_path(char *envp[])
 	}
 	return (path);
 }
-
-/*
-	char	**cmd1 = ft_split(av[2], ' ');
-	// char	**cmd2 = ft_split(av[3], ' ');
-
-	char	*cmdVec1[] = {cmd1[0], cmd1[1], av[1], NULL};
-	// char	*cmdVec2[] = {cmd2[0], cmd2[1], NULL};
-
-	int		fd[2];
-
-	pid_t	pid;
-
-	int		file1 = open(av[1], O_RDONLY);
-	// int		file2 = open(av[4], O_WRONLY | O_CREAT, 0666);
-
-	if (ac != 5)
-	{
-		perror("arguments");
-		return (1);
-	}
-	pipe(fd);
-	pid = fork();
-
-	int	flag = -1;
-	int	i = 0;
-
-	if (pid == -1)
-	{
-		perror("fork");
-		return (1);
-	}
-	else if (pid == 0) // child process
-	{
-		// dup2(fd[1], 1);
-		close(fd[0]); // 자식 프로세스는 파이프에서 읽지 않으므로 읽는 쪽을 닫는다.
-		while (flag < 0 || i < 5)
-		{
-			flag = execve("/bin/cat", cmdVec1, NULL);
-			printf("flag: %d\n", flag);
-			printf("%s\n", ft_strjoin(path[i], cmd1[0]));
-			++i;
-		}
-	}
-	else // parent process
-	{
-
-	}
- */
