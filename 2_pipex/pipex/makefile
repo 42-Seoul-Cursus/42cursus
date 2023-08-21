@@ -6,7 +6,7 @@ CFLAGS=-Wall -Werror -Wextra
 DEBUG=-g3 -fsanitize=address
 
 LIBFT=./Libft/libft.a
-SRCS=main.c utils.c
+SRCS=main.c utils.c protected.c
 OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
