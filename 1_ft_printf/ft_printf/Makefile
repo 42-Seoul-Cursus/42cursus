@@ -1,7 +1,7 @@
 .SUFFIXES : .c .o
 
 NAME=libftprintf.a
-CC=cc
+CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 DEBUG=-g3 -fsanitize=address
 

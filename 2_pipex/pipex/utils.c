@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:36:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/22 00:44:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/22 16:03:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	valid_path(char *path[], char *cmd)
 	i = 0;
 	while (path[i] != NULL)
 	{
-		if (access(ft_strjoin(path[i], cmd), F_OK | X_OK) == 0)
+		if (access(ft_strjoin(path[i], cmd), X_OK) == 0)
 			return (i);
 		++i;
 	}

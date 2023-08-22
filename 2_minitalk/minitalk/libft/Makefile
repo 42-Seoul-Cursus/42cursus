@@ -1,7 +1,7 @@
 .SUFFIXES : .c .o
 
 NAME=libft.a
-CC=cc
+CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 DEBUG=-g3 -fsanitize=address
 
@@ -16,7 +16,7 @@ $(NAME): $(MANDATORY_OBJS)
 	ar cr $(NAME) $(MANDATORY_OBJS)
 
 bonus:
-	make 'MANDATORY_OBJS=$(MANDATORY_OBJS) $(BONUS_OBJS)' all
+	$(MAKE) 'MANDATORY_OBJS=$(MANDATORY_OBJS) $(BONUS_OBJS)' all
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -28,11 +28,11 @@ fclean: clean
 	rm -f $(NAME)
 
 re:
-	make fclean
-	make all
+	$(MAKE) fclean
+	$(MAKE) all
 
 debug:
-	make fclean
-	make all CFLAGS="$(CFLAGS) $(DEBUG)"
+	$(MAKE) fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 
 .PHONY: all clean fclean re bonus debug
