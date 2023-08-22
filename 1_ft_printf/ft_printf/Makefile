@@ -1,9 +1,11 @@
 .SUFFIXES : .c .o
 
+NAME=libftprintf.a
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
-NAME=libftprintf.a
-SRCS=$(shell echo *.c)
+DEBUG=-g3 -fsanitize=address
+
+SRCS=ft_printf.c utils.c
 OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
@@ -24,4 +26,8 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: all clean fclean re bonus
+debug:
+	$(MAKE) fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+
+.PHONY: all clean fclean re bonus debug
