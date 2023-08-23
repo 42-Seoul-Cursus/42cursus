@@ -14,6 +14,10 @@
 
 ## pause
 
+SIGUSR1 = 0
+SIGUSR2 = 1
+
+
 ## sleep
 
 ## usleep

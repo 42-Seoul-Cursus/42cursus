@@ -6,20 +6,40 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:34:01 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/22 17:43:19 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/23 20:37:36 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
+char	buffer[8];
+int		i = 0;
+
+void	flush_buf(void)
+{
+	char	c;
+
+	c = 0;
+	for (int i = 0; i < 8; ++i)
+	{
+		if (buffer[i] == '1')
+			c += 1 << (7 - i);
+	}
+	ft_printf("%c", (char) c);
+}
+
 void	handler(int signum)
 {
 	if (signum == SIGUSR1)
-		ft_putstr_fd("SIGUSR1\n", 1);
+		buffer[i] = '0';
 	else if (signum == SIGUSR2)
-		ft_putstr_fd("SIGUSR2\n", 1);
-	else
-		ft_putstr_fd("Unknown signal\n", 1);
+		buffer[i] = '1';
+	++i;
+	if (i > 7)
+	{
+		i = 0;
+		flush_buf();
+	}
 }
 
 int	main(void)
