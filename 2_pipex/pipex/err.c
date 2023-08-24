@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   err.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 18:08:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/24 20:38:44 by seunan           ###   ########.fr       */
+/*   Created: 2023/08/24 17:08:46 by seunan            #+#    #+#             */
+/*   Updated: 2023/08/24 20:06:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "pipex.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	exit_with_err(char *err)
 {
-	char	*mem;
+	perror(err);
+	exit(EXIT_FAILURE);
+}
 
-	mem = malloc(size * count);
-	if (!mem)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
-	ft_bzero(mem, size * count);
-	return ((void *) mem);
+void	exit_with_msg(char *msg)
+{
+	ft_putstr_fd(msg, STDERR_FILENO);
+	exit(EXIT_FAILURE);
+}
+
+void	open_err(char *file)
+{
+	ft_putstr_fd("pipex: ", STDERR_FILENO);
+	perror(file);
+	exit(EXIT_FAILURE);
 }

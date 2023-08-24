@@ -6,28 +6,32 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:36:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/24 15:55:17 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/24 20:50:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	exit_with_msg(char *msg)
-{
-	ft_putstr_fd("bash: ", STDERR_FILENO);
-	perror(msg);
-	exit(EXIT_FAILURE);
-}
+// void	pipe_to_outfile(char *av[], char *path[], int fd[2], int outfile)
+// {
+// 	char	**execve_argv;
+// 	char	*execve_path;
 
-void	fd_to_outfile(char *av[], char *path[], int fd[2])
+// 	protected_close(fd[WRITE_END]);
+// 	protected_dup2(fd[READ_END], STDIN_FILENO);
+// 	protected_dup2(outfile, STDOUT_FILENO);
+// 	execve_argv = ft_split(av[3], ' ', '\0');
+// 	execve_path = ft_strjoin(path[valid_path(path, execve_argv[0])],
+// 			execve_argv[0]);
+// 	execve(execve_path, execve_argv, NULL);
+// 	exit_with_msg("Error: execve\n");
+// }
+
+void	pipe_to_outfile(char *av[], char *path[], int fd[2], int outfile)
 {
-	int		outfile;
 	char	**execve_argv;
 	char	*execve_path;
 
-	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (outfile < 0)
-		exit_with_msg("Error: output file\n");
 	protected_close(fd[WRITE_END]);
 	protected_dup2(fd[READ_END], STDIN_FILENO);
 	protected_dup2(outfile, STDOUT_FILENO);
@@ -38,23 +42,44 @@ void	fd_to_outfile(char *av[], char *path[], int fd[2])
 	exit_with_msg("Error: execve\n");
 }
 
-void	infile_to_fd(char *av[], char *path[], int fd[2])
+// void	infile_to_pipe(char *av[], char *path[], int fd[2], int infile)
+// {
+// 	char	**execve_argv;
+// 	char	*execve_path;
+
+// 	protected_close(fd[READ_END]);
+// 	protected_dup2(infile, STDIN_FILENO);
+// 	protected_dup2(fd[WRITE_END], STDOUT_FILENO);
+// 	execve_argv = ft_split(av[2], ' ', '\0');
+// 	execve_path = ft_strjoin(path[valid_path(path, execve_argv[0])],
+// 			execve_argv[0]);
+// 	execve(execve_path, execve_argv, NULL);
+// 	exit_with_msg("Error: execve\n");
+// }
+
+void	execute(int read[2], int write[2], char *cmd, char *path[])
 {
-	int		infile;
 	char	**execve_argv;
 	char	*execve_path;
 
-	infile = open(av[1], O_RDONLY);
-	if (infile < 0)
-		exit_with_msg(av[1]);
-	protected_close(fd[READ_END]);
-	protected_dup2(infile, STDIN_FILENO);
-	protected_dup2(fd[WRITE_END], STDOUT_FILENO);
-	execve_argv = ft_split(av[2], ' ', '\0');
+	protected_dup2(read[READ_END], STDIN_FILENO);
+	protected_dup2(write[WRITE_END], STDOUT_FILENO);
+	execve_argv = ft_split(cmd, ' ', '\0');
 	execve_path = ft_strjoin(path[valid_path(path, execve_argv[0])],
 			execve_argv[0]);
 	execve(execve_path, execve_argv, NULL);
-	exit_with_msg("Error: execve\n");
+	execve(execve_argv[0], execve_argv, NULL);
+}
+
+void	infile_to_pipe(char *av[], char *path[])
+{
+	pid_t	pid;
+	int		fd[2];
+
+	protected_pipe(fd);
+	pid = protected_fork();
+	if (pid == 0)
+		execute(fd, av[2], fd[WRITE_END], path);
 }
 
 int	valid_path(char *path[], char *cmd)
@@ -91,5 +116,7 @@ char	**parse_path(char *envp[])
 		}
 		++i;
 	}
+	if (path == NULL)
+		exit_with_msg("Error: PATH not found\n");
 	return (path);
 }

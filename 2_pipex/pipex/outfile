@@ -1,0 +1,15 @@
+Makefile
+err.c
+err.o
+libft
+main.c
+main.o
+outfil
+outfile
+pipex
+pipex.h
+print
+protected.c
+protected.o
+utils.c
+utils.o
