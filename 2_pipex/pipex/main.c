@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/24 20:51:46 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/24 21:01:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@
 void	pipex(int ac, char *av[], char *envp[])
 {
 	int		(*fd)[2];
-	int		i;
 	int		cmd_cnt;
 	char	**path;
 
 	path = parse_path(envp);
-	cmd_cnt = ac - 3;
-	fd = ft_calloc(sizeof(int *) * cmd_cnt);
+	cmd_cnt = ac - 5;
+	fd = ft_calloc(cmd_cnt, sizeof(int *));
 	infile_to_pipe();
-	i = 0;
-	// while (i < cmd_cnt - 1)
-	// 	pipe_to_pipe();
+	while (cmd_cnt-- > 0)
+		pipe_to_pipe();
 	pipe_to_outfile();
-	wait(NULL);
 }
 // void	pipex(int ac, char *av[], char *envp[])
 // {

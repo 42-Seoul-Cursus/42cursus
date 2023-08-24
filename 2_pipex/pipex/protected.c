@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 23:51:55 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/24 20:02:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/24 21:05:10 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ pid_t	protected_fork(void)
 
 	pid = fork();
 	if (pid < 0)
-		exit_with_msg("fork");
+		exit_with_err("fork");
 	return (pid);
 }
 
 void	protected_dup2(int oldfd, int newfd)
 {
 	if (dup2(oldfd, newfd) < 0)
-		exit_with_msg("dup2");
+		exit_with_err("dup2");
 }
