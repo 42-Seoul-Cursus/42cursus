@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:36:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/22 16:03:58 by seunan           ###   ########.fr       */
+/*   Updated: 2023/08/24 15:55:17 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	exit_with_msg(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("bash: ", STDERR_FILENO);
+	perror(msg);
 	exit(EXIT_FAILURE);
 }
 
@@ -24,7 +25,9 @@ void	fd_to_outfile(char *av[], char *path[], int fd[2])
 	char	**execve_argv;
 	char	*execve_path;
 
-	outfile = protected_open(av[4], O_WRONLY | O_CREAT | O_TRUNC);
+	outfile = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (outfile < 0)
+		exit_with_msg("Error: output file\n");
 	protected_close(fd[WRITE_END]);
 	protected_dup2(fd[READ_END], STDIN_FILENO);
 	protected_dup2(outfile, STDOUT_FILENO);
@@ -41,7 +44,9 @@ void	infile_to_fd(char *av[], char *path[], int fd[2])
 	char	**execve_argv;
 	char	*execve_path;
 
-	infile = protected_open(av[1], O_RDONLY);
+	infile = open(av[1], O_RDONLY);
+	if (infile < 0)
+		exit_with_msg(av[1]);
 	protected_close(fd[READ_END]);
 	protected_dup2(infile, STDIN_FILENO);
 	protected_dup2(fd[WRITE_END], STDOUT_FILENO);
