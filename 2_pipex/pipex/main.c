@@ -6,49 +6,31 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/08/24 21:01:04 by seunan           ###   ########.fr       */
+/*   Updated: 2023/09/02 14:37:21 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-
 void	pipex(int ac, char *av[], char *envp[])
 {
-	int		(*fd)[2];
-	int		cmd_cnt;
 	char	**path;
+	pid_t	pid;
+	int		fd[2];
 
 	path = parse_path(envp);
-	cmd_cnt = ac - 5;
-	fd = ft_calloc(cmd_cnt, sizeof(int *));
-	infile_to_pipe();
-	while (cmd_cnt-- > 0)
-		pipe_to_pipe();
-	pipe_to_outfile();
+	protected_pipe(fd);
+	pid = protected_fork();
+	if (pid == 0)
+		infile_to_fd(av, path, fd);
+	waitpid(pid, NULL, 0);
+	pid = protected_fork();
+	if (pid == 0)
+		fd_to_outfile(av, path, fd);
+	protected_close(fd[WRITE_END]);
+	waitpid(pid, NULL, 0);
+	(void) ac;
 }
-// void	pipex(int ac, char *av[], char *envp[])
-// {
-// 	char	**path;
-// 	pid_t	pid;
-// 	int		fd[2];
-// 	int		file[2];
-
-// 	path = parse_path(envp);
-// 	if (pipe(fd) == -1)
-// 		exit_with_err("pipe");
-// 	pid = fork();
-// 	if (pid == -1)
-// 		exit_with_err("fork");
-// 	if (pid == 0)
-// 		infile_to_pipe(av, path, fd, file[0]);
-// 	wait(NULL);
-// 	pid = fork();
-// 	if (pid == 0)
-// 		pipe_to_outfile(av, path, fd, file[1]);
-// 	wait(NULL);
-// }
 
 int	main(int ac, char *av[], char *envp[])
 {
