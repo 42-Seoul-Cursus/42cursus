@@ -3,7 +3,7 @@
 NAME=pipex
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra
-DEBUG=-g3 -fsanitize=address
+DEBUG=-g
 
 LIBFT=./Libft/libft.a
 SRCS=${wildcard *.c}
@@ -21,7 +21,7 @@ $(LIBFT):
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./Libft
+	$(MAKE) fclean -C ./Libft
 	rm -f $(OBJS)
 
 fclean: clean
