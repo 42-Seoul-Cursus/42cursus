@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:36:27 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/06 18:13:03 by seunan           ###   ########.fr       */
+/*   Updated: 2023/09/07 21:14:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void	pipex(char *av[], char *envp[])
 {
 	char	**path;
-	pid_t	pid;
+	pid_t	pid[2];
 	int		fd[2];
 
 	path = parse_path(envp);
 	protected_pipe(fd);
-	pid = protected_fork();
-	if (pid == 0)
+	pid[0] = protected_fork();
+	if (pid[0] == 0)
 		infile_to_fd(av, path, fd);
-	waitpid(pid, NULL, 0);
-	pid = protected_fork();
-	if (pid == 0)
+	pid[1] = protected_fork();
+	if (pid[1] == 0)
 		fd_to_outfile(av, path, fd);
 	close(fd[READ_END]);
 	close(fd[WRITE_END]);
-	waitpid(pid, NULL, 0);
+	waitpid(pid[0], NULL, 0);
+	waitpid(pid[1], NULL, 0);
 	free_path(path);
 }
 
