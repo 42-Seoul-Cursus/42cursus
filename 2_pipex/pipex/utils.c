@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 23:51:55 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/06 18:13:08 by seunan           ###   ########.fr       */
+/*   Updated: 2023/09/07 22:42:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	**parse_path(char *envp[])
 		}
 		++i;
 	}
+	if (path == NULL)
+		exit_with_msg("PATH not found\n");
 	return (path);
 }
 
