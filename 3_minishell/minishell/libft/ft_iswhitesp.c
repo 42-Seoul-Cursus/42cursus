@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_iswhitesp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/08/27 20:16:45 by seunan            #+#    #+#             */
+/*   Updated: 2023/08/27 20:53:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
-int	main(int ac, char *av[], char *envp[])
+int	ft_iswhitesp(char c)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	return ((9 <= c && c <= 13) || (c == ' '));
 }

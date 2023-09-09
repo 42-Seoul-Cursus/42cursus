@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 16:34:04 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/19 19:33:19 by anseungwon       ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
+	while (n-- != 0)
+	{
+		if (*(unsigned char *)s == (unsigned char)c)
+			return ((void *)s);
+		++s;
+	}
 	return (0);
 }

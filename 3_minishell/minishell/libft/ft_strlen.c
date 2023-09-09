@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 19:37:32 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+size_t	ft_strlen(const char *s)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	size_t	len;
+
+	len = 0;
+	while (s[len] != '\0')
+		++len;
+	return (len);
 }

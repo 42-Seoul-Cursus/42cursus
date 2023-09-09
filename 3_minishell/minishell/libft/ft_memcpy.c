@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/13 11:16:21 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/19 19:35:02 by anseungwon       ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	size_t	i;
+
+	if (dst == src)
+		return (dst);
+	i = 0;
+	while (i < n)
+	{
+		*(char *)(dst + i) = *(char *)(src + i);
+		++i;
+	}
+	return (dst);
 }

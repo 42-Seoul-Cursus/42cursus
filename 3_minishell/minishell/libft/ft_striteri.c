@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:42:09 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/16 10:07:52 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
-int	main(int ac, char *av[], char *envp[])
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	unsigned int	i;
+
+	i = 0;
+	while (*s != '\0')
+		f(i++, s++);
 }

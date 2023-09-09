@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:57 by seunan            #+#    #+#             */
+/*   Updated: 2023/07/18 11:11:47 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strdup(const char *s1)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	char	*answer;
+	size_t	i;
+
+	answer = ft_calloc(ft_strlen(s1) + 1, sizeof(char));
+	if (!answer)
+		return (0);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		answer[i] = s1[i];
+		++i;
+	}
+	return (answer);
 }

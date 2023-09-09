@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 21:07:32 by seunan            #+#    #+#             */
+/*   Updated: 2023/09/06 23:58:34 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	char	*answer;
+	size_t	i;
+	size_t	j;
+
+	answer = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	i = 0;
+	j = 0;
+	while (s1[j] != '\0')
+		answer[i++] = s1[j++];
+	j = 0;
+	while (s2[j] != '\0')
+		answer[i++] = s2[j++];
+	return (answer);
 }

@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:11 by seunan            #+#    #+#             */
+/*   Updated: 2023/08/27 02:13:08 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
-int	main(int ac, char *av[], char *envp[])
+int	ft_atoi(const char *str)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	long long	num;
+	int			min;
+	int			i;
+
+	num = 0;
+	min = 1;
+	i = 0;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
+		++i;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			min *= -1;
+		++i;
+	}
+	while (('0' <= str[i] && str[i] <= '9'))
+	{
+		num = num * 10 + str[i] - '0';
+		++i;
+	}
+	return (min * num);
 }

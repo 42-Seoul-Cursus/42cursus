@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/15 23:18:14 by seunan            #+#    #+#             */
+/*   Updated: 2023/03/18 19:37:49 by seunan           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char *av[], char *envp[])
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	char			*answer;
+	unsigned int	i;
+
+	answer = ft_calloc(sizeof(char), ft_strlen(s) + 1);
+	if (!answer)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		answer[i] = f(i, s[i]);
+		++i;
+	}
+	return (answer);
 }

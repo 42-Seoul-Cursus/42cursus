@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:47:33 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/09 16:01:52 by seunan           ###   ########.fr       */
+/*   Created: 2023/03/14 18:08:46 by seunan            #+#    #+#             */
+/*   Updated: 2023/09/04 22:41:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
+#include <stdio.h>
 
-int	main(int ac, char *av[], char *envp[])
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (ac < 5)
-		exit_with_msg("Usage: ./pipex [infile] [cmd 1] ... [cmd n] [outfile]\n");
-	pipex(av, envp);
-	return (0);
+	char	*mem;
+
+	mem = malloc(size * count);
+	if (!mem)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	ft_bzero(mem, size * count);
+	return ((void *) mem);
 }
