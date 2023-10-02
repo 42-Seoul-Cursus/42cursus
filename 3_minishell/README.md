@@ -66,12 +66,25 @@
 ## TODO
 
 - [x] parsing
-- [ ] syntax check
-- [ ] execute
-	- [ ] 다중 파이프
-	- [ ] 환경 변수 변환?
-	- [ ] awk 문법(파싱할 때 변수가 제일 많음)
-- [ ] 환경 변수 출력하기
+	- [x] Assign Type
+	- [x] syntax check
+- [x] execute
+	- [x] 다중 파이프
+	- [x] redirection 처리
+	- [x] HERE_DOC
+	- [x] 환경 변수 변환
+	- [x] quote trim 처리
+	- [x] leak 잡기
+	- [x] builtin pipe 처리
+	- [ ] norm 처리
+- [x] process 상태값
+- [x] signal 처리
+	- [x] ctrl + D
+	- [x] ctrl + C
+	- [x] ctrl + \
+- [x] 환경변수 치환
+	- 현재 순서 : str => replace env => trim quote => parse
+	- 바꿔야할 순서 : str => parse => replace env => trim quote
 
 ## Analyzing a subject
 

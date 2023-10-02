@@ -1,39 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/27 14:00:51 by seunan            #+#    #+#             */
+/*   Updated: 2023/10/02 22:09:48 by seunan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	print(t_list *lst)
+int	main(int argc, char *argv[], char *envp[])
 {
-	int	cnt = 0;
+	atexit(leak);
+	t_vars	*vars;
 
-	printf("\033[1;37m");
-	while (lst != NULL)
-	{
-		printf("%d: %s\n", cnt, lst->token);
-		lst = lst->next;
-		++cnt;
-	}
-	printf("\033[1;30m");
-	printf("\ndivided into %d tokens\n", cnt);
-	printf("\033[0m");
+	vars = (t_vars *)ft_calloc(1, sizeof(t_vars));
+	init_vars(vars, envp);
+	minishell(vars);
+	free_vars(vars, argc, argv);
+	return (g_status);
 }
 
-int	main(void)
+void	minishell(t_vars *vars)
 {
 	char	*str;
 
 	while (1)
 	{
+		signal(SIGINT, sigint_handler);
+		signal(SIGQUIT, SIG_IGN);
 		str = readline("\033[0;36mminishell$\033[0m ");
-		if (ft_strncmp(str, "exit", 5) == 0)
+		if (str == NULL)
 		{
-			ft_putstr_fd("exit\n", 1);
+			ft_putendl_fd("exit", 1);
 			break ;
 		}
-		print(tokenize(str));
 		add_history(str);
-		free(str);
+		if (!quotes_check(str))
+			continue ;
+		vars->lst = tokenize(str);
+		if (vars->lst == NULL)
+			;
+		else if (syntax_check(vars->lst) == 0)
+			g_status = 258;
+		else
+			execute_frame(vars);
+		free_str_tok(str, &(vars->lst));
 	}
-	return (0);
 }
-// USER=test | env | grep USER => 환경변수 변경 적용 안되는게 맞나?
-
-// "g"r"epadasdasfasd"

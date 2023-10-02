@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:29:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/09/06 23:29:30 by seunan           ###   ########.fr       */
+/*   Updated: 2023/09/27 14:04:25 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,36 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef enum e_state
+{
+	START,
+	CMD,
+	FNAME,
+	PIPE,
+	IN_REDIR,
+	OUT_REDIR,
+	HEREDOC,
+	PAIR_OUT_REDIR,
+}	t_state;
+
 typedef struct s_list
 {
 	char			*token;
+	t_state			state;
 	struct s_list	*next;
+
 }					t_list;
 
-int					ft_isalpha(int c);
-int					ft_isdigit(int c);
 int					ft_isalnum(int c);
-int					ft_isquote(char c);
-int					ft_iseven(int n);
+int					ft_isalpha(int c);
 int					ft_isascii(int c);
+int					ft_isdigit(int c);
+int					ft_iseven(int n);
 int					ft_isprint(int c);
+int					ft_isquote(char c);
+int					ft_issymbol(char c);
+int					ft_isseparator(char c);
+int					ft_isword(char c);
 int					ft_iswhitespace(char c);
 size_t				ft_strlen(const char *s);
 void				*ft_memset(void *b, int c, size_t len);
@@ -51,7 +68,7 @@ char				*ft_strdup(const char *s1);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
-char				**ft_split(char const *s, char c);
+char				**ft_split(char const *s, char c, char suffix);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
