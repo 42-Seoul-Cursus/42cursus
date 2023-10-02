@@ -106,13 +106,13 @@
 
 ##### _Here are the things you need to know if you want to succeed this assignment:_
  이 과제를 성공적으로 수행하기 위해 알아야 할 사항은 다음과 같습니다:
- 
+
 - ##### _One or more philosophers sit a round table.<br>Ther is a large bowl of spaghetti in the middle of the table._
 
 	 한 명 이상의 철학자들이 원탁에 둘러앉아 있고, 테이블 중앙에는 커다란 스파게티 한 그릇이 놓여 있습니다.
 
-- ##### _The philosophers alternatively `eat`, `think`, or `sleep`.<br>While they are eating, they are not thinking nor sleeping;<br>while thinkg, they are not eating nor sleeping;<br>and, of course, while sleeping, they are not eating nor thinking._
- 
+- ##### _The philosophers alternatively `eat`, `think`, or `sleep`.<br>While they are eating, they are not thinking nor sleeping;<br>while thinking, they are not eating nor sleeping;<br>and, of course, while sleeping, they are not eating nor thinking._
+
 	 철학자들은 번갈아가며 `먹기`, `생각하기`, `자기`를 합니다.<br>철학자가 먹고 있을 때에는 생각하거나 자지 않습니다.<br>생각하고 있을 때에는 먹거나 자지 않습니다.<br>물론 자고 있을 때에는 먹거나 생각하지 않습니다.
 
 - ##### _There are also forks on the table. There are `as many forks as philosophers`._
@@ -165,7 +165,7 @@
 
 		 철학자의 수 : 철학자의 수와 포크의 수입니다.
 
-	- ##### _`time_to_die`(in milliseconds): If a philosopher didn't start eating `time_to_die` milliseconds the beginning of the simulation, they die._ 
+	- ##### _`time_to_die`(in milliseconds): If a philosopher didn't start eating `time_to_die` milliseconds the beginning of the simulation, they die._
 
 		 철학자의 수명(밀리초 단위) : 철학자가 마지막으로 밥을 먹기 시작한 시점으로부터 `time_to_die` 시간만큼이 지나거나, 프로그램 시작 후 `time_to_die` 시간만큼이 지나도록 식사를 시작하지 않으면 해당 철학자는 사망합니다.
 
@@ -199,13 +199,13 @@
 	- ##### _timestamp_in_ms X is eating_
 	- ##### _timestamp_in_ms X is sleeping_
 	- ##### _timestamp_in_ms X is thinking_
-	- ##### _timestamp_in_ms X died_	 	
+	- ##### _timestamp_in_ms X died_
 
 	##### _Replace `timestamp_in_ms` with the current timestamp in milliseconds and `X` with the philosopher number._
-	 `timestamp_in_ms`를 현재 타임스탬프(밀리초)로 바꾸고 `X`를 철학자 번호로 바꿉니다. 
+	 `timestamp_in_ms`를 현재 타임스탬프(밀리초)로 바꾸고 `X`를 철학자 번호로 바꿉니다.
 
 - ##### _A displayed state message should not be mixed up with another message._
-	 
+
 	 철학자의 상태는 다른 철학자들의 상태와 뒤엉키거나 섞인 상태로 출력되면 안 됩니다.
 
 - ##### _A message announcing a philosopher died should be displayed no more than 10 ms after the actual death of the philosopher._
@@ -264,7 +264,7 @@
 | **제출할 파일** | philo_bonus/ 디렉토리 안에 Makefile, *.h, *.c  |
 | **Makefile** | all, clean, fclean, re |
 | **인자** | number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat] |
-| **사용가능한 외부 함수** | memset, printf, malloc, free, write, fork, kill, exit, pthtread_create, pthread_detach, pthread_join, usleep, gettimeofday waitpid, sem_open, sem_close, sem_post, sem_wait, sem_unlink |
+| **사용가능한 외부 함수** | memset, printf, malloc, free, write, fork, kill, exit, pthread_create, pthread_detach, pthread_join, usleep, gettimeofday waitpid, sem_open, sem_close, sem_post, sem_wait, sem_unlink |
 | **Libft 사용여부** | No |
 | **설명** | Philosophers with processes and semaphores |
 
@@ -292,7 +292,7 @@
 >
 > ##### _The bonus part will only be assessed if the mandatory part is PERFECT. Perfect means the mandatory part has been integrally done and works without malfunctioning.  If you have not passed ALL the mandatory requirements, your bonus part will not be evaluated at all._
 >
-> 
+>
 
 <br>
 
