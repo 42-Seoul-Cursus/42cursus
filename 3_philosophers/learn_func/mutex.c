@@ -6,7 +6,8 @@ pthread_mutex_t myMutex;
 int main(void)
 {
 	// Initialize the mutex
-	if (pthread_mutex_init(&myMutex, NULL) != 0) {
+	if (pthread_mutex_init(&myMutex, NULL) != 0)
+	{
 		perror("Mutex initialization failed");
 		return 1;
 	}
