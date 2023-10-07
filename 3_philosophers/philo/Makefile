@@ -1,13 +1,13 @@
 .SUFFIXES : .c .o
 
 NAME=philo
-CC=gcc
-PRINTF = printf
-CFLAGS= -Werror -Wall -Wextra -I/opt/homebrew/opt/readline/include
-LLDB= -g
-DEBUG= -g3 -fsanitize=address
+CC=cc
+PRINTF=printf
+CFLAGS=-Werror -Wall -Wextra
+LLDB=-g
+DEBUG=-g3 -fsanitize=thread
 
-SRCS= main.c
+SRCS=${wildcard *.c}
 OBJS=$(SRCS:.c=.o)
 
 # Color Aliases
