@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/08 16:53:28 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/08 19:25:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_data(t_data *data, int ac, char *av[])
 	data->number_of_times_each_philosopher_must_eat = 0;
 	if (ac == 6)
 		data->number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
-	data->cnt = 1;
+	data->cnt = 0;
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
 		exit_with_err("Mutex initialization failed");
 	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->number_of_philosophers);
@@ -50,18 +50,22 @@ t_philo	*init_philos(t_data *data)
 		exit_with_err("Malloc failed");
 	while (i < data->number_of_philosophers)
 	{
-		init_philo(&philos[i], data, i + 1);
+		init_philo(&philos[i], data, i);
 		i++;
 	}
 	return (philos);
 }
-
+// 0 1 2 3 4
+// 4 3 2 1 0
 void	init_philo(t_philo *philo, t_data *data, int id)
 {
-	philo->id = id;
+	philo->id = id + 1;
 	philo->status = THINKING;
-	philo->last_eat_time = 0;
-	philo->eat_count = 0;
+	philo->right_fork = id; // 4
+	if (id == data->number_of_philosophers - 1)
+		philo->left_fork = 0;
+	else
+		philo->left_fork = id + 1; // 2
 	philo->data = data;
 }
 

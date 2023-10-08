@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/08 16:53:06 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/08 22:37:43 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ typedef struct	s_data
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	int				id;
-	t_status		status;
-	int				last_eat_time;
-	int				eat_count;
-	t_data			*data; // 공유자원
+	pthread_t			thread;
+	int					id;
+	t_status			status;
+	int					left_fork;
+	int					right_fork;
+	unsigned long long	last_eat;
+	unsigned long long	;
+	t_data				*data; // 공유자원
 }				t_philo;
 
 // test.c
-void	print_philos(t_data *data);
+void	print_philos(t_philo *philos);
 
 void	exit_with_err(char *err_msg);
 
@@ -59,6 +61,7 @@ void	init_data(t_data *data, int ac, char *av[]);
 t_philo	*init_philos(t_data *data);
 void	init_philo(t_philo *philo, t_data *data, int id);
 void	check_data(t_data *data, int ac);
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
+void	*philo_routine(void *arg);
 
 #endif

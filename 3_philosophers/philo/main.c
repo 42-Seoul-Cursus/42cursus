@@ -6,13 +6,59 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/08 17:05:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/08 22:28:41 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*philo(void *arg)
+void	sit_table(t_philo *philo)
+{
+	while (1)
+	{
+		if (philo->id % 2 == 0)
+		{
+			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+
+			pthread_mutex_lock(&philo->data->print);
+			printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+			pthread_mutex_unlock(&philo->data->print);
+		}
+		else if (philo->id % 2 == 1)
+		{
+			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+
+			pthread_mutex_lock(&philo->data->print);
+			printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+			pthread_mutex_unlock(&philo->data->print);
+		}
+		if (philo->id % 2 == 0)
+		{
+			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+
+			pthread_mutex_lock(&philo->data->print);
+			printf("timestamp_in_ms %d is eating\n", philo->id);
+			pthread_mutex_unlock(&philo->data->print);
+
+			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		}
+		else if (philo->id % 2 == 1)
+		{
+			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+
+			pthread_mutex_lock(&philo->data->print);
+			printf("timestamp_in_ms %d is eating\n", philo->id);
+			pthread_mutex_unlock(&philo->data->print);
+
+			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		}
+	}
+
+}
+
+void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 	t_data	*data;
@@ -25,16 +71,14 @@ void	*philo(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&data->print);
-		if (data->cnt > data->number_of_philosophers)
+		if (data->cnt == data->number_of_philosophers)
 		{
 			pthread_mutex_unlock(&data->print);
 			break;
 		}
 		pthread_mutex_unlock(&data->print);
 	}
-	pthread_mutex_lock(&data->print);
-	printf("philo id : %d cnt : %d\n", philo->id, philo->data->cnt);
-	pthread_mutex_unlock(&data->print);
+	sit_table(philo);
 	return (NULL);
 }
 
@@ -45,9 +89,9 @@ void	make_thread(t_philo *philos)
 	i = 0;
 	while (i < (philos)->data->number_of_philosophers)
 	{
-		pthread_create(&(philos)[i].thread, NULL, philo, &(philos)[i]);
-		usleep(100000);
-		i++;
+		pthread_create(&(philos)[i].thread, NULL, philo_routine, &(philos)[i]);
+		usleep(300);
+		++i;
 	}
 	i = 0;
 	while (pthread_join(philos[i].thread, NULL) != 0)
@@ -62,7 +106,7 @@ int	main(int ac, char *av[])
 	init_data(&data, ac, av);
 	check_data(&data, ac);
 	philo = init_philos(&data);
-	// print_philos(&data);
+	// print_philos(philo);
 	make_thread(philo);
 	return (0);
 }
