@@ -6,56 +6,72 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/08 22:28:41 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/09 16:34:22 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	printf_with_lock(t_data *data, char *str)
+{
+	pthread_mutex_lock(&data->print);
+	printf("%s\n", str);
+	pthread_mutex_unlock(&data->print);
+}
+
+void	sleeping(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->print);
+	printf("timestamp_in_ms %d is sleeping\n", philo->id);
+	pthread_mutex_unlock(&philo->data->print);
+	usleep(philo->data->time_to_sleep_in_ms);
+}
+
+void	eating(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+		pthread_mutex_lock(&philo->data->print);
+		printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+		pthread_mutex_unlock(&philo->data->print);
+	}
+	else if (philo->id % 2 == 1)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+		pthread_mutex_lock(&philo->data->print);
+		printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+		pthread_mutex_unlock(&philo->data->print);
+	}
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+		pthread_mutex_lock(&philo->data->print);
+		printf("timestamp_in_ms %d is eating\n", philo->id);
+		usleep(philo->data->time_to_eat_in_ms);
+		pthread_mutex_unlock(&philo->data->print);
+		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+	}
+	else if (philo->id % 2 == 1)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+		pthread_mutex_lock(&philo->data->print);
+		printf("timestamp_in_ms %d is eating\n", philo->id);
+		usleep(philo->data->time_to_eat_in_ms);
+		pthread_mutex_unlock(&philo->data->print);
+		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+	}
+}
+
 void	sit_table(t_philo *philo)
 {
 	while (1)
 	{
-		if (philo->id % 2 == 0)
-		{
-			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
-
-			pthread_mutex_lock(&philo->data->print);
-			printf("timestamp_in_ms %d has taken a fork\n", philo->id);
-			pthread_mutex_unlock(&philo->data->print);
-		}
-		else if (philo->id % 2 == 1)
-		{
-			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-
-			pthread_mutex_lock(&philo->data->print);
-			printf("timestamp_in_ms %d has taken a fork\n", philo->id);
-			pthread_mutex_unlock(&philo->data->print);
-		}
-		if (philo->id % 2 == 0)
-		{
-			pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
-
-			pthread_mutex_lock(&philo->data->print);
-			printf("timestamp_in_ms %d is eating\n", philo->id);
-			pthread_mutex_unlock(&philo->data->print);
-
-			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
-			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-		}
-		else if (philo->id % 2 == 1)
-		{
-			pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
-
-			pthread_mutex_lock(&philo->data->print);
-			printf("timestamp_in_ms %d is eating\n", philo->id);
-			pthread_mutex_unlock(&philo->data->print);
-
-			pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
-			pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-		}
+		eating(philo);
+		sleeping(philo);
 	}
-
 }
 
 void	*philo_routine(void *arg)
@@ -73,8 +89,9 @@ void	*philo_routine(void *arg)
 		pthread_mutex_lock(&data->print);
 		if (data->cnt == data->number_of_philosophers)
 		{
+			gettimeofday(&data->start_time, NULL);
 			pthread_mutex_unlock(&data->print);
-			break;
+			break ;
 		}
 		pthread_mutex_unlock(&data->print);
 	}
@@ -84,13 +101,13 @@ void	*philo_routine(void *arg)
 
 void	make_thread(t_philo *philos)
 {
+
 	int	i;
 
 	i = 0;
 	while (i < (philos)->data->number_of_philosophers)
 	{
 		pthread_create(&(philos)[i].thread, NULL, philo_routine, &(philos)[i]);
-		usleep(300);
 		++i;
 	}
 	i = 0;
@@ -106,7 +123,7 @@ int	main(int ac, char *av[])
 	init_data(&data, ac, av);
 	check_data(&data, ac);
 	philo = init_philos(&data);
-	// print_philos(philo);
+	print_philos(philo);
 	make_thread(philo);
 	return (0);
 }

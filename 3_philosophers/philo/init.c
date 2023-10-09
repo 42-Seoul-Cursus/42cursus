@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/08 19:25:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/09 14:48:59 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_data(t_data *data, int ac, char *av[])
 	int	i;
 
 	if (!(ac == 5 || ac == 6))
-		exit_with_err("Error: Wrong number of arguments");
+		exit_with_err("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]");
 	data->number_of_philosophers = ft_atoi(av[1]);
 	data->time_to_die_in_ms = ft_atoi(av[2]);
 	data->time_to_eat_in_ms = ft_atoi(av[3]);
