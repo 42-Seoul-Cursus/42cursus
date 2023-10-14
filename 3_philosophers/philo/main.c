@@ -6,23 +6,17 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/09 16:34:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/14 19:25:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	printf_with_lock(t_data *data, char *str)
-{
-	pthread_mutex_lock(&data->print);
-	printf("%s\n", str);
-	pthread_mutex_unlock(&data->print);
-}
-
 void	sleeping(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->print);
-	printf("timestamp_in_ms %d is sleeping\n", philo->id);
+	gettimeofday(&(philo->time), NULL);
+	printf("%ld %d is sleeping\n", (philo->time.tv_sec - philo->data->start_time.tv_sec)  * 1000000 + (philo->time.tv_usec - philo->data->start_time.tv_usec), philo->id);
 	pthread_mutex_unlock(&philo->data->print);
 	usleep(philo->data->time_to_sleep_in_ms);
 }
@@ -33,21 +27,24 @@ void	eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_lock(&philo->data->print);
-		printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+		gettimeofday(&(philo->time), NULL);
+		printf("%ld %d has taken a fork\n", (philo->time.tv_sec - philo->data->start_time.tv_sec)  * 1000000 + (philo->time.tv_usec - philo->data->start_time.tv_usec), philo->id);
 		pthread_mutex_unlock(&philo->data->print);
 	}
 	else if (philo->id % 2 == 1)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
 		pthread_mutex_lock(&philo->data->print);
-		printf("timestamp_in_ms %d has taken a fork\n", philo->id);
+		gettimeofday(&(philo->time), NULL);
+		printf("%ld %d has taken a fork\n", (philo->time.tv_sec - philo->data->start_time.tv_sec)  * 1000000 + (philo->time.tv_usec - philo->data->start_time.tv_usec), philo->id);
 		pthread_mutex_unlock(&philo->data->print);
 	}
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
 		pthread_mutex_lock(&philo->data->print);
-		printf("timestamp_in_ms %d is eating\n", philo->id);
+		gettimeofday(&(philo->time), NULL);
+		printf("%ld %d is eating\n", (philo->time.tv_sec - philo->data->start_time.tv_sec)  * 1000000 + (philo->time.tv_usec - philo->data->start_time.tv_usec), philo->id);
 		usleep(philo->data->time_to_eat_in_ms);
 		pthread_mutex_unlock(&philo->data->print);
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
@@ -57,7 +54,8 @@ void	eating(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_lock(&philo->data->print);
-		printf("timestamp_in_ms %d is eating\n", philo->id);
+		gettimeofday(&(philo->time), NULL);
+		printf("%ld %d is eating\n", (philo->time.tv_sec - philo->data->start_time.tv_sec)  * 1000000 + (philo->time.tv_usec - philo->data->start_time.tv_usec), philo->id);
 		usleep(philo->data->time_to_eat_in_ms);
 		pthread_mutex_unlock(&philo->data->print);
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
@@ -107,7 +105,7 @@ void	make_thread(t_philo *philos)
 	i = 0;
 	while (i < (philos)->data->number_of_philosophers)
 	{
-		pthread_create(&(philos)[i].thread, NULL, philo_routine, &(philos)[i]);
+		pthread_create(&(philos[i].thread), NULL, philo_routine, &(philos[i]));
 		++i;
 	}
 	i = 0;
