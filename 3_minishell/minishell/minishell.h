@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:00:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/02 22:02:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:22:42 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_env
 
 typedef struct s_vars
 {
-	t_list			*lst;
-	t_env			*env;
+	t_list				*lst;
+	t_env				*env;
 }					t_vars;
 
 typedef struct s_execute
@@ -50,22 +50,25 @@ typedef struct s_execute
 }					t_execute;
 
 void				minishell(t_vars *vars);
+void				eof_exit(char *str);
 
 // utils.c
 void				init_vars(t_vars *vars, char *envp[]);
 void				free_vars(t_vars *vars, int a, char *b[]);
 void				free_str_tok(char *str, t_list **lst);
 
-// signal.c
-void				sigint_handler(int signo);
-void				sigint_handler_exec(int signum);
-void				sigquit_handler(int signo);
-
 // error.c
 void				error(char *err, char *cmd);
 void				exit_with_err(char *err, char *cmd, int status);
 void				error_msg(char *msg, char *cmd, char *arg);
 void				exit_with_msg(char *msg, char *cmd, char *arg);
+
+// signal.c
+void				child_handler(int signo);
+void				sigint_handler(int signo);
+void				heredoc_handler(int signo);
+void				sigint_handler_exec(int signum);
+void				sigquit_handler_exec(int signum);
 
 // syntax.c
 int					syntax_check(t_list *lst);
@@ -125,12 +128,13 @@ int					is_num(char *str);
 
 // env.c
 int					b_env(t_env *env);
+void				print_env(t_env *env);
 
 // export.c
-int					b_export(char **cmd, t_env *env);
-int					add_env(t_env *env, char *cmd);
-void				print_env(t_env *env, int flag);
-int					ft_isvalidenv(t_env *env, char *cmd, t_env *e_tmp);
+int					b_export(char **cmd, t_env **env);
+int					add_env(t_env **env, char *cmd);
+void				print_export(t_env *env);
+int					ft_isvalidenv(t_env **env, char *cmd, t_env *e_tmp);
 void				print_quote(int flag);
 
 // unset.c
@@ -138,14 +142,11 @@ int					b_unset(char **cmd, t_env **env);
 void				change_head(char *cmd, t_env **env);
 void				delete_node(char *cmd, t_env *env);
 
-// test/test.c
-void				leak(void);
-void				print_tokens(t_list *lst);
-
-// execute/execute.c
+// execute
 int					process_count(t_list *lst);
 int					cmd_size_count(t_list *lst);
 int					count_cmd_count(t_list *lst);
+int					ent_size(t_env *env);
 char				**make_cmd(t_list *lst);
 char				**make_envp(t_env *env);
 char				*path_join(char **path, char *cmd);
@@ -154,17 +155,20 @@ void				move_next_syntax(t_list **lst, int (*pipe_fd)[2],
 						int *tmp_arr_index, int *pid_index);
 void				find_in_redir(t_list **lst);
 void				find_out_redir(t_list **lst);
-void				find_heredoc(char **tmp_arr, int tmp_arr_index);
+void				find_heredoc(char **tmp_arr, int *tmp_arr_index);
 void				find_pair_out_redir(t_list **lst);
 void				find_redirect(t_list *lst, char **tmp_arr,
-						int tmp_arr_index);
+						int *tmp_arr_index);
 char				**malloc_tmp_arr(t_list *lst);
 size_t				gnl_strlen(char *str);
+char				**malloc_tmp_arr(t_list *lst);
 char				*naming_tmp_file(char *tmp_file);
-void				write_in_tmpfile(t_list *lst, int tmp_fd);
+void				fill_heredoc(int *len, int buffer_size,
+						int tmp_fd, char *limiter);
+void				write_in_tmpfile(t_list *lst, int tmp_fd, int *len);
 void				fill_tmp_arr(char **tmp_arr, t_list *lst);
-int					ft_is_redirection(t_list *lst);
 void				free_tmp_arr(char **tmp_arr);
+int					ft_is_redirection(t_list *lst);
 void				execute_command(t_vars *vars, char **cmd, char **envp);
 void				clear_resources(char **envp, int process, int (*pipe_fd)[2],
 						char **tmp_arr);

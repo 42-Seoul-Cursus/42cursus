@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 20:18:39 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/02 22:01:54 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:36:45 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 void	execute_frame(t_vars *vars)
 {
+	t_list	*head;
 	int		process;
 	pid_t	*pid;
 	int		(*pipe_fd)[2];
 
-	signal(SIGINT, sigint_handler_exec);
 	replace_env_and_trim_quote(vars);
-	while (vars->lst != NULL && *(vars->lst->token) == '\0')
+	g_status = 0;
+	head = vars->lst;
+	while (vars->lst && vars->lst->flag && *(vars->lst->token) == '\0')
 		vars->lst = vars->lst->next;
 	if (vars->lst == NULL)
+	{
+		vars->lst = head;
 		return ;
+	}
 	process = process_count(vars->lst);
 	pipe_fd = NULL;
 	pid = ft_calloc(process, sizeof(pid_t));
@@ -32,6 +37,7 @@ void	execute_frame(t_vars *vars)
 	execute(vars, pid, pipe_fd, process);
 	wait_child(pid, process);
 	use_free(pid);
+	vars->lst = head;
 }
 
 void	execute(t_vars *vars, pid_t *pid, int (*pipe_fd)[2], int process)
@@ -53,7 +59,7 @@ void	execute(t_vars *vars, pid_t *pid, int (*pipe_fd)[2], int process)
 			if (pid[data.pid_index] == 0)
 			{
 				connect_pipe(data.pid_index, process, pipe_fd);
-				find_redirect(lst, data.tmp_arr, data.tmp_arr_index);
+				find_redirect(lst, data.tmp_arr, &(data.tmp_arr_index));
 				execute_command(vars, data.cmd, data.envp);
 			}
 		}
@@ -83,12 +89,18 @@ void	execute_command(t_vars *vars, char **cmd, char **envp)
 {
 	char	**path;
 
-	path = parse_path(vars->env);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (is_builtin(cmd))
 		exit(builtin_func(vars, cmd));
 	else
 	{
+		path = parse_path(vars->env);
 		cmd[0] = path_join(path, cmd[0]);
+		if (path != NULL)
+			free_path(path);
+		if (cmd[0] == NULL)
+			exit(1);
 		use_execve(cmd[0], cmd, envp);
 	}
 }
@@ -98,24 +110,24 @@ void	wait_child(pid_t *pid, int process)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (j < process - 1)
+	i = 0;
+	while (i < process - 1)
 	{
-		i = 0;
-		while (i < process - 1)
+		j = 0;
+		while (j < process - 1)
 		{
-			if (waitpid(pid[i], &g_status, WNOHANG) == pid[i])
+			if (waitpid(pid[j], &g_status, WNOHANG) > 0)
 			{
 				if (WIFEXITED(g_status))
 					g_status = WEXITSTATUS(g_status);
-				++j;
+				++i;
 			}
-			++i;
+			++j;
 		}
 	}
 	waitpid(pid[process - 1], &g_status, 0);
-	if (g_status == 2)
-		g_status = 130;
+	if (g_status == 2 || g_status == 3)
+		g_status += 128;
 	else if (WIFEXITED(g_status))
 		g_status = WEXITSTATUS(g_status);
 }

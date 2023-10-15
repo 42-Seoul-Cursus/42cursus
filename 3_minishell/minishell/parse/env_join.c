@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:13:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/03 02:36:02 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/09 03:57:35 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	state_join(char **result, int *i)
 {
-	char	*tmp;
+	char	*num;
+	char	*mem;
 
-	tmp = *result;
-	*result = ft_strjoin(*result, ft_itoa(g_status));
-	use_free(tmp);
+	mem = *result;
+	num = ft_itoa(g_status);
+	*result = ft_strjoin(*result, num);
+	use_free(mem);
+	use_free(num);
 	*i += 2;
 }
 
@@ -30,10 +33,8 @@ void	env_join(char *content, char **result, int *i, t_env *env)
 
 	j = *i + 1;
 	while (content[j] != '\0'
-		&& !ft_iswhitespace(content[j])
-		&& !ft_isquote(content[j])
-		&& content[j] != '$'
-		&& content[j] != '=')
+		&& (ft_isalnum(content[j])
+			|| content[j] == '_'))
 		j++;
 	key = ft_substr(content, *i + 1, j - *i - 1);
 	tmp = *result;

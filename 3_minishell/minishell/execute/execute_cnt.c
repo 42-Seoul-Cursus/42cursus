@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:39:51 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/02 21:39:53 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/11 18:55:02 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	process_count(t_list *lst)
 	process = 1;
 	while (lst != NULL)
 	{
-		if (ft_strncmp(lst->token, "|", 2) == 0)
+		if (lst->state == PIPE)
 			process++;
 		lst = lst->next;
 	}
@@ -66,4 +66,18 @@ size_t	gnl_strlen(char *str)
 		str++;
 	}
 	return (result_len);
+}
+
+int	ent_size(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env != NULL)
+	{
+		if (env->value != NULL)
+			i++;
+		env = env->next;
+	}
+	return (i);
 }

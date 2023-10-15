@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:01:09 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/03 02:35:34 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/09 03:57:46 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	is_envvar(char *content, int i)
 {
 	if (content[i] == '$'
-		&& content[i + 1] != '\0'
-		&& !ft_iswhitespace(content[i + 1])
-		&& !ft_isquote(content[i + 1])
-		&& content[i + 1] != '$')
+		&& (content[i + 1] == '?'
+			|| content[i + 1] == '_'
+			|| ft_isalpha(content[i + 1])))
 		return (1);
 	return (0);
 }
@@ -68,6 +67,7 @@ int	quotes_check(char *str)
 	if (is_valid_quotes(str) == 0)
 	{
 		use_free(str);
+		g_status = 2;
 		error_msg("Invalid quotes", 0, 0);
 		return (0);
 	}

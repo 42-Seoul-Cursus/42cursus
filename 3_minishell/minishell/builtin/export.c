@@ -6,20 +6,20 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:02:11 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/02 21:57:14 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/08 22:59:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	b_export(char **cmd, t_env *env)
+int	b_export(char **cmd, t_env **env)
 {
 	int		i;
 	int		res;
 
 	res = 0;
 	if (cmd[1] == NULL)
-		print_env(env, 1);
+		print_export(*env);
 	else
 	{
 		i = 1;
@@ -32,11 +32,11 @@ int	b_export(char **cmd, t_env *env)
 	return (res);
 }
 
-int	add_env(t_env *env, char *cmd)
+int	add_env(t_env **env, char *cmd)
 {
 	t_env	*e_tmp;
 
-	e_tmp = env;
+	e_tmp = *env;
 	while (e_tmp != NULL)
 	{
 		if (ft_strncmp(e_tmp->key, cmd, ft_strlen(e_tmp->key)) == 0
@@ -53,33 +53,7 @@ int	add_env(t_env *env, char *cmd)
 	return (ft_isvalidenv(env, cmd, e_tmp));
 }
 
-void	print_env(t_env *env, int flag)
-{
-	while (env != NULL)
-	{
-		if (flag && env->value != NULL)
-		{
-			if (ft_strchr(env->value, '\"'))
-				flag = 2;
-			else
-				flag = 1;
-		}
-		if (flag)
-			ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(env->key, STDOUT_FILENO);
-		if (env->value != NULL)
-		{
-			ft_putchar_fd('=', STDOUT_FILENO);
-			print_quote(flag);
-			ft_putstr_fd(env->value, STDOUT_FILENO);
-			print_quote(flag);
-		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		env = env->next;
-	}
-}
-
-int	ft_isvalidenv(t_env *env, char *cmd, t_env *e_tmp)
+int	ft_isvalidenv(t_env **env, char *cmd, t_env *e_tmp)
 {
 	if (e_tmp == NULL)
 	{
@@ -89,9 +63,26 @@ int	ft_isvalidenv(t_env *env, char *cmd, t_env *e_tmp)
 			return (1);
 		}
 		else
-			ft_envadd_back(&env, make_env(cmd));
+			ft_envadd_back(env, make_env(cmd));
 	}
 	return (0);
+}
+
+void	print_export(t_env *env)
+{
+	while (env != NULL)
+	{
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(env->key, STDOUT_FILENO);
+		if (env->value != NULL)
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(env->value, STDOUT_FILENO);
+			ft_putchar_fd('\"', STDOUT_FILENO);
+		}
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		env = env->next;
+	}
 }
 
 void	print_quote(int flag)

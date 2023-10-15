@@ -67,6 +67,7 @@
 
 - [x] parsing
 	- [x] Assign Type
+	- [x] quote check error code
 	- [x] syntax check
 - [x] execute
 	- [x] 다중 파이프
@@ -74,17 +75,38 @@
 	- [x] HERE_DOC
 	- [x] 환경 변수 변환
 	- [x] quote trim 처리
-	- [x] leak 잡기
+	- [x] leak 잡기 ("$USER"""''""$?) => $? ft_itoa free 안해줘서 생김
 	- [x] builtin pipe 처리
 	- [ ] norm 처리
 - [x] process 상태값
 - [x] signal 처리
 	- [x] ctrl + D
 	- [x] ctrl + C
+		- [x] HERE_DOC
 	- [x] ctrl + \
+		- [x] HERE_DOC
+		- [x] child process
 - [x] 환경변수 치환
-	- 현재 순서 : str => replace env => trim quote => parse
-	- 바꿔야할 순서 : str => parse => replace env => trim quote
+	- [x] 환경 변수를 어느정도 삭제 후에 ./minishell 을 하면 메모리 문제 발생
+- [ ] 고칠 것들
+	- ~~자식 프로세스의 leak 잡기 (path 안쓸 때 free 안해줌)~~
+	- ~~<< a << b << c << d > file~~
+		- ~~sig_int로 취소할 때 file이 만들어지고 exit status가 1이 안되는 문제~~
+		```comment
+			ARG라는 타입을 지정하여 CMD 개수로 process의 개수 구분하고 (make_cmd, syntax_check 등 수정 필요) 실질적 실행부인 while 문에 들어가지 않아도 .tmp 파일들이 unlink 되게끔 처리하면 될듯
+		```
+	- ~~'/' 가 들어올 때 path랑 합쳐지는 문제~~
+	- ~~'//////cat(asa)'~~
+	- ~~/////bin/ls 는 되고 /ls는 안됨 (bash 기준)~~
+	- $EMPTY -> new prompt, $? = 0
+	- "" -> error message, $? = 127
+	- "$dsa"echo a, ""echo a 는 잘 동작함
+	- 길이가 25~30자 이상일 때 버퍼가 예상치 못하게 깨짐
+	- 빌트인 함수 + 리다이렉션일 때 fork로 동작하여 cd .. > a, export a=1 > a, unset a > a 등이 bash와 같이 동작하지 않음
+	```c
+	while (vars->lst && *(vars->lst->token) == '\0')
+		vars->lst = vars->lst->next;
+	```
 
 ## Analyzing a subject
 
