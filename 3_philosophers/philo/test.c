@@ -10,10 +10,10 @@
 
 void	print_philos(t_philo *philos)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	while (i < philos[0].data->number_of_philosophers)
+	while (i < philos[0].data->num)
 	{
 		printf("philos[%d].id = %d\n", i, philos[i].id);
 		printf("philos[%d].status = %d\n", i, philos[i].status);
