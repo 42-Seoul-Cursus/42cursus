@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 23:06:09 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:31:06 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void	*philo_routine(void *arg)
 void	make_thread(t_philo *philos)
 {
 	int				i;
+	int				cnt;
 	struct timeval	cur;
 
 	i = 0;
@@ -180,7 +181,8 @@ void	make_thread(t_philo *philos)
 		++i;
 	}
 	i = 0;
-	spend_time(philos, philos->data->t2d * 1000);
+	cnt = 0;
+	spend_time(philos, philos->data->t2d * 1000); // 먹을 때 시간을 체크하므로, 죽는 시간을 체크하기 위해선 먹는 시간을 기다려야 함
 	while (1)
 	{
 		if (i == philos->data->num)
@@ -197,14 +199,26 @@ void	make_thread(t_philo *philos)
 			break;
 		}
 		pthread_mutex_unlock(&(philos->data->lock));
-		pthread_mutex_lock(&(philos->data->lock));
 		if (philos->data->must_eat != -2 && philos[i].eat_cnt >= philos->data->must_eat)
 		{
-			philos->data->dead = 1;
-			pthread_mutex_unlock(&(philos->data->lock));
-			break;
+			if (philos[i].is_full == 0)
+			{
+				philos[i].is_full = 1;
+				++cnt;
+			}
+			if (cnt == philos->data->num)
+			{
+				pthread_mutex_lock(&(philos->data->lock));
+				philos->data->dead = 1;
+				pthread_mutex_unlock(&(philos->data->lock));
+				pthread_mutex_lock(&(philos->data->print));
+				printf("\033[32m");
+				printf("All philos ate %d times\n", philos->data->must_eat);
+				printf("\033[0m");
+				pthread_mutex_unlock(&(philos->data->print));
+				break;
+			}
 		}
-		pthread_mutex_unlock(&(philos->data->lock));
 		++i;
 	}
 	i = 0;

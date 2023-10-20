@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 23:02:01 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:27:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo
 	int					right_fork; // fork on the right (index)
 	struct timeval		last_eat;
 	int					eat_cnt;
+	int					is_full;
 	t_data				*data; // shared data
 }						t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 23:02:41 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:28:03 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_philo(t_philo *philo, t_data *data, int id)
 	else
 		philo->left_fork = id + 1;
 	philo->eat_cnt = 0;
+	philo->is_full = 0;
 	philo->data = data;
 }
 
