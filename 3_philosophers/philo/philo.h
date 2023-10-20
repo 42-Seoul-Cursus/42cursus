@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/18 16:09:22 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 18:26:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,26 @@ typedef enum e_status
 
 typedef struct s_data
 {
-	pthread_mutex_t		*forks; // forks in the table
-	pthread_mutex_t		print; // print lock
-	unsigned int		num; // number of philosophers
-	unsigned int		t2d; // time to die
-	unsigned int		t2e; // time to eat
-	unsigned int		t2s; // time to sleep
-	unsigned int		must_eat; // number of times each philosopher must eat
-	struct timeval		start_time; // philo routine start time
+	pthread_mutex_t		*forks;		 // forks in the table
+	pthread_mutex_t		print;		 // before use printf
+	pthread_mutex_t		lock;		 // before accessing shared data
+	int					num;		 // number of philosophers                    (only read)
+	int					t2d;		 // time to die                               (only read)
+	int					t2e;		 // time to eat                               (only read)
+	int					t2s;		 // time to sleep                             (only read)
+	int					must_eat;	 // number of times each philosopher must eat (only read)
+	short				dead;		 // if one of the philosophers dies, it becomes 1
+	struct timeval		start_time;	 // philo routine start time                  (only read)
 }						t_data;
 
 typedef struct s_philo
 {
 	pthread_t			thread;
-	unsigned int		id;
+	int					id;
 	t_status			status;
-	unsigned int		left_fork; // fork on the left (index)
-	unsigned int		right_fork; // fork on the right (index)
-	unsigned int		last_eat;
+	int					left_fork; // fork on the left (index)
+	int					right_fork; // fork on the right (index)
+	struct timeval		last_eat;
 	t_data				*data; // shared data
 }						t_philo;
 
@@ -58,7 +60,7 @@ void					exit_with_err(char *err_msg);
 
 void					init_data(t_data *data, int ac, char *av[]);
 t_philo					*init_philos(t_data *data);
-void					init_philo(t_philo *philo, t_data *data, unsigned int id);
+void					init_philo(t_philo *philo, t_data *data, int id);
 void					check_data(t_data *data, int ac);
 int						ft_atoi(char *str);
 void					*philo_routine(void *arg);

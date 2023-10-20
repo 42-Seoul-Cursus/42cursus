@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/18 16:10:45 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 18:30:54 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	init_data(t_data *data, int ac, char *av[])
 {
-	unsigned int	i;
+	int	i;
 
 	if (!(ac == 5 || ac == 6))
-		exit_with_err("Usage: ./philo num time_to_die time_to_eat time_to_sleep [must_eat]");
+		exit_with_err("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [must_eat]");
 	data->num = ft_atoi(av[1]);
 	data->t2d = ft_atoi(av[2]);
 	data->t2e = ft_atoi(av[3]);
 	data->t2s = ft_atoi(av[4]);
-	data->must_eat = 0;
+	data->must_eat = -2; // -1 atoi error, -2 no input
+	data->dead = 0;
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
+		exit_with_err("Mutex initialization failed");
+	if (pthread_mutex_init(&(data->lock), NULL) != 0)
 		exit_with_err("Mutex initialization failed");
 	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->num);
 	if (!data->forks)
@@ -42,7 +45,7 @@ void	init_data(t_data *data, int ac, char *av[])
 t_philo	*init_philos(t_data *data)
 {
 	t_philo		*philos;
-	unsigned int	i;
+	int			i;
 
 	i = 0;
 	philos = (t_philo *)malloc(sizeof(t_philo) * data->num);
@@ -56,7 +59,7 @@ t_philo	*init_philos(t_data *data)
 	return (philos);
 }
 
-void	init_philo(t_philo *philo, t_data *data, unsigned int id)
+void	init_philo(t_philo *philo, t_data *data, int id)
 {
 	philo->id = id + 1;
 	philo->status = THINKING;
@@ -66,7 +69,6 @@ void	init_philo(t_philo *philo, t_data *data, unsigned int id)
 	else
 		philo->left_fork = id + 1; // 2
 	philo->data = data;
-	philo->last_eat = 0;
 }
 
 void	check_data(t_data *data, int ac)

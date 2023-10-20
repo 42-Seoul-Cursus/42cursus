@@ -10,7 +10,7 @@
 
 void	print_philos(t_philo *philos)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (i < philos[0].data->num)
@@ -22,4 +22,12 @@ void	print_philos(t_philo *philos)
 		printf("philos[%d].data = %p\n", i, philos[i].data);
 		i++;
 	}
+	printf("-------------------------------------------------\n");
+	printf("number_of_philosophers                    : %d\n", philos[0].data->num);
+	printf("time to die                               : %d\n", philos[0].data->t2d);
+	printf("time to eat                               : %d\n", philos[0].data->t2e);
+	printf("time to sleep                             : %d\n", philos[0].data->t2s);
+	printf("number_of_times_each_philosopher_must_eat : %d\n", philos[0].data->must_eat);
+	printf("dead flag                                 : %d\n", philos[0].data->dead);
+	printf("-------------------------------------------------\n");
 }
