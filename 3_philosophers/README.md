@@ -1,5 +1,13 @@
 # philosopher
 
+- [philosopher](#philosopher)
+	- [`<unistd.h>`](#unistdh)
+	- [`<stdio.h>`](#stdioh)
+	- [`<stdlib.h>`](#stdlibh)
+	- [`<string.h>`](#stringh)
+	- [`<sys/time.h>`](#systimeh)
+	- [`<pthread.h>`](#pthreadh)
+
 ## `<unistd.h>`
 
 ```c
