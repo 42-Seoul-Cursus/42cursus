@@ -16,7 +16,6 @@ void	print_philos(t_philo *philos)
 	while (i < philos[0].data->num)
 	{
 		printf("philos[%d].id = %d\n", i, philos[i].id);
-		printf("philos[%d].status = %d\n", i, philos[i].status);
 		printf("philos[%d].right_fork = %d\n", i, philos[i].right_fork);
 		printf("philos[%d].left_fork = %d\n", i, philos[i].left_fork);
 		printf("philos[%d].data = %p\n", i, philos[i].data);

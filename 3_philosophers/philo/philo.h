@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 18:26:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:02:01 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-typedef enum e_status
-{
-	THINKING,
-	EATING,
-	SLEEPING,
-	DEAD
-}						t_status;
 
 typedef struct s_data
 {
@@ -46,10 +38,10 @@ typedef struct s_philo
 {
 	pthread_t			thread;
 	int					id;
-	t_status			status;
 	int					left_fork; // fork on the left (index)
 	int					right_fork; // fork on the right (index)
 	struct timeval		last_eat;
+	int					eat_cnt;
 	t_data				*data; // shared data
 }						t_philo;
 

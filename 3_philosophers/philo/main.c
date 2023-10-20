@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 18:34:41 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/20 23:06:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	print_eat(t_philo *philo)
 	}
 	pthread_mutex_unlock(&(philo->data->lock));
 	pthread_mutex_lock(&philo->data->print);
-	printf("%d %d is eating\n", time, philo->id);
+	printf("%u %d is eating\n", time, philo->id);
 	pthread_mutex_unlock(&philo->data->print);
+	philo->eat_cnt++;
 	spend_time(philo ,philo->data->t2e * 1000);
 }
 
@@ -192,6 +193,14 @@ void	make_thread(t_philo *philos)
 			pthread_mutex_lock(&(philos->data->print));
 			printf("%ld %d died\n", (cur.tv_sec - philos[i].data->start_time.tv_sec) * 1000 + (cur.tv_usec - philos[i].data->start_time.tv_usec) / 1000, philos[i].id);
 			pthread_mutex_unlock(&(philos->data->print));
+			pthread_mutex_unlock(&(philos->data->lock));
+			break;
+		}
+		pthread_mutex_unlock(&(philos->data->lock));
+		pthread_mutex_lock(&(philos->data->lock));
+		if (philos->data->must_eat != -2 && philos[i].eat_cnt >= philos->data->must_eat)
+		{
+			philos->data->dead = 1;
 			pthread_mutex_unlock(&(philos->data->lock));
 			break;
 		}
