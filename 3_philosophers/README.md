@@ -7,6 +7,7 @@
 	- [`<string.h>`](#stringh)
 	- [`<sys/time.h>`](#systimeh)
 	- [`<pthread.h>`](#pthreadh)
+	- [Trouble](#trouble)
 
 ## `<unistd.h>`
 
@@ -60,4 +61,23 @@ pthread_mutex_destroy(pthread_mutex_t *mutex)
 pthread_mutex_lock(pthread_mutex_t *mutex)
 pthread_mutex_unlock(pthread_mutex_t *mutex)
 // 이 두 함수는 뮤텍스를 사용하여 크리티컬 섹션(동시에 하나의 스레드만 접근 가능한 섹션)을 보호합니다. pthread_mutex_lock 함수는 뮤텍스를 잠그고, pthread_mutex_unlock 함수는 뮤텍스를 해제합니다.
+```
+
+## Trouble
+
+```c
+		// 기존에 1ms씩 당겨서 출력되는 문제가 있었음
+		gettimeofday(&cur, NULL);
+		time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
+		pthread_mutex_lock(&philo->data->print);
+		printf("%d %d has taken a fork\n", time, philo->id);
+		pthread_mutex_unlock(&philo->data->print);
+
+
+		// print lock 안에서 시간을 측정하고 출력하니까 해결됨
+		pthread_mutex_lock(&philo->data->print);
+		gettimeofday(&cur, NULL);
+		time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
+		printf("%d %d has taken a fork\n", time, philo->id);
+		pthread_mutex_unlock(&philo->data->print);
 ```

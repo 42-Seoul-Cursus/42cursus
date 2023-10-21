@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/20 23:27:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/21 16:28:09 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct s_philo
 	int					id;
 	int					left_fork; // fork on the left (index)
 	int					right_fork; // fork on the right (index)
-	struct timeval		last_eat;
-	int					eat_cnt;
-	int					is_full;
+	int					eat_cnt; // number of times the philosopher ate
+	int					is_full; // if must_eat is set, it becomes 1 when eat_cnt is equal to must_eat
+	struct timeval		last_eat; // last time the philosopher ate
 	t_data				*data; // shared data
 }						t_philo;
 
@@ -51,11 +51,11 @@ void					print_philos(t_philo *philos);
 
 void					exit_with_err(char *err_msg);
 
-void					init_data(t_data *data, int ac, char *av[]);
-t_philo					*init_philos(t_data *data);
-void					init_philo(t_philo *philo, t_data *data, int id);
-void					check_data(t_data *data, int ac);
-int						ft_atoi(char *str);
-void					*philo_routine(void *arg);
+// init.c
+void	init_data(t_data *data, int ac, char *av[]);
+void	check_data(t_data *data, int ac);
+void	init_mutex(t_data *data);
+t_philo	*init_philo(t_data *data);
+int		ft_atoi(char *str);
 
 #endif
