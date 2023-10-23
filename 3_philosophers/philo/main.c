@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/23 14:23:25 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/23 14:52:42 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,10 @@ int	eat_even(t_philo *philo)
 
 int	eating(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-	{
-		if (take_right_fork(philo) == 1)
+	if (take_right_fork(philo) == 1)
 			return (1);
-	}
-	else
-	{
-		if (take_left_fork(philo) == 1)
-			return (1);
-	}
-	if (philo->id % 2 == 0)
-	{
-		if (eat_even(philo) == 1)
-			return (1);
-	}
-	else
-	{
-		if (eat_odd(philo) == 1)
-			return (1);
-	}
+	if (eat_even(philo) == 1)
+		return (1);
 	return (0);
 }
 
