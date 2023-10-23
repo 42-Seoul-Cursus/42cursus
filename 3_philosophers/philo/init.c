@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/21 16:27:57 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/22 03:43:00 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data, int ac, char *av[])
 {
 	if (ac != 5 && ac != 6)
-		exit_with_err("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [must_eat]");
+		exit_with_err("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]");
 	data->num = ft_atoi(av[1]);
 	data->t2d = ft_atoi(av[2]);
 	data->t2e = ft_atoi(av[3]);
