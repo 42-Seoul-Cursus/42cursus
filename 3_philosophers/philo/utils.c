@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:06:53 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/23 16:28:04 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:36:36 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,28 @@ int	is_dead(t_data *data)
 		return (1);
 	}
 	pthread_mutex_unlock(&(data->lock));
+	return (0);
+}
+
+int	take_left_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
+	if (print_timestamp(philo, "has taken a fork") == 1)
+	{
+		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		return (1);
+	}
+	return (0);
+}
+
+int	take_right_fork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->forks[philo->right_fork]);
+	if (print_timestamp(philo, "has taken a fork") == 1)
+	{
+		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
+		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
+		return (1);
+	}
 	return (0);
 }

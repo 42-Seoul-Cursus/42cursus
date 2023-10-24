@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/23 16:57:40 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:38:39 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int ac, char *av[])
 {
-	// atexit(leak);
 	t_philo	*philo;
 	t_data	data;
 
@@ -22,7 +21,6 @@ int	main(int ac, char *av[])
 	check_data(&data, ac);
 	init_mutex(&data);
 	philo = init_philo(&data);
-	// print_philos(philo);
 	make_thread(philo);
 	free_data(&philo);
 	return (0);

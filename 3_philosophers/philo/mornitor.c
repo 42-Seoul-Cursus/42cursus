@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   mornitor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:32:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:28:33 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:33:20 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	make_thread(t_philo *philo)
 	spend_time(philo, philo->data->t2d);
 	monitoring(philo);
 	join_philo(philo);
+}
+
+void	monitoring(t_philo *philo)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (TRUE)
+	{
+		if (i == philo->data->num)
+			i = 0;
+		if (check_dead(philo, i) == 1)
+			break ;
+		if (check_must_eat(philo, i, &cnt) == 1)
+			break ;
+		++i;
+	}
 }
 
 int	check_dead(t_philo *philo, int i)
@@ -71,25 +90,6 @@ int	check_must_eat(t_philo *philo, int i, int *cnt)
 	}
 	pthread_mutex_unlock(&(philo[i].lock));
 	return (0);
-}
-
-void	monitoring(t_philo *philo)
-{
-	int	i;
-	int	cnt;
-
-	i = 0;
-	cnt = 0;
-	while (TRUE)
-	{
-		if (i == philo->data->num)
-			i = 0;
-		if (check_dead(philo, i) == 1)
-			break ;
-		if (check_must_eat(philo, i, &cnt) == 1)
-			break ;
-		++i;
-	}
 }
 
 void	join_philo(t_philo *philo)

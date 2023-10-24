@@ -8,7 +8,12 @@ DEBUG=-g
 THREAD=-g3 -fsanitize=thread
 MEMORY=-g3 -fsanitize=address
 
-SRCS=${wildcard *.c}
+SRCS= main.c \
+	init.c \
+	mornitor.c \
+	print.c \
+	routine.c \
+	utils.c
 OBJS=$(SRCS:.c=.o)
 
 # Color Aliases

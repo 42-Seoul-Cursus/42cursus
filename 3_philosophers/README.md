@@ -85,10 +85,10 @@ pthread_mutex_unlock(pthread_mutex_t *mutex)
 
 ## Check before submitting
 
-- [ ] Norm check
-- [ ] Makefile
-- [ ] `leaks -atExit -- ./philo 4 410 200 200`
-- [ ] -g3 -fsanitize=address -pthread
-- [ ] -g3 -fsanitize=thread -pthread
-- [ ] ./philo 4 410 200 200
-- [ ] ./philo 5 800 200 200
+- [x] Norm check
+- [x] Makefile
+- [x] `leaks -atExit -- ./philo 4 410 200 200`
+- [x] -g3 -fsanitize=address -pthread
+- [x] -g3 -fsanitize=thread -pthread
+- [x] ./philo 4 410 200 200
+- [x] ./philo 5 800 200 200
