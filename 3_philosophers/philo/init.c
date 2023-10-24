@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/22 03:43:00 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/23 16:37:53 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	init_data(t_data *data, int ac, char *av[])
 {
 	if (ac != 5 && ac != 6)
-		exit_with_err("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]");
+		exit_with_err("Usage: ./philo num t2d t2e t2s [must_eat]");
 	data->num = ft_atoi(av[1]);
 	data->t2d = ft_atoi(av[2]);
 	data->t2e = ft_atoi(av[3]);
 	data->t2s = ft_atoi(av[4]);
-	data->must_eat = -2; // -1 atoi error, -2 no input
+	data->must_eat = -2;
 	data->dead = 0;
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
@@ -37,7 +37,7 @@ void	check_data(t_data *data, int ac)
 	if (data->t2s <= 0)
 		exit_with_err("Invalid value time to sleep");
 	if (ac == 6 && data->must_eat <= 0)
-		exit_with_err("Invalid value number of times each philosopher must eat");
+		exit_with_err("Invalid value number of times each philo must eat");
 }
 
 void	init_mutex(t_data *data)
@@ -48,7 +48,7 @@ void	init_mutex(t_data *data)
 		exit_with_err("Failed print mutex initialization");
 	if (pthread_mutex_init(&(data->lock), NULL) != 0)
 		exit_with_err("Failed lock mutex initialization");
-	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->num);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num);
 	if (!data->forks)
 		exit_with_err("Failed forks arr malloc");
 	i = 0;
@@ -80,6 +80,8 @@ t_philo	*init_philo(t_data *data)
 		philo[i].eat_cnt = 0;
 		philo[i].is_full = 0;
 		philo[i].data = data;
+		if (pthread_mutex_init(&(philo[i].lock), NULL) != 0)
+			exit_with_err("Failed forks mutex initialization");
 		++i;
 	}
 	return (philo);
@@ -99,6 +101,8 @@ int	ft_atoi(char *str)
 		if ('0' <= *str && *str <= '9')
 			num = num * 10 + (*str - '0');
 		else
+			return (-1);
+		if (num < 0)
 			return (-1);
 		str++;
 	}

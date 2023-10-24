@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:06:53 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/23 13:59:52 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/23 16:28:04 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	spend_time(t_philo *philo, unsigned int us)
 	return (1);
 }
 
-unsigned int	get_us(struct timeval cur, struct timeval start)
+unsigned long long	get_us(struct timeval cur, struct timeval start)
 {
 	return ((cur.tv_sec - start.tv_sec) * 1000000
 		+ (cur.tv_usec - start.tv_usec));

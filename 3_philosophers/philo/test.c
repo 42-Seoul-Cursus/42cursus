@@ -30,3 +30,11 @@ void	print_philos(t_philo *philos)
 	printf("dead flag                                 : %d\n", philos[0].data->dead);
 	printf("-------------------------------------------------\n");
 }
+
+// export MallocStackLogging=1 find leaks after unset MallocStackLogging
+// if you want more info about leaks use gcc -g option
+// while true; do leaks minishell; sleep 1; done;
+void	leak(void)
+{
+	system("leaks --list philo");
+}

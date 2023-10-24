@@ -6,6 +6,7 @@ PRINTF=printf
 CFLAGS=-Werror -Wall -Wextra
 LLDB=-g
 DEBUG=-g3 -fsanitize=thread
+MEM=-g3 -fsanitize=address
 
 SRCS=${wildcard *.c}
 OBJS=$(SRCS:.c=.o)
@@ -64,8 +65,12 @@ debug:
 	$(MAKE) fclean
 	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 
+mem:
+	$(MAKE) fclean
+	$(MAKE) all CFLAGS="$(CFLAGS) $(MEM)"
+
 lldb:
 	$(MAKE) fclean
 	$(MAKE) all CFLAGS="$(CFLAGS) $(LLDB)"
 
-.PHONY: all clean fclean re debug lldb
+.PHONY: all clean fclean re debug mem lldb
