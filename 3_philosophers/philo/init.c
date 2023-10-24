@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:33:50 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 19:46:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ t_philo	*init_philo(t_data *data)
 	while (i < data->num)
 	{
 		philo[i].id = i + 1;
-		philo[i].right_fork = i;
+		philo[i].left_fork = i;
 		if (i == data->num - 1)
-			philo[i].left_fork = 0;
+			philo[i].right_fork = 0;
 		else
-			philo[i].left_fork = i + 1;
+			philo[i].right_fork = i + 1;
 		philo[i].eat_cnt = 0;
 		philo[i].is_full = 0;
 		philo[i].data = data;

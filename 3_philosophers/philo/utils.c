@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:06:53 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:36:36 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 19:41:49 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	spend_time(t_philo *philo, unsigned int us)
 			return (1);
 		if (get_us(cur, start) >= us)
 			return (0);
-		usleep(100);
+		usleep(200);
 	}
 	return (1);
 }

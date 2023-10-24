@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:32:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:33:20 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 19:40:51 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	monitoring(t_philo *philo)
 		if (check_must_eat(philo, i, &cnt) == 1)
 			break ;
 		++i;
+		usleep(5000);
 	}
 }
 
@@ -101,5 +102,6 @@ void	join_philo(t_philo *philo)
 	{
 		if (pthread_join(philo[i].thread, NULL) == 0)
 			++i;
+		usleep(1000);
 	}
 }
