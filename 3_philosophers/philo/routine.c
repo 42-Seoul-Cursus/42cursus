@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:17:58 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 12:43:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/24 13:01:29 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ int	lets_eat(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 		return (1);
 	}
-	pthread_mutex_lock(&philo->lock);
-	++(philo->eat_cnt);
-	pthread_mutex_unlock(&philo->lock);
 	if (spend_time(philo, philo->data->t2e * 1000) == 1)
 	{
 		pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 		return (1);
 	}
+	pthread_mutex_lock(&philo->lock);
+	++(philo->eat_cnt);
+	pthread_mutex_unlock(&philo->lock);
 	pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 	pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 	return (0);
