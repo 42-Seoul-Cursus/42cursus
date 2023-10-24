@@ -8,6 +8,7 @@
 	- [`<sys/time.h>`](#systimeh)
 	- [`<pthread.h>`](#pthreadh)
 	- [Trouble](#trouble)
+	- [Check before submitting](#check-before-submitting)
 
 ## `<unistd.h>`
 
@@ -66,18 +67,28 @@ pthread_mutex_unlock(pthread_mutex_t *mutex)
 ## Trouble
 
 ```c
-		// 기존에 1ms씩 당겨서 출력되는 문제가 있었음
-		gettimeofday(&cur, NULL);
-		time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
-		pthread_mutex_lock(&philo->data->print);
-		printf("%d %d has taken a fork\n", time, philo->id);
-		pthread_mutex_unlock(&philo->data->print);
+	// 기존에 1ms씩 당겨서 출력되는 문제가 있었음
+	gettimeofday(&cur, NULL);
+	time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
+	pthread_mutex_lock(&philo->data->print);
+	printf("%d %d has taken a fork\n", time, philo->id);
+	pthread_mutex_unlock(&philo->data->print);
 
 
-		// print lock 안에서 시간을 측정하고 출력하니까 해결됨
-		pthread_mutex_lock(&philo->data->print);
-		gettimeofday(&cur, NULL);
-		time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
-		printf("%d %d has taken a fork\n", time, philo->id);
-		pthread_mutex_unlock(&philo->data->print);
+	// print lock 안에서 시간을 측정하고 출력하니까 해결됨
+	pthread_mutex_lock(&philo->data->print);
+	gettimeofday(&cur, NULL);
+	time = (cur.tv_sec - philo->data->start_time.tv_sec) * 1000 + (cur.tv_usec - philo->data->start_time.tv_usec) / 1000;
+	printf("%d %d has taken a fork\n", time, philo->id);
+	pthread_mutex_unlock(&philo->data->print);
 ```
+
+## Check before submitting
+
+- [ ] Norm check
+- [ ] Makefile
+- [ ] `leaks -atExit -- ./philo 4 410 200 200`
+- [ ] -g3 -fsanitize=address -pthread
+- [ ] -g3 -fsanitize=thread -pthread
+- [ ] ./philo 4 410 200 200
+- [ ] ./philo 5 800 200 200

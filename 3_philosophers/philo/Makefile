@@ -3,10 +3,10 @@
 NAME=philo
 CC=cc
 PRINTF=printf
-CFLAGS=-Werror -Wall -Wextra
-LLDB=-g
-DEBUG=-g3 -fsanitize=thread
-MEM=-g3 -fsanitize=address
+CFLAGS=-Werror -Wall -Wextra -pthread
+DEBUG=-g
+THREAD=-g3 -fsanitize=thread
+MEMORY=-g3 -fsanitize=address
 
 SRCS=${wildcard *.c}
 OBJS=$(SRCS:.c=.o)
@@ -61,16 +61,16 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-debug:
+th:
 	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+	$(MAKE) all CFLAGS="$(CFLAGS) $(THREAD)"
 
 mem:
 	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(MEM)"
+	$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
 
-lldb:
+deb:
 	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(LLDB)"
+	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 
-.PHONY: all clean fclean re debug mem lldb
+.PHONY: all clean fclean re mem th deb
