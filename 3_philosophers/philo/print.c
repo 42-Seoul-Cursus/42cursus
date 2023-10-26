@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:22:07 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:35:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/26 13:31:49 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	print_timestamp(t_philo *philo, char *s)
 	struct timeval	cur;
 
 	pthread_mutex_lock(&philo->data->print);
-	gettimeofday(&cur, NULL);
 	if (is_dead(philo->data))
 	{
 		pthread_mutex_unlock(&(philo->data->print));
 		return (1);
 	}
-	printf("%llu %d %s\n", get_us(cur, philo->data->start_time) / 1000,
+	gettimeofday(&cur, NULL);
+	printf("%llu %d %s\n", get_ms(cur, philo->data->start_time),
 		philo->id, s);
 	pthread_mutex_unlock(&philo->data->print);
 	return (0);
@@ -31,19 +31,16 @@ int	print_timestamp(t_philo *philo, char *s)
 
 int	print_timestamp_eat(t_philo *philo)
 {
-	struct timeval	cur;
-
 	pthread_mutex_lock(&(philo->data->print));
-	gettimeofday(&cur, NULL);
 	if (is_dead(philo->data))
 	{
 		pthread_mutex_unlock(&(philo->data->print));
 		return (1);
 	}
 	pthread_mutex_lock(&philo->lock);
-	philo->last_eat = cur;
+	gettimeofday(&(philo->last_eat), NULL);
 	pthread_mutex_unlock(&philo->lock);
-	printf("%llu %d is eating\n", get_us(cur, philo->data->start_time) / 1000,
+	printf("%llu %d is eating\n", get_ms(philo->last_eat, philo->data->start_time),
 		philo->id);
 	pthread_mutex_unlock(&philo->data->print);
 	return (0);
@@ -62,7 +59,7 @@ void	print_dead(t_philo *philo, struct timeval cur)
 {
 	pthread_mutex_lock(&(philo->data->print));
 	printf("\033[33m");
-	printf("%llu %d died\n", get_us(cur, philo->data->start_time) / 1000,
+	printf("%llu %d died\n", get_ms(cur, philo->data->start_time),
 		philo->id);
 	printf("\033[0m");
 	pthread_mutex_unlock(&(philo->data->print));

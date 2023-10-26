@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 13:38:25 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/26 13:46:17 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ void				print_dead(t_philo *philo, struct timeval cur);
 void				exit_with_err(char *err_msg);
 
 // utils.c
-int					spend_time(t_philo *philo, unsigned int us);
-unsigned long long	get_us(struct timeval cur, struct timeval start);
+int					spend_time(t_philo *philo, int ms);
+unsigned long long	get_ms(struct timeval cur, struct timeval start);
 int					is_dead(t_data *data);
-int					take_left_fork(t_philo *philo);
-int					take_right_fork(t_philo *philo);
+int					take_two_fork(t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:32:46 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/24 19:40:51 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/26 17:58:29 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	make_thread(t_philo *philo)
 		pthread_create(&(philo[i].thread), NULL, philo_routine, &(philo[i]));
 		++i;
 	}
-	spend_time(philo, philo->data->t2d);
+	usleep(philo->data->t2d);
 	monitoring(philo);
 	join_philo(philo);
 }
@@ -44,7 +44,7 @@ void	monitoring(t_philo *philo)
 		if (check_must_eat(philo, i, &cnt) == 1)
 			break ;
 		++i;
-		usleep(5000);
+		usleep(10);
 	}
 }
 
@@ -54,7 +54,7 @@ int	check_dead(t_philo *philo, int i)
 
 	gettimeofday(&cur, NULL);
 	pthread_mutex_lock(&(philo[i].lock));
-	if (get_us(cur, philo[i].last_eat) / 1000
+	if (get_ms(cur, philo[i].last_eat)
 		>= (unsigned long long) philo->data->t2d)
 	{
 		pthread_mutex_unlock(&(philo[i].lock));
@@ -102,6 +102,6 @@ void	join_philo(t_philo *philo)
 	{
 		if (pthread_join(philo[i].thread, NULL) == 0)
 			++i;
-		usleep(1000);
+		usleep(10);
 	}
 }
