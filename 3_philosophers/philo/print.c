@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:22:07 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/26 13:31:49 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/26 18:48:26 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	print_timestamp_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->lock);
 	gettimeofday(&(philo->last_eat), NULL);
 	pthread_mutex_unlock(&philo->lock);
-	printf("%llu %d is eating\n", get_ms(philo->last_eat, philo->data->start_time),
-		philo->id);
+	printf("%llu %d is eating\n", get_ms(philo->last_eat,
+			philo->data->start_time), philo->id);
 	pthread_mutex_unlock(&philo->data->print);
 	return (0);
 }
@@ -65,10 +65,25 @@ void	print_dead(t_philo *philo, struct timeval cur)
 	pthread_mutex_unlock(&(philo->data->print));
 }
 
-void	exit_with_err(char *err_msg)
+int	error(int flag)
 {
 	printf("\033[31m");
-	printf("Error: %s\n", err_msg);
-	printf("\033[0m");
-	exit(EXIT_FAILURE);
+	if (flag == 0)
+		printf("Error: Failed malloc");
+	if (flag == 1)
+		printf("Error: Failed mutex initialization");
+	if (flag == 2)
+		printf("Usage: ./philo num t2d t2e t2s [must_eat]");
+	if (flag == 3)
+		printf("Error: Invalid value number of philosophers");
+	if (flag == 4)
+		printf("Error: Invalid value time to die");
+	if (flag == 5)
+		printf("Error: Invalid value time to eat");
+	if (flag == 6)
+		printf("Error: Invalid value time to sleep");
+	if (flag == 7)
+		printf("Error: Invalid value number of times each philo must eat");
+	printf("\n\033[0m");
+	return (1);
 }
