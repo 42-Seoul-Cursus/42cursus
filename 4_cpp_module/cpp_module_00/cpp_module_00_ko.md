@@ -32,9 +32,9 @@ _요약: 이 문서는 C++ 모듈의 00번째 모듈 서브젝트를 담고 있�
 
   기억하세요: 여러분은 이제 `C`가 아닌 `C++`로 코딩을 해야 합니다. 그러므로:
 
-  - ##### _The following functions are FORBIDDEN, and their use will be punished by a 0, no questions asked: `*alloc`, `*printf` and `free`._
+  - ##### _The following functions are FORBIDDEN, and their use will be punished by a 0, no questions asked: `malloc`, `printf` and `free`._
 
-    다음의 함수들은 사용이 **금지됩니다**. 사용이 발각될 시에는 0점이 부여됩니다. 어떠한 변명도 받지 않습니다 : `*alloc`, `*printf`, `free`
+    다음의 함수들은 사용이 **금지됩니다**. 사용이 발각될 시에는 0점이 부여됩니다. 어떠한 변명도 받지 않습니다 : `malloc`, `printf`, `free`
 
   - ##### _You are allowed to use basically everything in the standard library. HOWEVER, it would be smart to try and use the C++-ish versions of the functions you are used to in C, instead of just keeping to what you know, this is a new language after all. And NO, you are not allowed to use the STL until you actually are supposed to (that is, until module 08). That means no vectors/lists/maps/etc... or anything that requires an include `<algorithm>` until then._
     여러분은 표준 라이브러리에 있는 거의 모든 것들을 사용 가능합니다. **단**, 최대한 C에서 사용하던 함수의 C++ 버전을 찾아 응용하는 것이 현명할 것입니다. 새로운 언어를 사용하는 만큼, 기존에 알던 내용을 그대로 쓰는 것보단 나을 테니까요. 그리고, STL이 사용가능한 과제가 나오기 전까지 STL은 **금지**됩니다. (module 08 전까진 쭉 사용 불가능하다는 의미입니다.) 이건 곧 벡터 / 리스트 / 맵 등등... `<algorithm>` 헤더를 불러와야만 사용가능한 요소들을 사용할 수 없다는 뜻이에요.
