@@ -10,10 +10,11 @@ MEMORY=-g3 -fsanitize=address
 
 SRCS= main.c \
 	init.c \
-	mornitor.c \
-	print.c \
 	routine.c \
-	utils.c
+	mornitor.c \
+	utils.c \
+	cleanup.c \
+	print.c
 OBJS=$(SRCS:.c=.o)
 
 # Color Aliases

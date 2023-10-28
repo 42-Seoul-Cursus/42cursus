@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/26 18:42:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/28 15:48:35 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,6 @@ int	check_data(t_data *data, int ac)
 	return (0);
 }
 
-void	fail_init_data(pthread_mutex_t **fork, int fail_idx)
-{
-	int	i;
-
-	i = 0;
-	while (i < fail_idx - 1)
-	{
-		pthread_mutex_destroy(&((*fork)[i]));
-		++i;
-	}
-	free(*fork);
-}
-
 int	init_mutex(t_data *data)
 {
 	int	i;
@@ -65,43 +52,18 @@ int	init_mutex(t_data *data)
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
 		return (error(1));
 	if (pthread_mutex_init(&(data->lock), NULL) != 0)
-	{
-		pthread_mutex_destroy(&(data->print));
-		return (error(1));
-	}
+		return (fail_init_data(data, 0, 1));
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num);
 	if (!data->forks)
-	{
-		pthread_mutex_destroy(&(data->print));
-		pthread_mutex_destroy(&(data->lock));
-		return (error(0));
-	}
+		return (fail_init_data(data, 0, 2));
 	i = 0;
 	while (i < data->num)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
-		{
-			pthread_mutex_destroy(&(data->print));
-			pthread_mutex_destroy(&(data->lock));
-			fail_init_data(&(data->forks), i);
-			return (error(1));
-		}
+			return (fail_init_data(data, i, 3));
 		++i;
 	}
 	return (0);
-}
-
-void	fail_init_philo(t_philo **philo, int fail_idx)
-{
-	int	i;
-
-	i = 0;
-	while (i < fail_idx - 1)
-	{
-		pthread_mutex_destroy(&((*philo)[i].lock));
-		++i;
-	}
-	free(*philo);
 }
 
 int	init_philo(t_philo **philo, t_data *data)
@@ -124,10 +86,7 @@ int	init_philo(t_philo **philo, t_data *data)
 		(*philo)[i].is_full = 0;
 		(*philo)[i].data = data;
 		if (pthread_mutex_init(&((*philo)[i].lock), NULL) != 0)
-		{
-			fail_init_philo(philo, i);
-			return (error(1));
-		}
+			return (fail_init_philo(philo, i));
 		++i;
 	}
 	return (0);

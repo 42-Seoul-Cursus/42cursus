@@ -6,39 +6,11 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:26:48 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/26 18:47:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/28 15:46:58 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	free_data(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->num)
-	{
-		pthread_mutex_destroy(&(data->forks[i]));
-		++i;
-	}
-	pthread_mutex_destroy(&(data->print));
-	pthread_mutex_destroy(&(data->lock));
-	free(data->forks);
-}
-
-void	free_philo(t_philo **philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < (*philo)->data->num)
-	{
-		pthread_mutex_destroy(&((*philo)->lock));
-		++i;
-	}
-	free(*philo);
-}
 
 int	main(int ac, char *av[])
 {
