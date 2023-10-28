@@ -58,7 +58,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TEST_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
