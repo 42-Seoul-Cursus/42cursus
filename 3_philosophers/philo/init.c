@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/29 14:18:24 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:22:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int	init_mutex(t_data *data)
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
 		return (error(MUTEX_ERR));
 	if (pthread_mutex_init(&(data->lock), NULL) != 0)
-		return (fail_init_data(data, 0, 1));
+		return (fail_init_mutex(data, 0, 1));
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num);
 	if (!data->forks)
-		return (fail_init_data(data, 0, 2));
+		return (fail_init_mutex(data, 0, 2));
 	i = 0;
 	while (i < data->num)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
-			return (fail_init_data(data, i, 3));
+			return (fail_init_mutex(data, i, 3));
 		++i;
 	}
 	return (0);

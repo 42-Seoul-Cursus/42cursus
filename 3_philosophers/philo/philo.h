@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/29 14:11:07 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:22:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int					is_dead(t_data *data);
 // cleanup.c
 void				free_data(t_data *data);
 void				free_philo(t_philo **philo);
-int					fail_init_data(t_data *data, int fail_idx, int flag);
+int					fail_init_mutex(t_data *data, int fail_idx, int flag);
 int					fail_init_philo(t_philo **philo, int fail_idx);
 
 // print.c
