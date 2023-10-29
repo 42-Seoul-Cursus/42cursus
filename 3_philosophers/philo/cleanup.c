@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:46:49 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:47:39 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:17:19 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,19 @@ int	fail_init_data(t_data *data, int fail_idx, int flag)
 	int	i;
 
 	i = 0;
+	pthread_mutex_destroy(&(data->print));
 	if (flag == 1)
-	{
-		pthread_mutex_destroy(&(data->print));
-		return (error(1));
-	}
+		return (error(MUTEX_ERR));
+	pthread_mutex_destroy(&(data->lock));
 	if (flag == 2)
-	{
-		pthread_mutex_destroy(&(data->print));
-		pthread_mutex_destroy(&(data->lock));
-		return (error(0));
-	}
+		return (error(MALLOC_ERR));
 	while (flag == 3 && i < fail_idx - 1)
 	{
 		pthread_mutex_destroy(&((data->forks)[i]));
 		++i;
 	}
 	free(data->forks);
-	return (error(1));
+	return (error(MUTEX_ERR));
 }
 
 int	fail_init_philo(t_philo **philo, int fail_idx)
@@ -76,5 +71,5 @@ int	fail_init_philo(t_philo **philo, int fail_idx)
 		++i;
 	}
 	free(*philo);
-	return (error(1));
+	return (error(MUTEX_ERR));
 }

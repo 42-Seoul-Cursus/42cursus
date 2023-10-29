@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:22:07 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/26 18:48:26 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:10:52 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,21 @@ void	print_dead(t_philo *philo, struct timeval cur)
 int	error(int flag)
 {
 	printf("\033[31m");
-	if (flag == 0)
+	if (flag == MALLOC_ERR)
 		printf("Error: Failed malloc");
-	if (flag == 1)
+	if (flag == MUTEX_ERR)
 		printf("Error: Failed mutex initialization");
-	if (flag == 2)
+	if (flag == ARG_NUM_ERR)
 		printf("Usage: ./philo num t2d t2e t2s [must_eat]");
-	if (flag == 3)
+	if (flag == NUM_VALUE_ERR)
 		printf("Error: Invalid value number of philosophers");
-	if (flag == 4)
+	if (flag == T2D_VALUE_ERR)
 		printf("Error: Invalid value time to die");
-	if (flag == 5)
+	if (flag == T2E_VALUE_ERR)
 		printf("Error: Invalid value time to eat");
-	if (flag == 6)
+	if (flag == T2S_VALUE_ERR)
 		printf("Error: Invalid value time to sleep");
-	if (flag == 7)
+	if (flag == MUST_EAT_VALUE_ERR)
 		printf("Error: Invalid value number of times each philo must eat");
 	printf("\n\033[0m");
 	return (1);

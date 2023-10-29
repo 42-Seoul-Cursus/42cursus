@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:54:31 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:50:51 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:11:07 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ typedef enum e_bool
 	FALSE = 0,
 	TRUE = 1
 }					t_bool;
+
+typedef enum e_errno
+{
+	MALLOC_ERR = 0,
+	MUTEX_ERR = 1,
+	ARG_NUM_ERR = 2,
+	NUM_VALUE_ERR = 3,
+	T2D_VALUE_ERR = 4,
+	T2E_VALUE_ERR = 5,
+	T2S_VALUE_ERR = 6,
+	MUST_EAT_VALUE_ERR = 7
+}					t_errno;
 
 typedef struct s_data
 {
