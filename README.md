@@ -1,4 +1,5 @@
 ## Subject
+
 |Circle|Subject|Score|Date|
 |----|----|:----:|:----:|
 |00|Libft|125|2023.03.20|
@@ -9,9 +10,9 @@
 |02|push_swap|125|2023.08.21|
 |02|pipex|100|2023.09.09|
 |03|minishell|100|2023.10.15|
-|03|Philosophers|-|-|
+|03|Philosophers|100|2023.10.29|
 |04|NetPractice|-|-|
-|04|cub3d|-|-|
+|04|miniRT|-|-|
 |04|CPP Module 00 ~ 04|-|-|
 |05|CPP Module 05 ~ 09|-|-|
 |05|webserv|-|-|
