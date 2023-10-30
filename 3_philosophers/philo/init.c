@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:21:13 by seunan            #+#    #+#             */
-/*   Updated: 2023/10/28 15:48:35 by seunan           ###   ########.fr       */
+/*   Updated: 2023/10/29 14:22:33 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	init_data(t_data *data, int ac, char *av[])
 {
 	if (ac != 5 && ac != 6)
-		return (error(2));
+		return (error(ARG_NUM_ERR));
 	data->forks = NULL;
 	data->num = ft_atoi(av[1]);
 	data->t2d = ft_atoi(av[2]);
 	data->t2e = ft_atoi(av[3]);
 	data->t2s = ft_atoi(av[4]);
-	data->must_eat = -2;
+	data->must_eat = 0;
 	data->dead = 0;
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
@@ -33,15 +33,15 @@ int	init_data(t_data *data, int ac, char *av[])
 int	check_data(t_data *data, int ac)
 {
 	if (data->num < 1)
-		return (error(3));
+		return (error(NUM_VALUE_ERR));
 	if (data->t2d < 1)
-		return (error(4));
+		return (error(T2D_VALUE_ERR));
 	if (data->t2e < 1)
-		return (error(5));
+		return (error(T2E_VALUE_ERR));
 	if (data->t2s < 1)
-		return (error(6));
+		return (error(T2S_VALUE_ERR));
 	if (ac == 6 && data->must_eat < 1)
-		return (error(7));
+		return (error(MUST_EAT_VALUE_ERR));
 	return (0);
 }
 
@@ -50,17 +50,17 @@ int	init_mutex(t_data *data)
 	int	i;
 
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
-		return (error(1));
+		return (error(MUTEX_ERR));
 	if (pthread_mutex_init(&(data->lock), NULL) != 0)
-		return (fail_init_data(data, 0, 1));
+		return (fail_init_mutex(data, 0, 1));
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num);
 	if (!data->forks)
-		return (fail_init_data(data, 0, 2));
+		return (fail_init_mutex(data, 0, 2));
 	i = 0;
 	while (i < data->num)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
-			return (fail_init_data(data, i, 3));
+			return (fail_init_mutex(data, i, 3));
 		++i;
 	}
 	return (0);
@@ -68,11 +68,11 @@ int	init_mutex(t_data *data)
 
 int	init_philo(t_philo **philo, t_data *data)
 {
-	int			i;
+	int	i;
 
 	*philo = (t_philo *)malloc(sizeof(t_philo) * data->num);
 	if (!(*philo))
-		return (error(0));
+		return (error(MALLOC_ERR));
 	i = 0;
 	while (i < data->num)
 	{
