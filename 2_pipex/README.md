@@ -4,21 +4,23 @@
 
 ![](./img/pipex.png)
 
-## [pipe](https://tldp.org/LDP/lpg/node11.html)
-[+](https://nomad-programmer.tistory.com/110)
-## [fork](https://codetravel.tistory.com/23)
-## open
-## close
-## [execve](https://badayak.com/entry/C%EC%96%B8%EC%96%B4-%EB%8B%A4%EB%A5%B8-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89-%ED%95%A8%EC%88%98execve)
+## Allowed functions
+
+- [pipe](https://tldp.org/LDP/lpg/node11.html)
+	 - [+](https://nomad-programmer.tistory.com/110)
+- [fork](https://codetravel.tistory.com/23)
+- open
+- close
+- [execve](https://badayak.com/entry/C%EC%96%B8%EC%96%B4-%EB%8B%A4%EB%A5%B8-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89-%ED%95%A8%EC%88%98execve)
 [+](https://www.it-note.kr/157)
-## [wait](https://codetravel.tistory.com/42)
-## [waitpid](https://codetravel.tistory.com/42)
-## [dup](https://reakwon.tistory.com/104)
-## [dup2](https://reakwon.tistory.com/104)
-## [unlink](https://www.it-note.kr/177)
-## [access](https://jdm.kr/blog/76)
-## [perror](https://modoocode.com/53)
-## [strerror](https://modoocode.com/105)
+- [wait](https://codetravel.tistory.com/42)
+- [waitpid](https://codetravel.tistory.com/42)
+- [dup](https://reakwon.tistory.com/104)
+- [dup2](https://reakwon.tistory.com/104)
+- [unlink](https://www.it-note.kr/177)
+- [access](https://jdm.kr/blog/76)
+- [perror](https://modoocode.com/53)
+- [strerror](https://modoocode.com/105)
 
 
 echo $PATH
@@ -37,3 +39,5 @@ file이 올바르지 않은 것
 cmd가 올바르지 않은 것
 - bash: [cmd]: command not found
 - 만약 파일이 안열리면 (infile의 경우에만) 오류메세지 없음 -> open err 시 exit
+
+awk 구현하지 않음

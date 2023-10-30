@@ -1,5 +1,13 @@
 # push_swap
 
+## Solution
+
+deque를 이용하여 구현
+
+## Bonus
+
+gnl을 이용하여 checker 구현
+
 ./checker_Mac -d -> 시각화
 
 ./push_swap 1 2 3 4 -
