@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:34:58 by jooahn            #+#    #+#             */
-/*   Updated: 2023/11/02 00:39:25 by seunan           ###   ########.fr       */
+/*   Updated: 2023/11/02 04:03:37 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,20 @@ void	receive_ack()
 	g_ack_received = 1;
 }
 
-// void	send_bit(pid_t pid, unsigned char bit)
-// {
-// 	while (1)
-// 	{
-// 		if (bit == 1)
-// 			kill(pid, SIGUSR1);
-// 		else if (bit == 0)
-// 			kill(pid, SIGUSR2);
-// 		usleep(TIMEOUT); // if timeout -> send bit again, else -> receive ack
-// 		usleep(100); // @test 31, 46번째 줄의 usleep이 없으면 비트가 더 보내지는 현상 생김
-// 		if (g_ack_received)
-// 			return ;
-// 	}
-// }
-
 void	send_bit(pid_t pid, unsigned char bit)
 {
-	if (bit == 1)
-		kill(pid, SIGUSR1);
-	else if (bit == 0)
-		kill(pid, SIGUSR2);
-	usleep(TIMEOUT); // if timeout -> send bit again, else -> receive ack
-	usleep(200); // @test 31, 46번째 줄의 usleep이 없으면 비트가 더 보내지는 현상 생김
-	if (g_ack_received)
-		return ;
+	while (1)
+	{
+		if (bit == 1)
+			kill(pid, SIGUSR1);
+		else if (bit == 0)
+			kill(pid, SIGUSR2);
+		usleep(TIMEOUT); // if timeout -> send bit again, else -> receive ack
+		usleep(200); // usleep이 없으면 비트가 더 보내지는 현상 생김
+		// => kill 함수의 호출 빈도를 높이면 비트가 꼬이는 현상이 생김
+		if (g_ack_received)
+			return ;
+	}
 }
 
 void	send_char(pid_t pid, unsigned char c)
@@ -55,7 +44,6 @@ void	send_char(pid_t pid, unsigned char c)
 	{
 		g_ack_received = 0;
 		send_bit(pid, (c >> i++) & 1); // 1bit씩 보내기
-		// usleep(100); @test 31, 46번째 줄의 usleep이 없으면 비트가 더 보내지는 현상 생김
 	}
 }
 

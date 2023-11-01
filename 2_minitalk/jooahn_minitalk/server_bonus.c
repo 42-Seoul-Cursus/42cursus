@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:34:52 by jooahn            #+#    #+#             */
-/*   Updated: 2023/11/02 00:25:15 by seunan           ###   ########.fr       */
+/*   Updated: 2023/11/02 04:04:50 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 #include <stdio.h>
 
 static char	buf = 0; // check_buf를 사용할 때 필요
-
-void	send_ack(pid_t pid)
-{
-	while (1)
-	{
-		if (kill(pid, SIGUSR1) != -1)
-			return ;
-	}
-}
 
 // if cnt == 0 -> buf |= 00000001
 // if cnt == 1 -> buf |= 00000010
@@ -32,8 +23,8 @@ void	send_ack(pid_t pid)
 void	receive_bit(int signum, struct __siginfo *info, void *any)
 {
 	// static char		buf;
-	static int		cnt;
-	static char		backup_char = 'a';
+	static int	cnt;
+	static char	backup_char = 'a';
 
 	(void) any;
 	if (info->si_pid == 0)
@@ -49,7 +40,7 @@ void	receive_bit(int signum, struct __siginfo *info, void *any)
 		cnt = 0;
 		buf = 0;
 	}
-	send_ack(info->si_pid); // send ack
+	kill(info->si_pid, SIGUSR1); // send ack
 }
 
 // sigint로 buf 확인
@@ -64,7 +55,7 @@ int main(void)
 	struct sigaction	sa;
 
 	signal(SIGINT, check_buf);
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_flags = SA_SIGINFO; // sa_flags를 설정해야 siginfo_t를 사용할 수 있음
 	sa.__sigaction_u.__sa_sigaction = receive_bit; // signal handler
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
