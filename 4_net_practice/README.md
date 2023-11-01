@@ -9,5 +9,6 @@
 
 ```bash
 bc # 계산기
-obase=2; # IP 주소 10진수 -> 2진수 변환
+obase=2; # Output base
+ibase=2; # Input base
 ```
