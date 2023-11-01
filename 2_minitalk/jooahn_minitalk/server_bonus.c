@@ -6,7 +6,7 @@
 /*   By: seunan <seunan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:34:52 by jooahn            #+#    #+#             */
-/*   Updated: 2023/11/01 16:23:59 by seunan           ###   ########.fr       */
+/*   Updated: 2023/11/02 00:25:15 by seunan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 
 static char	buf = 0; // check_buf를 사용할 때 필요
 
-void	send_ack(pid_t pid, pid_t backup)
+void	send_ack(pid_t pid)
 {
-	(void)backup;
-	if (pid == 0)
-	{
-		printf("pid is 0\n");
-		// if (kill(backup, SIGUSR1) != -1)
-			return ;
-	}
 	while (1)
 	{
 		if (kill(pid, SIGUSR1) != -1)
@@ -40,20 +33,23 @@ void	receive_bit(int signum, struct __siginfo *info, void *any)
 {
 	// static char		buf;
 	static int		cnt;
-	static pid_t	backup;
+	static char		backup_char = 'a';
 
 	(void) any;
+	if (info->si_pid == 0)
+		return ;
 	if (signum == SIGUSR1) // if bit is 1 -> SIGUSR1
 		buf |= (1 << cnt);
 	if (++cnt == 8)
 	{
-		write(1, &buf, 1);
+		if (backup_char != buf)
+			printf("%d != %d\n",(int)backup_char, (int)buf);
+		else
+			write(1, &buf, 1);
 		cnt = 0;
 		buf = 0;
 	}
-	if (info->si_pid != backup && info->si_pid != 0) // if pid is changed
-		backup = info->si_pid;
-	send_ack(info->si_pid, backup); // send ack
+	send_ack(info->si_pid); // send ack
 }
 
 // sigint로 buf 확인

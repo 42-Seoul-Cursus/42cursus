@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 INC = includes
 LIB_DIR = ./libft
 OBJS_DIR = obj/
