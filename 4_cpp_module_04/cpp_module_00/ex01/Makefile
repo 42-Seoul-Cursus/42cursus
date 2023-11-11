@@ -1,12 +1,14 @@
 .SUFFIXES : .cpp .o
 
-NAME=megaphone
+NAME=phonebook
 CC=c++
 CFLAGS=-std=c++98 -Werror -Wall -Wextra
 DEBUG=-g
 MEMORY=-g3 -fsanitize=address
 
-SRCS=megaphone.cpp
+SRCS=main.cpp \
+	Contact.cpp \
+	PhoneBook.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(NAME)
