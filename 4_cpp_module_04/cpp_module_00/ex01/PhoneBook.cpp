@@ -15,7 +15,7 @@ PhoneBook::PhoneBook()
 }
 void PhoneBook::AddContact()
 {
-	if (mCnt == 8)
+	if (mCurIdx == 8)
 		mCurIdx = 0;
 	std::cin.ignore();
 	mContacts[mCurIdx].SetFirstName(GetInput("first name"));
@@ -52,7 +52,7 @@ void PhoneBook::SearchContact()
 	}
 	std::cout << "Enter index: ";
 	std::cin >> input;
-	if (input.length() != 1 || input[0] < '0' || input[0] > '7')
+	if (!(input.length() == 1 && '0' <= input[0] && input[0] < mCnt + '0'))
 	{
 		std::cout << "Invalid index" << std::endl;
 		return;
