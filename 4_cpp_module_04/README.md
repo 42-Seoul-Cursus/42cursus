@@ -15,7 +15,7 @@
 	```
 2. 지역 변수와 함수의 매개 변수의 이름은 카멜 표기법을 따른다.
 	```cpp
-	void functionName(int myParameter)
+	void FunctionName(int myParameter)
 	{
 			int myLocalVariable;
 			// ...
@@ -291,5 +291,5 @@
 
 ### What I learned from this subject
 
-
 - class1 내부의 크기가 8인  class2 배열은 class1 생성 시 class2 생성자 호출이 8번 일어난다.
+- cpp의 파일 입출력은 [fstream](https://cplusplus.com/reference/fstream/fstream/)를 사용한다.

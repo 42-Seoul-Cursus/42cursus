@@ -1,7 +1,7 @@
 .SUFFIXES : .cpp .o
 
 NAME=phonebook
-CC=c++
+CC=clang++
 CFLAGS=-std=c++98 -Werror -Wall -Wextra
 DEBUG=-g
 MEMORY=-g3 -fsanitize=address

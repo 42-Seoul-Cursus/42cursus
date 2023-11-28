@@ -1,12 +1,12 @@
 .SUFFIXES : .cpp .o
 
-NAME=megaphone
-CC=clang++
+NAME=brain
+CC=c++
 CFLAGS=-std=c++98 -Werror -Wall -Wextra
 DEBUG=-g
 MEMORY=-g3 -fsanitize=address
 
-SRCS=megaphone.cpp
+SRCS=main.cpp Zombie.cpp ZombieHorde.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(NAME)

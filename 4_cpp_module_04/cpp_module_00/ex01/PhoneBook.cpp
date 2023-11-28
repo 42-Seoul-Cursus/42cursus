@@ -15,8 +15,6 @@ PhoneBook::PhoneBook()
 }
 void PhoneBook::AddContact()
 {
-	if (mCurIdx == 8)
-		mCurIdx = 0;
 	std::cin.ignore();
 	mContacts[mCurIdx].SetFirstName(GetInput("first name"));
 	if (std::cin.eof()) return ;
@@ -29,6 +27,8 @@ void PhoneBook::AddContact()
 	mContacts[mCurIdx].SetDarkestSecret(GetInput("darkest secret"));
 	std::cout << "Contact added" << std::endl;
 	++mCurIdx;
+	if (mCurIdx >= 8)
+		mCurIdx = 0;
 	if (mCnt < 8)
 		++mCnt;
 }
