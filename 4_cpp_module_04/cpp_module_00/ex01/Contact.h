@@ -15,11 +15,11 @@ private:
 	std::string mDarkestSecret;
 public:
 	Contact();
-	void				SetFirstName(std::string firstName);
-	void				SetLastName(std::string lastName);
-	void				SetNickname(std::string nickname);
-	void				SetPhoneNumber(std::string phoneNumber);
-	void				SetDarkestSecret(std::string darkestSecret);
+	void		SetFirstName(std::string firstName);
+	void		SetLastName(std::string lastName);
+	void		SetNickname(std::string nickname);
+	void		SetPhoneNumber(std::string phoneNumber);
+	void		SetDarkestSecret(std::string darkestSecret);
 	std::string	GetFirstName(bool isShort);
 	std::string	GetLastName(bool isShort);
 	std::string	GetNickname(bool isShort);
