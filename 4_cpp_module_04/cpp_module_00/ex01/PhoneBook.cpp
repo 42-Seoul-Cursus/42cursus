@@ -25,7 +25,7 @@ void PhoneBook::AddContact()
 	mContacts[mCurIdx].SetPhoneNumber(GetInput("phone number"));
 	if (std::cin.eof()) return ;
 	mContacts[mCurIdx].SetDarkestSecret(GetInput("darkest secret"));
-	std::cout << "Contact added" << std::endl;
+	std::cout << "\033[0;32m" << "Contact added" << "\033[0m" << std::endl;
 	++mCurIdx;
 	if (mCurIdx >= 8)
 		mCurIdx = 0;
@@ -39,7 +39,7 @@ void PhoneBook::SearchContact()
 
 	if (mCnt == 0)
 	{
-		std::cout << "PhoneBook is empty" << std::endl;
+		std::cout << "\033[0;33m" << "PhoneBook is empty" << "\033[0m" <<  std::endl;
 		return;
 	}
 	std::cout << "     index|first name| last name|  nickname" << std::endl;
@@ -54,7 +54,7 @@ void PhoneBook::SearchContact()
 	std::cin >> input;
 	if (!(input.length() == 1 && '0' <= input[0] && input[0] < mCnt + '0'))
 	{
-		std::cout << "Invalid index" << std::endl;
+		std::cout << "\033[0;31m" << "Invalid index" << "\033[0m" << std::endl;
 		return;
 	}
 	i = input[0] - '0';
