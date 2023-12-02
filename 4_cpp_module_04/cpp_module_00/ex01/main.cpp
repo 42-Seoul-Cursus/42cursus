@@ -5,16 +5,23 @@ int	main()
 	PhoneBook phonebook;
 	std::string input;
 
-	std::cout << "Enter the commend (ADD, SEARCH, EXIT)\n";
-	std::cin >> input;
-	while (!std::cin.eof() && input != "EXIT")
+	while (true)
 	{
-		if (input == "ADD")
-			phonebook.AddContact();
-		else if (input == "SEARCH")
-			phonebook.SearchContact();
 		std::cout << "Enter the commend (ADD, SEARCH, EXIT)\n";
 		std::cin >> input;
+
+		if (input == "ADD")
+		{
+			phonebook.AddContact();
+		}
+		else if (input == "SEARCH")
+		{
+			phonebook.SearchContact();
+		}
+		if (std::cin.eof() || input == "EXIT")
+		{
+			break;
+		}
 	}
 	return 0;
 }
