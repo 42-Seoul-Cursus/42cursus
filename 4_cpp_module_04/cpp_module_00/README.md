@@ -50,4 +50,6 @@ This function and the related types were deprecated in C++11 and removed in C++1
 std::mem_fn and std::bind, both of which create callable adaptor-compatible function objects from member functions.
 ```
 
-[mem_fun_ref](http://www.cplusplus.com/reference/functional/mem_fun_ref/)
+- [mem_fun_ref](http://www.cplusplus.com/reference/functional/mem_fun_ref/)
+- [씹cpp](https://modoocode.com/254)
+
