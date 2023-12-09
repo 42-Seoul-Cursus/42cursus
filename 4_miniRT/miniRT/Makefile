@@ -10,9 +10,11 @@ LIBS=-L./MiniLibX
 FRAMEWORKS=-lmlx -framework OpenGL -framework AppKit
 LIBMLX=./MiniLibX/libmlx.a
 SRCS=main.c \
-	operations.c \
-	operations2.c \
-	pixel.c
+	vec_operation1.c \
+	vec_operation2.c \
+	ray_operation.c \
+	color.c \
+	hooks.c
 OBJS=$(SRCS:.c=.o)
 
 # -----make practiceMLX-----
