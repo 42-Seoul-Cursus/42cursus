@@ -2,7 +2,7 @@
 
 ## Solution
 
-deque를 이용하여 구현
+deque 자료구조, greedy algorithm을 이용하여 구현
 
 ## Bonus
 

@@ -41,3 +41,12 @@ cmd가 올바르지 않은 것
 - 만약 파일이 안열리면 (infile의 경우에만) 오류메세지 없음 -> open err 시 exit
 
 awk 구현하지 않음
+
+```c
+// 터지는 케이스들 모음
+
+./pipex /dev/random "cat" "head -1" a
+./pipex a ls "sleep 10" b // ps 시 좀비 프로세스가 생김
+chmod 000 a
+unset PATH
+```
