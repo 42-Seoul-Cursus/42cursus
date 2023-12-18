@@ -34,3 +34,4 @@ t_vec vec_unit(t_vec v)
 	len = vec_length(v);
 	return (vec(v.x / len, v.y / len ,v.z / len));
 }
+

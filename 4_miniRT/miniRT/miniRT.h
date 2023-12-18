@@ -4,6 +4,9 @@
 # include "MiniLibX/mlx.h"
 # include <unistd.h>
 
+# define WIDTH 1440
+# define HEIGHT 900
+
 typedef struct s_vars
 {
 	void	*mlx;
@@ -54,8 +57,15 @@ double	vec_dot(t_vec *v1, t_vec *v2);
 t_vec	vec_cross(t_vec *v1, t_vec *v2);
 t_vec	vec_unit(t_vec v);
 
+/* ray_operating.c */
+t_vec	ray_at(t_ray *ray, double t);
+
 /* color.c */
 int		get_color(int t, t_color pixel_color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+/* hooks.c */
+int	key_hook(int keycode, t_vars *vars);
+int	exit_hook(void);
 
 #endif

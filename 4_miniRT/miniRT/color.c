@@ -1,8 +1,22 @@
 #include "miniRT.h"
 
+// Transparency, Red, Green, Blue
+// 0xTTRRGGBB
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
 int get_color(int t, t_color pixel_color)
 {
 	return (t << 24 | (255 * pixel_color.r) << 16 | (255 * pixel_color.g) << 8 | (255 * pixel_color.b));
+}
+
+int ray_color(t_ray r)
+{
+	t_vec unit_direction = vec_unit(r.dir);
+	int t = 0.5 * (unit_direction.y + 1.0);
+	return ((1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0));
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
