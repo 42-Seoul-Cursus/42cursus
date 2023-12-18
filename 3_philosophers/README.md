@@ -9,6 +9,7 @@
 	- [`<pthread.h>`](#pthreadh)
 	- [Trouble](#trouble)
 	- [Check before submitting](#check-before-submitting)
+	- [About mutex](#about-mutex)
 
 ## `<unistd.h>`
 
@@ -92,3 +93,7 @@ pthread_mutex_unlock(pthread_mutex_t *mutex)
 - [x] -g3 -fsanitize=thread -pthread
 - [x] ./philo 4 410 200 200
 - [x] ./philo 5 800 200 200
+
+## About mutex
+
+- [fork를 뮤텍스로 mutex로 구현해도 되는 이유](https://www.ibm.com/docs/ko/aix/7.3?topic=p-pthread-mutex-lock-pthread-mutex-trylock-pthread-mutex-unlock-subroutine)
