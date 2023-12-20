@@ -15,8 +15,8 @@
 
 #include <sys/types.h>
 
-typedef struct s_list	t_list;
 typedef enum e_bool		t_bool;
+typedef struct s_list	t_list;
 
 # ifndef INT_MAX
 #  define INT_MAX 2147483647
@@ -30,16 +30,16 @@ typedef enum e_bool		t_bool;
 #  define NULL (void *)0
 # endif
 
-struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-};
-
 enum e_bool
 {
 	FALSE = 0,
 	TRUE = 1
+};
+
+struct s_list
+{
+	void			*content;
+	t_list			*next;
 };
 
 int		ft_isalpha(int c);

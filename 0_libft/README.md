@@ -1,7 +1,9 @@
 # libft
+> My own library
 
 - [libft](#libft)
 - [MANDATORY](#mandatory)
+	- [Makefile](#makefile)
 	- [Libc functions](#libc-functions)
 		- [ft\_is~ series](#ft_is-series)
 		- [ft\_strlen](#ft_strlen)
@@ -34,6 +36,8 @@
 		- [ft\_putendl\_fd](#ft_putendl_fd)
 		- [ft\_putnbr\_fd](#ft_putnbr_fd)
 - [BONUS](#bonus)
+	- [Makefile](#makefile-1)
+	- [Bonus functions](#bonus-functions)
 		- [ft\_lstnew](#ft_lstnew)
 		- [ft\_lstadd\_front](#ft_lstadd_front)
 		- [ft\_lstsize](#ft_lstsize)
@@ -43,11 +47,15 @@
 		- [ft\_lstclear](#ft_lstclear)
 		- [ft\_lstiter](#ft_lstiter)
 		- [ft\_lstmap](#ft_lstmap)
-		- [Reference](#reference)
+	- [Reference](#reference)
 
 <br>
 
 # MANDATORY
+
+## Makefile
+
+`man ar`, `man cc`
 
 ## Libc functions
 
@@ -268,6 +276,16 @@ void	ft_putnbr_fd(int n, int fd);
 ```
 
 # BONUS
+```Makefile
+bonus:
+	$(MAKE) 'MANDATORY_OBJS=$(MANDATORY_OBJS) $(BONUS_OBJS)' all
+```
+
+보너스 규칙으로는 MANDATORY_OBJS에 BONUS_OBJS를 추가해준다.
+
+## Makefile
+
+## Bonus functions
 
 ### ft_lstnew
 ```c
@@ -314,8 +332,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 ```
 
-### Reference
+## Reference
 
-* [C언어 가변인자(가변파라미터)를 사용해보자](https://norux.me/19)
-* [C언어 가변인자](https://aossuper8.tistory.com/17)
-* [가변인자 함수의 사용](https://jhnyang.tistory.com/293)
+- [ar 명령어로 라이브러리 다루기](https://betterourlife.tistory.com/17)
