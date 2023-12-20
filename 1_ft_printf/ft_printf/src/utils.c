@@ -16,7 +16,7 @@ void	ft_putstr(char *s, int *cnt)
 {
 	int	i;
 
-	if (s == 0)
+	if (s == NULL)
 	{
 		write(1, "(null)", 6);
 		*cnt += 6;
