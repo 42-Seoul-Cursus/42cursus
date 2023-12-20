@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static size_t	is_size(int n)
+static size_t	get_size(int n)
 {
 	size_t	size;
 
@@ -29,28 +29,28 @@ static size_t	is_size(int n)
 
 char	*ft_itoa(int n)
 {
-	char		*num;
-	int			minus;
+	char		*out;
+	int			neg;
 	long long	ncpy;
 	int			i;
 
 	ncpy = n;
-	minus = 0;
+	neg = 0;
 	if (ncpy < 0)
 	{
 		ncpy *= -1;
-		++minus;
+		neg = 1;
 	}
-	num = ft_calloc(sizeof(char), (is_size(n) + minus + 1));
-	if (!num)
-		return (0);
-	i = is_size(n) + minus;
+	out = ft_calloc(sizeof(char), (get_size(n) + neg + 1));
+	if (!out)
+		return (NULL);
+	i = get_size(n) + neg;
 	while (--i >= 0)
 	{
-		num[i] = ncpy % 10 + '0';
+		out[i] = ncpy % 10 + '0';
 		ncpy /= 10;
 	}
-	if (minus == 1)
-		num[0] = '-';
-	return (num);
+	if (neg == 1)
+		out[0] = '-';
+	return (out);
 }

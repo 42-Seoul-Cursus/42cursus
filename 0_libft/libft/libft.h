@@ -12,14 +12,35 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
 
-typedef struct s_list
+#include <sys/types.h>
+
+typedef struct s_list	t_list;
+typedef enum e_bool		t_bool;
+
+# ifndef INT_MAX
+#  define INT_MAX 2147483647
+# endif
+
+# ifndef INT_MIN
+#  define INT_MIN -INT_MAX-1
+# endif
+
+# ifndef NULL
+#  define NULL (void *)0
+# endif
+
+struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}	t_list;
+};
+
+enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+};
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

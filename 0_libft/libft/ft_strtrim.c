@@ -12,15 +12,15 @@
 
 #include "libft.h"
 
-static int	is_set(char c, char const *set)
+static t_bool	is_set(char c, char const *set)
 {
 	while (*set != '\0')
 	{
 		if (*set == c)
-			return (1);
+			return (TRUE);
 		++set;
 	}
-	return (0);
+	return (FALSE);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
@@ -43,7 +43,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	str = ft_calloc(1, (end - start + 1));
 	if (!str)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (start < end)
 		str[i++] = s1[start++];

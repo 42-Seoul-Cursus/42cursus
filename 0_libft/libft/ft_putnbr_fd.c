@@ -10,33 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-static void	write_num(int n, int fd)
+static void	print_num(int n, int fd)
 {
 	char	num;
 
 	if (n == 0)
 		return ;
 	num = n % 10 + '0';
-	write_num(n / 10, fd);
+	print_num(n / 10, fd);
 	write(fd, &num, 1);
 }
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	tmp;
+	char	last;
 
 	if (n > 0)
-		write_num(n, fd);
+		print_num(n, fd);
 	else if (n == 0)
 		write(fd, "0", 1);
 	else
 	{
-		tmp = -1 * (n % 10) + '0';
+		last = -1 * (n % 10) + '0';
 		n /= 10;
 		write(fd, "-", 1);
-		write_num(n * -1, fd);
-		write(fd, &tmp, 1);
+		print_num(-n, fd);
+		write(fd, &last, 1);
 	}
 }

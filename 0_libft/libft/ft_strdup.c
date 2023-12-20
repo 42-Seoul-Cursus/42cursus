@@ -14,17 +14,17 @@
 
 char	*ft_strdup(const char *s1)
 {
-	char	*answer;
+	char	*out;
 	size_t	i;
 
-	answer = ft_calloc(ft_strlen(s1) + 1, sizeof(char));
-	if (!answer)
-		return (0);
+	out = ft_calloc(ft_strlen(s1) + 1, sizeof(char));
+	if (!out)
+		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
 	{
-		answer[i] = s1[i];
+		out[i] = s1[i];
 		++i;
 	}
-	return (answer);
+	return (out);
 }

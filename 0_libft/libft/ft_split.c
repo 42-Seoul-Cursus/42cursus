@@ -10,36 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-static char	**str_free(char **answer, int arridx)
+static char	**str_free(char **out, int arridx)
 {
 	int	i;
 
 	i = 0;
 	while (i <= arridx)
 	{
-		free(answer[i]);
+		free(out[i]);
 		++i;
 	}
-	free(answer);
-	return (0);
+	free(out);
+	return (NULL);
 }
 
-static int	cnt_strnum(char const *s, char c)
+static int	get_cnt(char const *s, char c)
 {
-	int	strnum;
+	int	cnt;
 	int	i;
 
-	strnum = 0;
+	cnt = 0;
 	i = 0;
 	while (s[i] != '\0')
 	{
 		if ((s[i] != c) && ((s[i + 1] == c) || s[i + 1] == '\0'))
-			++strnum;
+			++cnt;
 		++i;
 	}
-	return (strnum);
+	return (cnt);
 }
 
 static char	*str_maker(const char *s, int *sidx, char c)
@@ -57,7 +58,7 @@ static char	*str_maker(const char *s, int *sidx, char c)
 	}
 	str = (char *) ft_calloc(sizeof(char), (strlen + 1));
 	if (!str)
-		return (0);
+		return (NULL);
 	*sidx -= strlen;
 	strlen = 0;
 	while (s[*sidx] != '\0' && s[*sidx] != c)
@@ -71,25 +72,25 @@ static char	*str_maker(const char *s, int *sidx, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**answer;
+	char	**out;
 	char	*str;
-	int		i;
-	int		strnum;
 	int		sidx;
+	int		cnt;
+	int		i;
 
-	strnum = cnt_strnum(s, c);
-	answer = (char **)ft_calloc(sizeof(char *), (strnum + 1));
-	if (!answer)
-		return (0);
-	i = 0;
+	cnt = get_cnt(s, c);
+	out = (char **)ft_calloc(sizeof(char *), (cnt + 1));
+	if (!out)
+		return (NULL);
 	sidx = 0;
-	while (i < strnum)
+	i = 0;
+	while (i < cnt)
 	{
 		str = str_maker(s, &sidx, c);
 		if (!str)
-			return (str_free(answer, i));
-		answer[i] = str;
+			return (str_free(out, i));
+		out[i] = str;
 		++i;
 	}
-	return (answer);
+	return (out);
 }

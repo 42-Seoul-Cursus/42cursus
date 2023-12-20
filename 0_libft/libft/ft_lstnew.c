@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anseungwon <anseungwon@student.42seoul.    +#+  +:+       +#+        */
+/*   By: anseungwon <anseungwon@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 14:45:37 by seunan            #+#    #+#             */
-/*   Updated: 2023/03/19 19:30:56 by anseungwon       ###   ########seoul.kr  */
+/*   Created: 2023/03/17 14:44:41 by seunan            #+#    #+#             */
+/*   Updated: 2023/07/18 11:08:47 by anseungwon       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_list	*ft_lstnew(void *content)
 {
-	if (lst == 0)
-		return ;
-	del(lst->content);
-	free(lst);
+	t_list	*new;
+
+	new = ft_calloc(1, sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
 }

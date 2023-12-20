@@ -14,17 +14,17 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*answer;
+	char			*out;
 	unsigned int	i;
 
-	answer = ft_calloc(sizeof(char), ft_strlen(s) + 1);
-	if (!answer)
-		return (0);
+	out = ft_calloc(sizeof(char), ft_strlen(s) + 1);
+	if (!out)
+		return (NULL);
 	i = 0;
 	while (s[i] != '\0')
 	{
-		answer[i] = f(i, s[i]);
+		out[i] = f(i, s[i]);
 		++i;
 	}
-	return (answer);
+	return (out);
 }
