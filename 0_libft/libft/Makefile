@@ -28,7 +28,7 @@ WHITE_ = \033[47m
 INCLUDE = -I./include
 SRC_DIR = ./src
 
-SRC=\
+SRC = \
 	ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -78,11 +78,11 @@ BONUS_SRC=\
 BONUS_OBJS = $(addprefix $(SRC_DIR)/, $(BONUS_SRC:.c=.o))
 
 all: $(NAME)
+	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 $(NAME): $(OBJS)
-	@echo "$(GREEN)Creating library: $(WHITE)$@$(RESET)"
+	@echo "$(WHITE)Creating $@$(RESET)"
 	@ar cr $(NAME) $(OBJS)
-	@echo "$(GREEN)Library created successfully$(RESET)"
 
 bonus:
 	@$(MAKE) 'OBJS=$(OBJS) $(BONUS_OBJS)' all

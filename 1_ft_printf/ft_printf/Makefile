@@ -34,11 +34,11 @@ SRC = \
 OBJS = $(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
+	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 $(NAME): $(OBJS)
-	@echo "$(GREEN)Creating library: $(WHITE)$@$(RESET)"
+	@echo "$(WHITE)Creating $@$(RESET)"
 	@ar cr $(NAME) $(OBJS)
-	@echo "$(GREEN)Library created successfully$(RESET)"
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
