@@ -1,38 +1,113 @@
 .SUFFIXES : .c .o
 
-NAME=libft.a
-CC=gcc
-CFLAGS=-Wall -Wextra -Werror
-DEBUG=-g3 -fsanitize=address
+NAME = libft.a
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+MEMORY = -g3 -fsanitize=address
+DEBUG = -g
 
-MANDATORY_SRC=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-MANDATORY_OBJS=$(MANDATORY_SRC:.c=.o)
-BONUS_SRC=ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
-BONUS_OBJS=$(BONUS_SRC:.c=.o)
+BLACK = \033[30m
+RED = \033[31m
+GREEN = \033[32m
+YELLOW = \033[33m
+BLUE = \033[34m
+MAGENTA = \033[35m
+CYAN = \033[36m
+WHITE = \033[37m
+RESET = \033[0m
+
+BLACK_ = \033[40m
+RED_ = \033[41m
+GREEN_ = \033[42m
+YELLOW_ = \033[43m
+BLUE_ = \033[44m
+MAGENTA_ = \033[45m
+CYAN_ = \033[46m
+WHITE_ = \033[47m
+
+INCLUDE = -I./include
+SRC_DIR = ./src
+
+SRC = \
+	ft_isalpha.c \
+	ft_isdigit.c \
+	ft_isalnum.c \
+	ft_isascii.c \
+	ft_isprint.c \
+	ft_strlen.c \
+	ft_memset.c \
+	ft_bzero.c \
+	ft_memcpy.c \
+	ft_memmove.c \
+	ft_strlcpy.c \
+	ft_strlcat.c \
+	ft_toupper.c \
+	ft_tolower.c \
+	ft_strchr.c \
+	ft_strrchr.c \
+	ft_strncmp.c \
+	ft_memchr.c \
+	ft_memcmp.c \
+	ft_strnstr.c \
+	ft_atoi.c \
+	ft_calloc.c \
+	ft_strdup.c \
+	ft_substr.c \
+	ft_strjoin.c \
+	ft_strtrim.c \
+	ft_split.c \
+	ft_itoa.c \
+	ft_strmapi.c \
+	ft_striteri.c \
+	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c
+OBJS = $(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
+
+BONUS_SRC=\
+	ft_lstnew.c \
+	ft_lstadd_front.c \
+	ft_lstsize.c \
+	ft_lstlast.c \
+	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstclear.c \
+	ft_lstiter.c \
+	ft_lstmap.c
+BONUS_OBJS = $(addprefix $(SRC_DIR)/, $(BONUS_SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(MANDATORY_OBJS)
-	ar cr $(NAME) $(MANDATORY_OBJS)
+$(NAME): $(OBJS)
+	@echo "$(WHITE)Creating $@$(RESET)"
+	@ar cr $(NAME) $(OBJS)
+	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 bonus:
-	$(MAKE) 'MANDATORY_OBJS=$(MANDATORY_OBJS) $(BONUS_OBJS)' all
+	@$(MAKE) 'OBJS=$(OBJS) $(BONUS_OBJS)' all
+	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	@echo "$(CYAN)Compiled:$(RESET) $< -> $@"
 
 clean:
-	rm -f $(MANDATORY_OBJS) $(BONUS_OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
-debug:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+mem:
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
 
-.PHONY: all clean fclean re bonus debug
+lldb:
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+
+.PHONY: all clean fclean re bonus mem lldb
