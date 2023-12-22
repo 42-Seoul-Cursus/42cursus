@@ -1,31 +1,31 @@
 # Born2BeRoot
 <!--
 해야할 일
-1. *apt edit-sources (== /etc/apt/sources.list)* 이 무엇인지 추가
+1. apt edit-sources (== /etc/apt/sources.list) 이 무엇인지 추가
 2. 미흡한 부분 추가
 3. 추가한 스샷 넣어주기
 -->
-- [Install Guide](#install-guide)
-- [Hard Disk](#hard-disk)
-	- [Partition](#partition)
-	- [LVM](#lvm)
-- [Package Manager](#package-manager)
-	- [What Are Package Dependencies](#what-are-package-dependencies)
-	- [apt vs aptitude](#apt-vs-aptitude)
-- [port](#port)
-- [AppArmor](#apparmor)
-- [UFW](#ufw)
-	- [iptables](#iptables)
-- [SSH](#ssh)
-	- [telnet](#telnet)
-- [PASSWORD POLICY](#password-policy)
-- [GROUP, USER](#group-user)
-- [SUDO](#sudo)
-- [monitoring.sh](#monitoringsh)
-	- [crontab](#crontab)
-	- [SHELL](#shell)
-	- [SHA](#sha)
-- [추가로 공부해야하는 부분](#추가로-공부해야하는-부분)
+- [Born2BeRoot](#born2beroot)
+	- [Install Guide](#install-guide)
+	- [Hard Disk](#hard-disk)
+		- [Partition](#partition)
+		- [LVM](#lvm)
+	- [Package Manager](#package-manager)
+		- [What Are Package Dependencies](#what-are-package-dependencies)
+		- [apt vs aptitude](#apt-vs-aptitude)
+	- [port](#port)
+	- [AppArmor](#apparmor)
+	- [UFW](#ufw)
+		- [iptables](#iptables)
+	- [SSH](#ssh)
+		- [telnet](#telnet)
+	- [PASSWORD POLICY](#password-policy)
+	- [GROUP, USER](#group-user)
+	- [SUDO](#sudo)
+	- [monitoring.sh](#monitoringsh)
+		- [crontab](#crontab)
+		- [SHA](#sha)
+		- [SHELL](#shell)
 
 ## Install Guide
 ![](img/1.png)
