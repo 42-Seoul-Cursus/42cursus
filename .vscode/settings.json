@@ -60,6 +60,10 @@
 		"vector": "cpp",
 		"algorithm": "cpp",
 		"iomanip": "cpp",
-		"fstream": "cpp"
+		"fstream": "cpp",
+		"unistd.h": "c",
+		"libft.h": "c",
+		"types.h": "c",
+		"ft_printf.h": "c"
 	}
 }

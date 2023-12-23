@@ -1,4 +1,4 @@
-# miniRT with sunko
+# [miniRT](https://github.com/seungwonme/miniRT) with sunko
 
 [raytracing in one weekend](https://80000coding.oopy.io/4988ecf3-4d1f-4b94-9068-7872092b981b)와 [mini_raytracing_in_c](https://github.com/GaepoMorningEagles/mini_raytracing_in_c)를 보고 정리
 
