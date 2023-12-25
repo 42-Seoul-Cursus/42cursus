@@ -62,7 +62,7 @@ SRC = \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c 
 OBJS = $(addprefix $(SRC_DIR)/, $(SRC:.c=.o))
 
 BONUS_SRC=\
@@ -74,7 +74,9 @@ BONUS_SRC=\
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	ft_error_bonus.c \
+	ft_strtod_bonus.c 
 BONUS_OBJS = $(addprefix $(SRC_DIR)/, $(BONUS_SRC:.c=.o))
 
 all: $(NAME)
