@@ -64,6 +64,7 @@
 		"unistd.h": "c",
 		"libft.h": "c",
 		"types.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"stdlib.h": "c"
 	}
 }

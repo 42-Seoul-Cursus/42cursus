@@ -13,7 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <sys/types.h>
+# include <sys/types.h>
 
 typedef enum e_bool		t_bool;
 typedef struct s_list	t_list;
@@ -23,11 +23,23 @@ typedef struct s_list	t_list;
 # endif
 
 # ifndef INT_MIN
-#  define INT_MIN -INT_MAX-1
+#  define INT_MIN (int)-2147483648
 # endif
 
-# ifndef NULL
-#  define NULL (void *)0
+# ifndef NULLPTR
+#  define NULLPTR (void *)0
+# endif
+
+# ifndef STDIN
+#  define STDIN 0
+# endif
+
+# ifndef STDOUT
+#  define STDOUT 1
+# endif
+
+# ifndef STDERR
+#  define STDERR 2
 # endif
 
 enum e_bool
