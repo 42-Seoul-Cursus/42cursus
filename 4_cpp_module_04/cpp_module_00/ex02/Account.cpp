@@ -4,23 +4,23 @@
 
 static int	getNbAccounts( void )
 {
-
+  std::cout << "getNbAccounts" << '\n';
 }
 static int	getTotalAmount( void )
 {
-
+  std::cout << "getTotalAmount" << '\n';
 }
 static int	getNbDeposits( void )
 {
-
+  std::cout << "getNbDeposits" << '\n';
 }
 static int	getNbWithdrawals( void )
 {
-
+  std::cout << "getNbWithdrawals" << '\n';
 }
 static void	displayAccountsInfos( void )
 {
-
+  std::cout << "displayAccountsInfos" << '\n';
 }
 
 Account::Account(int initial_deposit)
@@ -29,12 +29,12 @@ Account::Account(int initial_deposit)
 }
 Account::~Account(void)
 {
-
+  std::cout << "Destroy" << '\n';
 }
 
 void	Account::makeDeposit( int deposit )
 {
-
+  std::cout << "makeDeposit" << '\n';
 }
 bool	Account::makeWithdrawal( int withdrawal )
 {
