@@ -1,34 +1,37 @@
 .SUFFIXES : .c .o
 
-NAME=philo
-CC=cc
-PRINTF=printf
-CFLAGS=-Werror -Wall -Wextra -pthread
-DEBUG=-g
-THREAD=-g3 -fsanitize=thread
-MEMORY=-g3 -fsanitize=address
+NAME   := philo
+CC     := cc
+PRINTF := printf
+CFLAGS := -Werror -Wall -Wextra -pthread
+DEBUG  := -g
+THREAD := -g3 -fsanitize=thread
+MEMORY := -g3 -fsanitize=address
 
-SRCS= main.c \
-	init.c \
-	routine.c \
-	mornitor.c \
-	utils.c \
-	cleanup.c \
-	print.c
-OBJS=$(SRCS:.c=.o)
+INCLUDE := -I./include
+SRC_DIR := ./src
+
+SRCS   := main.c \
+					init.c \
+					routine.c \
+					mornitor.c \
+					utils.c \
+					cleanup.c \
+					print.c
+OBJS   := $(addprefix $(SRC_DIR)/, $(SRCS:.c=.o))
 
 # Color Aliases
-DEFAULT = \033[0;39m
-GRAY = \033[0;30m
-RED = \033[0;31m
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-BLUE = \033[0;34m
-MAGENTA = \033[0;35m
-CYAN = \033[0;36m
-WHITE = \033[0;37m
+BLACK   := \033[30m
+RED     := \033[31m
+GREEN   := \033[32m
+YELLOW  := \033[33m
+BLUE    := \033[34m
+MAGENTA := \033[35m
+CYAN    := \033[36m
+WHITE   := \033[37m
+RESET   := \033[0m
 
-ASCII_ART="\
+ASCII_ART := "\
 ..............................................................\n\
 . \n\
 .        :::::::::  :::    ::: ::::::::::: :::        ::::::::\n\
@@ -43,40 +46,44 @@ ASCII_ART="\
 "
 
 all: clear $(NAME)
+	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 clear:
 	clear
 	@echo "$(CYAN)"
 	@echo $(ASCII_ART)
-	@echo "$(DEFAULT)"
+	@echo "$(RESET)"
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS)	
+	@echo "$(WHITE)Creating $@$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@$(PRINTF) "\r%100s\r$(GREEN)$(BIN) is up to date!$(DEFAULT)\n"
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	@echo "$(CYAN)Compiled:$(RESET) $< -> $@"
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
+	@echo "$(BLUE)Cleaned up object files$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(BLUE)Cleaned up executable and library$(RESET)"
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 th:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(THREAD)"
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(THREAD)"
 
 mem:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
 
-deb:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+lldb:
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 
-.PHONY: all clean fclean re mem th deb
+.PHONY: all clean fclean re mem th lldb
