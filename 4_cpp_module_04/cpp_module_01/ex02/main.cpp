@@ -11,6 +11,7 @@ int main(void)
 	std::cout << stringPTR << std::endl;
 	std::cout << &stringREF << std::endl;
 
+	std::cout << s << std::endl;
 	std::cout << *stringPTR << std::endl;
 	std::cout << stringREF << std::endl;
 }
