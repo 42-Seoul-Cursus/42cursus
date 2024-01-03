@@ -10,8 +10,8 @@ public:
 	Zombie(std::string name);
 	~Zombie();
 	void		setName(std::string name);
-	std::string	getName();
-	void		announce(void);
+	std::string	getName() const;
+	void		announce(void) const;
 };
 
 void	randomChump( std::string name );
