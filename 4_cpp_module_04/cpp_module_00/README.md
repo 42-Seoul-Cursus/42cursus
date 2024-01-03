@@ -45,11 +45,30 @@ getline()이 바로 종료되는 현상이 발생한다.
 
 ## ex02
 
+예금, 출금 기록 로그를 역추적하여 소스코드를 복구하는 과제
+
 ```
 This function and the related types were deprecated in C++11 and removed in C++17 in favor of the more general
 std::mem_fn and std::bind, both of which create callable adaptor-compatible function objects from member functions.
 ```
 
+```cpp
+// 현재 시간을 얻기
+std::time_t currentTime = std::time(nullptr);
+// std::tm 구조체를 사용하여 시간을 지역 시간으로 변환
+std::tm *localTime = std::localtime(&currentTime);
+
+// 기존 날짜 출력 방식
+std::cout << (localTime->tm_year + 1900);
+std::cout << std::setfill('0') << std::setw(2) << (localTime->tm_mon + 1);
+std::cout << std::setfill('0') << std::setw(2) << localTime->tm_mday << '_';
+std::cout << std::setfill('0') << std::setw(2) << localTime->tm_hour;
+std::cout << std::setfill('0') << std::setw(2) << localTime->tm_min;
+std::cout << std::setfill('0') << std::setw(2) << localTime->tm_sec << std::endl;
+
+// put_time을 사용한 날짜 출력 방식
+std::cout << std::put_time(localTime, "%Y%m%d_%H%M%S") << std::endl;
+```
 - [mem_fun_ref](http://www.cplusplus.com/reference/functional/mem_fun_ref/)
 - [씹cpp](https://modoocode.com/254)
 

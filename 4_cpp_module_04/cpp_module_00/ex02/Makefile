@@ -21,40 +21,40 @@ INCLUDE := -I./inc
 
 SRC     := \
 		Account.cpp \
-		tests.cpp 
+		tests.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
 	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
 
 $(NAME): $(OBJ)
-	$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "$(WHITE)Creating $@$(RESET)"
 
 %.o: %.cpp
-	$(CXX) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	@$(CXX) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 	@echo "$(CYAN)Compiled:$(RESET) $< -> $@"
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 	@echo "$(BLUE)Cleaned up object files$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@echo "$(BLUE)Cleaned up executable and library$(RESET)"
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 mem:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
 	@echo "$(YELLOW)Executable compiled with memory sanitizer$(RESET)"
 
 lldb:
-	$(MAKE) fclean
-	$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
+	@$(MAKE) fclean
+	@$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
 	@echo "$(YELLOW)Executable compiled to enable LLDB debugging$(RESET)"
 
 .PHONY: all clean fclean re mem lldb
