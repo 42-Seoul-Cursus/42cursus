@@ -105,6 +105,11 @@ void	Account::_displayTimestamp( void )
 {
 	std::time_t currentTime = std::time(nullptr);
 	std::tm *localTime = std::localtime(&currentTime);
-	std::cout << '[' << std::put_time(localTime, "%Y%m%d_%H%M%S") << "] ";
+	std::cout << '[' << (localTime->tm_year + 1900)
+	<< std::setfill('0') << std::setw(2) << (localTime->tm_mon + 1)
+	<< std::setfill('0') << std::setw(2) << localTime->tm_mday << '_'
+	<< std::setfill('0') << std::setw(2) << localTime->tm_hour
+	<< std::setfill('0') << std::setw(2) << localTime->tm_min
+	<< std::setfill('0') << std::setw(2) << localTime->tm_sec << "] ";
 	// std::cout << "[19920104_091532] ";
 }
