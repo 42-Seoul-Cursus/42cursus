@@ -28,33 +28,53 @@ void Contact::SetDarkestSecret(std::string darkestSecret)
 {
 	mDarkestSecret = darkestSecret;
 }
-std::string Contact::GetFirstName(bool isShort)
+std::string Contact::GetFirstName(void) const
 {
-	if (isShort && mFirstName.length() > 10)
+	return mFirstName;
+}
+std::string Contact::GetLastName(void) const
+{
+	return mLastName;
+}
+std::string Contact::GetNickname(void) const
+{
+	return mNickname;
+}
+std::string Contact::GetPhoneNumber(void) const
+{
+	return mPhoneNumber;
+}
+std::string Contact::GetDarkestSecret(void) const
+{
+	return mDarkestSecret;
+}
+std::string Contact::GetShortFirstName(void) const
+{
+	if (mFirstName.length() > 10)
 		return mFirstName.substr(0, 9) + ".";
 	return mFirstName;
 }
-std::string Contact::GetLastName(bool isShort)
+std::string Contact::GetShortLastName(void) const
 {
-	if (isShort && mLastName.length() > 10)
+	if (mLastName.length() > 10)
 		return mLastName.substr(0, 9) + ".";
 	return mLastName;
 }
-std::string Contact::GetNickname(bool isShort)
+std::string Contact::GetShortNickname(void) const
 {
-	if (isShort && mNickname.length() > 10)
+	if (mNickname.length() > 10)
 		return mNickname.substr(0, 9) + ".";
 	return mNickname;
 }
-std::string Contact::GetPhoneNumber(bool isShort)
+std::string Contact::GetShortPhoneNumber(void) const
 {
-	if (isShort && mPhoneNumber.length() > 10)
+	if (mPhoneNumber.length() > 10)
 		return mPhoneNumber.substr(0, 9) + ".";
 	return mPhoneNumber;
 }
-std::string Contact::GetDarkestSecret(bool isShort)
+std::string Contact::GetShortDarkestSecret(void) const
 {
-	if (isShort && mDarkestSecret.length() > 10)
+	if (mDarkestSecret.length() > 10)
 		return mDarkestSecret.substr(0, 9) + ".";
 	return mDarkestSecret;
 }

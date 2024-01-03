@@ -20,11 +20,16 @@ public:
 	void		SetNickname(std::string nickname);
 	void		SetPhoneNumber(std::string phoneNumber);
 	void		SetDarkestSecret(std::string darkestSecret);
-	std::string	GetFirstName(bool isShort);
-	std::string	GetLastName(bool isShort);
-	std::string	GetNickname(bool isShort);
-	std::string	GetPhoneNumber(bool isShort);
-	std::string	GetDarkestSecret(bool isShort);
+	std::string	GetFirstName(void) const;
+	std::string	GetLastName(void) const;
+	std::string	GetNickname(void) const;
+	std::string	GetPhoneNumber(void) const;
+	std::string	GetDarkestSecret(void) const;
+	std::string	GetShortFirstName(void) const;
+	std::string	GetShortLastName(void) const;
+	std::string	GetShortNickname(void) const;
+	std::string	GetShortPhoneNumber(void) const;
+	std::string	GetShortDarkestSecret(void) const;
 };
 
 #endif

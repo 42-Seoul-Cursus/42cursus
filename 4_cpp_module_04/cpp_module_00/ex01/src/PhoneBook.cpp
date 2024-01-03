@@ -15,7 +15,6 @@ PhoneBook::PhoneBook()
 }
 void PhoneBook::AddContact()
 {
-	std::cin.ignore();
 	mContacts[mCurIdx].SetFirstName(GetInput("first name"));
 	if (std::cin.eof()) return ;
 	mContacts[mCurIdx].SetLastName(GetInput("last name"));
@@ -46,9 +45,9 @@ void PhoneBook::SearchContact()
 	for (i = 0; i < mCnt; ++i)
 	{
 		std::cout << std::setw(10) << i << "|";
-		std::cout << std::setw(10) << mContacts[i].GetFirstName(true) << "|";
-		std::cout << std::setw(10) << mContacts[i].GetLastName(true) << "|";
-		std::cout << std::setw(10) << mContacts[i].GetNickname(true) << std::endl;
+		std::cout << std::setw(10) << mContacts[i].GetShortFirstName() << "|";
+		std::cout << std::setw(10) << mContacts[i].GetShortLastName() << "|";
+		std::cout << std::setw(10) << mContacts[i].GetShortNickname() << std::endl;
 	}
 	std::cout << "Enter index: ";
 	std::cin >> input;
@@ -58,8 +57,8 @@ void PhoneBook::SearchContact()
 		return;
 	}
 	i = input[0] - '0';
-	std::cout << "first name: " << mContacts[i].GetFirstName(false) << std::endl;
-	std::cout << "last name: " << mContacts[i].GetLastName(false) << std::endl;
-	std::cout << "nickname: " << mContacts[i].GetNickname(false) << std::endl;
-	std::cout << "phone number: " << mContacts[i].GetPhoneNumber(false) << std::endl;
+	std::cout << "first name: " << mContacts[i].GetFirstName() << std::endl;
+	std::cout << "last name: " << mContacts[i].GetLastName() << std::endl;
+	std::cout << "nickname: " << mContacts[i].GetNickname() << std::endl;
+	std::cout << "phone number: " << mContacts[i].GetPhoneNumber() << std::endl;
 }

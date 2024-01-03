@@ -5,12 +5,17 @@ int	main()
 	PhoneBook phonebook;
 	std::string input;
 
-	while (true)
+	while (!std::cin.eof())
 	{
 		std::cout << "\033[0;37m" << "Enter the commend (ADD, SEARCH, EXIT)\n" << "\033[0m";
 		std::cin >> input;
+		std::cin.ignore();
 
-		if (input == "ADD")
+		if (std::cin.eof() || input == "EXIT")
+		{
+			break;
+		}
+		else if (input == "ADD")
 		{
 			phonebook.AddContact();
 		}
@@ -21,10 +26,6 @@ int	main()
 		else
 		{
 			std::cout << "\033[0;31m\"" << input << "\" is not commend\n" << "\033[0m";
-		}
-		if (std::cin.eof() || input == "EXIT")
-		{
-			break;
 		}
 	}
 	return 0;
