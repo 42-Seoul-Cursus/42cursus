@@ -103,7 +103,7 @@ void	Account::displayStatus( void ) const
 }
 void	Account::_displayTimestamp( void )
 {
-	std::time_t currentTime = std::time(nullptr);
+	std::time_t currentTime = std::time(NULL);
 	std::tm *localTime = std::localtime(&currentTime);
 	std::cout << '[' << (localTime->tm_year + 1900)
 	<< std::setfill('0') << std::setw(2) << (localTime->tm_mon + 1)
