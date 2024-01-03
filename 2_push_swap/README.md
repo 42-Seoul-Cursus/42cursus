@@ -1,4 +1,4 @@
-# push_swap
+# [push_swap](https://github.com/seungwonme/push_swap)
 
 ## Solution
 

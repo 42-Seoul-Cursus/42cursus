@@ -1,4 +1,4 @@
-# So Long
+# [so Long](https://github.com/seungwonme/so_long)
 
 ## Mandatory
 

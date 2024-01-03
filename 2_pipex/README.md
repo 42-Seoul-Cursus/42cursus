@@ -1,4 +1,4 @@
-# pipex
+# [pipex](https://github.com/seungwonme/pipex)
 
 `< infile cmd1 | cmd2 > outfile`
 

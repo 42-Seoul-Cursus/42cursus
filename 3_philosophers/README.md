@@ -1,6 +1,6 @@
-# philosopher
+# [Philosophers](https://github.com/seungwonme/Philosophers)
 
-- [philosopher](#philosopher)
+- [Philosophers](#philosophers)
 	- [`<unistd.h>`](#unistdh)
 	- [`<stdio.h>`](#stdioh)
 	- [`<stdlib.h>`](#stdlibh)

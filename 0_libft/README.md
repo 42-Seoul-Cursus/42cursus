@@ -1,4 +1,4 @@
-# libft
+# [libft](https://github.com/seungwonme/libft)
 > My own library
 
 - [libft](#libft)

@@ -1,6 +1,4 @@
-# minishell
-
-[minishell](https://github.com/seungwonme/Minishell) with inlim
+# [minishell](https://github.com/seungwonme/minishell)
 
 ## Table of contents
 

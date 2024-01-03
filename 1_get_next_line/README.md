@@ -1,4 +1,4 @@
-# get_next_line
+# [get_next_line](https://github.com/seungwonme/get_next_line)
 
 ## char *get_next_line(int fd);
 
