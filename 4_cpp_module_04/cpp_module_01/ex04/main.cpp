@@ -10,35 +10,42 @@ int main(int ac, char const *av[])
 		return 1;
 	}
 
+	// 파일 읽기
 	std::ifstream readFile(av[1]);
 	if (!readFile)
 	{
-		std::cerr << "Error!" << std::endl;
+		std::cerr << "\033[31mFile open error" << std::endl;
 		return 1;
 	}
 
 	std::string fileName = av[1];
 	fileName.append(".replace");
 
+	// 파일 쓰기
 	std::ofstream writeFile(fileName);
+
+	int beforeLen = 0;
+
+	while (av[2][beforeLen])
+	{
+		++beforeLen;
+	}
 
 	while (!readFile.eof())
 	{
 		std::string line;
+		std::string replace("");
 
 		std::getline(readFile, line);
+		size_t idx = line.find(av[2]);
 
-		/* line에서 문자열 s1을 s2로 바꿔주는 작업 */
-		while (line.find(av[2]) != std::string::npos)
+		if (idx != std::string::npos)
 		{
-			int len = 0;
-			while (av[2][len] != '\0')
-			{
-				++len;
-			}
-			line.replace(line.find(av[2]), len, av[3]);
+			replace += line.substr(0, idx);
+			replace += av[3];
+			replace += line.substr(idx + beforeLen);
+			line = replace;
 		}
-		/* --------------------------------------- */
 
 		if (!readFile.eof())
 		{
