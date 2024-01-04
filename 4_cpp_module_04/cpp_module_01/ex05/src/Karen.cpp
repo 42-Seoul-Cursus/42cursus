@@ -1,27 +1,28 @@
 #include "Karen.hpp"
 
-void Karen::complain(std::string level)
+void Karen::Complain(std::string level)
 {
-	void (Karen::*f)(void);
-	if (level == "debug")
+	void (Karen::*f)(void) const;
+
+	if (level == "DEBUG")
 	{
 		f = &Karen::debug;
 	}
-	else if (level == "info")
+	else if (level == "INFO")
 	{
 		f = &Karen::info;
 	}
-	else if (level == "warning")
+	else if (level == "WARNING")
 	{
 		f = &Karen::warning;
 	}
-	else if (level == "error")
+	else if (level == "ERROR")
 	{
 		f = &Karen::error;
 	}
 	else
 	{
-		std::cout << "Invalid level\n";
+		std::cout << "Invalid level" << std::endl;
 		return;
 	}
 	(this->*f)();
