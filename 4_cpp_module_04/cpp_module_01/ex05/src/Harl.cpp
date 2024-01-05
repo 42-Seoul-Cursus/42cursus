@@ -1,6 +1,6 @@
 #include "Harl.hpp"
 
-void Harl::Complain(std::string level)
+void Harl::complain(std::string level)
 {
 	std::string levelArr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	void (Harl::*funcArr[4])(void)  = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};

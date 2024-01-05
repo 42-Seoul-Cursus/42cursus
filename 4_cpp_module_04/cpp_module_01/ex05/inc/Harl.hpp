@@ -9,6 +9,6 @@ private:
 	void	warning(void);
 	void	error(void);
 public:
-	void	Complain(std::string level);
+	void	complain(std::string level);
 };
 

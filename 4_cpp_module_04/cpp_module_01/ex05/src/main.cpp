@@ -7,7 +7,7 @@ int main(void)
 
 	for (int i = 0; i < 6; i++)
 	{
-		harl.Complain(level[i]);
+		harl.complain(level[i]);
 	}
 
 }
