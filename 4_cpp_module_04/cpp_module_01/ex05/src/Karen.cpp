@@ -2,30 +2,21 @@
 
 void Karen::Complain(std::string level)
 {
-	void (Karen::*f)(void) const;
+	std::string levelArr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void (Karen::*funcArr[4])(void)  = {&Karen::debug, &Karen::info, &Karen::warning, &Karen::error};
+	void (Karen::*f)(void) = NULL;
 
-	if (level == "DEBUG")
+	for (int i = 0; i < 4; i++)
 	{
-		f = &Karen::debug;
+		if (level == levelArr[i])
+		{
+			f = funcArr[i];
+		}
 	}
-	else if (level == "INFO")
+	if (f != NULL)
 	{
-		f = &Karen::info;
+		(this->*f)();
 	}
-	else if (level == "WARNING")
-	{
-		f = &Karen::warning;
-	}
-	else if (level == "ERROR")
-	{
-		f = &Karen::error;
-	}
-	else
-	{
-		std::cout << "Invalid level" << std::endl;
-		return;
-	}
-	(this->*f)();
 }
 void Karen::debug( void )
 {
