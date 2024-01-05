@@ -1,13 +1,13 @@
-#include "Karen.hpp"
+#include "Harl.hpp"
 
 int main(void)
 {
-	Karen karen;
+	Harl harl;
 	const char *level[6] = {"DEBUG", "INFO", "WARNING", "ERROR", "das", "HELLO"};
 
 	for (int i = 0; i < 6; i++)
 	{
-		karen.Complain(level[i]);
+		harl.Complain(level[i]);
 	}
 
 }

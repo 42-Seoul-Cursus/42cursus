@@ -1,6 +1,6 @@
 .SUFFIXES : .cpp .o
 
-NAME    := karen
+NAME    := harl
 CXX     := clang++
 CFLAGS  := -std=c++98 -Werror -Wall -Wextra
 DEBUG   := -g
@@ -21,7 +21,7 @@ INCLUDE := -I./inc
 
 SRC     := \
 		main.cpp \
-		Karen.cpp
+		Harl.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)

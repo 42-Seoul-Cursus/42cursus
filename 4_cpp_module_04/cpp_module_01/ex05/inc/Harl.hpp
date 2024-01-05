@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-class Karen
+class Harl
 {
 private:
 	void	debug(void);
