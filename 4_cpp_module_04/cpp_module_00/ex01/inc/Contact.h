@@ -15,21 +15,21 @@ private:
 	std::string mDarkestSecret;
 public:
 	Contact();
-	void		SetFirstName(std::string firstName);
-	void		SetLastName(std::string lastName);
-	void		SetNickname(std::string nickname);
-	void		SetPhoneNumber(std::string phoneNumber);
-	void		SetDarkestSecret(std::string darkestSecret);
-	std::string	GetFirstName(void) const;
-	std::string	GetLastName(void) const;
-	std::string	GetNickname(void) const;
-	std::string	GetPhoneNumber(void) const;
-	std::string	GetDarkestSecret(void) const;
-	std::string	GetShortFirstName(void) const;
-	std::string	GetShortLastName(void) const;
-	std::string	GetShortNickname(void) const;
-	std::string	GetShortPhoneNumber(void) const;
-	std::string	GetShortDarkestSecret(void) const;
+	void				SetFirstName(std::string firstName);
+	void				SetLastName(std::string lastName);
+	void				SetNickname(std::string nickname);
+	void				SetPhoneNumber(std::string phoneNumber);
+	void				SetDarkestSecret(std::string darkestSecret);
+	const std::string&	GetFirstName(void) const;
+	const std::string&	GetLastName(void) const;
+	const std::string&	GetNickname(void) const;
+	const std::string&	GetPhoneNumber(void) const;
+	const std::string&	GetDarkestSecret(void) const;
+	const std::string&	GetShortFirstName(void) const;
+	const std::string&	GetShortLastName(void) const;
+	const std::string&	GetShortNickname(void) const;
+	const std::string&	GetShortPhoneNumber(void) const;
+	const std::string&	GetShortDarkestSecret(void) const;
 };
 
 #endif
