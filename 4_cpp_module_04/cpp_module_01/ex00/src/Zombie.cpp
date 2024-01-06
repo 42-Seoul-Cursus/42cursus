@@ -1,10 +1,11 @@
+#include <iostream>
 #include "Zombie.hpp"
 
 Zombie::Zombie()
 {
 	mName = "";
 }
-Zombie::Zombie(std::string name)
+Zombie::Zombie(const std::string name)
 {
 	mName = name;
 }
@@ -12,15 +13,15 @@ Zombie::~Zombie()
 {
 	std::cout << "Zombie \"" << mName << "\" has been destroyed.\n";
 }
-void Zombie::setName(std::string name)
-{
-	mName = name;
-}
-std::string Zombie::getName() const
+const std::string& Zombie::getName() const
 {
 	return mName;
 }
+void Zombie::setName(const std::string name)
+{
+	mName = name;
+}
 void Zombie::announce(void) const
 {
-	std::cout << mName << " BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << mName << " : BraiiiiiiinnnzzzZ..." << std::endl;
 }
