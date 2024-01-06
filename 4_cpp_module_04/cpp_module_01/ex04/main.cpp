@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 
-#include <unistd.h>
+static void WriteOriginalContentToFile(std::ifstream& readFile, std::ofstream& writeFile, std::string s1, std::string s2);
+static void WriteReplaceContentToFile(std::ifstream& readFile, std::ofstream& writeFile);
+
 int main(int ac, char const *av[])
 {
 	if (ac != 4)
@@ -11,7 +13,6 @@ int main(int ac, char const *av[])
 		return 1;
 	}
 
-	// 파일 읽기
 	std::ifstream readFile(av[1]);
 	if (!readFile)
 	{
@@ -19,20 +20,30 @@ int main(int ac, char const *av[])
 		return 1;
 	}
 
-	std::string fileName = av[1];
-	fileName.append(".replace");
-
-	// 파일 쓰기
-	std::ofstream writeFile(fileName);
+	std::ofstream writeFile(static_cast<std::string>(av[1]).append(".replace"));
 	if (!writeFile)
 	{
-		std::cerr << "\033[31mError: Unable to open output file \'" << fileName << '\'' << std::endl;
+		std::cerr << "\033[31mError: Unable to open output file \'" << av[1] << ".replace\'" << std::endl;
 		return 1;
 	}
 
+	if (static_cast<std::string>(av[2]) != static_cast<std::string>(av[3]))
+	{
+		WriteOriginalContentToFile(readFile, writeFile, av[2], av[3]);
+	}
+	else
+	{
+		WriteReplaceContentToFile(readFile, writeFile);
+	}
+
+	return 0;
+}
+
+static void WriteOriginalContentToFile(std::ifstream& readFile, std::ofstream& writeFile, std::string s1, std::string s2)
+{
 	int beforeLen = 0;
 
-	while (av[2][beforeLen])
+	while (s1[beforeLen])
 	{
 		++beforeLen;
 	}
@@ -43,15 +54,15 @@ int main(int ac, char const *av[])
 		std::string replace("");
 
 		std::getline(readFile, line);
-		size_t idx = line.find(av[2]);
+		size_t idx = line.find(s1);
 
 		while (idx != std::string::npos)
 		{
 			replace += line.substr(0, idx);
-			replace += av[3];
+			replace += s2;
 			replace += line.substr(idx + beforeLen);
 			line = replace;
-			idx = line.find(av[2]);
+			idx = line.find(s1);
 			replace = "";
 		}
 
@@ -62,6 +73,19 @@ int main(int ac, char const *av[])
 
 		writeFile.write(line.c_str(), line.length());
 	}
+}
 
-	return 0;
+static void WriteReplaceContentToFile(std::ifstream& readFile, std::ofstream& writeFile)
+{
+	while (!readFile.eof())
+	{
+		std::string line;
+
+		std::getline(readFile, line);
+		if (!readFile.eof())
+		{
+			line.append("\n");
+		}
+		writeFile.write(line.c_str(), line.length());
+	}
 }
