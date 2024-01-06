@@ -39,19 +39,19 @@ static int GetLevel(std::string s)
 {
 	if (s == "DEBUG")
 	{
-		return 4;
+		return DEBUG;
 	}
 	if (s == "INFO")
 	{
-		return 3;
+		return INFO;
 	}
 	if (s == "WARNING")
 	{
-		return 2;
+		return WARNING;
 	}
 	if (s == "ERROR")
 	{
-		return 1;
+		return ERROR;
 	}
 	return 0;
 }
