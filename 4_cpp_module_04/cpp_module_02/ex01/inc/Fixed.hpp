@@ -9,9 +9,7 @@ public:
 	Fixed();
 	~Fixed();
 	Fixed(const Fixed& oldFixed);
-	Fixed&	operator=(const Fixed& c);
-	int			getRawBits(void) const;
-	void		setRawBits(int const raw);
-	float		toFloat(void) const;
-	int			toInt(void) const;
+	const Fixed&	operator=(const Fixed& c);
+	const int&		getRawBits(void) const;
+	void			setRawBits(const int raw);
 };
