@@ -1,5 +1,15 @@
-#include <iostream>
+#ifndef HARL_HPP
+#define HARL_HPP
+
 #include <string>
+
+enum eLevel
+{
+	DEBUG = 4,
+	INFO = 3,
+	WARNING = 2,
+	ERROR = 1
+};
 
 class Harl
 {
@@ -12,3 +22,4 @@ public:
 	void	complain(std::string level);
 };
 
+#endif

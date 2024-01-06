@@ -1,50 +1,57 @@
+#include <iostream>
 #include "Harl.hpp"
 
-static size_t hashCode(const char* str)
-{
-	size_t hash = 0;
-	int i = 0;
-	while (str[i] != '\0')
-	{
-		hash = (hash + str[0]) % 10000;
-		++i;
-	}
-	return hash ^ (hash >> 16);
-}
+static int GetLevel(std::string s);
 
 int main(int ac, const char *av[])
 {
 	if (ac != 2)
 	{
-		std::cerr << "\033[0;31mUsage: ./harlFilter LEVEL\033[0m;";
+		std::cerr << "\033[0;31mUsage: ./harlFilter LEVEL\033[0m";
 		return 1;
 	}
 
 	Harl harl;
-	size_t hash = hashCode(av[1]);
+	int level = GetLevel(static_cast<std::string>(av[1]));
 
-	std::cout << hash << std::endl;
-	switch (hash)
+	switch (level)
 	{
-	case /* constant-expression */:
-		std::cout << "[ DEBUG ]\n";
+	case DEBUG:
+		std::cout << "[ DEBUG ]" << std::endl;
 		harl.complain("DEBUG");
-		break;
-	case /* constant-expression */:
-		std::cout << "[ INFO ]\n";
+	case INFO:
+		std::cout << "[ INFO ]" << std::endl;
 		harl.complain("INFO");
-		break;
-	case /* constant-expression */:
-		std::cout << "[ WARNING ]\n";
+	case WARNING:
+		std::cout << "[ WARNING ]" << std::endl;
 		harl.complain("WARNING");
-		break;
-	case /* constant-expression */:
-		std::cout << "[ ERROR ]\n";
+	case ERROR:
+		std::cout << "[ ERROR ]" << std::endl;
 		harl.complain("ERROR");
 		break;
-
 	default:
-		std::cout << "[ Probably complaining about insignificant problems ]\n";
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	}
+	return 0;
+}
+
+static int GetLevel(std::string s)
+{
+	if (s == "DEBUG")
+	{
+		return 4;
+	}
+	if (s == "INFO")
+	{
+		return 3;
+	}
+	if (s == "WARNING")
+	{
+		return 2;
+	}
+	if (s == "ERROR")
+	{
+		return 1;
 	}
 	return 0;
 }
