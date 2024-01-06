@@ -12,15 +12,15 @@ Fixed::~Fixed()
 Fixed::Fixed(const Fixed& oldFixed)
 {
 	std::cout << "Copy constructor called\n";
-	mRawBits = oldFixed.getRawBits();
+	*this = oldFixed;
 }
-Fixed& Fixed::operator=(const Fixed& oldFixed)
+const Fixed& Fixed::operator=(const Fixed& oldFixed)
 {
 	std::cout << "Assignation operator called\n";
 	mRawBits = oldFixed.getRawBits();
 	return *this;
 }
-int Fixed::getRawBits(void) const
+const int& Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called\n";
 	return mRawBits;
