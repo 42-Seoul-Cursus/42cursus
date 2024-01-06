@@ -1,11 +1,7 @@
 #include "Zombie.hpp"
 
-static void	leak(void);
-
 int	main(void)
 {
-	atexit(leak);
-
 	Zombie a("zomzom");
 	a.announce();
 
@@ -19,9 +15,4 @@ int	main(void)
 	delete[] b;
 
 	return 0;
-}
-
-static void	leak(void)
-{
-	system("leaks zombie");
 }
