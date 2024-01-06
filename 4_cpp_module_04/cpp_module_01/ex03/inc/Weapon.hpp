@@ -9,9 +9,9 @@ private:
 	std::string type;
 public:
 	Weapon();
-	Weapon(std::string t);
-	std::string		getType() const;
-	void			setType(std::string t);
+	Weapon(const std::string& t);
+	const std::string&	getType() const;
+	void				setType(const std::string& t);
 };
 
 #endif

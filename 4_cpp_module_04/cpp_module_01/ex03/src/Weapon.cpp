@@ -6,17 +6,17 @@ Weapon::Weapon(void)
 	type = "";
 }
 
-Weapon::Weapon(std::string t)
+Weapon::Weapon(const std::string& t)
 {
 	type = t;
 }
 
-std::string	Weapon::getType() const
+const std::string& Weapon::getType() const
 {
 	return type;
 }
 
-void	Weapon::setType(std::string t)
+void Weapon::setType(const std::string& t)
 {
 	type = t;
 }
