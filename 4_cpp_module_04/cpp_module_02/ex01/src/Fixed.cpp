@@ -5,6 +5,14 @@ Fixed::Fixed()
 	std::cout << "Default constructor called\n";
 	mRawBits = 0;
 }
+Fixed::Fixed(const int num)
+{
+
+}
+Fixed::Fixed(const float num)
+{
+
+}
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called\n";
@@ -29,4 +37,12 @@ void Fixed::setRawBits(int const raw)
 {
 	std::cout << "setRawBits member function called\n";
 	mRawBits = raw;
+}
+float Fixed::toFloat(void) const
+{
+
+}
+int Fixed::toInt(void) const
+{
+
 }
