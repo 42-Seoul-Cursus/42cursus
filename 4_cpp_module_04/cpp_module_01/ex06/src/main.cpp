@@ -7,7 +7,7 @@ int main(int ac, const char *av[])
 {
 	if (ac != 2)
 	{
-		std::cerr << "\033[0;31mUsage: ./harlFilter LEVEL\033[0m";
+		std::cerr << "\033[0;31mUsage: ./harlFilter LEVEL\033[0m" << std::endl;
 		return 1;
 	}
 

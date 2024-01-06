@@ -20,7 +20,7 @@ int main(int ac, char const *av[])
 		return 1;
 	}
 
-	std::ofstream writeFile(std::string(av[1]).append(".replace").c_str());
+	std::ofstream writeFile(static_cast<std::string>(av[1]).append(".replace").c_str());
 	if (!writeFile)
 	{
 		std::cerr << "\033[31mError: Unable to open output file \'" << av[1] << ".replace\'" << std::endl;
