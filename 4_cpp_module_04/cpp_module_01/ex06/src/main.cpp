@@ -37,21 +37,13 @@ int main(int ac, const char *av[])
 
 static int GetLevel(std::string s)
 {
-	if (s == "DEBUG")
+	const std::string levelArr[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	const enum eLevel level[4] = {DEBUG, INFO, WARNING, ERROR};
+
+	for (size_t i = 0; i < 4; i++)
 	{
-		return DEBUG;
-	}
-	if (s == "INFO")
-	{
-		return INFO;
-	}
-	if (s == "WARNING")
-	{
-		return WARNING;
-	}
-	if (s == "ERROR")
-	{
-		return ERROR;
+		if (s == levelArr[i])
+			return level[i];
 	}
 	return 0;
 }
