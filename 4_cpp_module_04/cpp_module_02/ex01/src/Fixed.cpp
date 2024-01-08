@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Fixed.hpp"
 
 Fixed::Fixed()
@@ -7,11 +8,13 @@ Fixed::Fixed()
 }
 Fixed::Fixed(const int num)
 {
-
+	std::cout << "Int constructor called\n";
+	mRawBits = num << mFractionalBits;
 }
 Fixed::Fixed(const float num)
 {
-
+	std::cout << "Float constructor called\n";
+	mRawBits = roundf(num * (1 << mFractionalBits));
 }
 Fixed::~Fixed()
 {
@@ -24,25 +27,35 @@ Fixed::Fixed(const Fixed& oldFixed)
 }
 const Fixed& Fixed::operator=(const Fixed& oldFixed)
 {
-	std::cout << "Assignation operator called\n";
+	std::cout << "Copy assignment operator called\n";
 	mRawBits = oldFixed.getRawBits();
 	return *this;
 }
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+	if (fixed.getRawBits() % 256 == 0)
+	{
+		std::cout << fixed.toInt();
+	}
+	else
+	{
+		std::cout << fixed.toFloat();
+	}
+	return os;
+}
 const int& Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called\n";
 	return mRawBits;
 }
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called\n";
 	mRawBits = raw;
 }
 float Fixed::toFloat(void) const
 {
-
+	return (static_cast<float>(mRawBits) / (1 << mFractionalBits));
 }
 int Fixed::toInt(void) const
 {
-
+	return mRawBits >> mFractionalBits;
 }
