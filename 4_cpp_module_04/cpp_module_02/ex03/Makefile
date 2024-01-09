@@ -21,7 +21,9 @@ INCLUDE := -I./inc
 
 SRC     := \
 		main.cpp \
-		Fixed.cpp
+		Fixed.cpp \
+		Point.cpp \
+		bsp.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
