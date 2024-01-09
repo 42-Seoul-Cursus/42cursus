@@ -31,18 +31,6 @@ const Fixed& Fixed::operator=(const Fixed& oldFixed)
 	mRawBits = oldFixed.getRawBits();
 	return *this;
 }
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
-{
-	if (fixed.getRawBits() % 256 == 0)
-	{
-		std::cout << fixed.toInt();
-	}
-	else
-	{
-		std::cout << fixed.toFloat();
-	}
-	return os;
-}
 const int& Fixed::getRawBits(void) const
 {
 	return mRawBits;
@@ -58,4 +46,16 @@ float Fixed::toFloat(void) const
 int Fixed::toInt(void) const
 {
 	return mRawBits >> mFractionalBits;
+}
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+	if (fixed.getRawBits() % 256 == 0)
+	{
+		std::cout << fixed.toInt();
+	}
+	else
+	{
+		std::cout << fixed.toFloat();
+	}
+	return os;
 }
