@@ -121,7 +121,7 @@ int Fixed::getRawBits(void) const
 {
 	return mRawBits;
 }
-void Fixed::setRawBits(int const rawBits)
+void Fixed::setRawBits(const int rawBits)
 {
 	mRawBits = rawBits;
 }

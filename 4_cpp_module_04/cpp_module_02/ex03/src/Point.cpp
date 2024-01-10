@@ -12,14 +12,12 @@ Point::~Point()
 {};
 Point::Point(const Point& rhs)
 {
-	x = rhs.x;
-	y = rhs.y;
-	return *this
+	*this = rhs;
 };
 const Point& Point::operator=(const Point& rhs)
 {
-	x.setRawBits(rhs.x.getRawBits());
-	y.setRawBits(rhs.y.getRawBits());
+	const_cast<Fixed *>(&x)->setRawBits(rhs.x.getRawBits());
+	const_cast<Fixed *>(&y)->setRawBits(rhs.y.getRawBits());
 	return *this;
 };
 const Fixed& Point::GetX()
