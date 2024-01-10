@@ -86,7 +86,7 @@ Fixed Fixed::operator-(const Fixed& rhs)
 Fixed Fixed::operator*(const Fixed& rhs)
 {
 	Fixed res;
-	res.mRawBits = (toFloat() * rhs.toFloat()) * (1 << mFractionalBits);;
+	res.mRawBits = (toFloat() * rhs.toFloat()) * (1 << mFractionalBits);
 	return res;
 }
 Fixed Fixed::operator/(const Fixed& rhs)

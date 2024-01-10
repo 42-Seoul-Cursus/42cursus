@@ -10,29 +10,11 @@ Point::Point(const float a, const float b)
 {};
 Point::~Point()
 {};
-Point::Point(const Point& rhs)
-{
-	*this = rhs;
-};
-const Point& Point::operator=(const Point& rhs)
-{
-	const_cast<Fixed *>(&x)->setRawBits(rhs.x.getRawBits());
-	const_cast<Fixed *>(&y)->setRawBits(rhs.y.getRawBits());
-	return *this;
-};
-const Fixed& Point::GetX()
+Fixed Point::GetX()
 {
 	return x;
 }
-const Fixed& Point::GetY()
+Fixed Point::GetY()
 {
 	return y;
-}
-void Point::SetX(const Fixed& rhs)
-{
-	x = rhs;
-}
-void Point::SetY(const Fixed& rhs)
-{
-	y = rhs
 }
