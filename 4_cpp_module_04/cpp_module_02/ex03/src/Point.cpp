@@ -8,6 +8,10 @@ Point::Point(const float a, const float b)
 : x(a)
 , y(b)
 {};
+Point::Point(const Point& rhs)
+: x(rhs.x)
+, y(rhs.y)
+{};
 Point::~Point()
 {};
 Fixed Point::GetX()
