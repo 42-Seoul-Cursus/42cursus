@@ -20,24 +20,24 @@ Fixed::~Fixed()
 {
 	std::cout << "Destructor called\n";
 }
-Fixed::Fixed(const Fixed& oldFixed)
+Fixed::Fixed(const Fixed& rhs)
 {
 	std::cout << "Copy constructor called\n";
-	*this = oldFixed;
+	mRawBits = rhs.getRawBits();
 }
-const Fixed& Fixed::operator=(const Fixed& oldFixed)
+const Fixed& Fixed::operator=(const Fixed& rhs)
 {
-	std::cout << "Copy assignment operator called\n";
-	mRawBits = oldFixed.getRawBits();
+	std::cout << "Assignation operator called\n";
+	mRawBits = rhs.getRawBits();
 	return *this;
 }
-const int& Fixed::getRawBits(void) const
+int Fixed::getRawBits(void) const
 {
 	return mRawBits;
 }
-void Fixed::setRawBits(int const raw)
+void Fixed::setRawBits(int const rhs)
 {
-	mRawBits = raw;
+	mRawBits = rhs;
 }
 float Fixed::toFloat(void) const
 {
@@ -49,13 +49,6 @@ int Fixed::toInt(void) const
 }
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 {
-	if (fixed.getRawBits() % 256 == 0)
-	{
-		std::cout << fixed.toInt();
-	}
-	else
-	{
-		std::cout << fixed.toFloat();
-	}
+	os << fixed.toFloat();
 	return os;
 }

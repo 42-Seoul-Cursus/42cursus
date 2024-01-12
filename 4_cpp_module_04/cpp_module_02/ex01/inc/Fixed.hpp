@@ -13,13 +13,12 @@ public:
 	Fixed(const int num);
 	Fixed(const float num);
 	~Fixed();
-	Fixed(const Fixed& oldFixed);
-	const Fixed&	operator=(const Fixed& c);
-	const int&		getRawBits(void) const;
-	void			setRawBits(const int raw);
+	Fixed(const Fixed& rhs);
+	const Fixed&	operator=(const Fixed& rhs);
+	int				getRawBits(void) const;
+	void			setRawBits(const int rhs);
 	float			toFloat(void) const;
 	int				toInt(void) const;
-
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
