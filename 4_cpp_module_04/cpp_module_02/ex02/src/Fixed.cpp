@@ -31,7 +31,7 @@ const Fixed& Fixed::operator=(const Fixed& rhs)
 	mRawBits = rhs.getRawBits();
 	return *this;
 }
-bool Fixed::operator>(const Fixed& rhs)
+bool Fixed::operator>(const Fixed& rhs) const
 {
 	if (toFloat() > rhs.toFloat())
 	{
@@ -39,7 +39,7 @@ bool Fixed::operator>(const Fixed& rhs)
 	}
 	return false;
 }
-bool Fixed::operator<(const Fixed& rhs)
+bool Fixed::operator<(const Fixed& rhs) const
 {
 	if (toFloat() < rhs.toFloat())
 	{
@@ -47,7 +47,7 @@ bool Fixed::operator<(const Fixed& rhs)
 	}
 	return false;
 }
-bool Fixed::operator>=(const Fixed& rhs)
+bool Fixed::operator>=(const Fixed& rhs) const
 {
 	if (toFloat() >= rhs.toFloat())
 	{
@@ -55,7 +55,7 @@ bool Fixed::operator>=(const Fixed& rhs)
 	}
 	return false;
 }
-bool Fixed::operator<=(const Fixed& rhs)
+bool Fixed::operator<=(const Fixed& rhs) const
 {
 	if (toFloat() <= rhs.toFloat())
 	{
@@ -63,7 +63,7 @@ bool Fixed::operator<=(const Fixed& rhs)
 	}
 	return false;
 }
-bool Fixed::operator!=(const Fixed& rhs)
+bool Fixed::operator!=(const Fixed& rhs) const
 {
 	if (toFloat() != rhs.toFloat())
 	{
@@ -71,27 +71,27 @@ bool Fixed::operator!=(const Fixed& rhs)
 	}
 	return false;
 }
-const Fixed Fixed::operator+(const Fixed& rhs)
+const Fixed Fixed::operator+(const Fixed& rhs) const
 {
 	float num = toFloat() + rhs.toFloat();
 	Fixed res(num);
 	return res;
 }
-const Fixed Fixed::operator-(const Fixed& rhs)
+const Fixed Fixed::operator-(const Fixed& rhs) const
 {
 	float num = toFloat() - rhs.toFloat();
 	Fixed res(num);
 	return res;
 }
-const Fixed Fixed::operator*(const Fixed& rhs)
+const Fixed Fixed::operator*(const Fixed& rhs) const
 {
 	float num = toFloat() * rhs.toFloat();
 	Fixed res(num);
 	return res;
 }
-const Fixed Fixed::operator/(const Fixed& rhs)
+const Fixed Fixed::operator/(const Fixed& rhs) const
 {
-	float num = toFloat() * rhs.toFloat();
+	float num = toFloat() / rhs.toFloat();
 	Fixed res(num);
 	return res;
 }

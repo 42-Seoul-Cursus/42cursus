@@ -15,15 +15,15 @@ public:
 	~Fixed();
 	Fixed(const Fixed& rhs);
 	const Fixed&		operator=(const Fixed& rhs);
-	bool				operator>(const Fixed& rhs);
-	bool				operator<(const Fixed& rhs);
-	bool				operator>=(const Fixed& rhs);
-	bool				operator<=(const Fixed& rhs);
-	bool				operator!=(const Fixed& rhs);
-	const Fixed			operator+(const Fixed& rhs);
-	const Fixed			operator-(const Fixed& rhs);
-	const Fixed			operator*(const Fixed& rhs);
-	const Fixed			operator/(const Fixed& rhs);
+	bool				operator>(const Fixed& rhs) const;
+	bool				operator<(const Fixed& rhs) const;
+	bool				operator>=(const Fixed& rhs) const;
+	bool				operator<=(const Fixed& rhs) const;
+	bool				operator!=(const Fixed& rhs) const;
+	const Fixed			operator+(const Fixed& rhs) const;
+	const Fixed			operator-(const Fixed& rhs) const;
+	const Fixed			operator*(const Fixed& rhs) const;
+	const Fixed			operator/(const Fixed& rhs) const;
 	const Fixed&		operator++();
 	const Fixed			operator++(int);
 	const Fixed&		operator--();
@@ -36,7 +36,6 @@ public:
 	static const Fixed&	max(const Fixed& a, const Fixed& b);
 	static const Fixed&	min(Fixed& a, Fixed& b);
 	static const Fixed&	min(const Fixed& a, const Fixed& b);
-
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
