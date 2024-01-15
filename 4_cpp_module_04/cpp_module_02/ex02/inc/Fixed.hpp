@@ -19,6 +19,7 @@ public:
 	bool				operator<(const Fixed& rhs) const;
 	bool				operator>=(const Fixed& rhs) const;
 	bool				operator<=(const Fixed& rhs) const;
+	bool				operator==(const Fixed& rhs) const;
 	bool				operator!=(const Fixed& rhs) const;
 	const Fixed			operator+(const Fixed& rhs) const;
 	const Fixed			operator-(const Fixed& rhs) const;

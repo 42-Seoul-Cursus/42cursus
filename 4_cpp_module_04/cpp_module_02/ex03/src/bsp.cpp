@@ -2,7 +2,6 @@
 
 static Fixed GetArea(Point const a, Point const b, Point const c);
 
-//TODO: 신발끈 공식 벡터 외적 이용해서 정리하기..
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
 	Fixed totalArea = GetArea(a, b, c);
@@ -10,11 +9,11 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed bArea = GetArea(b, c, point);
 	Fixed cArea = GetArea(c, a, point);
 	
-	if (totalArea != aArea + bArea + cArea)
+	if (totalArea == aArea + bArea + cArea)
 	{
-		return false;
+		return true;
 	}
-	return true;
+	return false;
 }
 
 static Fixed GetArea(Point const a, Point const b, Point const c)

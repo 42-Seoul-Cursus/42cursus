@@ -63,6 +63,14 @@ bool Fixed::operator<=(const Fixed& rhs) const
 	}
 	return false;
 }
+bool Fixed::operator==(const Fixed& rhs) const
+{
+	if (toFloat() == rhs.toFloat())
+	{
+		return true;
+	}
+	return false;
+}
 bool Fixed::operator!=(const Fixed& rhs) const
 {
 	if (toFloat() != rhs.toFloat())
