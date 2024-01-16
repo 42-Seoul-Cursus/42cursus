@@ -1,12 +1,13 @@
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main(void)
 {
-	ScavTrap a("a");
-	ScavTrap b(a);
-	ScavTrap c;
+	FragTrap a("a");
+	FragTrap b(a);
+	FragTrap c;
 	c = a;
 
+	a.highFivesGuys();
 	for (int i = 0; i < 55; i++)
 	{
 		a.attack("b");
