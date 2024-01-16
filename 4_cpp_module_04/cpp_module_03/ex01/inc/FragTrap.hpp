@@ -11,14 +11,14 @@ private:
 	int mEnergyPoints;
 	int mAttackDamage;
 public:
-	FragTrap();
-	FragTrap(const std::string& name);
-	~FragTrap();
+	virtual FragTrap();
+	virtual FragTrap(const std::string& name);
+	virtual	~FragTrap();
 	FragTrap(const FragTrap& rhs);
 	const FragTrap&	operator=(const FragTrap& rhs);
-	void	 attack(const std::string& target);
-	void	 takeDamage(unsigned int amount);
-	void	 beRepaired(unsigned int amount);
+	virtual void	attack(const std::string& target);
+	void	 		takeDamage(unsigned int amount);
+	void	 		beRepaired(unsigned int amount);
 };
 
 #endif 
