@@ -1,51 +1,75 @@
 #include <iostream>
 #include "FragTrap.hpp"
 
-void	FragTrap::init(const FragTrap& rhs)
+FragTrap::FragTrap()
+: mName("default")
+, mHitPoints(10)
+, mEnergyPoints(10)
+, mAttackDamage(0) 
 {
-	mHitPoint = rhs.mHitPoint;
-	mMaxHitPoints = rhs.mMaxHitPoints;
-	mEnergyPoints = rhs.mEnergyPoints;
-	mMaxEnergyPoints = rhs.mMaxEnergyPoints;
-	mLevel = rhs.mLevel;
-	mName = rhs.mName;
-	mMeleeAttackDamage = rhs.mMeleeAttackDamage;
-	mRangedAttackDamage = rhs.mRangedAttackDamage;
-	mArmorAttackReduction = rhs.mArmorAttackReduction;
+	std::cout << "ClapTrap " << mName << " is created" << std::endl;
 }
 FragTrap::FragTrap(const std::string& name)
-: mHitPoint(100)
-, mMaxHitPoints(100)
-, mEnergyPoints(100)
-, mMaxEnergyPoints(100)
-, mLevel(1)
-, mName(name)
-, mMeleeAttackDamage(30)
-, mRangedAttackDamage(20)
-, mArmorAttackReduction(5) {}
-FragTrap::~FragTrap() {};
-FragTrap::FragTrap(const FragTrap& rhs)
+: mName(name)
+, mHitPoints(10)
+, mEnergyPoints(10)
+, mAttackDamage(0) 
 {
-	init(rhs);
+	std::cout << "ClapTrap " << mName << " is created" << std::endl;
 }
-const FragTrap&	FragTrap::operator=(const FragTrap& rhs)
+FragTrap::~FragTrap() 
 {
-	init(rhs);
+	std::cout << "ClapTrap " << mName << " is destroyed" << std::endl;
+}
+FragTrap::FragTrap(const FragTrap& rhs)
+: mName(rhs.mName)
+, mHitPoints(rhs.mHitPoints)
+, mEnergyPoints(rhs.mEnergyPoints)
+, mAttackDamage(rhs.mAttackDamage) 
+{
+	std::cout << "ClapTrap " << mName << " is created as a copy" << std::endl;
+}
+const FragTrap& FragTrap::operator=(const FragTrap& rhs)
+{
+	std::cout << "ClapTrap " << mName << " is copied" << std::endl;
+	mName = rhs.mName;
+	mHitPoints = rhs.mHitPoints;
+	mEnergyPoints = rhs.mEnergyPoints;
+	mAttackDamage = rhs.mAttackDamage;
 	return *this;
 }
-void FragTrap::rangedAttack(std::string const& target)
+void FragTrap::attack(const std::string& target)
 {
-	std::cout << target << " attacks at range, causing points of damage!" << std::endl;
-}
-void FragTrap::meleeAttack(std::string const& target)
-{
-
+	if (mHitPoints <= 0)
+	{
+		std::cout << "ClapTrap " << mName << " has no hit point and can`t do anything..." << std::endl;
+		return ;
+	}
+	if (mEnergyPoints <= 0)
+	{
+		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
+		return ;
+	}
+	std::cout << "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" << std::endl;
+	--mEnergyPoints;
 }
 void FragTrap::takeDamage(unsigned int amount)
 {
-
+	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
+	mHitPoints -= amount;
 }
 void FragTrap::beRepaired(unsigned int amount)
 {
-
+	if (mHitPoints <= 0)
+	{
+		std::cout << "ClapTrap " << mName << " has no hit point and can`t do anything..." << std::endl;
+		return ;
+	}
+	if (mEnergyPoints <= 0)
+	{
+		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
+		return ;
+	}
+	std::cout << "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage!" << std::endl;
+	--mEnergyPoints;
 }
