@@ -1,9 +1,9 @@
 #ifndef SCAVTRAP_HPP
 #define SCAVTRAP_HPP
 
-#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : public FragTrap
 {
 public:
 	ScavTrap();

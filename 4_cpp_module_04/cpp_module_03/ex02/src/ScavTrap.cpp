@@ -2,7 +2,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() 
-: ClapTrap()
+: FragTrap()
 {
 	SetHitPoints(100);
 	SetEnergyPoints(50);
@@ -10,7 +10,7 @@ ScavTrap::ScavTrap()
 	std::cout << "ScavTrap " << GetName() << " is created" << std::endl;
 }
 ScavTrap::ScavTrap(const std::string& name) 
-: ClapTrap(name)
+: FragTrap(name)
 {
 	SetHitPoints(100);
 	SetEnergyPoints(50);

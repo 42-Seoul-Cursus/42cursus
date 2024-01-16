@@ -1,6 +1,6 @@
 .SUFFIXES : .cpp .o
 
-NAME    := fragtrap
+NAME    := claptrap
 CXX     := c++
 CFLAGS  := -std=c++98 -Werror -Wall -Wextra
 DEBUG   := -g
@@ -21,7 +21,7 @@ INCLUDE := -I./inc
 
 SRC     := \
 		main.cpp \
-		FragTrap.cpp
+		ClapTrap.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)

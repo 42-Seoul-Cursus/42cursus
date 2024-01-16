@@ -21,7 +21,7 @@ INCLUDE := -I./inc
 
 SRC     := \
 		main.cpp \
-		ClapTrap.cpp \
+		FragTrap.cpp \
 		ScavTrap.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 

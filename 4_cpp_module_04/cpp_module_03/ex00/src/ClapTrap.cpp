@@ -1,7 +1,7 @@
 #include <iostream>
-#include "FragTrap.hpp"
+#include "ClapTrap.hpp"
 
-FragTrap::FragTrap()
+ClapTrap::ClapTrap()
 : mName("default")
 , mHitPoints(10)
 , mEnergyPoints(10)
@@ -9,7 +9,7 @@ FragTrap::FragTrap()
 {
 	std::cout << "ClapTrap " << mName << " is created" << std::endl;
 }
-FragTrap::FragTrap(const std::string& name)
+ClapTrap::ClapTrap(const std::string& name)
 : mName(name)
 , mHitPoints(10)
 , mEnergyPoints(10)
@@ -17,11 +17,11 @@ FragTrap::FragTrap(const std::string& name)
 {
 	std::cout << "ClapTrap " << mName << " is created" << std::endl;
 }
-FragTrap::~FragTrap() 
+ClapTrap::~ClapTrap() 
 {
 	std::cout << "ClapTrap " << mName << " is destroyed" << std::endl;
 }
-FragTrap::FragTrap(const FragTrap& rhs)
+ClapTrap::ClapTrap(const ClapTrap& rhs)
 : mName(rhs.mName)
 , mHitPoints(rhs.mHitPoints)
 , mEnergyPoints(rhs.mEnergyPoints)
@@ -29,7 +29,7 @@ FragTrap::FragTrap(const FragTrap& rhs)
 {
 	std::cout << "ClapTrap " << mName << " is created as a copy" << std::endl;
 }
-const FragTrap& FragTrap::operator=(const FragTrap& rhs)
+const ClapTrap& ClapTrap::operator=(const ClapTrap& rhs)
 {
 	std::cout << "ClapTrap " << mName << " is copied" << std::endl;
 	mName = rhs.mName;
@@ -38,7 +38,7 @@ const FragTrap& FragTrap::operator=(const FragTrap& rhs)
 	mAttackDamage = rhs.mAttackDamage;
 	return *this;
 }
-void FragTrap::attack(const std::string& target)
+void ClapTrap::attack(const std::string& target)
 {
 	if (mHitPoints <= 0)
 	{
@@ -53,12 +53,12 @@ void FragTrap::attack(const std::string& target)
 	std::cout << "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" << std::endl;
 	--mEnergyPoints;
 }
-void FragTrap::takeDamage(unsigned int amount)
+void ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
 	mHitPoints -= amount;
 }
-void FragTrap::beRepaired(unsigned int amount)
+void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (mHitPoints <= 0)
 	{

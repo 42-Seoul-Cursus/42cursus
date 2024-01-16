@@ -1,9 +1,9 @@
-#ifndef FRAGTRAP_HPP
-#define FRAGTRAP_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
 #include <string>
 
-class FragTrap
+class ClapTrap
 {
 private:
 	std::string mName;
@@ -11,11 +11,11 @@ private:
 	int mEnergyPoints;
 	int mAttackDamage;
 public:
-	FragTrap();
-	FragTrap(const std::string& name);
-	~FragTrap();
-	FragTrap(const FragTrap& rhs);
-	const FragTrap&	operator=(const FragTrap& rhs);
+	ClapTrap();
+	ClapTrap(const std::string& name);
+	~ClapTrap();
+	ClapTrap(const ClapTrap& rhs);
+	const ClapTrap&	operator=(const ClapTrap& rhs);
 	void	 attack(const std::string& target);
 	void	 takeDamage(unsigned int amount);
 	void	 beRepaired(unsigned int amount);
