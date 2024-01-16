@@ -31,11 +31,11 @@ FragTrap::FragTrap(const FragTrap& rhs)
 }
 const FragTrap& FragTrap::operator=(const FragTrap& rhs)
 {
-	std::cout << "ClapTrap " << mName << " is copied" << std::endl;
 	mName = rhs.mName;
 	mHitPoints = rhs.mHitPoints;
 	mEnergyPoints = rhs.mEnergyPoints;
 	mAttackDamage = rhs.mAttackDamage;
+	std::cout << "ClapTrap " << mName << " is copied" << std::endl;
 	return *this;
 }
 void FragTrap::attack(const std::string& target)
@@ -50,13 +50,13 @@ void FragTrap::attack(const std::string& target)
 		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" << std::endl;
 	--mEnergyPoints;
+	std::cout << "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" << std::endl;
 }
 void FragTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
 	mHitPoints -= amount;
+	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
 }
 void FragTrap::beRepaired(unsigned int amount)
 {
@@ -70,6 +70,38 @@ void FragTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage!" << std::endl;
 	--mEnergyPoints;
+	std::cout << "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage!" << std::endl;
+}
+void FragTrap::SetName(const std::string& name)
+{
+	mName = name;
+}
+const std::string&	FragTrap::GetName(void) const
+{
+	return mName;
+}
+void FragTrap::SetHitPoints(const int hitPoints)
+{
+	mHitPoints = hitPoints;
+}
+int FragTrap::GetHitPoints(void) const
+{
+	return mHitPoints;
+}
+void FragTrap::SetEnergyPoints(const int energyPoints)
+{
+	mEnergyPoints = energyPoints;
+}
+int FragTrap::GetEnergyPoints(void) const
+{
+	return mEnergyPoints;
+}
+void FragTrap::SetAttackDamage(const int attackDamage)
+{
+	mAttackDamage = attackDamage;
+}
+int FragTrap::GetAttackDamage(void) const
+{
+	return mAttackDamage;
 }

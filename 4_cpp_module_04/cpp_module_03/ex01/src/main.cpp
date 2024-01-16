@@ -1,22 +1,21 @@
-#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
-	FragTrap a("a");
-	FragTrap b(a);
-	FragTrap c;
+	ScavTrap a("a");
+	ScavTrap b(a);
+	ScavTrap c;
 	c = a;
 
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < 55; i++)
 	{
 		a.attack("b");
 	}
 	for (int i = 0; i < 5; i++)
 	{
-		a.takeDamage(2);
+		a.takeDamage(20);
 	}
 	a.attack("b");
 	a.beRepaired(10);
-	
 	return 0;
 }
