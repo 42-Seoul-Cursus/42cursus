@@ -2,7 +2,7 @@
 
 int	main()
 {
-	if (bsp(Point(0, 0), Point(1, 0), Point(0, 1), Point(0.1, 0.5)))
+	if (bsp(Point(0, 0), Point(1, 0), Point(0, 1), Point(0.05, 0.85)))
 	{
 		std::cout << "The point is inside a triangle !" << std::endl;
 	}

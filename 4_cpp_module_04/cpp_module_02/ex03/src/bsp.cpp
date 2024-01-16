@@ -1,6 +1,7 @@
 #include "Point.hpp"
 
 static Fixed GetArea(Point const a, Point const b, Point const c);
+static bool	IsPointOnTriangleEdge(const Fixed aArea, const Fixed bArea, const Fixed cArea);
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
@@ -9,6 +10,10 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed bArea = GetArea(b, c, point);
 	Fixed cArea = GetArea(c, a, point);
 	
+	if (IsPointOnTriangleEdge(aArea, bArea, cArea))
+	{
+		return false;
+	}
 	if (totalArea == aArea + bArea + cArea)
 	{
 		return true;
@@ -25,4 +30,13 @@ static Fixed GetArea(Point const a, Point const b, Point const c)
 		res = res * -1;
 	}
 	return res;
+}
+
+static bool	IsPointOnTriangleEdge(const Fixed aArea, const Fixed bArea, const Fixed cArea)
+{
+	if (aArea == 0 || bArea == 0 || cArea == 0)
+	{
+		return true;
+	}
+	return false;
 }
