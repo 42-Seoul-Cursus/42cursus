@@ -7,6 +7,7 @@ int	main(void)
 	ScavTrap c;
 	c = a;
 
+	a.guardGate();
 	for (int i = 0; i < 55; i++)
 	{
 		a.attack("b");

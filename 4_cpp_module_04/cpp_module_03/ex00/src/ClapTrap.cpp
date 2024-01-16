@@ -7,7 +7,7 @@ ClapTrap::ClapTrap()
 , mEnergyPoints(10)
 , mAttackDamage(0) 
 {
-	std::cout << "ClapTrap " << mName << " is created" << std::endl;
+	std::cout << "ClapTrap default is created" << std::endl;
 }
 ClapTrap::ClapTrap(const std::string& name)
 : mName(name)
@@ -40,36 +40,55 @@ const ClapTrap& ClapTrap::operator=(const ClapTrap& rhs)
 }
 void ClapTrap::attack(const std::string& target)
 {
-	if (mHitPoints <= 0)
+	if (mHitPoints == 0)
 	{
-		std::cout << "ClapTrap " << mName << " has no hit point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;31m" 
+		<< "ClapTrap " << mName << " has no hit point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	if (mEnergyPoints <= 0)
+	if (mEnergyPoints == 0)
 	{
-		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;33m" 
+		<< "ClapTrap " << mName << " has no energy point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" << std::endl;
+	std::cout << "\033[0;32m" 
+	<< "ClapTrap " << mName << " attacks " << target << ", causing " << mAttackDamage << " points of damage!" 
+	<< "\033[0m" << std::endl;
 	--mEnergyPoints;
 }
 void ClapTrap::takeDamage(unsigned int amount)
 {
+	if (amount >= mHitPoints)
+	{
+		mHitPoints = 0;
+	}
+	else
+	{
+		mHitPoints -= amount;
+	}
 	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
-	mHitPoints -= amount;
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (mHitPoints <= 0)
+	if (mHitPoints == 0)
 	{
-		std::cout << "ClapTrap " << mName << " has no hit point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;31m" 
+		<< "ClapTrap " << mName << " has no hit point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	if (mEnergyPoints <= 0)
+	if (mEnergyPoints == 0)
 	{
-		std::cout << "ClapTrap " << mName << " has no energy point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;33m" 
+		<< "ClapTrap " << mName << " has no energy point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage!" << std::endl;
+	std::cout << "\033[0;32m" 
+	<< "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage!" 
+	<< "\033[0m" << std::endl;
 	--mEnergyPoints;
 }

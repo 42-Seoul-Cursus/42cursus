@@ -21,44 +21,55 @@ ScavTrap::~ScavTrap()
 {
 	std::cout << "ScavTrap " << GetName() << " is destroyed" << std::endl;
 };
-ScavTrap::ScavTrap(const ScavTrap& rhs)
+void ScavTrap::init(const ScavTrap& rhs)
 {
 	SetName(rhs.GetName());
 	SetHitPoints(rhs.GetHitPoints());
 	SetEnergyPoints(rhs.GetEnergyPoints());
 	SetAttackDamage(rhs.GetAttackDamage());
+}
+ScavTrap::ScavTrap(const ScavTrap& rhs)
+{
+	init(rhs);
 	std::cout << "ScavTrap " << GetName() << " is created as a copy" << std::endl;
 }
 const ScavTrap&	ScavTrap::operator=(const ScavTrap& rhs)
 {
-	SetName(rhs.GetName());
-	SetHitPoints(rhs.GetHitPoints());
-	SetEnergyPoints(rhs.GetEnergyPoints());
-	SetAttackDamage(rhs.GetAttackDamage());
+	init(rhs);
 	std::cout << "ScavTrap " << GetName() << " is copied" << std::endl;
 	return *this;
 }
 void ScavTrap::attack(const std::string& target)
 {
-	if (GetHitPoints() <= 0)
+	if (GetHitPoints() == 0)
 	{
-		std::cout << "ScavTrap " << GetName() << " has no hit point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;31m" 
+		<< "ClapTrap " << GetName() << " has no hit point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	if (GetEnergyPoints() <= 0)
+	if (GetEnergyPoints() == 0)
 	{
-		std::cout << "ScavTrap " << GetName() << " has no energy point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;33m" 
+		<< "ClapTrap " << GetName() << " has no energy point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	std::cout << "ScavTrap " << GetName() << " attacks " << target << ", causing " << GetAttackDamage() << " points of damage!" << std::endl;
+	std::cout << "\033[0;32m" 
+	<< "ScavTrap " << GetName() << " attacks " << target << ", causing " << GetAttackDamage() << " points of damage!" 
+	<< "\033[0m" << std::endl;
 	SetEnergyPoints(GetEnergyPoints() - 1);
 }
 void ScavTrap::guardGate()
 {
-	if (GetHitPoints() <= 0)
+	if (GetHitPoints() == 0)
 	{
-		std::cout << "ScavTrap " << GetName() << " has no hit point and can`t do anything..." << std::endl;
+		std::cout << "\033[0;31m" 
+		<< "ClapTrap " << GetName() << " has no hit point and can`t do anything..." 
+		<< "\033[0m" << std::endl;
 		return ;
 	}
-	std::cout << "ScavTrap " << GetName() << " is now in Gate" << std::endl;
+	std::cout << "\033[0;37m" 
+	<< "ScavTrap " << GetName() << " is now in Gate" 
+	<< "\033[0m" << std::endl;
 }

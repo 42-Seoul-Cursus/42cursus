@@ -1,10 +1,10 @@
-#include "FragTrap.hpp"
+#include "ClapTrap.hpp"
 
 int	main(void)
 {
-	FragTrap a("a");
-	FragTrap b(a);
-	FragTrap c;
+	ClapTrap a("a");
+	ClapTrap b(a);
+	ClapTrap c;
 	c = a;
 
 	for (int i = 0; i < 15; i++)
