@@ -29,6 +29,7 @@ void FragTrap::init(const FragTrap& rhs)
 	SetAttackDamage(rhs.GetAttackDamage());
 }
 FragTrap::FragTrap(const FragTrap& rhs)
+: ClapTrap(rhs)
 {
 	init(rhs);
 	std::cout << "FragTrap " << GetName() << " is created as a copy" << std::endl;

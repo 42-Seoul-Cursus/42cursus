@@ -29,7 +29,10 @@ void DiamondTrap::init(const DiamondTrap& rhs)
 	FragTrap::SetAttackDamage(rhs.FragTrap::GetAttackDamage());
 }
 DiamondTrap::DiamondTrap(const DiamondTrap& rhs)
+: FragTrap(rhs)
+, ScavTrap(rhs)
 {
+
 	init(rhs);
 	std::cout << "DiamondTrap " << ScavTrap::GetName() << " is created as a copy" << std::endl;
 }

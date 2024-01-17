@@ -29,6 +29,7 @@ void ScavTrap::init(const ScavTrap& rhs)
 	SetAttackDamage(rhs.GetAttackDamage());
 }
 ScavTrap::ScavTrap(const ScavTrap& rhs)
+: ClapTrap(rhs)
 {
 	init(rhs);
 	std::cout << "ScavTrap " << GetName() << " is created as a copy" << std::endl;
