@@ -21,4 +21,6 @@ public:
 	void	beRepaired(unsigned int amount);
 };
 
+const unsigned int MAX_HP = 2000;
+
 #endif 

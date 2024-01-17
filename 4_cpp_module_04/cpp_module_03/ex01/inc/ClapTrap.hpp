@@ -29,4 +29,6 @@ public:
 	int					GetAttackDamage(void) const;
 };
 
+const unsigned int MAX_HP = 2000;
+
 #endif 
