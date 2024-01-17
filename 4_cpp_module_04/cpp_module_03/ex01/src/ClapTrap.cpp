@@ -43,14 +43,14 @@ void ClapTrap::attack(const std::string& target)
 	if (mHitPoints == 0)
 	{
 		std::cout << "\033[0;31m" 
-		<< "ClapTrap " << mName << " has no hit point and can`t do anything..." 
+		<< "ClapTrap " << mName << " can`t do anything because it has no hit point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}
 	if (mEnergyPoints == 0)
 	{
 		std::cout << "\033[0;33m" 
-		<< "ClapTrap " << mName << " has no energy point and can`t do anything..." 
+		<< "ClapTrap " << mName << " can`t do anything because it has no energy point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}
@@ -69,21 +69,21 @@ void ClapTrap::takeDamage(unsigned int amount)
 	{
 		mHitPoints -= amount;
 	}
-	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage!" << std::endl;
+	std::cout << "ClapTrap " << mName << " is attacked and takes " << amount << " points of damage and has " << mHitPoints << " hit points remaining..." << std::endl;
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (mHitPoints == 0)
 	{
 		std::cout << "\033[0;31m" 
-		<< "ClapTrap " << mName << " has no hit point and can`t do anything..." 
+		<< "ClapTrap " << mName << " can`t do anything because it has no hit point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}
 	if (mEnergyPoints == 0)
 	{
 		std::cout << "\033[0;33m" 
-		<< "ClapTrap " << mName << " has no energy point and can`t do anything..." 
+		<< "ClapTrap " << mName << " can`t do anything because it has no energy point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}
