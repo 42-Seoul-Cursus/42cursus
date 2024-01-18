@@ -8,11 +8,12 @@ int	main(void)
 	c = a;
 
 	a.guardGate();
+	a.beRepaired(0);
 	for (int i = 0; i < 55; i++)
 	{
 		a.attack("b");
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		a.takeDamage(20);
 	}

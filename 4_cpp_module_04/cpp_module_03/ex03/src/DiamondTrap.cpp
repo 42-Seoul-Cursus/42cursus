@@ -2,6 +2,9 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap()
+: ClapTrap()
+, FragTrap()
+, ScavTrap()
 {
 	ScavTrap::SetName("default_clap_name");
 	FragTrap::SetHitPoints(FragTrap::GetHitPoints());
@@ -10,6 +13,9 @@ DiamondTrap::DiamondTrap()
 	std::cout << "DiamondTrap " << ScavTrap::GetName() << " is created" << std::endl;
 }
 DiamondTrap::DiamondTrap(const std::string& name)
+: ClapTrap(name)
+, FragTrap(name)
+, ScavTrap(name)
 {
 	ScavTrap::SetName(name + "_clap_name");
 	FragTrap::SetHitPoints(FragTrap::GetHitPoints());
@@ -29,7 +35,8 @@ void DiamondTrap::init(const DiamondTrap& rhs)
 	FragTrap::SetAttackDamage(rhs.FragTrap::GetAttackDamage());
 }
 DiamondTrap::DiamondTrap(const DiamondTrap& rhs)
-: FragTrap(rhs)
+: ClapTrap(rhs)
+, FragTrap(rhs)
 , ScavTrap(rhs)
 {
 

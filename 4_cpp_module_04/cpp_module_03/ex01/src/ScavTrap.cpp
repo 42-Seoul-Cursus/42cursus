@@ -45,14 +45,14 @@ void ScavTrap::attack(const std::string& target)
 	if (GetHitPoints() == 0)
 	{
 		std::cout << "\033[0;31m" 
-		<< "ClapTrap " << GetName() << " can`t do anything because it has no hit point..." 
+		<< "ScavTrap " << GetName() << " can`t do anything because it has no hit point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}
 	if (GetEnergyPoints() == 0)
 	{
 		std::cout << "\033[0;33m" 
-		<< "ClapTrap " << GetName() << " can`t do anything because it has no energy point..." 
+		<< "ScavTrap " << GetName() << " can`t do anything because it has no energy point..." 
 		<< "\033[0m" << std::endl;
 		return ;
 	}

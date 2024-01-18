@@ -10,6 +10,7 @@ private:
 	unsigned int mHitPoints;
 	unsigned int mEnergyPoints;
 	unsigned int mAttackDamage;
+	static const unsigned int mMaxHP = 2000;
 public:
 	ClapTrap();
 	ClapTrap(const std::string& name);
@@ -28,7 +29,5 @@ public:
 	void 				SetAttackDamage(const unsigned int attackDamage);
 	int					GetAttackDamage(void) const;
 };
-
-const unsigned int MAX_HP = 2000;
 
 #endif 

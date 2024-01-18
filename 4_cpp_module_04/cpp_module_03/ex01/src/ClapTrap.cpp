@@ -88,12 +88,12 @@ void ClapTrap::beRepaired(unsigned int amount)
 		return ;
 	}
 	--mEnergyPoints;
-	for (size_t i = 0; i < amount && mHitPoints < MAX_HP; i++)
+	for (size_t i = 0; i < amount && mHitPoints < mMaxHP; i++)
 	{
 		++mHitPoints;
 	}
 	std::cout << "\033[0;32m" 
-	<< "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage, bringing it to" << mHitPoints << " HP!" 
+	<< "ClapTrap " << mName << " repairs and heals for " << amount << " points of damage, bringing it to " << mHitPoints << " HP!" 
 	<< "\033[0m" << std::endl;
 }
 void ClapTrap::SetName(const std::string& name)

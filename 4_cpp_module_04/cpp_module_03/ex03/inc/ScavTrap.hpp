@@ -6,7 +6,7 @@
 class ScavTrap : virtual public ClapTrap
 {
 private:
-	void	init(const ScavTrap& rhs);
+	void init(const ScavTrap& rhs);
 public:
 	ScavTrap();
 	ScavTrap(const std::string& name);
