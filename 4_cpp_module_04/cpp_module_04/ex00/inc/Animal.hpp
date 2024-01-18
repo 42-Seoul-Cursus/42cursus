@@ -10,7 +10,7 @@ private:
 public:
 	Animal();
 	Animal(const std::string& type);
-	~Animal();
+	virtual ~Animal();
 	Animal(const Animal& rhs);
 	const Animal&		operator=(const Animal& rhs);
 	virtual void		makeSound() const;

@@ -38,7 +38,7 @@ void Brain::AddIdea(const std::string& idea)
 		<< "\033[0m" << std::endl;
 		return ;
 	}
-	mIdeas[mIdx] = idea;
+	mIdeas[mIdx++] = idea;
 	std::cout << "\033[0;32m"
 	<< "Ideas added to the brain !"
 	<< "\033[0m" << std::endl;
@@ -47,6 +47,8 @@ void Brain::PrintAllIdeas(void) const
 {
 	for (size_t i = 0; i < mIdx; i++)
 	{
-		std::cout << mIdeas[i] << std::endl;
+		std::cout << "\033[3;39m" << "\033[45m"
+		<< mIdeas[i] 
+		<< "\033[0m" << std::endl;
 	}
 }
