@@ -7,13 +7,13 @@ int	main(void)
 	FragTrap c;
 	c = a;
 
-	a.beRepaired(0);
+	a.beRepaired(10);
 	a.highFivesGuys();
 	for (int i = 0; i < 105; i++)
 	{
 		a.attack("b");
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		a.takeDamage(20);
 	}

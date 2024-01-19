@@ -8,7 +8,7 @@ int	main(void)
 	c = a;
 
 	a.guardGate();
-	a.beRepaired(0);
+	a.beRepaired(10);
 	for (int i = 0; i < 55; i++)
 	{
 		a.attack("b");

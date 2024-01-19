@@ -11,6 +11,7 @@ private:
 	unsigned int mEnergyPoints;
 	unsigned int mAttackDamage;
 	static const unsigned int mMaxHP = 2000;
+	void init(const ClapTrap& rhs);
 public:
 	ClapTrap();
 	ClapTrap(const std::string& name);

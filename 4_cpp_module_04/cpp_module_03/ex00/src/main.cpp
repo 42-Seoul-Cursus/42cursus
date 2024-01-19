@@ -7,14 +7,14 @@ int	main(void)
 	ClapTrap c;
 	c = a;
 
-	a.beRepaired(0);
+	a.beRepaired(10);
 	for (int i = 0; i < 15; i++)
 	{
 		a.attack("b");
 	}
 	for (int i = 0; i < 5; i++)
 	{
-		a.takeDamage(2);
+		a.takeDamage(5);
 	}
 	a.attack("b");
 	a.beRepaired(10);

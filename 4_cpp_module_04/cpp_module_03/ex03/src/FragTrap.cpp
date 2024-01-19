@@ -4,43 +4,53 @@
 FragTrap::FragTrap() 
 : ClapTrap()
 {
-	SetHitPoints(100);
-	SetEnergyPoints(100);
-	SetAttackDamage(30);
-	std::cout << "FragTrap " << GetName() << " is created" << std::endl;
+	mHitPoints = 100;
+	mEnergyPoints = 50;
+	mAttackDamage = 20;
+	std::cout << "FragTrap " << mName << " is created" << std::endl;
 }
 FragTrap::FragTrap(const std::string& name) 
 : ClapTrap(name)
 {
-	SetHitPoints(100);
-	SetEnergyPoints(100);
-	SetAttackDamage(30);
-	std::cout << "FragTrap " << GetName() << " is created" << std::endl;
+	mHitPoints = 100;
+	mEnergyPoints = 50;
+	mAttackDamage = 20;
+	std::cout << "FragTrap " << mName << " is created" << std::endl;
 }
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap " << GetName() << " is destroyed" << std::endl;
+	std::cout << "FragTrap " << mName << " is destroyed" << std::endl;
 };
-void FragTrap::init(const FragTrap& rhs)
-{
-	SetName(rhs.GetName());
-	SetHitPoints(rhs.GetHitPoints());
-	SetEnergyPoints(rhs.GetEnergyPoints());
-	SetAttackDamage(rhs.GetAttackDamage());
-}
 FragTrap::FragTrap(const FragTrap& rhs)
 : ClapTrap(rhs)
 {
 	init(rhs);
-	std::cout << "FragTrap " << GetName() << " is created as a copy" << std::endl;
+	std::cout << "FragTrap " << mName << " is created as a copy" << std::endl;
 }
 const FragTrap&	FragTrap::operator=(const FragTrap& rhs)
 {
 	init(rhs);
-	std::cout << "FragTrap " << GetName() << " is copied" << std::endl;
+	std::cout << "FragTrap " << mName << " is copied" << std::endl;
 	return *this;
 }
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "🙋 High Five guys 🙋" << std::endl;
+	if (mHitPoints == 0)
+	{
+		std::cout << "\033[0;31m" 
+		<< "ScavTrap " << mName << " can`t do anything because it has no hit point..." 
+		<< "\033[0m" << std::endl;
+		return ;
+	}
+	if (mEnergyPoints == 0)
+	{
+		std::cout << "\033[0;33m" 
+		<< "ScavTrap " << mName << " can`t do anything because it has no energy point..." 
+		<< "\033[0m" << std::endl;
+		return ;
+	}
+	--mEnergyPoints;
+	std::cout << "\033[44m" 
+	<< "🙋 High Five guys 🙋"
+	<< "\033[0m" << std::endl;
 }
