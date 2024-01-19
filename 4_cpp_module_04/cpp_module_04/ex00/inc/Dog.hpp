@@ -1,5 +1,5 @@
-#ifndef Dog_HPP
-#define Dog_HPP
+#ifndef DOG_HPP
+#define DOG_HPP
 
 #include "Animal.hpp"
 
@@ -10,7 +10,7 @@ public:
 	~Dog();
 	Dog(const Dog& rhs);
 	const Dog&		operator=(const Dog& rhs);
-	virtual void	makeSound() const;
+	virtual void	MakeSound() const;
 };
 
 #endif 

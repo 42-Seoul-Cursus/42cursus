@@ -21,7 +21,7 @@ const Cat& Cat::operator=(const Cat& rhs)
 	std::cout << "Cat is copied" << std::endl;
 	return *this;
 }
-void Cat::makeSound() const
+void Cat::MakeSound() const
 {
 	std::cout << "\033[3;37m"
 	<< "🐱 meow 🐱"

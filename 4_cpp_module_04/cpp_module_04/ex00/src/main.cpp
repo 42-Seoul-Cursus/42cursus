@@ -8,24 +8,24 @@ int main()
 	const Animal* animal = new Animal();
 	const Animal* dog = new Dog();
 	const Animal* cat = new Cat();
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
-	dog->makeSound();
-	cat->makeSound();
-	animal->makeSound();
+	std::cout << dog->GetType() << " " << std::endl;
+	std::cout << cat->GetType() << " " << std::endl;
+	dog->MakeSound();
+	cat->MakeSound();
+	animal->MakeSound();
 
 	delete animal;
 	delete dog;
 	delete cat;
 
-	// Wrong Class Test
+	// Wrong Class TEST
 	
 	const WrongAnimal* wrongAnimal = new WrongAnimal();
 	const WrongAnimal* wrongCat = new WrongCat();
 
-	std::cout << wrongCat->getType() << " " << std::endl;
-	wrongCat->makeSound(); //will output the cat sound!
-	wrongAnimal->makeSound();
+	std::cout << wrongCat->GetType() << " " << std::endl;
+	wrongCat->MakeSound(); //will output the cat sound!
+	wrongAnimal->MakeSound();
 
 	delete wrongAnimal;
 	delete wrongCat;

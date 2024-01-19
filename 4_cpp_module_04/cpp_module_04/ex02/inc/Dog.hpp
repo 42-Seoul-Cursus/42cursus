@@ -1,5 +1,5 @@
-#ifndef Dog_HPP
-#define Dog_HPP
+#ifndef DOG_HPP
+#define DOG_HPP
 
 #include "AAnimal.hpp"
 #include "Brain.hpp"
@@ -13,9 +13,9 @@ public:
 	~Dog();
 	Dog(const Dog& rhs);
 	const Dog&	operator=(const Dog& rhs);
-	virtual void	makeSound() const;
-	void			AddIdea(const std::string& idea);
-	void			PrintAllIdeas(void) const;
+	void		MakeSound() const;
+	void		AddIdea(const std::string& idea);
+	void		PrintAllIdeas(void) const;
 };
 
 #endif 

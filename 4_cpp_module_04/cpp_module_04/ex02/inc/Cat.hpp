@@ -13,9 +13,9 @@ public:
 	~Cat();
 	Cat(const Cat& rhs);
 	const Cat&	operator=(const Cat& rhs);
-	virtual void	makeSound() const;
-	void			AddIdea(const std::string& idea);
-	void			PrintAllIdeas(void) const;
+	void		MakeSound() const;
+	void		AddIdea(const std::string& idea);
+	void		PrintAllIdeas(void) const;
 };
 
 #endif 

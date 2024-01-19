@@ -27,6 +27,7 @@ void	leak(void)
 int main()
 {
 	atexit(leak);
+	// AAnimal aanimalIsAbstractClass;
 	AAnimal* zoo[MAX_SIZE];
 
 	for (size_t i = 0; i < MAX_SIZE / 2; i++)
@@ -39,7 +40,7 @@ int main()
 	}
 	for (size_t i = 0; i < MAX_SIZE; i++)
 	{
-		zoo[i]->makeSound();
+		zoo[i]->MakeSound();
 	}
 
 	Cat* navi = new Cat;

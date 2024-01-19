@@ -21,7 +21,7 @@ const Dog& Dog::operator=(const Dog& rhs)
 	std::cout << "Dog is copied" << std::endl;
 	return *this;
 }
-void Dog::makeSound() const
+void Dog::MakeSound() const
 {
 	std::cout << "\033[3;33m"
 	<< "🐶 bark 🐶"

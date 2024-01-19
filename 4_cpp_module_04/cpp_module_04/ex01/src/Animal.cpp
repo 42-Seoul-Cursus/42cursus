@@ -26,15 +26,13 @@ const Animal& Animal::operator=(const Animal& rhs)
 	std::cout << "Animal is copied" << std::endl;
 	return *this;
 }
-void Animal::makeSound() const
+void Animal::MakeSound() const
 {
-	std::cout << "Animal sound" << std::endl;
+	std::cout << "\033[3;35m"
+	<< "Animal Sound"
+	<< "\033[0m" << std::endl;
 }
 const std::string& Animal::GetType() const
 {
 	return mType;
-}
-void Animal::SetType(const std::string& type)
-{
-	mType = type;
 }

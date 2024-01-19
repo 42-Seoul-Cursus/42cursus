@@ -30,7 +30,3 @@ const std::string& AAnimal::GetType() const
 {
 	return mType;
 }
-void AAnimal::SetType(const std::string& type)
-{
-	mType = type;
-}

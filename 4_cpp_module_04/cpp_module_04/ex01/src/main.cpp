@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongCat.hpp"
 
 // Must even !
 const static int MAX_SIZE = 2;
@@ -39,7 +40,7 @@ int main()
 	}
 	for (size_t i = 0; i < MAX_SIZE; i++)
 	{
-		zoo[i]->makeSound();
+		zoo[i]->MakeSound();
 	}
 
 	Cat* navi = new Cat;
@@ -67,6 +68,12 @@ int main()
 	{
 		delete zoo[i];
 	}
+
+	// Wrong Class TEST
+
+	WrongAnimal* DerivedClassNotCallOwnDestructor = new WrongCat;
+
+	delete DerivedClassNotCallOwnDestructor;
 	
 	return 0;
 }

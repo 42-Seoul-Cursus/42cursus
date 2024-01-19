@@ -24,6 +24,8 @@ SRC     := \
 		AAnimal.cpp \
 		Dog.cpp \
 		Cat.cpp \
+		WrongAnimal.cpp \
+		WrongCat.cpp \
 		Brain.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
