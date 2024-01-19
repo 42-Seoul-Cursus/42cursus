@@ -5,7 +5,7 @@
 
 class Animal
 {
-private:
+protected:
 	std::string mType;
 public:
 	Animal();
@@ -14,8 +14,7 @@ public:
 	Animal(const Animal& rhs);
 	const Animal&		operator=(const Animal& rhs);
 	virtual void		makeSound() const;
-	const std::string&	GetType() const;
-	void				SetType(const std::string& type);
+	const std::string&	getType() const;
 };
 
 #endif 

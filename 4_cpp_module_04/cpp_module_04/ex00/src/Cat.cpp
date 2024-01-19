@@ -10,7 +10,20 @@ Cat::~Cat()
 {
 	std::cout << "Cat is destroyed" << std::endl;
 }
+Cat::Cat(const Cat& rhs)
+: Animal(rhs.mType)
+{
+	std::cout << "Cat is created as a copy" << std::endl;
+}
+const Cat& Cat::operator=(const Cat& rhs)
+{
+	mType = rhs.mType;
+	std::cout << "Cat is copied" << std::endl;
+	return *this;
+}
 void Cat::makeSound() const
 {
-	std::cout << "meow" << std::endl;
+	std::cout << "\033[3;37m"
+	<< "🐱 meow 🐱"
+	<< "\033[0m" << std::endl;
 }

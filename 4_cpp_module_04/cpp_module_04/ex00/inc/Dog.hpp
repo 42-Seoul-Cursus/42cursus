@@ -5,13 +5,12 @@
 
 class Dog : public Animal
 {
-private:
-	Dog(const Dog& rhs);
-	const Dog& operator=(const Dog& rhs);
 public:
 	Dog();
 	~Dog();
-	void	makeSound() const;
+	Dog(const Dog& rhs);
+	const Dog&		operator=(const Dog& rhs);
+	virtual void	makeSound() const;
 };
 
 #endif 
