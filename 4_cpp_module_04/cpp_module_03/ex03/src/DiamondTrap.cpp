@@ -7,9 +7,9 @@ DiamondTrap::DiamondTrap()
 , ScavTrap()
 {
 	mName = "default_clap_name";
-	mHitPoints = FragTrap::mHitPoints;
-	mEnergyPoints = ScavTrap::mEnergyPoints;
-	mAttackDamage = FragTrap::mAttackDamage;
+	mHitPoints = 100;
+	mEnergyPoints = 100;
+	mAttackDamage = 20;
 	std::cout << "DiamondTrap default_clap_name is created" << std::endl;
 }
 DiamondTrap::DiamondTrap(const std::string& name)
@@ -18,9 +18,9 @@ DiamondTrap::DiamondTrap(const std::string& name)
 , ScavTrap(name)
 {
 	mName = ScavTrap::mName + "_clap_name";
-	mHitPoints = FragTrap::mHitPoints;
-	mEnergyPoints = ScavTrap::mEnergyPoints;
-	mAttackDamage = FragTrap::mAttackDamage;
+	mHitPoints = 100;
+	mEnergyPoints = 100;
+	mAttackDamage = 20;
 	std::cout << "DiamondTrap " << mName << " is created" << std::endl;
 }
 DiamondTrap::~DiamondTrap()
@@ -31,13 +31,14 @@ DiamondTrap::DiamondTrap(const DiamondTrap& rhs)
 : ClapTrap(rhs)
 , FragTrap(rhs)
 , ScavTrap(rhs)
-{
-
+{	
+	mName = rhs.mName;
 	init(rhs);
 	std::cout << "DiamondTrap " << mName << " is created as a copy" << std::endl;
 }
 const DiamondTrap&	DiamondTrap::operator=(const DiamondTrap& rhs)
 {
+	mName = rhs.mName;
 	init(rhs);
 	std::cout << "DiamondTrap " << mName << " is copied" << std::endl;
 	return *this;

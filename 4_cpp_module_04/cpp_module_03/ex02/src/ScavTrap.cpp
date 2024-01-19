@@ -5,16 +5,16 @@ ScavTrap::ScavTrap()
 : ClapTrap()
 {
 	mHitPoints = 100;
-	mEnergyPoints = 50;
-	mAttackDamage = 20;
+	mEnergyPoints = 100;
+	mAttackDamage = 30;
 	std::cout << "ScavTrap " << mName << " is created" << std::endl;
 }
 ScavTrap::ScavTrap(const std::string& name) 
 : ClapTrap(name)
 {
 	mHitPoints = 100;
-	mEnergyPoints = 50;
-	mAttackDamage = 20;
+	mEnergyPoints = 100;
+	mAttackDamage = 30;
 	std::cout << "ScavTrap " << mName << " is created" << std::endl;
 }
 ScavTrap::~ScavTrap()

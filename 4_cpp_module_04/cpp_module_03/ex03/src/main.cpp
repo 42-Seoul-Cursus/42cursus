@@ -7,7 +7,7 @@ int	main(void)
 	DiamondTrap c;
 	c = a;
 	a.whoAmI();
-	for (int i = 0; i < 55; i++)
+	for (int i = 0; i < 105; i++)
 	{
 		a.attack("b");
 	}
