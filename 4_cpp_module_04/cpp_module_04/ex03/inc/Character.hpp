@@ -13,8 +13,8 @@ class Character : public ICharacter
 {
 private:
 	std::string mName;
-	AMateria* mInventory[4];
 	size_t mIdx;
+	AMateria* mInventory[4];
 public:
 	Character(const std::string& name);
 	Character(const Character& rhs);

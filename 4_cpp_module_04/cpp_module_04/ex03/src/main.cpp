@@ -1,11 +1,20 @@
 #include <iostream>
+#include "MateriaSource.hpp"
 #include "Character.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
-#include "MateriaSource.hpp"
+
+// export MallocStackLogging=1 find leaks after unset MallocStackLogging
+// if you want more info about leaks use gcc -g option
+// while true; do leaks a.out; sleep 1; done;
+void	leak(void)
+{
+	system("leaks --list interface");
+}
 
 int main()
 {
+	atexit(leak);
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());

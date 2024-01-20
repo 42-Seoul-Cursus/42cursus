@@ -7,7 +7,10 @@ AMateria::AMateria(const AMateria& rhs)
 : mType(rhs.mType) {}
 const AMateria& AMateria::operator=(const AMateria& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	return *this;
 }
 AMateria::~AMateria() {};
