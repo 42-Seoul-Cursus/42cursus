@@ -17,7 +17,10 @@ Dog::Dog(const Dog& rhs)
 }
 const Dog& Dog::operator=(const Dog& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	std::cout << "Dog is copied" << std::endl;
 	return *this;
 }

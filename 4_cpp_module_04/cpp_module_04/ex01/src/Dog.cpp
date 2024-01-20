@@ -20,8 +20,11 @@ Dog::Dog(const Dog& rhs)
 }
 const Dog& Dog::operator=(const Dog& rhs)
 {
-	mType = rhs.mType;
-	*mBrain = *(rhs.mBrain);
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+		*mBrain = *(rhs.mBrain);
+	}
 	std::cout << "Dog is copied" << std::endl;
 	return *this;
 }

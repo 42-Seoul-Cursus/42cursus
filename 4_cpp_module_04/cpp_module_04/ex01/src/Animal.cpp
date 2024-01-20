@@ -22,7 +22,10 @@ Animal::Animal(const Animal& rhs)
 }
 const Animal& Animal::operator=(const Animal& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	std::cout << "Animal is copied" << std::endl;
 	return *this;
 }

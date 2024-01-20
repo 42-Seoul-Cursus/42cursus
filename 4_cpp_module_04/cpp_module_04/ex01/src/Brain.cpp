@@ -21,11 +21,14 @@ Brain::Brain(const Brain& rhs)
 }
 const Brain& Brain::operator=(const Brain& rhs)
 {
-	for (size_t i = 0; i < rhs.mIdx; i++)
+	if (this != &rhs)
 	{
-		mIdeas[i] = rhs.mIdeas[i];
+		for (size_t i = 0; i < rhs.mIdx; i++)
+		{
+			mIdeas[i] = rhs.mIdeas[i];
+		}
+		mIdx = rhs.mIdx;
 	}
-	mIdx = rhs.mIdx;
 	std::cout << "Brain is copied" << std::endl;
 	return *this;
 }

@@ -17,7 +17,10 @@ WrongCat::WrongCat(const WrongCat& rhs)
 }
 const WrongCat& WrongCat::operator=(const WrongCat& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	std::cout << "WrongCat is copied" << std::endl;
 	return *this;
 }

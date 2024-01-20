@@ -17,7 +17,10 @@ Cat::Cat(const Cat& rhs)
 }
 const Cat& Cat::operator=(const Cat& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	std::cout << "Cat is copied" << std::endl;
 	return *this;
 }

@@ -22,7 +22,10 @@ WrongAnimal::WrongAnimal(const WrongAnimal& rhs)
 }
 const WrongAnimal& WrongAnimal::operator=(const WrongAnimal& rhs)
 {
-	mType = rhs.mType;
+	if (this != &rhs)
+	{
+		mType = rhs.mType;
+	}
 	std::cout << "WrongAnimal is copied" << std::endl;
 	return *this;
 }
