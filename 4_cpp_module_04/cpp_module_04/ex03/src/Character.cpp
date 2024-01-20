@@ -4,18 +4,20 @@
 Character::Character(const std::string& name)
 {
 	mName = name;
-	for (mIdx = 0; mIdx < 4; ++mIdx)
+	for (size_t i = 0; i < 4; i++)
 	{
-		mInventory[mIdx] = nullptr;
+		mInventory[i] = nullptr;
 	}
+	mIdx = 0;
 }
 Character::Character(const Character& rhs)
 {
 	mName = rhs.mName;
-	for (mIdx = 0; mIdx < rhs.mIdx; ++mIdx)
+	for (size_t i = 0; i < rhs.mIdx; i++)
 	{
-		mInventory[mIdx] = nullptr;
+		mInventory[i] = rhs.mInventory[i];
 	}
+	mIdx = rhs.mIdx;
 }
 Character::~Character() {}
 const Character& Character::operator=(const Character& rhs)
@@ -23,10 +25,11 @@ const Character& Character::operator=(const Character& rhs)
 	if (this != &rhs)
 	{
 		mName = rhs.mName;
-		for (mIdx = 0; mIdx < rhs.mIdx; ++mIdx)
+		for (size_t i = 0; i < rhs.mIdx; i++)
 		{
-			mInventory[mIdx] = rhs.mInventory[mIdx];
+			mInventory[i] = rhs.mInventory[i];
 		}
+		mIdx = rhs.mIdx;
 	}
 	return *this;
 }
@@ -52,7 +55,7 @@ void Character::unequip(int idx)
 }
 void Character::use(int idx, ICharacter &target)
 {
-	if (!(0 <= idx && static_cast<size_t>(idx) < mIdx))
+	if (!(0 < idx && static_cast<size_t>(idx) < mIdx))
 	{
 		return ;
 	}
