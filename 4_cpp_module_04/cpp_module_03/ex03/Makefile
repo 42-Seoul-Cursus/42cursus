@@ -2,7 +2,7 @@
 
 NAME    := diamondtrap
 CXX     := c++
-CFLAGS  := -std=c++98 -Werror -Wall -Wextra
+CFLAGS  := -std=c++98 -Werror -Wall -Wextra -Wshadow
 DEBUG   := -g
 MEMORY  := -g3 -fsanitize=address
 
