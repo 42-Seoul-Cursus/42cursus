@@ -5,16 +5,16 @@ FragTrap::FragTrap()
 : ClapTrap()
 {
 	mHitPoints = 100;
-	mEnergyPoints = 50;
-	mAttackDamage = 20;
+	mEnergyPoints = 100;
+	mAttackDamage = 30;
 	std::cout << "FragTrap " << mName << " is created" << std::endl;
 }
 FragTrap::FragTrap(const std::string& name) 
 : ClapTrap(name)
 {
 	mHitPoints = 100;
-	mEnergyPoints = 50;
-	mAttackDamage = 20;
+	mEnergyPoints = 100;
+	mAttackDamage = 30;
 	std::cout << "FragTrap " << mName << " is created" << std::endl;
 }
 FragTrap::~FragTrap()
