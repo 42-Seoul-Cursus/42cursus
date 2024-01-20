@@ -15,10 +15,10 @@ private:
 	std::string mName;
     AMateria* mInventory[4];
 public:
-	Character(std::string const &name);
-    Character(const Character &other); // 복사 생성자
-    ~Character();
-
+	Character(std::string const&name);
+    Character(const Character& other);
+    virtual ~Character();
+    const Character&
     virtual std::string const &getName() const override;
     virtual void equip(AMateria *m) override;
     virtual void unequip(int idx) override;

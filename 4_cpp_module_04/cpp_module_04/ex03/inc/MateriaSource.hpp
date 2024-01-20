@@ -15,9 +15,10 @@ private:
 public:
 	MateriaSource();
 	virtual ~MateriaSource();
-
-	virtual void learnMateria(AMateria *m) override;
-	virtual AMateria *createMateria(std::string const &type) override;
+	MateriaSource(const MateriaSource& rhs);
+	const MateriaSource&	operator=(const MateriaSource& rhs);
+	virtual void			learnMateria(AMateria *m);
+	virtual AMateria*		createMateria(std::string const &type);
 };
 
 #endif
