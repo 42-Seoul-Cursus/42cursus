@@ -4,6 +4,22 @@
 #include <string>
 #include "ICharacter.hpp"
 
+class AMateria
+{
+protected:
+	std::string mType;
+public:
+	AMateria(std::string const& type);
+	virtual ~AMateria();
+	AMateria(const AMateria& rhs);
+	const AMateria&		operator=(const AMateria& rhs);
+	std::string const&	getType() const;
+	virtual AMateria*	clone() const = 0;
+	virtual void		use(ICharacter& target);
+};
+
+#endif 
+
 /* 
 AMateria 클래스 (Abstract Base Class):
 
@@ -12,19 +28,3 @@ type 멤버 변수는 마법의 타입을 나타냅니다.
 clone()은 순수 가상 함수로, 해당 마법을 복제한 새로운 인스턴스를 반환합니다.
 use(ICharacter &target)은 순수 가상 함수로, 해당 마법을 사용할 때의 동작을 정의합니다.
 */
-class AMateria
-{
-protected:
-	std::string mType;
-private:
-	AMateria(const AMateria& rhs);
-	const AMateria& operator=(const AMateria& rhs);
-public:
-	AMateria(std::string const& type);
-	virtual ~AMateria();
-	std::string const&	getType() const; //Returns the materia type
-	virtual AMateria*	clone() const = 0;
-	virtual void		use(ICharacter& target);
-};
-
-#endif 

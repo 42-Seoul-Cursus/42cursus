@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Ice.hpp"
 
 Ice::Ice()
@@ -8,15 +9,16 @@ Ice::Ice(const Ice& rhs)
 {
 	mType = rhs.mType;
 }
-AMateria* Ice::clone()
-{
-	return new Ice(*this);
-}
 const Ice& Ice::operator=(const Ice& rhs)
 {
 	mType = rhs.mType;
+	return *this;
+}
+AMateria* Ice::clone() const
+{
+	return new Ice(*this);
 }
 void Ice::use(ICharacter& target)
 {
-	// std::cout << "* shoots an ice bolt at " << target << " *" << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

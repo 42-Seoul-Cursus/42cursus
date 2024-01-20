@@ -13,16 +13,17 @@ class Character : public ICharacter
 {
 private:
 	std::string mName;
-    AMateria* mInventory[4];
+	AMateria* mInventory[4];
+	size_t mIdx;
 public:
-	Character(std::string const&name);
-    Character(const Character& other);
-    virtual ~Character();
-    const Character&
-    virtual std::string const &getName() const override;
-    virtual void equip(AMateria *m) override;
-    virtual void unequip(int idx) override;
-    virtual void use(int idx, ICharacter &target) override;
+	Character(const std::string& name);
+	Character(const Character& rhs);
+	virtual ~Character();
+	const Character&			operator=(const Character& rhs);
+	virtual std::string const&	getName() const;
+	virtual void				equip(AMateria *m);
+	virtual void				unequip(int idx);
+	virtual void				use(int idx, ICharacter &target);
 };
 
 #endif

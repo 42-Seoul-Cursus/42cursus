@@ -2,7 +2,7 @@
 #define ICHARACTER_HPP
 
 #include <string>
-#include "AMateria.hpp"
+class AMateria;
 
 /* 
 ICharacter 인터페이스는 캐릭터의 기본 기능을 정의합니다.
@@ -15,7 +15,7 @@ use(int idx, ICharacter &target)은 특정 인덱스의 마법을 사용하는 �
 class ICharacter
 {
 public:
-	virtual ~ICharacter() {}
+	virtual ~ICharacter() {};
 	virtual std::string const & getName() const = 0;
 	virtual void equip(AMateria* m) = 0;
 	virtual void unequip(int idx) = 0;

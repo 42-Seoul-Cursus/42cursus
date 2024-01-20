@@ -12,6 +12,7 @@ class MateriaSource : public IMateriaSource
 {
 private:
 	AMateria* mLearnedMaterias[4];
+	size_t mIdx;
 public:
 	MateriaSource();
 	virtual ~MateriaSource();

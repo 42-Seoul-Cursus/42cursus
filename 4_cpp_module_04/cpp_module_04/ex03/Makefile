@@ -22,8 +22,10 @@ INCLUDE := -I./inc
 SRC     := \
 		main.cpp \
 		AMateria.cpp \
-		AMateriaSource.cpp \
-		ICharacter.cpp 
+		Ice.cpp \
+		Cure.cpp \
+		Character.cpp \
+		MateriaSource.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)

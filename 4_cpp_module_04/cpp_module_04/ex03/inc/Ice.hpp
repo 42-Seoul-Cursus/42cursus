@@ -15,7 +15,7 @@ public:
 	virtual ~Ice();
 	Ice(const Ice& rhs);
 	const Ice&			operator=(const Ice& rhs);
-	virtual AMateria*	clone();
+	virtual AMateria*	clone() const;
 	virtual void		use(ICharacter& target);
 };
 
