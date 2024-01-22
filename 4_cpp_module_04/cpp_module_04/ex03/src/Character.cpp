@@ -7,7 +7,7 @@ Character::Character(const std::string& name)
 	mIdx = 0;
 	for (size_t i = 0; i < 4; i++)
 	{
-		mInventory[i] = nullptr;
+		mInventory[i] = NULL;
 	}
 }
 Character::Character(const Character& rhs)
@@ -51,7 +51,7 @@ void Character::unequip(int idx)
 	{
 		return ;
 	}
-	mInventory[idx] = nullptr;
+	mInventory[idx] = NULL;
 }
 void Character::use(int idx, ICharacter &target)
 {
