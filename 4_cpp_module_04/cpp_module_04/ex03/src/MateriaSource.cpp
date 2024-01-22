@@ -33,6 +33,10 @@ const MateriaSource& MateriaSource::operator=(const MateriaSource& rhs)
 }
 void MateriaSource::learnMateria(AMateria *m)
 {
+	if (mIdx == 4)
+	{
+		return ;
+	}
 	mLearnedMaterias[mIdx++] = m;
 }
 AMateria* MateriaSource::createMateria(std::string const &type)
