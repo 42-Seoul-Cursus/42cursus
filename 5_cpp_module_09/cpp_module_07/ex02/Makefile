@@ -20,8 +20,7 @@ SRC_DIR := ./src
 INCLUDE := -I./inc
 
 SRC     := \
-		main.cpp \
-		Array.tpp
+		main.cpp 
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
