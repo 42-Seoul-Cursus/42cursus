@@ -26,14 +26,18 @@ void RobotomyRequestForm::executeForm(void) const
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> dis(0, 1);
 
-	std::cout << "Whirr, whirr, whirr...";
+	std::cout << "mWhirr, whirr, whirr... ";
 	switch (dis(gen))
 	{
 	case 0:
-		std::cout << mTarget << " has been robotomized successfully !" << std::endl;
+		std::cout << "\033[0;32m" 
+		<< mTarget << " has been robotomized successfully !" 
+		<< "\033[0m" << std::endl;
 		break;
 	default:
-		std::cout << mTarget << " robotomy failed..." << std::endl;
+		std::cout << "\033[0;31m"
+		<< mTarget << " robotomy failed..."
+		<< "\033[0m" << std::endl;
 		break;
 	}
 }
