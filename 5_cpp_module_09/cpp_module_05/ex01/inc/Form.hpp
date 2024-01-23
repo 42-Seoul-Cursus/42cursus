@@ -18,7 +18,7 @@ public:
 	const std::string&	GetName() const;
 	bool				GetIsSigned() const;
 	int					GetMinGradeForSign() const;
-	int					GetMinGradeForExecte() const;
+	int					GetMinGradeForExecute() const;
 	void				BeSigned(const Bureaucrat& bureaucrat);
 	class GradeTooHighException : public std::exception
 	{
