@@ -3,12 +3,34 @@
 
 int main()
 {
-	Bureaucrat a("seunan");
+	try
+	{
+		Bureaucrat tooLow("d", 151);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		Bureaucrat tooHigh("d", 0);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
+	Bureaucrat a("a", 1);
+	Bureaucrat b("b", 100);
+	Bureaucrat c("c", 150);
+
+	std::cout << a << '\n'
+	<< b << '\n'
+	<< c << std::endl;
 	// LOW TEST
 	try 
 	{
-		a.Decrement(1);
+		c.Decrement(1);
 	}
 	catch (std::exception& e)
 	{
@@ -17,13 +39,12 @@ int main()
 	// HIGH TEST
 	try 
 	{
-		a.Increment(150);
+		c.Increment(150);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	std::cout << a << std::endl;
 
 	// NORMAL TEST
 
@@ -31,23 +52,23 @@ int main()
 	{
 		try 
 		{
-			a.Increment(10);
+			c.Increment(10);
 		}
 		catch (std::exception& e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout <<  e.what() << std::endl;
 		}
-		std::cout << a << std::endl;
+		std::cout << c << std::endl;
 	}
 	
 	try 
 	{
-		a.Decrement(140);
+		c.Decrement(140);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	std::cout << a << std::endl;
+	std::cout << c << std::endl;
 	return 0;
 }

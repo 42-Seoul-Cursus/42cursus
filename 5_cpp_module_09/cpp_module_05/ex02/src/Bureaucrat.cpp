@@ -7,6 +7,19 @@ Bureaucrat::Bureaucrat()
 Bureaucrat::Bureaucrat(const std::string& name)
 : mName(name)
 , mGrade(150) {}
+Bureaucrat::Bureaucrat(const std::string& name, const int grade)
+: mName(name)
+, mGrade(grade)
+{
+	if (mGrade > 150)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
+	if (mGrade < 1)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
+}
 Bureaucrat::~Bureaucrat() {};
 Bureaucrat::Bureaucrat(const Bureaucrat& rhs)
 : mName(rhs.mName)
@@ -41,7 +54,7 @@ void Bureaucrat::Decrement(const int amount)
 	}
 	mGrade = decreasedGrade;
 }
-void Bureaucrat::SignForm(AForm& form)
+void Bureaucrat::SignForm(AForm& form) const
 {
 	try
 	{
@@ -51,6 +64,18 @@ void Bureaucrat::SignForm(AForm& form)
 	catch (std::exception& e)
 	{
 		std::cout << mName << " couldn\'t sign " << form.GetName() << " because " << e.what() << std::endl;
+	}
+}
+void Bureaucrat::ExecuteForm(const AForm& form) const
+{
+	try
+	{
+		form.Execute(*this);
+		std::cout << GetName() << " executed " << form.GetName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
 	}
 }
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)

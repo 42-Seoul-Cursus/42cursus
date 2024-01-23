@@ -6,36 +6,15 @@
 class RobotomyRequestForm : public AForm
 {
 private:
-	const std::string mName;
-	bool mbIsSigned;
-	const int mMinGradeForSign;
-	const int mMinGradeForExecute;
+	const std::string mTarget;
 	const RobotomyRequestForm& operator=(const RobotomyRequestForm& rhs);
+protected:
+	virtual void	executeForm(void) const;
 public:
-	RobotomyRequestForm(const std::string& name, int minGradeForSign, int minGradeForExecute);
+	RobotomyRequestForm(const std::string& target);
 	virtual ~RobotomyRequestForm();
 	RobotomyRequestForm(const RobotomyRequestForm& rhs);
-	const std::string&	GetName() const;
-	bool				GetIsSigned() const;
-	int					GetMinGradeForSign() const;
-	int					GetMinGradeForExecte() const;
-	void				BeSigned(const Bureaucrat& bureaucrat);
-	class GradeTooHighException : public std::exception
-	{
-		virtual const char* what() const _NOEXCEPT
-		{
-			return "RobotomyRequestForm : Grade is too high !";
-		}
-	};
-	class GradeTooLowException : public std::exception
-	{
-		virtual const char* what() const _NOEXCEPT
-		{
-			return "From : Grade is too low !";
-		}
-	};
+	virtual void	Execute(const Bureaucrat& executor) const;
 };
-
-std::ostream& operator<<(std::ostream& os, const RobotomyRequestForm& form);
 
 #endif 

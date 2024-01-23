@@ -24,14 +24,14 @@ public:
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "Form : Grade is too high !";
+			return "\033[0;31mGrade is too high !\033[0m";
 		}
 	};
 	class GradeTooLowException : public std::exception
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "From : Grade is too low !";
+			return "\033[0;31mGrade is too low !\033[0m";
 		}
 	};
 };

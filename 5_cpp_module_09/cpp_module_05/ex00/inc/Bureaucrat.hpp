@@ -12,6 +12,7 @@ private:
 public:
 	Bureaucrat();
 	Bureaucrat(const std::string& name);
+	Bureaucrat(const std::string& name, const int grade);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat& rhs);
 	const std::string&	GetName() const;
@@ -22,14 +23,14 @@ public:
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "Grade is too high !";
+			return "\033[0;31mGrade is too high !\033[0m";
 		}
 	};
 	class GradeTooLowException : public std::exception
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "Grade is too low !";
+			return "\033[0;31mGrade is too low !\033[0m";
 		}
 	};
 };

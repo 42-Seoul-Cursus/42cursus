@@ -33,7 +33,7 @@ int AForm::GetMinGradeForSign() const
 {
 	return mMinGradeForSign;
 }
-int AForm::GetMinGradeForExecte() const
+int AForm::GetMinGradeForExecute() const
 {
 	return mMinGradeForExecute;
 }
@@ -51,6 +51,6 @@ std::ostream& operator<<(std::ostream& os, const AForm& Aform)
 	<< "Name: " << Aform.GetName() << '\n'
 	<< "Is Signed: " << (Aform.GetIsSigned() ? "Yes" : "No") << '\n'
     << "Min Grade for Sign: " << Aform.GetMinGradeForSign() << '\n'
-    << "Min Grade for Execute: " << Aform.GetMinGradeForExecte() << "\033[0m";
+    << "Min Grade for Execute: " << Aform.GetMinGradeForExecute() << "\033[0m";
 	return os;
 }

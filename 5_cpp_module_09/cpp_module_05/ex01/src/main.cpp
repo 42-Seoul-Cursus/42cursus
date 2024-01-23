@@ -2,9 +2,8 @@
 
 int main()
 {
-	Bureaucrat a("seunan");
+	Bureaucrat a("seunan", 150);
 	a.Increment(140);
-
 	std::cout << a << std::endl;
 
 	Form form("42", 9, 10);

@@ -1,6 +1,6 @@
 .SUFFIXES : .cpp .o
 
-NAME    := form
+NAME    := aform
 CXX     := c++
 CFLAGS  := -std=c++98 -Werror -Wall -Wextra
 DEBUG   := -g

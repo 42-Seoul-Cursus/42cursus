@@ -6,6 +6,19 @@ Bureaucrat::Bureaucrat()
 Bureaucrat::Bureaucrat(const std::string& name)
 : mName(name)
 , mGrade(150) {}
+Bureaucrat::Bureaucrat(const std::string& name, const int grade)
+: mName(name)
+, mGrade(grade)
+{
+	if (mGrade > 150)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
+	if (mGrade < 1)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
+}
 Bureaucrat::~Bureaucrat() {};
 Bureaucrat::Bureaucrat(const Bureaucrat& rhs)
 : mName(rhs.mName)

@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -14,25 +14,27 @@ private:
 public:
 	Bureaucrat();
 	Bureaucrat(const std::string& name);
+	Bureaucrat(const std::string& name, const int grade);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat& rhs);
 	const std::string&	GetName() const;
 	int					GetGrade() const;
 	void				Increment(const int amount);
 	void				Decrement(const int amount);
-	void				SignForm(Form& form);
+	void				SignForm(AForm& form) const;
+	void				ExecuteForm(const AForm& form) const;
 	class GradeTooHighException : public std::exception
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "Bureaucrat : Grade is too high !";
+			return "\033[0;31mGrade is too high !\033[0m";
 		}
 	};
 	class GradeTooLowException : public std::exception
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "Bureaucrat : Grade is too low !";
+			return "\033[0;31mGrade is too low !\033[0m";
 		}
 	};
 };
