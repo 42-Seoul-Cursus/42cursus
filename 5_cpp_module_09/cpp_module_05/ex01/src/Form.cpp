@@ -47,9 +47,10 @@ void Form::BeSigned(const Bureaucrat& bureaucrat)
 }
 std::ostream& operator<<(std::ostream& os, const Form& form)
 {
-	os << "Name: " << form.GetName() << '\n'
-	<< "Is Signed: " << (form.GetIsSigned() ? "Yes" : "No") << "\n"
-    << "Min Grade for Sign: " << form.GetMinGradeForSign() << "\n"
-    << "Min Grade for Execute: " << form.GetMinGradeForExecte();
+	os << "\033[3;37m"
+	<< "Name: " << form.GetName() << '\n'
+	<< "Is Signed: " << (form.GetIsSigned() ? "Yes" : "No") << '\n'
+    << "Min Grade for Sign: " << form.GetMinGradeForSign() << '\n'
+    << "Min Grade for Execute: " << form.GetMinGradeForExecte() << "\033[0m";
 	return os;
 }

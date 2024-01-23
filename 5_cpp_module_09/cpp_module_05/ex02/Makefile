@@ -22,7 +22,10 @@ INCLUDE := -I./inc
 SRC     := \
 		main.cpp \
 		Bureaucrat.cpp \
-		Form.cpp 
+		AForm.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)

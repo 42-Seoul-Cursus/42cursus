@@ -3,7 +3,7 @@
 
 int main()
 {
-	Bureaucrat a;
+	Bureaucrat a("seunan");
 
 	// LOW TEST
 	try 

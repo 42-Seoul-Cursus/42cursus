@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat()
 : mName("Default")
@@ -21,29 +21,27 @@ int Bureaucrat::GetGrade() const
 }
 void Bureaucrat::Increment(const int amount)
 {
-	if (amount > 149 || amount < 0)
+	int increasedGrade = mGrade - amount;
+
+	if (amount > 149 || amount < 0 
+	||increasedGrade > 150 ||increasedGrade < 1)
 	{
 		throw GradeTooHighException();
 	}
-	if (mGrade - amount > 150 || mGrade - amount < 1)
-	{
-		throw GradeTooHighException();
-	}
-	mGrade -= amount;
+	mGrade = increasedGrade;
 }
 void Bureaucrat::Decrement(const int amount)
 {
-	if (amount > 149 || amount < 0)
+	int decreasedGrade = mGrade + amount;
+
+	if (amount > 149 || amount < 0 
+	||decreasedGrade > 150 ||decreasedGrade < 1)
 	{
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	}
-	if (mGrade + amount > 150 || mGrade + amount < 1)
-	{
-		throw GradeTooHighException();
-	}
-	mGrade += amount;
+	mGrade = decreasedGrade;
 }
-void Bureaucrat::SignForm(Form& form)
+void Bureaucrat::SignForm(AForm& form)
 {
 	try
 	{
