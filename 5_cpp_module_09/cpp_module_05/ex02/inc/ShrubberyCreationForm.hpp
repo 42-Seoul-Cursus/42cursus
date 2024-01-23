@@ -1,20 +1,20 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 
-class SHRUBBERYCREATIONFORM_HPP : public AForm
+class ShrubberyCreationForm : public AForm
 {
 private:
 	const std::string mName;
 	bool mbIsSigned;
 	const int mMinGradeForSign;
 	const int mMinGradeForExecute;
-	const SHRUBBERYCREATIONFORM_HPP& operator=(const SHRUBBERYCREATIONFORM_HPP& rhs);
+	const ShrubberyCreationForm& operator=(const ShrubberyCreationForm& rhs);
 public:
-	SHRUBBERYCREATIONFORM_HPP(const std::string& name, int minGradeForSign, int minGradeForExecute);
-	virtual ~SHRUBBERYCREATIONFORM_HPP();
-	SHRUBBERYCREATIONFORM_HPP(const SHRUBBERYCREATIONFORM_HPP& rhs);
+	ShrubberyCreationForm(const std::string& name, int minGradeForSign, int minGradeForExecute);
+	virtual ~ShrubberyCreationForm();
+	ShrubberyCreationForm(const ShrubberyCreationForm& rhs);
 	const std::string&	GetName() const;
 	bool				GetIsSigned() const;
 	int					GetMinGradeForSign() const;
@@ -24,7 +24,7 @@ public:
 	{
 		virtual const char* what() const _NOEXCEPT
 		{
-			return "SHRUBBERYCREATIONFORM_HPP : Grade is too high !";
+			return "ShrubberyCreationForm : Grade is too high !";
 		}
 	};
 	class GradeTooLowException : public std::exception
@@ -36,6 +36,6 @@ public:
 	};
 };
 
-std::ostream& operator<<(std::ostream& os, const SHRUBBERYCREATIONFORM_HPP& form);
+std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& form);
 
 #endif 
