@@ -21,7 +21,8 @@ INCLUDE := -I./inc
 
 SRC     := \
 		main.cpp \
-		ScalarConverter.cpp
+		ScalarConverter.cpp \
+		ScalarConverterStuff.cpp
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)

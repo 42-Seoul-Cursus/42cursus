@@ -1,8 +1,6 @@
 #ifndef SCALARCONVERTER_CPP
 #define SCALARCONVERTER_CPP
 
-#include <string>
-
 class ScalarConverter
 {
 private:
