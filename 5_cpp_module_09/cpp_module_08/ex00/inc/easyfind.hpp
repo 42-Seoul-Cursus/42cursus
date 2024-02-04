@@ -11,6 +11,6 @@ int	easyfind(T& dst, int src)
 			return src;
 		}
 	}
-	throw std::exception();
+	throw "\033[0;31mNot Found\033[0m";
 }
 #endif

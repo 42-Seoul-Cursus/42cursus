@@ -19,11 +19,10 @@ int	main()
 		std::cout << easyfind(l, 11) << std::endl;
 		std::cout << easyfind(v, 5) << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(const char* error)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << error << std::endl;
 	}
-	
 	
 	return 0;
 }
