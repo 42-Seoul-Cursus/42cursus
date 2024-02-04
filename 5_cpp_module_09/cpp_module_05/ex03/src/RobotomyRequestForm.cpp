@@ -42,3 +42,7 @@ void RobotomyRequestForm::executeForm(void) const
 		break;
 	}
 }
+AForm* RobotomyRequestForm::Clone() const
+{
+	return new RobotomyRequestForm(*this);
+}

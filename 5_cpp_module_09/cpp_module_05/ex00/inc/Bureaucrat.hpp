@@ -17,8 +17,8 @@ public:
 	Bureaucrat(const Bureaucrat& rhs);
 	const std::string&	GetName() const;
 	int					GetGrade() const;
-	void				Increment(const int amount);
-	void				Decrement(const int amount);
+	void				Increment(const unsigned int amount);
+	void				Decrement(const unsigned int amount);
 	class GradeTooHighException : public std::exception
 	{
 		virtual const char* what() const _NOEXCEPT

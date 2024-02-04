@@ -32,23 +32,21 @@ int Bureaucrat::GetGrade() const
 {
 	return mGrade;
 }
-void Bureaucrat::Increment(const int amount)
+void Bureaucrat::Increment(const unsigned int amount)
 {
 	int increasedGrade = mGrade - amount;
 
-	if (amount > 149 || amount < 0 
-	||increasedGrade > 150 ||increasedGrade < 1)
+	if (amount > 149 ||increasedGrade > 150 ||increasedGrade < 1)
 	{
 		throw GradeTooHighException();
 	}
 	mGrade = increasedGrade;
 }
-void Bureaucrat::Decrement(const int amount)
+void Bureaucrat::Decrement(const unsigned int amount)
 {
 	int decreasedGrade = mGrade + amount;
 
-	if (amount > 149 || amount < 0 
-	||decreasedGrade > 150 ||decreasedGrade < 1)
+	if (amount > 149 ||decreasedGrade > 150 ||decreasedGrade < 1)
 	{
 		throw GradeTooLowException();
 	}
