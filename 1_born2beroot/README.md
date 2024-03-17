@@ -54,6 +54,7 @@
 ![](img/24.png)
 ![](img/25.png)
 ![](img/26.png)
+[Gib](https://ko.wikipedia.org/wiki/%EA%B8%B0%EB%B9%84%EB%B0%94%EC%9D%B4%ED%8A%B8)를 사용하여 디스크 용량을 정확하게 정해주었다.
 ![](img/27.png)
 ![](img/28.png)
 */boot(sda1) 파티션을 500mib로 만드는 법은 아직도 모르겠다.*
@@ -70,6 +71,7 @@
 ![](img/39.png)
 ![](img/40.png)
 
+[UTM Debian 12 install guide](https://siytek.com/debian-on-mac-utm-vm/)
 
 ## Hard Disk
 하드디스크는 물리적 저장 장치다.

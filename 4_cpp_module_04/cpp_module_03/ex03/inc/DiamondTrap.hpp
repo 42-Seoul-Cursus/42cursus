@@ -17,4 +17,4 @@ public:
 	void				whoAmI();
 };
 
-#endif 
+#endif
