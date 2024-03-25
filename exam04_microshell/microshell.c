@@ -60,7 +60,7 @@ void middle()
     g_prev_fd = g_fd[READ_END];
     pipe(g_fd);
 
-    while (g_av[g_av_idx] && strncmp(g_av[g_av_idx], "|", 2) != 0)
+    while (g_av[g_av_idx] && strncmp(g_av[g_av_idx], "|", 2) != 0 && strncmp(g_av[g_av_idx], ";", 2) != 0)
     {
         ++g_av_idx;
     }
@@ -73,7 +73,7 @@ void middle()
         dup2(g_prev_fd, STDIN_FILENO);
         dup2(g_fd[WRITE_END], STDOUT_FILENO);
         g_av[g_av_idx] = NULL;
-        execve(g_av[g_av_idx - 1], g_av + start, NULL);
+        execve(g_av[start], g_av + start, NULL);
     }
     else
     {
@@ -105,7 +105,7 @@ void first()
     int start = g_av_idx;
     pid_t pid;
 
-    while (g_av[g_av_idx] && strncmp(g_av[g_av_idx], "|", 2) != 0)
+    while (g_av[g_av_idx] && strncmp(g_av[g_av_idx], "|", 2) != 0 && strncmp(g_av[g_av_idx], ";", 2) != 0)
     {
         ++g_av_idx;
     }
@@ -121,7 +121,7 @@ void first()
         g_av[g_av_idx] = NULL;
         // ["a.out", "ls", "|", "cat"]
         // ["ls", NULL, "cat"]
-        execve(g_av[g_av_idx - 1], g_av + start, NULL);
+        execve(g_av[start], g_av + start, NULL);
         printf("FAIL\n");
     }
     else
