@@ -1,75 +1,52 @@
 #include <cmath>
 #include "Span.hpp"
 
-Span::Span(unsigned int maxStore)
-: mData(new int[maxStore])
-, mMaxStore(maxStore)
-, mCnt(0) {}
-Span::~Span() 
-{
-	delete[] mData;
-}
-Span::Span(const Span& rhs)
-: mData(new int[rhs.mMaxStore])
-, mMaxStore(rhs.mMaxStore) 
-, mCnt(rhs.mCnt) 
-{
-	for (size_t i = 0; i < mMaxStore; i++)
-	{
-		mData[i] = rhs.mData[i];
-	}
-}
+Span::Span(size_t maxStore)
+	: mData(), mMaxStore(maxStore) {}
+Span::~Span() {}
+Span::Span(const Span &rhs)
+	: mData(rhs.mData), mMaxStore(rhs.mMaxStore) {}
 void Span::AddNumber(int data)
 {
-	if (mCnt == mMaxStore)
+	if (mData.size() == mMaxStore)
 	{
 		throw "\033[0;33mSpan is full and can't be added more.\033[0m";
 	}
-	mData[mCnt++] = data;
+	mData.push_back(data);
 }
 int Span::ShortestSpan() const
 {
-	if (mCnt < 2)
+	if (mData.size() < 2)
 	{
 		throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
 	}
 
-	int min = abs(mData[1] - mData[0]);
+	std::vector<int> tmp(mData);
+	std::sort(tmp.begin(), tmp.end());
 
-	for (size_t i = 1; i < mCnt; i++)
+	int min = tmp[1] - tmp[0];
+	for (std::vector<int>::iterator it = tmp.begin(); it + 1 != tmp.end(); ++it)
 	{
-		for (size_t j = i + 1; j < mCnt; j++)
+		if (min > *(it + 1) - *it)
 		{
-			if (min > abs(mData[j] - mData[i]))
-			{
-				min = abs(mData[j] - mData[i]);
-			}
+			min = *(it + 1) - *it;
 		}
 	}
 	return min;
 }
 int Span::LongestSpan() const
 {
-	if (mCnt < 2)
+	if (mData.size() < 2)
 	{
 		throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
 	}
 
-	int max = abs(mData[1] - mData[0]);
+	std::vector<int> tmp(mData);
+	std::sort(tmp.begin(), tmp.end());
 
-	for (size_t i = 1; i < mCnt; i++)
-	{
-		for (size_t j = i + 1; j < mCnt; j++)
-		{
-			if (max < abs(mData[j] - mData[i]))
-			{
-				max = abs(mData[j] - mData[i]);
-			}
-		}
-	}
-	return max;
+	return *(tmp.rbegin()) - *(tmp.begin());
 }
-int& Span::operator[](const unsigned int idx)
+int& Span::operator[](const size_t idx)
 {
 	if (idx >= mMaxStore)
 	{

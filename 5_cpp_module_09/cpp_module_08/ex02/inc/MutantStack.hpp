@@ -5,23 +5,18 @@
 #include <iterator>
 
 template <typename T>
-class MutantStack : public std::stack<T, std::deque<T> >
+class MutantStack : public std::stack<T>
 {
 public:
-	class iterator : public std::deque<T>::iterator 
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	iterator begin()
 	{
-		iterator(typename std::deque<T>::iterator it) : std::deque<T>::iterator(it) {}
-	};
-	iterator begin() 
+		return this->c.begin();
+	}
+	iterator end()
 	{
-        return c.begin();
-    }
-    iterator end() 
-	{
-        return c.end();
-    }
+		return this->c.end();
+	}
 };
-
-#include "MutantStack.tpp"
 
 #endif
