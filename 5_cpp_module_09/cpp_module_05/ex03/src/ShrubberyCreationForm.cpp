@@ -23,6 +23,10 @@ void ShrubberyCreationForm::Execute(const Bureaucrat& executor) const
 void ShrubberyCreationForm::executeForm(void) const
 {
 	std::ofstream writeFile((mTarget + "_shrubbery").c_str());
+	if (!writeFile.is_open())
+	{
+		throw std::runtime_error("Error opening file");
+	}
 	std::string asciiTree = 
 	"            .        +          .      .          .\n"
 	"     .            _        .                    .\n"
