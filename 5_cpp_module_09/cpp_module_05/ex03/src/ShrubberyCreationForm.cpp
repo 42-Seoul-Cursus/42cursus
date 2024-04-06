@@ -49,6 +49,7 @@ void ShrubberyCreationForm::executeForm(void) const
 	"               )  ___/#\\::`/ (O \"==._____   O, (O  /`\n"
 	"          ~~~w/w~\"~~,\\` `:/,-(~`\"~~~~~~~~\"~o~\\~/~w|/~";
 	writeFile.write(asciiTree.c_str(), asciiTree.length());
+	writeFile.close();
 }
 AForm* ShrubberyCreationForm::Clone() const
 {

@@ -4,22 +4,30 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+void	leak(void)
+{
+	system("leaks --list intern | grep 'total leaked bytes'");
+}
+
 int main()
 {
+	atexit(leak);
 	Intern someRandomIntern;
 	AForm* form;
-	form = someRandomIntern.MakeForm("robotomy request", "Bender");
 
 	Bureaucrat seunan("seunan", 5);
-	seunan.SignForm(*form);
-	form->Execute(seunan);
+	const std::string names[4] = {"shrubbery creation", "robotomy request", "presidential pardon", "random"};
 
-	form = someRandomIntern.MakeForm("shrubbery creation", "Home");
-	seunan.SignForm(*form);
-	form->Execute(seunan);
-
-	form = someRandomIntern.MakeForm("presidential pardon", "seunan");
-	seunan.SignForm(*form);
-	form->Execute(seunan);
+	for (size_t i = 0; i < 4; i++)
+	{
+		form = someRandomIntern.MakeForm(names[i], "target");
+		if (form == NULL)
+		{
+			continue;
+		}
+		seunan.SignForm(*form);
+		form->Execute(seunan);
+		delete form;
+	}
 	return 0;
 }
