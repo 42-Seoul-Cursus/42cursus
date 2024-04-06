@@ -44,8 +44,7 @@ namespace ScalarConverterStuff
 	}
 	bool IsFloat(const std::string& literal)
 	{
-		if (literal != "+inf" && literal != "-inf" && literal != "inf"
-		&& literal != "+inff" && literal != "-inff" && literal != "inff" && literal.back() == 'f')
+		if (literal != "+inf" && literal != "-inf" && literal != "inf" && literal.back() == 'f')
 		{
 			return true;
 		}
@@ -97,13 +96,13 @@ namespace ScalarConverterStuff
 		if (std::numeric_limits<float>::max() < num)
 		{
 			std::cout << "\033[0;37m" 
-			<< "+inf" 
+			<< "+inff" 
 			<< "\033[0m" << std::endl;
 		}
 		else if (std::numeric_limits<float>::lowest() > num)
 		{
 			std::cout << "\033[0;37m" 
-			<< "-inf" 
+			<< "-inff" 
 			<< "\033[0m" << std::endl;
 		}
 		else
