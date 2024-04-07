@@ -4,9 +4,9 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base*	generate(void);
-void	identify(Base* p);
-void	identify(Base& p);
+static Base*	generate(void);
+static void		identify(Base* p);
+static void		identify(Base& p);
 
 int	main(void)
 {
@@ -34,22 +34,30 @@ Base*	generate(void)
 
 void	identify(Base* p)
 {
-	if (dynamic_cast<A*>(p))
+	try
 	{
-		std::cout << "A" << std::endl;
+		if (dynamic_cast<A*>(p))
+		{
+			std::cout << "A" << std::endl;
+		}
+		else if (dynamic_cast<B*>(p))
+		{
+			std::cout << "B" << std::endl;
+		}
+		else if (dynamic_cast<C*>(p))
+		{
+			std::cout << "C" << std::endl;
+		}
+		else
+		{
+			std::cout << "Not Found" << std::endl;
+		}
 	}
-	else if (dynamic_cast<B*>(p))
+	catch (const std::bad_cast&)
 	{
-		std::cout << "B" << std::endl;
+		std::cerr << "hi" << std::endl;
 	}
-	else if (dynamic_cast<C*>(p))
-	{
-		std::cout << "C" << std::endl;
-	}
-	else
-	{
-		std::cout << "Not Found" << std::endl;
-	}
+	
 }
 
 void	identify(Base& p)
