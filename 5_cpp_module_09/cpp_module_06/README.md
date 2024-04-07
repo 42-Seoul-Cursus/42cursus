@@ -154,3 +154,4 @@ int main() {
     return 0;
 }
 ```
+[cpp typeid, type_info : 네이버 블로그](https://blog.naver.com/PostView.naver?blogId=kyed203&logNo=220164579551)
