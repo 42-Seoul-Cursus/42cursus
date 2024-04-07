@@ -55,7 +55,7 @@ int main() {
 
 ## ex01
 
-### reinterpret_cast
+### [reinterpret_cast](https://learn.microsoft.com/ko-kr/cpp/cpp/reinterpret-cast-operator?view=msvc-170)
 `reinterpret_cast`는 C++의 타입 캐스팅 연산자 중 하나로, 한 포인터 타입을 다른 포인터 타입으로, 또는 포인터 타입을 충분히 큰 정수 타입으로, 그 반대의 경우로 변환할 때 사용됩니다. 
 `reinterpret_cast`는 컴파일 시간에 타입 체크를 거의 수행하지 않으므로, 사용자가 타입 안전성을 보장해야 합니다.
 이 연산자는 비트 단위로 변환을 수행하기 때문에, 결과는 사용자의 해석에 따라 달라질 수 있습니다.
@@ -95,9 +95,7 @@ int main() {
 
 ## ex02
 
-### Cascading Dynamic cast
-
-### Dynamic cast
+### [Dynamic cast](https://learn.microsoft.com/ko-kr/cpp/cpp/dynamic-cast-operator?view=msvc-170)
 다이나믹 캐스트(dynamic_cast)에서 예외가 발생하는 경우는 주로 다운캐스팅(downcasting)을 수행할 때 발생합니다. 
 다운캐스팅은 기본 클래스의 포인터나 참조를 파생 클래스의 포인터나 참조로 변환하는 과정을 말합니다. 
 `dynamic_cast`는 런타임에 객체의 타입을 확인하여 안전한 타입 변환을 지원합니다. 
@@ -122,3 +120,37 @@ int main() {
 3. **가상 상속**: 복잡한 상속 구조에서 가상 상속이 사용되지 않은 경우, 예상치 못한 방식으로 `dynamic_cast`가 실패할 수 있습니다.
 
 `dynamic_cast`의 이러한 특성을 이해하는 것은 객체 지향 프로그래밍, 특히 C++에서 안전한 타입 변환을 구현하는 데 중요합니다. 실패 가능성을 항상 염두에 두고, `nullptr` 체크나 예외 처리를 적절히 수행해야 합니다.
+
+### Avoid cascade of dynamic_cast
+
+부모 클래스 포인터에 실제 어떤 클래스의 객체가 할당되어 있는지 확인하기 위해 `dynamic_cast`를 사용하는 것은 좋은 방법이 아닙니다.
+`dynamic_cast`는 런타임에 객체의 타입을 확인하여 안전한 타입 변환을 하기 때문에 비용이 많이 드는 연산이기 때문입니다.
+대신 `typeinfo`를 사용하여 객체의 타입을 확인하고, 이를 기반으로 적절한 타입 변환을 수행하는 것이 좋습니다.
+
+```cpp
+#include <iostream>
+#include <typeinfo>
+
+class Base {
+public:
+    virtual ~Base() {}
+};
+
+class Derived : public Base {
+public:
+    void foo() {}
+};
+
+int main() {
+    Base* base = new Derived();
+    if (typeid(*base) == typeid(Derived)) {
+        Derived* derived = dynamic_cast<Derived*>(base);
+        if (derived) {
+            derived->foo();
+        }
+    }
+
+    delete base;
+    return 0;
+}
+```
