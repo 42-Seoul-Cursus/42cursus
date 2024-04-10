@@ -12,22 +12,23 @@ void	leak(void)
 int	main()
 {
 	atexit(leak);
-	Array<int> arrInt(10);
+	Array<int> arr(10);
+	Array<int> emptyArr(0);
 
-	std::cout << arrInt.size() << std::endl;
+	std::cout << arr.size() << std::endl;
 	
 	for (size_t i = 0; i < 10; i++)
 	{
-		arrInt[i] = i + 1;
+		arr[i] = i + 1;
 	}
 	for (size_t i = 0; i < 10; i++)
 	{
-		std::cout << arrInt[i] << ' ';
+		std::cout << arr[i] << ' ';
 	}
 	std::cout << std::endl;
 	try
 	{
-		arrInt[10];
+		arr[10];
 	}
 	catch(const std::exception& e)
 	{

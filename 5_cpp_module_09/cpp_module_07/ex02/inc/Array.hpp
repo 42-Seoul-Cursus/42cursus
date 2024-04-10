@@ -10,12 +10,11 @@ private:
 	T* mData;
 	size_t mSize;
 public:
-	Array();
-	Array(size_t size);
+	Array(size_t size = 0);
 	~Array();
 	Array(const Array& rhs);
 	const Array&	operator=(const Array& rhs);
-	T&				operator[](const size_t idx) const;
+	T&				operator[](const size_t idx);
 	size_t			size() const;
 };
 

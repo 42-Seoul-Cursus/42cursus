@@ -2,10 +2,6 @@
 #include "Array.hpp"
 
 template <typename T>
-Array<T>::Array()
-: mData(new T[1])
-, mSize(1) {}
-template <typename T>
 Array<T>::Array(size_t size)
 : mData(new T[size])
 , mSize(size) {}
@@ -39,7 +35,7 @@ const Array<T>& Array<T>::operator=(const Array<T>& rhs)
 	}
 }
 template <typename T>
-T& Array<T>::operator[](const size_t idx) const
+T& Array<T>::operator[](const size_t idx)
 {
 	if (idx >= mSize)
 	{
