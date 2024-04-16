@@ -20,8 +20,7 @@ SRC_DIR := ./src
 INCLUDE := -I./inc
 
 SRC     := \
-		main.cpp \
-		MutantStack.cpp
+		main.cpp 
 OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
