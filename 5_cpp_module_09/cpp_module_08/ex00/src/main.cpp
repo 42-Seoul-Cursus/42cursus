@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
+#include <stack>
 #include "easyfind.hpp"
 
 int	main()
@@ -16,12 +17,13 @@ int	main()
 
 	try
 	{
-		std::cout << easyfind(l, 11) << std::endl;
-		std::cout << easyfind(v, 5) << std::endl;
+		std::cout << easyfind(l, 10) << std::endl;
+		std::cout << easyfind(v, 1) << std::endl;
+		std::cout << easyfind(v, 0) << std::endl;
 	}
-	catch(const char* error)
+	catch(const std::exception& e)
 	{
-		std::cerr << error << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 	
 	return 0;

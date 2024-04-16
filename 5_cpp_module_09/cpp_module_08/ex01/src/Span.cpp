@@ -1,50 +1,63 @@
-#include <cmath>
+#include <algorithm>
 #include "Span.hpp"
 
 Span::Span(size_t maxStore)
-	: mData(), mMaxStore(maxStore) {}
-Span::~Span() {}
+: mpData(new int[maxStore])
+, mMaxStore(maxStore)
+, mCur(0) {}
 Span::Span(const Span &rhs)
-	: mData(rhs.mData), mMaxStore(rhs.mMaxStore) {}
+: mpData(new int[rhs.mMaxStore])
+, mMaxStore(rhs.mMaxStore) 
+, mCur(0)
+{
+	for (; mCur < mMaxStore; mCur++)
+	{
+		mpData[mCur] = rhs.mpData[mCur];
+	}
+}
+Span::~Span() 
+{
+	delete[] mpData;
+}
 void Span::AddNumber(int data)
 {
-	if (mData.size() == mMaxStore)
+	if (mCur == mMaxStore)
 	{
 		throw "\033[0;33mSpan is full and can't be added more.\033[0m";
 	}
-	mData.push_back(data);
+	mpData[mCur++] = data;
 }
 int Span::ShortestSpan() const
 {
-	if (mData.size() < 2)
+	if (mCur < 1)
 	{
 		throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
 	}
 
-	std::vector<int> tmp(mData);
-	std::sort(tmp.begin(), tmp.end());
+	Span tmp(*this);
+	std::sort(tmp.mpData, tmp.mpData + tmp.mCur);
 
 	int min = tmp[1] - tmp[0];
-	for (std::vector<int>::iterator it = tmp.begin(); it + 1 != tmp.end(); ++it)
+	for (size_t i = 1; i < mCur; i++)
 	{
-		if (min > *(it + 1) - *it)
+		if (min > tmp[i] - tmp[i - 1])
 		{
-			min = *(it + 1) - *it;
+			min = tmp[i] - tmp[i - 1];
 		}
 	}
 	return min;
 }
 int Span::LongestSpan() const
 {
-	if (mData.size() < 2)
+	if (mCur < 1)
 	{
 		throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
 	}
 
-	std::vector<int> tmp(mData);
-	std::sort(tmp.begin(), tmp.end());
+	Span tmp(*this);
+	std::sort(tmp.mpData, tmp.mpData + tmp.mCur);
 
-	return *(tmp.rbegin()) - *(tmp.begin());
+	return tmp[mCur - 1] - tmp[0];
 }
 int& Span::operator[](const size_t idx)
 {
@@ -52,5 +65,5 @@ int& Span::operator[](const size_t idx)
 	{
 		throw "\033[0;31mOut of range\033[0m";
 	}
-	return mData[idx];
+	return mpData[idx];
 }
