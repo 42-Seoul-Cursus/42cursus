@@ -1,13 +1,47 @@
 #include <iostream>
 #include <stack>
+#include <list>
 #include "MutantStack.tpp"
 
 void test_subject(void);
+void test_list(void);
 
 int main()
 {
     test_subject();
+    test_list();
     return 0;
+}
+
+void test_list(void)
+{
+    std::list<int> lst;
+
+    lst.push_back(5);
+    lst.push_back(17);
+
+    std::cout << lst.back() << std::endl;
+
+    lst.erase(--lst.end());
+
+    std::cout << lst.size() << std::endl;
+
+    lst.push_back(3); 
+    lst.push_back(5); 
+    lst.push_back(737);
+     //[...] 
+    lst.push_back(0);
+
+    std::list<int>::iterator it = lst.begin(); 
+    std::list<int>::iterator ite = lst.end();
+
+    ++it;
+    --it;
+    while (it != ite) 
+    {
+        std::cout << *it << std::endl;
+        ++it; 
+    }
 }
 
 void test_subject(void)

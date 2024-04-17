@@ -1,6 +1,8 @@
 #ifndef EASYFIND_HPP
 #define EASYFIND_HPP
 
+#include <algorithm>
+
 class NotFoundException : public std::exception 
 {
 public:
@@ -13,13 +15,11 @@ public:
 template <typename T>
 int	easyfind(T& dst, int src)
 {
-    for (typename T::iterator it = dst.begin(); it != dst.end(); ++it)
+    typename T::iterator it = std::find(dst.begin(), dst.end(), src);
+    if (it == dst.end())
     {
-        if (*it == src)
-        {
-            return src;
-        }
+        throw NotFoundException();
     }
-    throw NotFoundException();
+    return *it;
 }
 #endif

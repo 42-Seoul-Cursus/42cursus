@@ -18,8 +18,8 @@ int	main()
 	try
 	{
 		std::cout << easyfind(l, 10) << std::endl;
+		std::cout << easyfind(v, -1) << std::endl;
 		std::cout << easyfind(v, 1) << std::endl;
-		std::cout << easyfind(v, 0) << std::endl;
 	}
 	catch(const std::exception& e)
 	{
