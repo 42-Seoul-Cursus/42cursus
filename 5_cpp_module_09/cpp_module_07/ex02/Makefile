@@ -4,7 +4,7 @@ NAME    := array
 CXX     := c++
 CFLAGS  := -std=c++98 -Werror -Wall -Wextra
 DEBUG   := -g
-MEMORY  := -g3 -fsanitize=address
+MEMORY  := -g3 -fsanitize=address -ggdb3
 
 BLACK   := \033[30m
 RED     := \033[31m

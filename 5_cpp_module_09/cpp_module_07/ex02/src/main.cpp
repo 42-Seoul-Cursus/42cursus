@@ -1,13 +1,14 @@
 #include <iostream>
 #include <stdlib.h>
+#include <unistd.h>
 #include "Array.tpp"
 
-// export MallocStackLogging=1 when you're finished unset MallocStackLogging.
-// To view detailed information about leaks, use the gcc -g option.
-// while true; do leaks a.out; sleep 1; done;
-void	leak(void)
+/*  export MallocStackLogging=1 when you're finished unset MallocStackLogging.
+    To view detailed information about leaks, use the gcc -g option.
+    while true; do leaks a.out; sleep 1; done; */
+void leak(void)
 {
-	system("leaks -q array");
+    system("leaks -q array");
 }
 
 int	main()
@@ -15,6 +16,8 @@ int	main()
 	atexit(leak);
 	Array<int> arr(10);
 	Array<int> emptyArr(0);
+
+    emptyArr = arr;
 
 	std::cout << arr.size() << std::endl;
 	
@@ -35,6 +38,5 @@ int	main()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
 	return 0;
 }
