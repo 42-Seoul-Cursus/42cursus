@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Array.tpp"
 
 // export MallocStackLogging=1 when you're finished unset MallocStackLogging.
