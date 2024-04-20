@@ -9,10 +9,11 @@ private:
     int* const mpData;
     const size_t mMaxStore;
     size_t mCur;
-    const Span& operator=(const Span &rhs);
+    const Span& operator=(const Span& rhs);
+
 public:
     Span(size_t maxStore);
-    Span(const Span &rhs);
+    Span(const Span& rhs);
     ~Span();
     void AddNumber(int data);
     int ShortestSpan() const;

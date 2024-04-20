@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <random>
+#include <vector>
 #include "Span.hpp"
 
 const int MAX_STORE = 20;
@@ -8,10 +8,10 @@ const int MAX_STORE = 20;
 void test_random(void);
 void test_subject(void);
 
-int	main()
+int main()
 {
     // test_subject();
-    test_random(); // ./span | sort -n
+    test_random();  // ./span | sort -n
     return 0;
 }
 
@@ -25,9 +25,9 @@ void test_subject(void)
     sp.AddNumber(9);
     sp.AddNumber(11);
 
-    std::cout << sp.ShortestSpan() << '\n'
+    std::cout << sp.ShortestSpan() << '\n' 
     << sp.LongestSpan() << std::endl;
-    /* 
+    /*
     $> ./ex01
     2
     14
@@ -48,13 +48,14 @@ void test_random(void)
     {
         v[i] = dis(gen);
     }
-    sp.AddNumbers<std::vector<int> >(v.begin(), v.end());
+    sp.AddNumbers<std::vector<int>>(v.begin(), v.end());
 
     for (size_t i = 0; i < MAX_STORE; i++)
     {
         std::cout << sp[i] << ' ' << sp[i] << '\n';
     }
 
-    std::cout  << "\033[0;37m" <<  "LongestSpan: " << sp.LongestSpan() 
-    << " ShortestSpan: " << sp.ShortestSpan() << "\033[0m" << std::endl;
+    std::cout << "\033[0;37m" << "LongestSpan: " << sp.LongestSpan()
+              << " ShortestSpan: " << sp.ShortestSpan() << "\033[0m"
+              << std::endl;
 }
