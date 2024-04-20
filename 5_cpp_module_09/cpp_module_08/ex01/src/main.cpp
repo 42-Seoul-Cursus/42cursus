@@ -25,8 +25,7 @@ void test_subject(void)
     sp.AddNumber(9);
     sp.AddNumber(11);
 
-    std::cout << sp.ShortestSpan() << '\n' 
-    << sp.LongestSpan() << std::endl;
+    std::cout << sp.ShortestSpan() << '\n' << sp.LongestSpan() << std::endl;
     /*
     $> ./ex01
     2
@@ -48,7 +47,7 @@ void test_random(void)
     {
         v[i] = dis(gen);
     }
-    sp.AddNumbers<std::vector<int>>(v.begin(), v.end());
+    sp.AddNumbers<std::vector<int> >(v.begin(), v.end());
 
     for (size_t i = 0; i < MAX_STORE; i++)
     {
