@@ -1,5 +1,6 @@
 #include <iostream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <vector>
 #include "Span.hpp"
 
@@ -36,16 +37,14 @@ void test_subject(void)
 
 void test_random(void)
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(1, 100);
+    std::srand(std::time(NULL)); // use current time as seed for random generator
 
     Span sp = Span(MAX_STORE);
     std::vector<int> v(MAX_STORE);
 
     for (size_t i = 0; i < MAX_STORE; i++)
     {
-        v[i] = dis(gen);
+        v[i] = std::rand();
     }
     sp.AddNumbers<std::vector<int> >(v.begin(), v.end());
 
