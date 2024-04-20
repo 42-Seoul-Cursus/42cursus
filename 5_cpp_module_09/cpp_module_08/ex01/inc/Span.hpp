@@ -2,20 +2,39 @@
 #define SPAN_HPP
 
 #include <cstddef>
-#include <vector>
+#include <exception>
+
+class SpanFullException : public std::exception
+{
+public:
+    const char* what() const _NOEXCEPT
+    {
+        return "\033[33mSpan is full and can't be added more.\033[0m";
+    }
+};
+
+class InsufficientNumbersException : public std::exception
+{
+public:
+    const char* what() const _NOEXCEPT
+    {
+        return "\033[33mSAt least two integers are required to compare the difference.\033[0m";
+    }
+};
 
 class Span
 {
 private:
-    int* const mpData;
-    const size_t mMaxStore;
+    int* mpData;
+    size_t mMaxStore;
     size_t mCur;
-    const Span& operator=(const Span& rhs);
+    bool hasSufficientNumbers() const;
 
 public:
     Span(size_t maxStore);
     Span(const Span& rhs);
     ~Span();
+    const Span& operator=(const Span& rhs);
     void AddNumber(int data);
     int ShortestSpan() const;
     int LongestSpan() const;
@@ -25,11 +44,7 @@ public:
     {
         for (; start != end; ++start)
         {
-            if (mCur == mMaxStore)
-            {
-                throw "\033[0;33mSpan is full and can't be added more.\033[0m";
-            }
-            mpData[mCur++] = *start;
+            AddNumber(*start);
         }
     }
 };

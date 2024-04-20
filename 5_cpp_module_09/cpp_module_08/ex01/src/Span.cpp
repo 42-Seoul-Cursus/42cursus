@@ -21,19 +21,36 @@ Span::~Span()
 {
     delete[] mpData;
 }
+const Span& Span::operator=(const Span& rhs)
+{
+    if (this != &rhs)
+    {
+        if (mMaxStore != rhs.mMaxStore)
+        {
+            delete[] mpData;
+            mMaxStore = rhs.mMaxStore;
+            mpData = new int[mMaxStore];
+        }
+        for (mCur = 0; mCur < rhs.mCur; mCur++)
+        {
+            mpData[mCur] = rhs.mpData[mCur];
+        }
+    }
+    return *this;
+}
 void Span::AddNumber(int data)
 {
     if (mCur == mMaxStore)
     {
-        throw "\033[0;33mSpan is full and can't be added more.\033[0m";
+        throw SpanFullException();
     }
     mpData[mCur++] = data;
 }
 int Span::ShortestSpan() const
 {
-    if (mCur < 1)
+    if (!hasSufficientNumbers())
     {
-        throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
+        throw InsufficientNumbersException();
     }
 
     Span tmp(*this);
@@ -51,9 +68,9 @@ int Span::ShortestSpan() const
 }
 int Span::LongestSpan() const
 {
-    if (mCur < 1)
+    if (!hasSufficientNumbers())
     {
-        throw "\033[0;33mAt least two integers are required to compare the difference.\033[0m";
+        throw InsufficientNumbersException();
     }
 
     Span tmp(*this);
@@ -65,7 +82,15 @@ int& Span::operator[](const size_t idx)
 {
     if (idx >= mMaxStore)
     {
-        throw "\033[0;31mOut of range\033[0m";
+        throw std::out_of_range("\033[0;31mIndex exceeds allowed boundaries.\033[0m");
     }
     return mpData[idx];
+}
+bool Span::hasSufficientNumbers() const
+{
+    if (mCur < 2)
+    {
+        return false;
+    }
+    return true;
 }

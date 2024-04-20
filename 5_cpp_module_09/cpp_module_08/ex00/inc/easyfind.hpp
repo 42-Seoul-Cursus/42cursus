@@ -6,7 +6,7 @@
 class NotFoundException : public std::exception
 {
 public:
-    const char* what() const throw()
+    const char* what() const _NOEXCEPT
     {
         return "\033[0;31mNot Found\033[0m";
     }
