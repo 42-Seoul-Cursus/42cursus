@@ -15,11 +15,11 @@ RUN wget https://wordpress.org/latest.tar.gz -O /tmp/latest.tar.gz && \
     mv wordpress/* /var/www/html/ && \
     rm -f /tmp/latest.tar.gz
 
-COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
-COPY conf/php.ini /etc/php81/php.ini
+COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
+COPY conf/php.ini /etc/php82/php.ini
 
 EXPOSE 9000
 
 VOLUME /var/www/html
 
-CMD ["php-fpm81", "-F"]
+CMD ["php-fpm82", "-F"]
