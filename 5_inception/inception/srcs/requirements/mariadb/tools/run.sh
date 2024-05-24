@@ -34,15 +34,11 @@ DROP DATABASE IF EXISTS test ;
 FLUSH PRIVILEGES ;
 EOF
 
+	# https://dev.mysql.com/doc/refman/8.3/en/mysqld.html
+	# https://mariadb.com/resources/blog/using-mysql_embedded-and-mysqld-bootstrap-to-tinker-with-privilege-tables/
+	# https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/server-options.html
 	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
 	# rm -f $tfile
 fi
 
 exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@
-
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE wordpress;"
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';"
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$MYSQL_USER'@'localhost';"
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$MYSQL_USER'@'%';"
-# mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
