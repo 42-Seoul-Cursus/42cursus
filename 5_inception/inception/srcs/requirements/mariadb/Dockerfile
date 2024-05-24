@@ -1,6 +1,4 @@
 # https://github.com/yobasystems/alpine-mariadb/blob/master/alpine-mariadb-aarch64/Dockerfile
-
-# Base image
 FROM alpine:3.18
 
 RUN apk update && \
