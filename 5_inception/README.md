@@ -1,5 +1,23 @@
 # inception
 
+- [inception](#inception)
+  - [Mendatory part](#mendatory-part)
+    - [Container to implement](#container-to-implement)
+      - [A Docker container that contains NGINX with TLSv1.2 or TLSv1.3 only](#a-docker-container-that-contains-nginx-with-tlsv12-or-tlsv13-only)
+      - [A Docker container that contains WordPress + php-fpm (it must be installed and configured) only without nginx.](#a-docker-container-that-contains-wordpress--php-fpm-it-must-be-installed-and-configured-only-without-nginx)
+      - [A Docker container that contains MariaDB only without nginx.](#a-docker-container-that-contains-mariadb-only-without-nginx)
+    - [Volumes to implement](#volumes-to-implement)
+    - [Network to implement](#network-to-implement)
+    - [Set up a Alpine Linux on virtualbox](#set-up-a-alpine-linux-on-virtualbox)
+    - [Things to study](#things-to-study)
+  - [Bonus part](#bonus-part)
+    - [Set up redis cache for your WordPress website in order to properly manage the cache.](#set-up-redis-cache-for-your-wordpress-website-in-order-to-properly-manage-the-cache)
+    - [Set up a FTP server container pointing to the volume of your WordPress website.](#set-up-a-ftp-server-container-pointing-to-the-volume-of-your-wordpress-website)
+    - [Create a simple static website in the language of your choice except PHP (Yes, PHP is excluded!). For example, a showcase site or a site for presenting your resume.](#create-a-simple-static-website-in-the-language-of-your-choice-except-php-yes-php-is-excluded-for-example-a-showcase-site-or-a-site-for-presenting-your-resume)
+    - [Set up Adminer.](#set-up-adminer)
+    - [Set up a service of your choice that you think is useful.](#set-up-a-service-of-your-choice-that-you-think-is-useful)
+
+
 ## Mendatory part
 
 [**Container to implement:**](#container-to-implement)
@@ -22,6 +40,8 @@
 - [x] PID 1 and the best practices for writing Dockerfiles.
 
 ### Container to implement
+
+구현에 대한 설명은 [DevOps](https://github.com/seungwonme/DevOps/tree/main/docker) 저장소와 파일마다 주석 처리해놓은 링크를 참고하면 된다.
 
 #### A Docker container that contains NGINX with TLSv1.2 or TLSv1.3 only
 > NGINX container must be the only entrypoint into your infrastructure via the port 443 only, using the TLSv1.2 or TLSv1.3 protocol.
@@ -99,6 +119,18 @@ hosts 파일을 수정하여 도메인 주소를 로컬 IP 주소로 매핑하�
 - [로컬에서 도메인 주소로 테스트하기 - hosts 파일](https://velog.io/@wooojini/%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A3%BC%EC%86%8C%EB%A1%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%98%EA%B8%B0-hosts-%ED%8C%8C%EC%9D%BC)
 - [[Windows] hosts 변경하기 :: Free Will](https://ldne.tistory.com/240)
 
+### Set up a Alpine Linux on virtualbox
+
+- [Alpine Linux](https://wiki.alpinelinux.org/wiki/Installing_Alpine_in_a_virtual_machine#VirtualBox)
+  - [setup blog](https://linuxiac.com/how-to-install-alpine-linux/)
+  - [gui blog](https://www.linkedin.com/pulse/adding-gui-graphical-user-interface-our-alpine-linux-virtual-ionica/)
+  - [gui youtube](https://www.youtube.com/watch?v=LRx8QIzxsUQ)
+- [virtualbox shared folder](https://blog.naver.com/zeroing2/221169283910)
+- [virtualbox shared folder on alpine](https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders)
+- [install docker on alpine](https://wiki.alpinelinux.org/wiki/Docker)
+  - [install docker-compose on alpine](https://geekscircuit.com/install-docker-docker-compose-on-alpine-linux/)
+- [how to install make on alpine](https://stackoverflow.com/questions/55190714/unable-to-use-make-in-alpine-image)
+- [how to paste text from clipboard to vim](https://stackoverflow.com/questions/11489428/how-can-i-make-vim-paste-from-and-copy-to-the-systems-clipboard)
 
 ### Things to study
 **What is the difference between Alpine Linux and Debian?**
