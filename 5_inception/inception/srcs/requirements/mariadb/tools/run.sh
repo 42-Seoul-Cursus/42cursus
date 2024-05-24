@@ -21,7 +21,9 @@ else
 	fi
 
 	cat << EOF > $tfile
-
+CREATE DATABASE wordpress;
+DROP DATABASE IF EXISTS test ;
+FLUSH PRIVILEGES ;
 USE mysql;
 FLUSH PRIVILEGES ;
 GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
@@ -29,9 +31,6 @@ GRANT ALL ON *.* TO 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD' WITH
 GRANT ALL ON wordpress.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT ALL ON wordpress.* TO '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;
 SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MYSQL_ROOT_PASSWORD}') ;
-CREATE DATABASE wordpress;
-DROP DATABASE IF EXISTS test ;
-FLUSH PRIVILEGES ;
 EOF
 
 	# https://dev.mysql.com/doc/refman/8.3/en/mysqld.html
