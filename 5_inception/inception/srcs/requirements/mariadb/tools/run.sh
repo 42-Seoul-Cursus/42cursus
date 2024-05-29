@@ -23,7 +23,6 @@ else
 	cat << EOF > $tfile
 CREATE DATABASE wordpress;
 DROP DATABASE IF EXISTS test ;
-FLUSH PRIVILEGES ;
 USE mysql;
 FLUSH PRIVILEGES ;
 GRANT ALL ON *.* TO 'root'@'%' identified by '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION ;
@@ -37,7 +36,7 @@ EOF
 	# https://mariadb.com/resources/blog/using-mysql_embedded-and-mysqld-bootstrap-to-tinker-with-privilege-tables/
 	# https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/server-options.html
 	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 --skip-name-resolve --skip-networking=0 < $tfile
-	# rm -f $tfile
+	rm -f $tfile
 fi
 
 exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@

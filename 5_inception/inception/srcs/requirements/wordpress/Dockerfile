@@ -7,19 +7,29 @@
 FROM alpine:3.19
 
 RUN apk update && \
-apk add --no-cache php-fpm php-mysqli git
-
-RUN wget https://wordpress.org/latest.tar.gz -O /tmp/latest.tar.gz && \
-    tar -xzf /tmp/latest.tar.gz && \
-    mkdir -p /var/www/html && \
-    mv wordpress/* /var/www/html/ && \
-    rm -f /tmp/latest.tar.gz
+    apk add --no-cache \
+        wget \
+        php-fpm \
+        php-mysqli && \
+    wget https://wordpress.org/latest.tar.gz -O /tmp/latest.tar.gz && \
+    tar -xzf /tmp/latest.tar.gz -C /tmp && \
+    mkdir -p \
+        /var/www/html \
+        /scripts && \
+    mv /tmp/wordpress/* /var/www/html/ && \
+    rm -rf /tmp/* && \
+    touch \
+        /var/log/php82/www.error.log \
+        /var/log/php82/www.access.log
 
 COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 COPY conf/php.ini /etc/php82/php.ini
+COPY tools/run.sh /scripts/run.sh
+
+RUN chmod 7555 /scripts/run.sh
 
 EXPOSE 9000
 
 VOLUME /var/www/html
 
-CMD ["php-fpm82", "-F"]
+CMD ["/scripts/run.sh"]

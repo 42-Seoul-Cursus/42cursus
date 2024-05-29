@@ -1,69 +1,70 @@
-FG_BLACK = \033[90m
-FG_RED = \033[91m
-FG_GREEN = \033[92m
-FG_YELLOW = \033[93m
-FG_BLUE = \033[94m
-FG_MAGENTA = \033[95m
-FG_CYAN = \033[96m
-FG_WHITE = \033[97m
-FG_DEFAULT = \033[39m
+FG_BLACK		:= \x1b[90m
+FG_RED			:= \x1b[91m
+FG_GREEN		:= \x1b[92m
+FG_YELLOW		:= \x1b[93m
+FG_BLUE			:= \x1b[94m
+FG_MAGENTA		:= \x1b[95m
+FG_CYAN			:= \x1b[96m
+FG_WHITE		:= \x1b[97m
+FG_DEFAULT		:= \x1b[39m
 
-DEFAULT = \033[0m
-BOLD = \033[1m
-ITALIC = \033[3m
-UNDERLINE = \033[4m
-REVERSE = \033[7m
-STRIKETHROUGH = \033[9m
+DEFAULT			:= \x1b[0m
+BOLD			:= \x1b[1m
+ITALIC			:= \x1b[3m
+UNDERLINE		:= \x1b[4m
+REVERSE			:= \x1b[7m
+STRIKETHROUGH	:= \x1b[9m
 
-BG_BLACK = \033[100m
-BG_RED = \033[101m
-BG_GREEN = \033[102m
-BG_YELLOW = \033[103m
-BG_BLUE = \033[104m
-BG_MAGENTA = \033[105m
-BG_CYAN = \033[106m
-BG_WHITE = \033[107m
-BG_DEFAULT = \033[49m
+BG_BLACK		:= \x1b[100m
+BG_RED			:= \x1b[101m
+BG_GREEN		:= \x1b[102m
+BG_YELLOW		:= \x1b[103m
+BG_BLUE			:= \x1b[104m
+BG_MAGENTA		:= \x1b[105m
+BG_CYAN			:= \x1b[106m
+BG_WHITE		:= \x1b[107m
+BG_DEFAULT		:= \x1b[49m
 
-RESET = \033[0m
+RESET 			:= \x1b[0m
 
-up:
-	@docker-compose -f srcs/docker-compose.yml -p inception up -d
-	@echo "$(FG_GREEN)Connect to $(FG_WHITE)$(UNDERLINE)https://localhost$(RESET)"
+all: 
+	@make build
+	@make up
 
 build:
-	@docker-compose -f srcs/docker-compose.yml -p inception build
+	@echo "🐳 $(FG_BLUE)Building images$(RESET) 🐳"
+	@docker-compose -f srcs/docker-compose.yml -p "inception" build
+	@echo "🛠  $(FG_GREEN)Built images$(RESET) 🛠"
+
+up:
+	@docker-compose -f srcs/docker-compose.yml -p "inception" up -d
+	@echo "🛜  $(FG_GREEN)Connect to $(FG_WHITE)$(UNDERLINE)https://localhost$(RESET) 🛜"
 
 down:
-	@docker-compose -f srcs/docker-compose.yml -p inception down
-	@echo "$(FG_RED)Disconnected$(RESET)"
+	@docker-compose -f srcs/docker-compose.yml -p "inception" down
+	@echo "🚫 $(FG_RED)Disconnected$(RESET) 🚫"
 
 stop:
-	@docker-compose -f srcs/docker-compose.yml -p inception stop
-	@echo "$(YELLOW)Stopped$(RESET)"
+	@docker-compose -f srcs/docker-compose.yml -p "inception" stop
+	@echo "🛑 $(FG_YELLOW)Stopped$(RESET) 🛑"
 
 start:
 	@echo "$(FG_GREEN)Started$(RESET)"
-	@docker-compose -f srcs/docker-compose.yml -p inception start
+	@docker-compose -f srcs/docker-compose.yml -p "inception" start
 	@echo "$(FG_GREEN)Connect to $(FG_WHITE)$(UNDERLINE)https://localhost$(RESET)"
 
 re:
 	@echo "$(FG_GREEN)Restarted$(RESET)"
 	@make clean
-	@make up
+	@make all
 
-logs:
-	@echo "$(FG_CYAN)Logging$(RESET)"
-	@docker-compose -f srcs/docker-compose.yml -p inception logs -f
-
-ps:
-	@echo "$(FG_MAGENTA)Status$(RESET)"
-	@docker-compose -f srcs/docker-compose.yml -p inception ps
+log:
+	@echo "📄 $(FG_CYAN)Logs$(RESET) 📄"
+	@docker-compose -f srcs/docker-compose.yml logs -f
 
 clean:
-	@docker-compose -f srcs/docker-compose.yml -p inception down -v
 	@docker system prune -af --volumes
-	@echo "$(FG_BLUE)Cleaned up$(RESET)"
+	@echo "🧹 $(FG_BLUE)Cleaned up$(RESET) 🧹"
 
-.PHONY: build up down stop start re logs ps clean
+.PHONY: all build up down stop start re log clean
 

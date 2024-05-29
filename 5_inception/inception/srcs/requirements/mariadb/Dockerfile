@@ -2,9 +2,14 @@
 FROM alpine:3.19
 
 RUN apk update && \
-    apk add --no-cache mariadb mariadb-client mariadb-server-utils && \
+    apk add --no-cache \
+        mariadb \
+        mariadb-client \
+        mariadb-server-utils && \
     rm -rf /var/cache/apk/* && \
-    mkdir -p /scripts /var/log/mysql/ && \
+    mkdir -p \
+        /scripts \
+        /var/log/mysql/ && \
     touch /var/log/mysql/error.log && \
     chown -R mysql:mysql /var/log/mysql/
 

@@ -3,59 +3,78 @@
 
 services:
     mariadb:
-        build:
-            context: ./requirements/mariadb
-            # dockerfile: Dockerfile # 파일명이 Dockerfile이 아니면 명시해줘야 함
-        container_name: mariadb
+        build: ./requirements/mariadb
+        # https://hanseom.tistory.com/251
+        # https://seosh817.tistory.com/387
+        # https://stackoverflow.com/questions/32230577/how-do-i-define-the-name-of-image-built-with-docker-compose
+        image: mariadb:inception
+        container_name:  mariadb
         restart: on-failure
-        env_file: .env
-        # .env 파일에 정의된 것 외에 추가 환경 변수를 추가
         environment:
-            - MYSQL_DATABASE=$MYSQL_DATABASE
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         expose:
             - "3306"
         # dbdata라는 명명된 볼륨을 /var/lib/mysql 디렉토리에 마운트
         volumes:
             - dbdata:/var/lib/mysql
         networks:
-            - app-network
+            - network
     wordpress:
         depends_on:
             - mariadb
-        build:
-            context: ./requirements/wordpress
+        build: ./requirements/wordpress
+        image: wordpress:inception
         container_name: wordpress
         restart: on-failure
-        env_file: .env
         environment:
-            - WORDPRESS_DB_HOST=mariadb:3306
-            - WORDPRESS_DB_USER=$MYSQL_USER
-            - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
-            - WORDPRESS_DB_NAME=$MYSQL_DATABASE
+            - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+            - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+            - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+            - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+            - WORDPRESS_DB_CHARSET=${WORDPRESS_DB_CHARSET}
+            - WORDPRESS_AUTH_KEY=${WORDPRESS_AUTH_KEY}
+            - WORDPRESS_SECURE_AUTH_KEY=${WORDPRESS_SECURE_AUTH_KEY}
+            - WORDPRESS_LOGGED_IN_KEY=${WORDPRESS_LOGGED_IN_KEY}
+            - WORDPRESS_NONCE_KEY=${WORDPRESS_NONCE_KEY}
+            - WORDPRESS_AUTH_SALT=${WORDPRESS_AUTH_SALT}
+            - WORDPRESS_SECURE_AUTH_SALT=${WORDPRESS_SECURE_AUTH_SALT}
+            - WORDPRESS_LOGGED_IN_SALT=${WORDPRESS_LOGGED_IN_SALT}
+            - WORDPRESS_NONCE_SALT=${WORDPRESS_NONCE_SALT}
+            - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
         expose:
             - "9000"
         volumes:
             - wordpress:/var/www/html
         networks:
-            - app-network
+            - network
     nginx:
         depends_on:
             - wordpress
-        build:
-            context: ./requirements/nginx
+        build: ./requirements/nginx
+        image: nginx:inception
         container_name: nginx
         restart: on-failure
+        environment:
+            - DOMAIN_NAME=${DOMAIN_NAME}
         ports:
             - "443:443"
         volumes:
             - wordpress:/var/www/html
         networks:
-            - app-network
+            - network
 
 volumes:
     wordpress:
     dbdata:
 
+# https://stackoverflow.com/questions/40905761/how-do-i-mount-a-host-directory-as-a-volume-in-docker-compose
 networks:
-    app-network:
+    network:
         driver: bridge
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/seunan/data
