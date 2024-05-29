@@ -7,8 +7,8 @@ mv wp-cli.phar /usr/local/bin/wp
 
 if [ ! -f /var/www/html/wp-config.php ]; then
     # https://make.wordpress.org/cli/handbook/guides/quick-start/
-    wp core config --path=/var/www/html --dbname=${WORDPRESS_DB_NAME} --dbuser=${WORDPRESS_DB_USER} --dbpass=${WORDPRESS_DB_PASSWORD} --dbhost=${WORDPRESS_DB_HOST} --dbprefix=${WORDPRESS_TABLE_PREFIX} --allow-root
-    wp core install --url=${DOMAIN_NAME} --title=${WORDPRESS_TITLE} --admin_user=${WORDPRESS_ADMIN_USER} --admin_password=${WORDPRESS_ADMIN_PASSWORD} --admin_email=${WORDPRESS_ADMIN_EMAIL} --allow-root
+    wp core config --dbname=${WORDPRESS_DB_NAME} --dbuser=${WORDPRESS_DB_USER} --dbpass=${WORDPRESS_DB_PASSWORD} --dbhost=${WORDPRESS_DB_HOST} --dbprefix=${WORDPRESS_TABLE_PREFIX} --path=/var/www/html --allow-root
+    wp core install --url=${DOMAIN_NAME} --title=${WORDPRESS_TITLE} --admin_user=${WORDPRESS_ADMIN_USER} --admin_password=${WORDPRESS_ADMIN_PASSWORD} --admin_email=${WORDPRESS_ADMIN_EMAIL} --path=/var/www/html --allow-root
     # https://developer.wordpress.org/cli/commands/option/
     wp option update siteurl ${DOMAIN_NAME} --path=/var/www/html --allow-root
     wp option update home ${DOMAIN_NAME} --path=/var/www/html --allow-root
