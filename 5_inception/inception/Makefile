@@ -64,6 +64,7 @@ log:
 
 clean:
 	@make down
+	@docker volume rm -f inception_dbdata inception_wordpress
 	@docker system prune -af --volumes
 	@echo "🧹 $(FG_BLUE)Cleaned up$(RESET) 🧹"
 
