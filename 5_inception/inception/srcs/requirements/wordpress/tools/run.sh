@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# https://make.wordpress.org/cli/handbook/guides/installing/
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
-
 if [ ! -f /var/www/html/wp-config.php ]; then
     # https://make.wordpress.org/cli/handbook/guides/quick-start/
     wp core config --dbname=${WORDPRESS_DB_NAME} --dbuser=${WORDPRESS_DB_USER} --dbpass=${WORDPRESS_DB_PASSWORD} --dbhost=${WORDPRESS_DB_HOST} --dbprefix=${WORDPRESS_TABLE_PREFIX} --path=/var/www/html --allow-root
