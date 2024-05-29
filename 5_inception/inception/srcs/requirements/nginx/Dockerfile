@@ -8,13 +8,16 @@ RUN apk update && \
         openssl && \
     mkdir -p \
         /etc/nginx/ssl \
-        /var/www/html && \
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Cadet/CN=localhost"
+        /var/www/html \
+        /scripts
 
 # Copy the configuration file
 COPY conf/default.conf /etc/nginx/http.d/default.conf
+COPY tools/run.sh /scripts/run.sh
+
+RUN chmod +x /scripts/run.sh
 
 # Port to expose, Just documentation(Not necessary)
 EXPOSE 443/tcp
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/scripts/run.sh"]

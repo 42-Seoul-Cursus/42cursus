@@ -60,9 +60,10 @@ re:
 
 log:
 	@echo "📄 $(FG_CYAN)Logs$(RESET) 📄"
-	@docker-compose -f srcs/docker-compose.yml logs -f
+	@docker-compose -f srcs/docker-compose.yml -p "inception" logs -f
 
 clean:
+	@make down
 	@docker system prune -af --volumes
 	@echo "🧹 $(FG_BLUE)Cleaned up$(RESET) 🧹"
 

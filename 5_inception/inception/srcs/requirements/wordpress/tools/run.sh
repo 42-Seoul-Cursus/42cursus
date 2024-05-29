@@ -1,18 +1,17 @@
 #!/bin/sh
-mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
-sed -i "s/define( 'DB_NAME', 'database_name_here' );/define( 'DB_NAME', '${WORDPRESS_DB_NAME}' );/" /var/www/html/wp-config.php 
-sed -i "s/define( 'DB_USER', 'username_here' );/define( 'DB_USER', '${WORDPRESS_DB_USER}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'DB_PASSWORD', 'password_here' );/define( 'DB_PASSWORD', '${WORDPRESS_DB_PASSWORD}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', '${WORDPRESS_DB_HOST}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'AUTH_KEY',         'put your unique phrase here' );/define( 'AUTH_KEY',         '${WORDPRESS_AUTH_KEY}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );/define( 'SECURE_AUTH_KEY',  '${WORDPRESS_SECURE_AUTH_KEY}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'LOGGED_IN_KEY',    'put your unique phrase here' );/define( 'LOGGED_IN_KEY',    '${WORDPRESS_LOGGED_IN_KEY}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'NONCE_KEY',        'put your unique phrase here' );/define( 'NONCE_KEY',        '${WORDPRESS_NONCE_KEY}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'AUTH_SALT',        'put your unique phrase here' );/define( 'AUTH_SALT',        '${WORDPRESS_AUTH_SALT}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );/define( 'SECURE_AUTH_SALT', '${WORDPRESS_SECURE_AUTH_SALT}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'LOGGED_IN_SALT',   'put your unique phrase here' );/define( 'LOGGED_IN_SALT',   '${WORDPRESS_LOGGED_IN_SALT}' );/" /var/www/html/wp-config.php
-sed -i "s/define( 'NONCE_SALT',       'put your unique phrase here' );/define( 'NONCE_SALT',       '${WORDPRESS_NONCE_SALT}' );/" /var/www/html/wp-config.php
-sed -i "s/\$table_prefix  = 'wp_';/\$table_prefix  = '${WORDPRESS_TABLE_PREFIX}';/" /var/www/html/wp-config.php
+# https://make.wordpress.org/cli/handbook/guides/installing/
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
+# https://make.wordpress.org/cli/handbook/guides/quick-start/
+wp core config --path=/var/www/html --dbname=${WORDPRESS_DB_NAME} --dbuser=${WORDPRESS_DB_USER} --dbpass=${WORDPRESS_DB_PASSWORD} --dbhost=${WORDPRESS_DB_HOST} --dbprefix=${WORDPRESS_TABLE_PREFIX} --allow-root
+wp core install --url=${DOMAIN_NAME} --title=${WORDPRESS_TITLE} --admin_user=${WORDPRESS_ADMIN_USER} --admin_password=${WORDPRESS_ADMIN_PASSWORD} --admin_email=${WORDPRESS_ADMIN_EMAIL} --allow-root
+# https://developer.wordpress.org/cli/commands/option/
+wp option update siteurl ${DOMAIN_NAME} --path=/var/www/html --allow-root
+wp option update home ${DOMAIN_NAME} --path=/var/www/html --allow-root
+# https://developer.wordpress.org/cli/commands/user/create/
+wp user create ${WORDPRESS_USER} ${WORDPRESS_USER_EMAIL} --role=author --user_pass=${WORDPRESS_USER_PASSWORD} --path=/var/www/html --allow-root
 
 exec php-fpm82 -F

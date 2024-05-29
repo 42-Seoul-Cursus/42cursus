@@ -30,20 +30,16 @@ services:
         container_name: wordpress
         restart: on-failure
         environment:
+            - DOMAIN_NAME=${DOMAIN_NAME}
             - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
             - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
             - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
             - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-            - WORDPRESS_DB_CHARSET=${WORDPRESS_DB_CHARSET}
-            - WORDPRESS_AUTH_KEY=${WORDPRESS_AUTH_KEY}
-            - WORDPRESS_SECURE_AUTH_KEY=${WORDPRESS_SECURE_AUTH_KEY}
-            - WORDPRESS_LOGGED_IN_KEY=${WORDPRESS_LOGGED_IN_KEY}
-            - WORDPRESS_NONCE_KEY=${WORDPRESS_NONCE_KEY}
-            - WORDPRESS_AUTH_SALT=${WORDPRESS_AUTH_SALT}
-            - WORDPRESS_SECURE_AUTH_SALT=${WORDPRESS_SECURE_AUTH_SALT}
-            - WORDPRESS_LOGGED_IN_SALT=${WORDPRESS_LOGGED_IN_SALT}
-            - WORDPRESS_NONCE_SALT=${WORDPRESS_NONCE_SALT}
             - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
+            - WORDPRESS_TITLE=${WORDPRESS_TITLE}
+            - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+            - WORDPRESS_ADMIN_PASSWORD=${WORDPRESS_ADMIN_PASSWORD}
+            - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
         expose:
             - "9000"
         volumes:
@@ -68,13 +64,17 @@ services:
 
 volumes:
     wordpress:
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/seunan/data/wordpress
     dbdata:
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/seunan/data/mariadb
 
 # https://stackoverflow.com/questions/40905761/how-do-i-mount-a-host-directory-as-a-volume-in-docker-compose
 networks:
     network:
         driver: bridge
-        driver_opts:
-            o: bind
-            type: none
-            device: /home/seunan/data

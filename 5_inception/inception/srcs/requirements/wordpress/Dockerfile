@@ -10,9 +10,9 @@ RUN apk update && \
     apk add --no-cache \
         wget \
         php-fpm \
-        php-mysqli && \
-    wget https://wordpress.org/latest.tar.gz -O /tmp/latest.tar.gz && \
-    tar -xzf /tmp/latest.tar.gz -C /tmp && \
+        php-mysqli php82-cli php82-phar php82-mbstring php82-xml php82-mysqli php82-json php82-curl && \
+    wget https://wordpress.org/wordpress-6.5.3.tar.gz -O /tmp/wordpress.tar.gz && \
+    tar -xzf /tmp/wordpress.tar.gz -C /tmp && \
     mkdir -p \
         /var/www/html \
         /scripts && \
@@ -23,7 +23,6 @@ RUN apk update && \
         /var/log/php82/www.access.log
 
 COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
-COPY conf/php.ini /etc/php82/php.ini
 COPY tools/run.sh /scripts/run.sh
 
 RUN chmod 7555 /scripts/run.sh
