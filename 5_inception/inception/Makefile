@@ -55,7 +55,7 @@ start:
 
 re:
 	@echo "$(FG_GREEN)Restarted$(RESET)"
-	@make clean
+	@make fclean
 	@make all
 
 log:
@@ -64,9 +64,14 @@ log:
 
 clean:
 	@make down
-	@docker volume rm -f inception_dbdata inception_wordpress
 	@docker system prune -af --volumes
 	@echo "🧹 $(FG_BLUE)Cleaned up$(RESET) 🧹"
 
-.PHONY: all build up down stop start re log clean
+fclean:
+	@make down
+	@docker system prune -af --volumes
+	@docker volume rm -f inception_dbdata inception_wordpress
+	@echo "🧹 $(FG_BLUE)Fully cleaned up$(RESET) 🧹"
+
+.PHONY: all build up down stop start re log clean fclean
 

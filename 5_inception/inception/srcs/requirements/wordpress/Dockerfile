@@ -17,11 +17,9 @@ RUN apk update && \
     mkdir -p \
     /var/www/html \
     /scripts && \
-    mv /tmp/wordpress/* /var/www/html/ && \
+    mv /tmp/wordpress/* /var/www/html && \
     rm -rf /tmp/* && \
-    wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && \
-    mv wp-cli.phar /usr/local/bin/wp && \
+    wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /scripts/wp-cli.phar && \
     touch \
         /var/log/php82/www.error.log \
         /var/log/php82/www.access.log
@@ -29,10 +27,12 @@ RUN apk update && \
 COPY conf/www.conf /etc/php82/php-fpm.d/www.conf
 COPY tools/run.sh /scripts/run.sh
 
-RUN chmod +x /scripts/run.sh
+RUN chmod -R 755 /scripts
 
 EXPOSE 9000
 
 VOLUME /var/www/html
 
-CMD ["/scripts/run.sh"]
+ENTRYPOINT ["/scripts/run.sh"]
+
+CMD ["php-fpm82", "-F"]

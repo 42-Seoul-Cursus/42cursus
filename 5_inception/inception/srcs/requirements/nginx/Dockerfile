@@ -15,9 +15,11 @@ RUN apk update && \
 COPY conf/default.conf /etc/nginx/http.d/default.conf
 COPY tools/run.sh /scripts/run.sh
 
-RUN chmod +x /scripts/run.sh
+RUN chmod -R 755 /scripts
 
 # Port to expose, Just documentation(Not necessary)
 EXPOSE 443/tcp
 
-CMD ["/scripts/run.sh"]
+ENTRYPOINT ["/scripts/run.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]

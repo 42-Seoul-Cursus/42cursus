@@ -9,9 +9,9 @@ RUN apk update && \
     rm -rf /var/cache/apk/* && \
     mkdir -p \
         /scripts \
-        /var/log/mysql/ && \
+        /var/log/mysql && \
     touch /var/log/mysql/error.log && \
-    chown -R mysql:mysql /var/log/mysql/
+    chown -R mysql:mysql /var/log/mysql
 
 COPY tools/run.sh /scripts/run.sh
 COPY conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
@@ -23,3 +23,5 @@ EXPOSE 3306
 VOLUME ["/var/lib/mysql"]
 
 ENTRYPOINT ["/scripts/run.sh"]
+
+CMD ["/usr/bin/mysqld", "--user=mysql", "--console", "--skip-name-resolve", "--skip-networking=0"]
