@@ -28,8 +28,8 @@ BG_DEFAULT		:= \x1b[49m
 RESET 			:= \x1b[0m
 
 all: 
-	@make build
-	@make up
+	@$(MAKE) build
+	@$(MAKE) up
 
 build:
 	@echo "🐳 $(FG_BLUE)Building images$(RESET) 🐳"
@@ -55,20 +55,20 @@ start:
 
 re:
 	@echo "$(FG_GREEN)Restarted$(RESET)"
-	@make fclean
-	@make all
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 log:
 	@echo "📄 $(FG_CYAN)Logs$(RESET) 📄"
 	@docker-compose -f srcs/docker-compose.yml -p "inception" logs -f
 
 clean:
-	@make down
+	@$(MAKE) down
 	@docker system prune -af --volumes
 	@echo "🧹 $(FG_BLUE)Cleaned up$(RESET) 🧹"
 
 fclean:
-	@make down
+	@$(MAKE) down
 	@docker system prune -af --volumes
 	@docker volume rm -f inception_dbdata inception_wordpress
 	@echo "🧹 $(FG_BLUE)Fully cleaned up$(RESET) 🧹"
