@@ -1,47 +1,66 @@
 .SUFFIXES : .cpp .o
 
-NAME    := btc
-CXX     := c++
-CFLAGS  := -std=c++98 -Werror -Wall -Wextra
-DEBUG   := -g
-MEMORY  := -g3 -fsanitize=address
+NAME			:= btc
+CXX				:= c++
+CFLAGS			:= -std=c++98 -Werror -Wall -Wextra
+DEBUG			:= -g
+MEMORY			:= -g3 -fsanitize=address
 
-BLACK   := \033[30m
-RED     := \033[31m
-GREEN   := \033[32m
-YELLOW  := \033[33m
-BLUE    := \033[34m
-MAGENTA := \033[35m
-CYAN    := \033[36m
-WHITE   := \033[37m
-RESET   := \033[0m
+FG_BLACK		:= \033[90m
+FG_RED			:= \033[91m
+FG_GREEN		:= \033[92m
+FG_YELLOW		:= \033[93m
+FG_BLUE			:= \033[94m
+FG_MAGENTA		:= \033[95m
+FG_CYAN			:= \033[96m
+FG_WHITE		:= \033[97m
+FG_DEFAULT		:= \033[39m
 
-SRC_DIR := ./src
-INCLUDE := -I./inc
+DEFAULT			:= \033[0m
+BOLD			:= \033[1m
+ITALIC			:= \033[3m
+UNDERLINE		:= \033[4m
+REVERSE			:= \033[7m
+STRIKETHROUGH	:= \033[9m
 
-SRC     := \
-		main.cpp \
-		BitcoinExchange.cpp 
-OBJ     := $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
+BG_BLACK		:= \033[100m
+BG_RED			:= \033[101m
+BG_GREEN		:= \033[102m
+BG_YELLOW		:= \033[103m
+BG_BLUE			:= \033[104m
+BG_MAGENTA		:= \033[105m
+BG_CYAN			:= \033[106m
+BG_WHITE		:= \033[107m
+BG_DEFAULT		:= \033[49m
+
+RESET 			:= \033[0m
+
+SRC_DIR			:= ./src
+INCLUDE			:= -I./inc
+
+SRC				:= \
+				main.cpp \
+				BitcoinExchange.cpp 
+OBJ				:= $(addprefix $(SRC_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
-	@echo "$(GREEN)$(NAME) created successfully$(RESET)"
+	@echo "$(FG_GREEN)$(NAME) created successfully$(RESET)"
 
 $(NAME): $(OBJ)
 	@$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "$(WHITE)Creating $@$(RESET)"
+	@echo "$(FG_WHITE)Creating $@$(RESET)"
 
 %.o: %.cpp
 	@$(CXX) $(CFLAGS) -c $< -o $@ $(INCLUDE)
-	@echo "$(CYAN)Compiled:$(RESET) $< -> $@"
+	@echo "$(FG_CYAN)Compiled:$(RESET) $< -> $@"
 
 clean:
 	@rm -f $(OBJ)
-	@echo "$(BLUE)Cleaned up object files$(RESET)"
+	@echo "$(FG_BLUE)Cleaned up object files$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(BLUE)Cleaned up executable and library$(RESET)"
+	@echo "$(FG_BLUE)Cleaned up executable and library$(RESET)"
 
 re:
 	@$(MAKE) fclean
@@ -50,11 +69,11 @@ re:
 mem:
 	@$(MAKE) fclean
 	@$(MAKE) all CFLAGS="$(CFLAGS) $(MEMORY)"
-	@echo "$(YELLOW)Executable compiled with memory sanitizer$(RESET)"
+	@echo "$(FG_YELLOW)Executable compiled with memory sanitizer$(RESET)"
 
 lldb:
 	@$(MAKE) fclean
 	@$(MAKE) all CFLAGS="$(CFLAGS) $(DEBUG)"
-	@echo "$(YELLOW)Executable compiled to enable LLDB debugging$(RESET)"
+	@echo "$(FG_YELLOW)Executable compiled to enable LLDB debugging$(RESET)"
 
 .PHONY: all clean fclean re mem lldb
