@@ -140,12 +140,8 @@ void BitcoinExchange::processLine(std::map<std::string, double>& db, std::string
     else
     {
         const std::string str_date = getDateStr(date);
-        std::map<std::string, double>::iterator it = db.find(str_date);
-        if (it == db.end())
-        {
-            it = db.lower_bound(str_date);
-            it != db.begin() ? --it : it;
-        }
+        std::map<std::string, double>::iterator it = db.upper_bound(str_date);
+        it != db.begin() ? --it : it;
         std::cout << aec::fg::GREEN << str_date << " => " << val << " = " << val * it->second << aec::RESET << '\n';
     }
 }
