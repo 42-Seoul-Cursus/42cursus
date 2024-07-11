@@ -1,6 +1,8 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#define ll long long
+
 #include <string>
 
 class RPN
@@ -13,9 +15,10 @@ private:
 public:
     RPN(const std::string& input);
     ~RPN();
-    size_t Evaluate(void) const;
-
+    int Evaluate(void) const;
 };
+
+bool isWhitespace(char c);
 
 namespace aec
 {

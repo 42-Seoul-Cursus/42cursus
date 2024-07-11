@@ -9,56 +9,60 @@ RPN::RPN(const std::string& input)
 RPN::~RPN()
 {
 }
-size_t RPN::Evaluate(void) const
+int RPN::Evaluate(void) const
 {
-    std::stack<int> stack;
+    std::stack<int> st;
+    ll res, a, b;
 
     for (size_t i = 0; i < mInput.length(); i++)
     {
-        if (mInput[i] == ' ')
+        if (isWhitespace(mInput[i]))
         {
             continue;
         }
-        else if (mInput[i] >= '0' && mInput[i] <= '9')
+        if ('0' <= mInput[i] && mInput[i] <= '9')
         {
-            stack.push(mInput[i] - '0');
+            st.push(mInput[i] - '0');
+            continue;
         }
-        else if (stack.size() >= 2)
-        {
-            int a = stack.top();
-            stack.pop();
-            int b = stack.top();
-            stack.pop();
-
-            switch (mInput[i])
-            {
-                case '+':
-                    stack.push(b + a);
-                    break;
-                case '-':
-                    stack.push(b - a);
-                    break;
-                case '*':
-                    stack.push(b * a);
-                    break;
-                case '/':
-                    stack.push(b / a);
-                    break;
-                default:
-                    throw std::runtime_error("Error: Invalid operator");
-            }
-        }
-        else
+        if (st.size() < 2)
         {
             throw std::runtime_error("Error: Invalid input");
         }
+
+        a = st.top(); st.pop();
+        b = st.top(); st.pop();
+        switch (mInput[i])
+        {
+            case '+':
+                res = b + a;
+                break;
+            case '-':
+                res = b - a;
+                break;
+            case '*':
+                res = b * a;
+                break;
+            case '/':
+                a == 0 ? throw std::runtime_error("Error: Division by zero") : st.push(b / a);
+                res = b / a;
+                break;
+            default:
+                throw std::runtime_error("Error: Invalid operator");
+        }
+        if (res < std::numeric_limits<int>::min() ||res > std::numeric_limits<int>::max())
+        {
+            throw std::runtime_error("Error: Overflow");
+        }
+        st.push(res);
     }
-    if (!stack.empty())
-    {
-        return stack.top();
-    }
-    else
+    if (st.size() != 1)
     {
         throw std::runtime_error("Error: Invalid input");
     }
+    return st.top();
+}
+bool isWhitespace(char c)
+{
+    return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
 }
