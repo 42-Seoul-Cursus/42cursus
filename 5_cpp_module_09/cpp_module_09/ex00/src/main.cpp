@@ -5,7 +5,7 @@ int main(int ac, char* const* av)
 {
     if (ac != 2)
     {
-        std::cerr << aec::fg::RED << "Error: could not open file." << aec::RESET << std::endl;
+        std::cerr << aec::fg::YELLOW << "Usage: " << av[0] << " <input_file>" << aec::RESET << '\n';
         return 1;
     }
     try

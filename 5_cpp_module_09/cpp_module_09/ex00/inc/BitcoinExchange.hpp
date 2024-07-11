@@ -11,9 +11,12 @@ class BitcoinExchange
 private:
     const std::string mInputFile;
     const BitcoinExchange& operator=(const BitcoinExchange& rhs);
+    void parseDb(std::map<std::string, double>& db);
+    bool parseLine(std::map<std::string, double>& db, std::string& line);
+    void processInput(std::map<std::string, double>& db);
+    void processLine(std::map<std::string, double>& db, std::string& line);
     bool isValidDate(const Date& date);
-    void parse_file(std::map<std::string, double>* db, const std::string& filename, const std::string& header, char delimiter);
-    bool parse_line(std::map<std::string, double>* db, std::string& line, char delimiter);
+    std::string getDateStr(const Date& date);
 
 public:
     BitcoinExchange(const std::string& inputFile = "input.txt");
