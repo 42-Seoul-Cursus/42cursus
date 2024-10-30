@@ -4,6 +4,7 @@
 #include <vector>
 
 #ifdef TEST
+// g++ -std=c++98 -DTEST -o test ford-johnson.cpp
 
 void mergeInsertionSort(std::vector<int>& arr);
 int binarySearch(const std::vector<int>& sortedSeq, int value);

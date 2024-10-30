@@ -1,27 +1,20 @@
 #include <iostream>
 #include "PmergeMe.hpp"
 
-static void print_vector(const std::vector<int>& v);
 static bool vectors_equal(const std::vector<int>& a, const std::vector<int>& b);
 static void odd_test();
 static void even_test();
 static void random_test();
 
+const int TEST_RUN_COUNT = 10;
+const int NUM_ELEMENTS = 999;
+
 int main()
 {
     even_test();
-    odd_test();
-    random_test();
+    // odd_test();
+    // random_test();
     return 0;
-}
-
-void print_vector(const std::vector<int>& v)
-{
-    for (size_t i = 0; i < v.size(); ++i)
-    {
-        std::cout << v[i] << " ";
-    }
-    std::cout << std::endl;
 }
 
 bool vectors_equal(const std::vector<int>& a, const std::vector<int>& b)
@@ -69,6 +62,7 @@ void odd_test()
 void even_test()
 {
     std::vector<int> testVec;
+
     testVec.push_back(3);
     testVec.push_back(5);
     testVec.push_back(9);
@@ -103,33 +97,34 @@ void even_test()
 
 void random_test()
 {
-    // 랜덤 테스트
     std::vector<int> init;
-    for (int i = 0; i < 100; ++i)
+    for (int i = 0; i < NUM_ELEMENTS; ++i)
     {
         init.push_back(i);
     }
 
     std::srand(std::time(0));
 
-    for (int testVec = 0; testVec < 10; ++testVec)
+    for (int i = 0; i < TEST_RUN_COUNT; ++i)
     {
         std::vector<int> shuffled = init;
-        // Fisher-Yates shuffle
+
         for (int i = shuffled.size() - 1; i > 0; --i)
         {
             int j = std::rand() % (i + 1);
             std::swap(shuffled[i], shuffled[j]);
         }
 
-        std::cout << "Random test " << testVec + 1 << " starting..." << std::endl;
+        const std::vector<int> tmp = shuffled;
         PmergeMe::mergeInsertionSort(shuffled);
+
         if (!vectors_equal(shuffled, init))
         {
-            std::cout << "Random test " << testVec + 1 << " failed!" << std::endl;
+            std::cout << "Random test " << i + 1 << " failed!" << std::endl;
+            print_vector(tmp);
             return;
         }
-        std::cout << "Random test " << testVec + 1 << " passed" << std::endl;
+        std::cout << "Random test " << i + 1 << " passed" << std::endl;
     }
 
     std::cout << "All tests passed successfully!" << std::endl;

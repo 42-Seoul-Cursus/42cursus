@@ -1,4 +1,6 @@
-# ex00
+# Cpp Module 09
+
+## ex00
 
 ```
 특정 날짜에 특정 금액의 비트코인 가치를 출력하는 프로그램을 만들어야 합니다.
@@ -22,7 +24,7 @@
 경고: 이 연습의 유효성을 검사하는 데 사용하는 컨테이너는 더 이상 이 모듈의 나머지 부분에서는 더 이상 사용할 수 없습니다.
 ```
 
-# ex01
+## ex01
 
 ```
 이러한 제약 조건이 있는 프로그램을 생성해야 합니다:
@@ -44,7 +46,7 @@
 경고: 이전 연습에서 사용한 컨테이너는 여기서는 금지되어 있습니다. 이 연습의 유효성을 검사하는 데 사용한 컨테이너는 이 모듈의 나머지 부분에서는 사용할 수 없습니다.
 ```
 
-# ex02
+## ex02
 
 ```
 이러한 제약 조건이 있는 프로그램을 생성해야 합니다:
@@ -72,3 +74,22 @@
 
 중복과 관련된 오류 관리는 여러분의 재량에 맡기세요. 재량에 맡겨집니다.
 ```
+
+### Ford-Johnson Algorithm
+
+1959년에 발견되어 1979년까지 비교가 가장 적은 정렬 알고리즘으로 알려진 알고리즘.
+
+`가장 최적의 알고리즘은 무엇일까?` 라는 고민에서 출발하여 `비교가 가장 적은 정렬 알고리즘이 가장 최적의 알고리즘일 것이다.` 라는 가정에서 출발한 알고리즘.
+
+기수 정렬과 같이 비교를 하지 않는 알고리즘이 있기에 가정이 맞지 않을 수 있지만, `하나의 추만 허용하는 저울의 팬이 있을 때 저울을 사용하여 추들의 무게를 정렬하는 문제` 또는 `토너먼트에 참가하는 N명의 플레이어가 주어졌을 때, 플레이어의 순위가 동점 없이 선형적으로 정렬될 수 있다고 가정하고 모든 참가자의 순위를 매기는 데 충분한 최소 게임 수를 찾는 문제` 등의 문제를 해결할 때 사용할 수 있다.
+
+
+### References
+
+- [Merge-insertion Sort](https://en.wikipedia.org/wiki/Merge-insertion_sort)
+- [merge-insertion sort, 혹은 Ford–Johnson algorithm 찬찬히 뜯어보기](https://ebang.tistory.com/103)
+- [MergeInsertionSort (Ford-Johnson Algorithm) 를 구현하기 전에](https://tolerblanc.github.io/algorithm/merge-insertion-sort/)
+- [cpp09 - mergeInsertionSort(ford-johnson algorithm)](https://80000coding.oopy.io/6880ebc0-acb3-4225-809f-37fc419adf71)
+- [CPP Module 09 self check list](https://hijkl2e.tistory.com/147)
+- [Merge-insertion Sort](https://iq.opengenus.org/merge-insertion-sort/)
+- [Ford-Johnson Merge-Insertion Sort](https://codereview.stackexchange.com/questions/116367/ford-johnson-merge-insertion-sort)
