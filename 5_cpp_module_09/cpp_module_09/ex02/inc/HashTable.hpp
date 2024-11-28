@@ -1,4 +1,5 @@
-#pragma once
+#ifndef HASHTABLE_HPP
+#define HASHTABLE_HPP
 
 #include <vector>
 #include <list>
@@ -25,3 +26,5 @@ public:
     int get(int key) const;
     bool contains(int key) const;
 };
+
+#endif

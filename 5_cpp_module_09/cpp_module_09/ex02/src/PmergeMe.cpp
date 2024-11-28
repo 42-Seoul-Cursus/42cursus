@@ -88,78 +88,78 @@ void PmergeMe::run()
 
 /* Deque */
 
-std::deque<int> PmergeMe::sorted(const std::deque<int> &original)
+std::deque<int> PmergeMe::sorted(const std::deque<int> &sequence)
 {
-    if (original.size() <= 1)
-        return original;
+    if (sequence.size() <= 1)
+        return sequence;
 
-    std::deque<int> mainList;
-    std::deque<int> pendingList;
+    std::deque<int> mainChain;
+    std::deque<int> subChain;
 
-    pairwiseComparison(original, mainList, pendingList);
-    HashTable mappingDatas = createMapping(mainList, pendingList);
+    makePairChains(sequence, mainChain, subChain);
+    HashTable mappingDatas = mapping(mainChain, subChain);
 
-    mainList = sorted(mainList);
-    pendingList = reorderedPendingList(mainList, pendingList, mappingDatas);
+    mainChain = sorted(mainChain);
+    subChain = reorderedSubChain(mainChain, subChain, mappingDatas);
 
-    std::deque<int> result(mainList);
-    insertPendingToResult(result, pendingList);
+    std::deque<int> result(mainChain);
+    insertSubChainToMainChain(result, subChain);
 
     return result;
 }
 
-void PmergeMe::pairwiseComparison(const std::deque<int> &original, std::deque<int> &mainList, std::deque<int> &pendingList)
+void PmergeMe::makePairChains(const std::deque<int> &sequence, std::deque<int> &mainChain, std::deque<int> &subChain)
 {
-    for (size_t i = 0; i + 1 < original.size(); i += 2)
+    for (size_t i = 0; i + 1 < sequence.size(); i += 2)
     {
-        int large = std::max(original[i], original[i + 1]);
-        int small = std::min(original[i], original[i + 1]);
+        int large = std::max(sequence[i], sequence[i + 1]);
+        int small = std::min(sequence[i], sequence[i + 1]);
 
-        mainList.push_back(large);
-        pendingList.push_back(small);
+        mainChain.push_back(large);
+        subChain.push_back(small);
     }
 
-    if (original.size() % 2 == 1)
-        pendingList.push_back(original.back());
+    if (sequence.size() % 2 == 1)
+        subChain.push_back(sequence.back());
 }
 
-HashTable PmergeMe::createMapping(const std::deque<int> &mainList, const std::deque<int> &pendingList)
+HashTable PmergeMe::mapping(const std::deque<int> &mainChain, const std::deque<int> &subChain)
 {
-    HashTable mappingDatas(mainList.size());
+    HashTable mappingDatas(mainChain.size());
 
-    for (size_t i = 0; i < mainList.size(); ++i)
-        mappingDatas.insert(mainList[i], pendingList[i]);
+    for (size_t i = 0; i < mainChain.size(); ++i)
+        mappingDatas.insert(mainChain[i], subChain[i]);
 
     return mappingDatas;
 }
 
-std::deque<int> PmergeMe::reorderedPendingList(const std::deque<int> &mainList, const std::deque<int> &pendingList, const HashTable &mappingDatas)
+std::deque<int> PmergeMe::reorderedSubChain(const std::deque<int> &mainChain, const std::deque<int> &subChain, const HashTable &mappingDatas)
 {
-    std::deque<int> reorderedPendingList;
+    std::deque<int> reorderedSubChain;
 
-    for (size_t i = 0; i < mainList.size(); ++i)
+    for (size_t i = 0; i < mainChain.size(); ++i)
     {
-        int target = mappingDatas.get(mainList[i]);
-        reorderedPendingList.push_back(target);
+        int target = mappingDatas.get(mainChain[i]);
+        reorderedSubChain.push_back(target);
     }
 
-    if (pendingList.size() > mainList.size())
-        reorderedPendingList.push_back(pendingList.back());
+    if (subChain.size() > mainChain.size())
+        reorderedSubChain.push_back(subChain.back());
 
-    return reorderedPendingList;
+    return reorderedSubChain;
 }
 
-void PmergeMe::insertPendingToResult(std::deque<int> &result, const std::deque<int> &pendingList)
+void PmergeMe::insertSubChainToMainChain(std::deque<int> &mainChain, const std::deque<int> &subChain)
 {
-    std::vector<int> insertionOrder = generateInsertionOrder(pendingList.size());
+    std::vector<int> insertionOrder = createInsertionIndex(subChain.size());
 
     int insertionCnt = 0;
     for (size_t i = 0; i < insertionOrder.size(); ++i)
     {
         int targetIndex = insertionOrder[i];
-        int target = pendingList[targetIndex];
+        int target = subChain[targetIndex];
         int range = insertionCnt + targetIndex;
-        binaryInsert(result, target, range);
+        binaryInsert(mainChain, target, range);
         insertionCnt++;
     }
 }
@@ -190,78 +190,78 @@ void PmergeMe::binaryInsert(std::deque<int> &result, int target, int range)
 
 /* Vector */
 
-std::vector<int> PmergeMe::sorted(const std::vector<int> &original)
+std::vector<int> PmergeMe::sorted(const std::vector<int> &sequence)
 {
-    if (original.size() <= 1)
-        return original;
+    if (sequence.size() <= 1)
+        return sequence;
 
-    std::vector<int> mainList;
-    std::vector<int> pendingList;
+    std::vector<int> mainChain;
+    std::vector<int> subChain;
 
-    pairwiseComparison(original, mainList, pendingList);
-    HashTable mappingDatas = createMapping(mainList, pendingList);
+    makePairChains(sequence, mainChain, subChain);
+    HashTable mappingDatas = mapping(mainChain, subChain);
 
-    mainList = sorted(mainList);
-    pendingList = reorderedPendingList(mainList, pendingList, mappingDatas);
+    mainChain = sorted(mainChain);
+    subChain = reorderedSubChain(mainChain, subChain, mappingDatas);
 
-    std::vector<int> result(mainList);
-    insertPendingToResult(result, pendingList);
+    std::vector<int> result(mainChain);
+    insertSubChainToMainChain(result, subChain);
 
     return result;
 }
 
-void PmergeMe::pairwiseComparison(const std::vector<int> &original, std::vector<int> &mainList, std::vector<int> &pendingList)
+void PmergeMe::makePairChains(const std::vector<int> &sequence, std::vector<int> &mainChain, std::vector<int> &subChain)
 {
-    for (size_t i = 0; i + 1 < original.size(); i += 2)
+    for (size_t i = 0; i + 1 < sequence.size(); i += 2)
     {
-        int large = std::max(original[i], original[i + 1]);
-        int small = std::min(original[i], original[i + 1]);
+        int large = std::max(sequence[i], sequence[i + 1]);
+        int small = std::min(sequence[i], sequence[i + 1]);
 
-        mainList.push_back(large);
-        pendingList.push_back(small);
+        mainChain.push_back(large);
+        subChain.push_back(small);
     }
 
-    if (original.size() % 2 == 1)
-        pendingList.push_back(original.back());
+    if (sequence.size() % 2 == 1)
+        subChain.push_back(sequence.back());
 }
 
-HashTable PmergeMe::createMapping(const std::vector<int> &mainList, const std::vector<int> &pendingList)
+HashTable PmergeMe::mapping(const std::vector<int> &mainChain, const std::vector<int> &subChain)
 {
-    HashTable mappingDatas(mainList.size());
+    HashTable mappingDatas(mainChain.size());
 
-    for (size_t i = 0; i < mainList.size(); ++i)
-        mappingDatas.insert(mainList[i], pendingList[i]);
+    for (size_t i = 0; i < mainChain.size(); ++i)
+        mappingDatas.insert(mainChain[i], subChain[i]);
 
     return mappingDatas;
 }
 
-std::vector<int> PmergeMe::reorderedPendingList(const std::vector<int> &mainList, const std::vector<int> &pendingList, const HashTable &mappingDatas)
+std::vector<int> PmergeMe::reorderedSubChain(const std::vector<int> &mainChain, const std::vector<int> &subChain, const HashTable &mappingDatas)
 {
-    std::vector<int> reorderedPendingList;
+    std::vector<int> reorderedSubChain;
 
-    for (size_t i = 0; i < mainList.size(); ++i)
+    for (size_t i = 0; i < mainChain.size(); ++i)
     {
-        int target = mappingDatas.get(mainList[i]);
-        reorderedPendingList.push_back(target);
+        int target = mappingDatas.get(mainChain[i]);
+        reorderedSubChain.push_back(target);
     }
 
-    if (pendingList.size() > mainList.size())
-        reorderedPendingList.push_back(pendingList.back());
+    if (subChain.size() > mainChain.size())
+        reorderedSubChain.push_back(subChain.back());
 
-    return reorderedPendingList;
+    return reorderedSubChain;
 }
 
-void PmergeMe::insertPendingToResult(std::vector<int> &result, const std::vector<int> &pendingList)
+void PmergeMe::insertSubChainToMainChain(std::vector<int> &mainChain, const std::vector<int> &subChain)
 {
-    std::vector<int> insertionOrder = generateInsertionOrder(pendingList.size());
+    std::vector<int> insertionIndex = createInsertionIndex(subChain.size());
 
     int insertionCnt = 0;
-    for (size_t i = 0; i < insertionOrder.size(); ++i)
+    for (size_t i = 0; i < insertionIndex.size(); ++i)
     {
-        int targetIndex = insertionOrder[i];
-        int target = pendingList[targetIndex];
+        int targetIndex = insertionIndex[i];
+        int target = subChain[targetIndex];
         int range = insertionCnt + targetIndex;
-        binaryInsert(result, target, range);
+        binaryInsert(mainChain, target, range);
         insertionCnt++;
     }
 }
@@ -300,7 +300,7 @@ static std::vector<int> oneIndexedToZeroIndexed(const std::vector<int> &oneIndex
     return zeroIndexed;
 }
 
-std::vector<int> PmergeMe::generateInsertionOrder(int n)
+std::vector<int> PmergeMe::createInsertionIndex(int n)
 {
     std::vector<int> insertionOrder;
 

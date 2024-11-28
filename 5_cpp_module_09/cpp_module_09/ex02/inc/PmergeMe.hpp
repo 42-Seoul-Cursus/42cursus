@@ -1,7 +1,6 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <vector>
 #include <deque>
 #include "HashTable.hpp"
 
@@ -17,23 +16,23 @@ private:
     PmergeMe& operator=(const PmergeMe& rhs);
 
     // Deque
-    std::deque<int> sorted(const std::deque<int> &original);
-    void pairwiseComparison(const std::deque<int> &original, std::deque<int> &mainList, std::deque<int> &pendingList);
-    HashTable createMapping(const std::deque<int> &mainList, const std::deque<int> &pendingList);
-    std::deque<int> reorderedPendingList(const std::deque<int> &mainList, const std::deque<int> &pendingList, const HashTable &mappingDatas);
-    void insertPendingToResult(std::deque<int> &result, const std::deque<int> &pendingList);
+    std::deque<int> sorted(const std::deque<int> &sequence);
+    void makePairChains(const std::deque<int> &sequence, std::deque<int> &mainChain, std::deque<int> &subChain);
+    HashTable mapping(const std::deque<int> &mainChain, const std::deque<int> &subChain);
+    std::deque<int> reorderedSubChain(const std::deque<int> &mainChain, const std::deque<int> &subChain, const HashTable &mappingDatas);
+    void insertSubChainToMainChain(std::deque<int> &mainChain, const std::deque<int> &subChain);
     void binaryInsert(std::deque<int> &result, int target, int range);
 
     // Vector
-    std::vector<int> sorted(const std::vector<int> &original);
-    void pairwiseComparison(const std::vector<int> &original, std::vector<int> &mainList, std::vector<int> &pendingList);
-    HashTable createMapping(const std::vector<int> &mainList, const std::vector<int> &pendingList);
-    std::vector<int> reorderedPendingList(const std::vector<int> &mainList, const std::vector<int> &pendingList, const HashTable &mappingDatas);
-    void insertPendingToResult(std::vector<int> &result, const std::vector<int> &pendingList);
+    std::vector<int> sorted(const std::vector<int> &sequence);
+    void makePairChains(const std::vector<int> &sequence, std::vector<int> &mainChain, std::vector<int> &subChain);
+    HashTable mapping(const std::vector<int> &mainChain, const std::vector<int> &subChain);
+    std::vector<int> reorderedSubChain(const std::vector<int> &mainChain, const std::vector<int> &subChain, const HashTable &mappingDatas);
+    void insertSubChainToMainChain(std::vector<int> &mainChain, const std::vector<int> &subChain);
     void binaryInsert(std::vector<int> &result, int target, int range);
 
     void generateJacobsthalSequence(int n);
-    std::vector<int> generateInsertionOrder(int n);
+    std::vector<int> createInsertionIndex(int n);
 
 public:
     PmergeMe(int ac, const char* av[]);
