@@ -19,7 +19,7 @@ PmergeMe::PmergeMe(int ac, const char* av[])
     std::set<int> dupCheck;
     double d;
 
-    for (size_t i = 1; i < ac; i++)
+    for (int i = 1; i < ac; i++)
     {
         str = av[i];
 
@@ -307,6 +307,8 @@ std::vector<int> PmergeMe::generateInsertionOrder(int n)
     int pivot = 0;
     for (size_t i = 0; i < mJacobsthalNumbers.size(); i++)
     {
+        if (mJacobsthalNumbers[i] > n)
+            break;
         for (int order = mJacobsthalNumbers[i]; order > pivot; --order)
             insertionOrder.push_back(order);
         pivot = mJacobsthalNumbers[i];
