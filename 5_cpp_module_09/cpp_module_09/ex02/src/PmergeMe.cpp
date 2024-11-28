@@ -7,7 +7,9 @@
 #include <iostream>
 
 static bool isPositiveInteger(const std::string& str);
-static std::vector<int> oneIndexedToZeroIndexed(const std::vector<int> &oneIndexed);
+static std::vector<int> convertToHumanIndex(const std::vector<int> &index);
+static void printVector(const std::vector<int>& vector);
+static void printDeque(const std::deque<int>& deque);
 
 PmergeMe::PmergeMe(int ac, const char* av[])
 : mVector(ac - 1)
@@ -60,7 +62,7 @@ void PmergeMe::run()
         std::vector<int> sortedVector = sorted(mVector);
         const clock_t end = clock();
 
-        std::cout << "After: ";
+        std::cout << "After:\n";
         printVector(sortedVector);
 
         const double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
@@ -76,7 +78,7 @@ void PmergeMe::run()
         std::deque<int> sortedDeque = sorted(mDeque);
         const clock_t end = clock();
 
-        std::cout << "After: ";
+        std::cout << "After:\n";
         printDeque(sortedDeque);
 
         const double elapsedTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
@@ -151,12 +153,12 @@ std::deque<int> PmergeMe::reorderedSubChain(const std::deque<int> &mainChain, co
 
 void PmergeMe::insertSubChainToMainChain(std::deque<int> &mainChain, const std::deque<int> &subChain)
 {
-    std::vector<int> insertionOrder = createInsertionIndex(subChain.size());
+    std::vector<int> insertionIndex = createInsertionIndex(subChain.size());
 
     int insertionCnt = 0;
-    for (size_t i = 0; i < insertionOrder.size(); ++i)
+    for (size_t i = 0; i < insertionIndex.size(); ++i)
     {
-        int targetIndex = insertionOrder[i];
+        int targetIndex = insertionIndex[i];
         int target = subChain[targetIndex];
         int range = insertionCnt + targetIndex;
         binaryInsert(mainChain, target, range);
@@ -275,7 +277,29 @@ void PmergeMe::binaryInsert(std::vector<int> &result, int target, int range)
     result.insert(insertPos, target);
 }
 
-static bool isPositiveInteger(const std::string& str)
+std::vector<int> PmergeMe::createInsertionIndex(int n)
+{
+    std::vector<int> insertionIndex;
+
+    int pivot = 0;
+    for (size_t i = 0; i < mJacobsthalNumbers.size(); i++)
+    {
+        if (mJacobsthalNumbers[i] > n)
+            break;
+        for (int order = mJacobsthalNumbers[i]; order > pivot; --order)
+            insertionIndex.push_back(order);
+        pivot = mJacobsthalNumbers[i];
+    }
+
+    for (int i = n; i > pivot; --i)
+        insertionIndex.push_back(i);
+
+    return convertToHumanIndex(insertionIndex);
+}
+
+/* Static */
+
+bool isPositiveInteger(const std::string& str)
 {
     if (str.empty() || (str[0] == '0' && str.length() > 1))
     {
@@ -291,33 +315,13 @@ static bool isPositiveInteger(const std::string& str)
     return true;
 }
 
-static std::vector<int> oneIndexedToZeroIndexed(const std::vector<int> &oneIndexed)
+std::vector<int> convertToHumanIndex(const std::vector<int> &index)
 {
-    std::vector<int> zeroIndexed;
-    for (size_t i = 0; i < oneIndexed.size(); ++i)
-        zeroIndexed.push_back(oneIndexed[i] - 1);
+    std::vector<int> newIndex;
+    for (size_t i = 0; i < index.size(); ++i)
+        newIndex.push_back(index[i] - 1);
 
-    return zeroIndexed;
-}
-
-std::vector<int> PmergeMe::createInsertionIndex(int n)
-{
-    std::vector<int> insertionOrder;
-
-    int pivot = 0;
-    for (size_t i = 0; i < mJacobsthalNumbers.size(); i++)
-    {
-        if (mJacobsthalNumbers[i] > n)
-            break;
-        for (int order = mJacobsthalNumbers[i]; order > pivot; --order)
-            insertionOrder.push_back(order);
-        pivot = mJacobsthalNumbers[i];
-    }
-
-    for (int i = n; i > pivot; --i)
-        insertionOrder.push_back(i);
-
-    return oneIndexedToZeroIndexed(insertionOrder);
+    return newIndex;
 }
 
 void printVector(const std::vector<int>& vector)

@@ -40,7 +40,4 @@ public:
     void run();
 };
 
-void printVector(const std::vector<int>& vector);
-void printDeque(const std::deque<int>& deque);
-
 #endif

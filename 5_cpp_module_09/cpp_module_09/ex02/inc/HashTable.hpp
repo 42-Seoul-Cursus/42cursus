@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <utility>
+#include <cstddef>
 
 typedef std::list<std::pair<int, int> > hash_chain;
 
