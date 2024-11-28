@@ -93,3 +93,12 @@
 - [CPP Module 09 self check list](https://hijkl2e.tistory.com/147)
 - [Merge-insertion Sort](https://iq.opengenus.org/merge-insertion-sort/)
 - [Ford-Johnson Merge-Insertion Sort](https://codereview.stackexchange.com/questions/116367/ford-johnson-merge-insertion-sort)
+
+### 해야할 것
+
+1. 메인체인과 서브체인의 순서를 동기화한다.
+2. 픽스: 비교해야하는 수(얘한테 루트씌움), 정렬돠어 있는 수
+3. 야콥스탈 수를 쓸 때 1 3 2 5 4 11 10 9 8 7 6 ...
+
+결국 픽스된 수를 2의 거듭제곱 - 1로 유지하는게 개이득임
+그렇기 때문에 야콥스탈 수를 쓰는 거야!!!

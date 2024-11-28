@@ -8,7 +8,7 @@
 class RPN
 {
 private:
-    const std::string mInput;
+    const std::string& mInput;
     RPN(const RPN& rhs);
     RPN& operator=(const RPN& rhs);
 

@@ -133,7 +133,7 @@ void BitcoinExchange::processLine(std::map<std::string, double>& db, std::string
     {
         std::cout << aec::fg::RED << "Error: not a positive number." << aec::RESET << '\n';
     }
-    else if (val > std::numeric_limits<int>::max())
+    else if (val > 1000)
     {
         std::cout << aec::fg::RED << "Error: too large a number." << aec::RESET << '\n';
     }
