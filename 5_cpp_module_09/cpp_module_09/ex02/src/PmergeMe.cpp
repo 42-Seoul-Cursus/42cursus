@@ -3,6 +3,7 @@
 #include <cmath>
 #include <set>
 #include <sstream>
+#include <iostream>
 
 static bool isPositiveInteger(const std::string& str)
 {
@@ -20,8 +21,9 @@ static bool isPositiveInteger(const std::string& str)
     return true;
 }
 
-PmergeMe::PmergeMe(int ac, const char** av)
-: mInputVec(ac - 1)
+PmergeMe::PmergeMe(int ac, const char* av[])
+: mVector(ac - 1)
+, mDeque(ac - 1)
 {
     std::istringstream iss;
     std::string str;
@@ -38,18 +40,19 @@ PmergeMe::PmergeMe(int ac, const char** av)
             iss >> d;
             if (dupCheck.find(d) == dupCheck.end())
             {
-                mInputVec[i - 1] = d;
+                mVector[i - 1] = d;
+                mDeque[i - 1] = d;
                 dupCheck.insert(d);
                 iss.clear();
             }
             else
             {
-                throw std::invalid_argument(aec::fg::RED + "Error: " + av[i] + +" is a duplicate." + aec::RESET);
+                throw std::invalid_argument("Error: " + str + " is a duplicate.");
             }
         }
         else
         {
-            throw std::invalid_argument(aec::fg::RED + "Error: " + av[i] + +" is not a positive integer." + aec::RESET);
+            throw std::invalid_argument("Error: " + str + " is not a positive integer.");
         }
     }
 }
@@ -59,13 +62,22 @@ PmergeMe::~PmergeMe()
 }
 void PmergeMe::run()
 {
-    printVec(mInputVec);
+    printVector(mVector);
+    printDeque(mDeque);
 }
-void printVec(const std::vector<int>& vec)
+void printVector(const std::vector<int>& vector)
 {
-    for (size_t i = 0; i < vec.size(); i++)
+    for (size_t i = 0; i < vector.size(); i++)
     {
-        std::cout << vec[i] << " ";
+        std::cout << vector[i] << " ";
+    }
+    std::cout << std::endl;
+}
+void printDeque(const std::deque<int>& deque)
+{
+    for (size_t i = 0; i < deque.size(); i++)
+    {
+        std::cout << deque[i] << " ";
     }
     std::cout << std::endl;
 }
